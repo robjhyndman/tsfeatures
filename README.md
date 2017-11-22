@@ -53,11 +53,17 @@ real_features <- cbind(
 library(tsfeatures)
 library(tidyverse)
 
-M3data <- purrr::map(Mcomp::M3, function(x)x$x)
+M3data <- purrr::map(Mcomp::M3, 
+  function(x){
+    tspx <- tsp(x$x)
+    ts(c(x$x,x$xx), start=tspx[1], frequency=tspx[3])
+  })
 Lambda <- function(x){
-  suppressWarnings(forecast::BoxCox.lambda(x, lower=0, upper=1))
+  suppressWarnings(forecast::BoxCox.lambda(x, lower=0, upper=1, method='loglik'))
 }
-khs <- tsfeatures(M3data, c("entropy","stl_features","frequency","Lambda")) %>% 
+khs <- cbind(
+  tsfeatures(M3data, c("entropy","stl_features","frequency")),
+  tsfeatures(M3data, "Lambda", scale=FALSE)) %>% 
   select(frequency, entropy, trend, season, acfremainder, Lambda) %>%
   replace_na(list(season=1)) %>%
   rename(
