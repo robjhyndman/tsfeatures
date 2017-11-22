@@ -43,7 +43,7 @@ stl_features <- function(x)
   tt <- seq_len(len.contx)
   if (length(contx) <= 2 * freq || class(contx) == "try-error") 
   {
-    trend <- linearity <- curvature <- season <- spike <- peak <- trough <- NA
+    trend <- linearity <- curvature <- season <- spike <- peak <- trough <- acfremainder <- NA
   } 
   else 
   {
