@@ -18,3 +18,5 @@ vignettes/*.pdf
 
 .Rbuildignore
 *.Rproj
+
+README_cache

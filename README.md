@@ -50,7 +50,7 @@ khs <- tsfeatures(M3data, c("entropy","stl_features","frequency","Lambda")) %>%
 GGally::ggpairs(khs)
 ```
 
-![](README-ijf2017graphs-1.png)
+![](READMEfigs/ijf2017graphs-1.png)
 
 ``` r
 
@@ -62,16 +62,17 @@ prcomp(khs[,-1])$x %>%
     geom_point(aes(col=Period))
 ```
 
-![](README-ijf2017graphs-2.png)
+![](READMEfigs/ijf2017graphs-2.png)
 
 ``` r
+# Compute all features in MARs paper
+
 library(tsfeatures)
 library(tidyverse)
 library(forecast)
 
 M3data <- purrr::map(Mcomp::M3, function(x)x$x)
 
-# Compute all features in MARs paper
 nsdiffs <- function(x){
   c(nsdiffs=ifelse(frequency(x)==1L, 1L, forecast::nsdiffs(x)))
 }
@@ -105,25 +106,13 @@ yk <- cbind(
 
 ``` r
 # Compute all features in Yahoo anomaly paper
+library(anomalous)
 
-yahoo_DT <- c("dat0", "dat1", "dat2", "dat3", "dat4", "dat5")
-data(list = yahoo_DT, package = "anomalous")
+yahoo_real <- c(as.list(dat0),as.list(dat1),as.list(dat2),as.list(dat3))
+yahoo_simulated <- c(as.list(dat4),as.list(dat5))
 
-r <- lapply(yahoo_DT, function(name_DT){
-  DT <- get(name_DT)
-  return(lapply(seq(ncol(DT)), function(j){
-    DT[, j]
-  }))
-})
-list_real <- c(r[[1]], r[[2]], r[[3]], r[[4]])
-list_simulated <- c(r[[5]], r[[6]])
-
-# real world yahoo series
-myfeatures <- c("entropy", "af1", "stl_features")
-mat <- tsfeatures(list_real, myfeatures)
-
-# simulated yahoo series
-mat2 <- tsfeatures(list_simulated, myfeatures)
+real_features <- tsfeatures(yahoo_real[1:10], c("entropy", "acf1", "stl_features"))
+sim_features <- tsfeatures(yahoo_simulated[30:40], c("entropy", "acf1", "stl_features"))
 ```
 
 License
