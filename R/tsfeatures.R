@@ -10,3 +10,21 @@
 #' @importFrom purrr map map_dbl
 NULL
 #> NULL
+
+
+
+#' Convert mts object to list of time series
+#' @method as.list mts
+#' @export
+as.list.mts <- function(x)
+{
+  tspx <- tsp(x)
+  listx <- as.list(as.data.frame(x))
+  listx <- purrr::map(listx, 
+            function(u){
+              u <- as.ts(u)
+              tsp(u) <- tspx
+              return(u)
+            })
+  return(listx)
+}

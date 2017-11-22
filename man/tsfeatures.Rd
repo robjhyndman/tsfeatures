@@ -11,7 +11,8 @@ tsfeatures(tslist, features = c("frequency", "stl_features", "entropy",
   "acf1"), scale = TRUE, trim = FALSE, trim_amount = 0.1)
 }
 \arguments{
-\item{tslist}{a list of univariate time series, each of class \code{ts} or a numeric vector.}
+\item{tslist}{a list of univariate time series, each of class \code{ts} or a numeric vector.
+Alternatively, an object of class \code{mts} may be used.}
 
 \item{features}{a vector of function names which return numeric vectors of features.
 All features returned by these functions must be named if they return more than one feature.
@@ -27,7 +28,7 @@ are computed. Values larger than \code{trim_amount} in absolute value are set to
 \item{trim_amount}{Default level of trimming if \code{trim==TRUE}.}
 }
 \value{
-A feature matrix (in the form of a tibble) with each row corresponding to 
+A feature matrix (in the form of a tibble) with each row corresponding to
 one time series from tslist, and each column being a feature.
 }
 \description{

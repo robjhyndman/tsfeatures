@@ -2,6 +2,7 @@
 #'
 #' \code{tsfeatures} computes a matrix of time series features from a list of time series
 #' @param tslist a list of univariate time series, each of class \code{ts} or a numeric vector.
+#' Alternatively, an object of class \code{mts} may be used.
 #' @param features a vector of function names which return numeric vectors of features.
 #' All features returned by these functions must be named if they return more than one feature.
 #' Existing functions from installed packages may be used, but the package must be loaded first.
@@ -11,7 +12,7 @@
 #' @param trim if \code{TRUE}, time series are trimmed by \code{trim_amount} before features
 #' are computed. Values larger than \code{trim_amount} in absolute value are set to \code{NA}.
 #' @param trim_amount Default level of trimming if \code{trim==TRUE}.
-#' @return A feature matrix (in the form of a tibble) with each row corresponding to 
+#' @return A feature matrix (in the form of a tibble) with each row corresponding to
 #' one time series from tslist, and each column being a feature.
 #' @examples
 #' mylist <- list(sunspot.year, WWWusage, AirPassengers, USAccDeaths)
@@ -22,18 +23,18 @@ tsfeatures <- function(tslist,
                        scale=TRUE, trim=FALSE, trim_amount=0.1)
 {
   if(!is.list(tslist))
-    tslist <- list(tslist)
+    tslist <- as.list(tslist)
   if(scale)
     tslist <- map(tslist, scalets)
   if(trim)
-    tslists <- map(tslist, trimts, trim=trim_amount)
+    tslist <- map(tslist, trimts, trim=trim_amount)
 
   # Compute all features
 	flist <- funlist <- list()
   # Assuming that didn't generate an error, we will proceed
 	for(i in seq_along(features))
   {
-    flist[[i]] <- map(tslist, 
+    flist[[i]] <- map(tslist,
       function(x){match.fun(features[i])(x)})
     # Check names
     if(is.null(names(flist[[i]][[1]])))
