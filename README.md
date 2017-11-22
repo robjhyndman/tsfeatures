@@ -111,8 +111,20 @@ library(anomalous)
 yahoo_real <- c(as.list(dat0),as.list(dat1),as.list(dat2),as.list(dat3))
 yahoo_simulated <- c(as.list(dat4),as.list(dat5))
 
-real_features <- tsfeatures(yahoo_real[1:10], c("entropy", "acf1", "stl_features"))
-sim_features <- tsfeatures(yahoo_simulated[30:40], c("entropy", "acf1", "stl_features"))
+KLscore <- function(x){max_kl_shift(x, width=48)}
+yahoo_features <- c("mean","var","acf1","stl_features","entropy",
+                    "lumpiness","max_level_shift","max_var_shift","KLscore",
+                    "flat_spots","crossing_points")
+real_features <- tsfeatures(yahoo_real, yahoo_features) %>%
+  as_tibble() %>%
+  select(mean, var, acf1, trend, linearity, curvature, season, peak, trough, entropy,
+         lumpiness, spike, max_level_shift, max_var_shift, flat_spots, crossing_points,
+         max_kl_shift, time_kl_shift)
+sim_features <- tsfeatures(yahoo_simulated, yahoo_features) %>%
+  as_tibble() %>%
+  select(mean, var, acf1, trend, linearity, curvature, entropy,
+         lumpiness, spike, max_level_shift, max_var_shift, flat_spots, crossing_points,
+         max_kl_shift, time_kl_shift)
 ```
 
 License
