@@ -27,8 +27,8 @@ are computed. Values larger than \code{trim_amount} in absolute value are set to
 \item{trim_amount}{Default level of trimming if \code{trim==TRUE}.}
 }
 \value{
-A feature matrix with each row corresponding to one time series from tslist, and
-each column being a feature.
+A feature matrix (in the form of a tibble) with each row corresponding to 
+one time series from tslist, and each column being a feature.
 }
 \description{
 \code{tsfeatures} computes a matrix of time series features from a list of time series

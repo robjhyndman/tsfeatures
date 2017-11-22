@@ -17,6 +17,7 @@ Imports:
     purrr,
     RcppRoll (>= 0.2.2), 
     stats,
+    tibble,
     tseries
 License: GPL-3 + file LICENSE
 LazyData: true

@@ -45,12 +45,10 @@ yahoo_features <- c("mean","var","acf1","stl_features","entropy",
                     "lumpiness","max_level_shift","max_var_shift","KLscore",
                     "flat_spots","crossing_points")
 real_features <- tsfeatures(yahoo_real, yahoo_features) %>%
-  as_tibble() %>%
   select(mean, var, acf1, trend, linearity, curvature, season, peak, trough, entropy,
          lumpiness, spike, max_level_shift, max_var_shift, flat_spots, crossing_points,
          max_kl_shift, time_kl_shift)
 sim_features <- tsfeatures(yahoo_simulated, yahoo_features) %>%
-  as_tibble() %>%
   select(mean, var, acf1, trend, linearity, curvature, entropy,
          lumpiness, spike, max_level_shift, max_var_shift, flat_spots, crossing_points,
          max_kl_shift, time_kl_shift)
@@ -67,7 +65,6 @@ Lambda <- function(x){
   suppressWarnings(forecast::BoxCox.lambda(x, lower=0, upper=1))
 }
 khs <- tsfeatures(M3data, c("entropy","stl_features","frequency","Lambda")) %>% 
-  as_tibble %>%
   select(frequency, entropy, trend, season, acfremainder, Lambda) %>%
   replace_na(list(season=1)) %>%
   rename(
@@ -125,7 +122,6 @@ features2 <- c(
 yk <- cbind(
         tsfeatures(M3data, features1),
         tsfeatures(M3data, features2, trim=TRUE)) %>% 
-  as_tibble %>%
   select(entropy, trend, linearity, curvature, acf1,
     acfremainder, max_kl_shift, max_level_shift, max_var_shift, 
     ndiffs, Nonlinearity, frequency, season, nsdiffs,

@@ -11,8 +11,8 @@
 #' @param trim if \code{TRUE}, time series are trimmed by \code{trim_amount} before features
 #' are computed. Values larger than \code{trim_amount} in absolute value are set to \code{NA}.
 #' @param trim_amount Default level of trimming if \code{trim==TRUE}.
-#' @return A feature matrix with each row corresponding to one time series from tslist, and
-#' each column being a feature.
+#' @return A feature matrix (in the form of a tibble) with each row corresponding to 
+#' one time series from tslist, and each column being a feature.
 #' @examples
 #' mylist <- list(sunspot.year, WWWusage, AirPassengers, USAccDeaths)
 #' tsfeatures(mylist)
@@ -61,7 +61,7 @@ tsfeatures <- function(tslist,
   for(i in seq_along(tslist))
     fmat[i,featurenames[[i]]] <- featurelist[[i]][featurenames[[i]]]
 
-  return(fmat)
+  return(tibble::as_tibble(fmat))
 }
 
 # Scale time series
