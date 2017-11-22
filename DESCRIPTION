@@ -1,0 +1,25 @@
+Package: tsfeatures
+Title: Time Series Feature Extraction
+Version: 0.0.1
+Authors@R: c(
+    person("Rob", "Hyndman", email = "Rob.Hyndman@monash.edu", role = c("aut","cre")),
+    person("Earo", "Wang", role = "aut"),
+    person("Yanfei", "Kang", role = "aut"),
+    person("Souhaib", "Ben Taieb", role = "ctb"),
+    person("Thiyanga", "Talagala", role = "ctb"))
+Description: Methods for extracting various features from time series data.
+Depends:
+    R (>= 3.2.3)
+Imports:
+    ForeCA,
+    fracdiff,
+    mgcv,
+    purrr,
+    RcppRoll (>= 0.2.2), 
+    stats,
+    tseries
+License: GPL-3 + file LICENSE
+LazyData: true
+URL: https://github.com/robjhyndman/tsfeatures/
+BugReports: https://github.com/robjhyndman/tsfeatures/issues/
+RoxygenNote: 6.0.1
