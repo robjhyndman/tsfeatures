@@ -22,9 +22,33 @@ devtools::install_github("robjhyndman/tsfeatures")
 Usage (still in development)
 ----------------------------
 
-``` r
-# Compute features for M3 paper: Kang, Hyndman & Smith-Miles (IJF 2017)
+### Hyndman, Wang and Laptev (ICDM 2015)
 
+``` r
+library(anomalous)
+
+yahoo_real <- c(as.list(dat0),as.list(dat1),as.list(dat2),as.list(dat3))
+yahoo_simulated <- c(as.list(dat4),as.list(dat5))
+
+KLscore <- function(x){max_kl_shift(x, width=48)}
+yahoo_features <- c("mean","var","acf1","stl_features","entropy",
+                    "lumpiness","max_level_shift","max_var_shift","KLscore",
+                    "flat_spots","crossing_points")
+real_features <- tsfeatures(yahoo_real, yahoo_features) %>%
+  as_tibble() %>%
+  select(mean, var, acf1, trend, linearity, curvature, season, peak, trough, entropy,
+         lumpiness, spike, max_level_shift, max_var_shift, flat_spots, crossing_points,
+         max_kl_shift, time_kl_shift)
+sim_features <- tsfeatures(yahoo_simulated, yahoo_features) %>%
+  as_tibble() %>%
+  select(mean, var, acf1, trend, linearity, curvature, entropy,
+         lumpiness, spike, max_level_shift, max_var_shift, flat_spots, crossing_points,
+         max_kl_shift, time_kl_shift)
+```
+
+### Kang, Hyndman & Smith-Miles (IJF 2017)
+
+``` r
 library(tsfeatures)
 library(tidyverse)
 
@@ -64,6 +88,8 @@ prcomp(khs[,-1])$x %>%
 
 ![](READMEfigs/ijf2017graphs-2.png)
 
+### Kang, Hyndman & Li (in preparation)
+
 ``` r
 # Compute all features in MARs paper
 
@@ -102,29 +128,6 @@ yk <- cbind(
     ndiffs, Nonlinearity, frequency, season, nsdiffs,
     ARCHtest.p, GARCHtest.p, Boxtest.p, GARCHBoxtest.p, Hetero)
 # What happened to var change on remainder?
-```
-
-``` r
-# Compute all features in Yahoo anomaly paper
-library(anomalous)
-
-yahoo_real <- c(as.list(dat0),as.list(dat1),as.list(dat2),as.list(dat3))
-yahoo_simulated <- c(as.list(dat4),as.list(dat5))
-
-KLscore <- function(x){max_kl_shift(x, width=48)}
-yahoo_features <- c("mean","var","acf1","stl_features","entropy",
-                    "lumpiness","max_level_shift","max_var_shift","KLscore",
-                    "flat_spots","crossing_points")
-real_features <- tsfeatures(yahoo_real, yahoo_features) %>%
-  as_tibble() %>%
-  select(mean, var, acf1, trend, linearity, curvature, season, peak, trough, entropy,
-         lumpiness, spike, max_level_shift, max_var_shift, flat_spots, crossing_points,
-         max_kl_shift, time_kl_shift)
-sim_features <- tsfeatures(yahoo_simulated, yahoo_features) %>%
-  as_tibble() %>%
-  select(mean, var, acf1, trend, linearity, curvature, entropy,
-         lumpiness, spike, max_level_shift, max_var_shift, flat_spots, crossing_points,
-         max_kl_shift, time_kl_shift)
 ```
 
 License
