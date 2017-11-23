@@ -257,7 +257,7 @@ crossing_points <- function(x)
   p1 <- ab[1:(lenx - 1)]
   p2 <- ab[2:lenx]
   cross <- (p1 & !p2) | (p2 & !p1)
-  return(c(crossing_points=sum(cross)))
+  return(c(crossing_points=sum(cross, na.rm=TRUE)))
 }
 
 #' Number of flat spots
