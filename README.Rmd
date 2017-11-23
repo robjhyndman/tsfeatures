@@ -90,8 +90,7 @@ khs <- bind_cols(
     Trend = trend,
     Season = season,
     ACF1 = acfremainder,
-    Lambda = BoxCox.lambda) %>%
-  mutate(Period = as.factor(Period))
+    Lambda = BoxCox.lambda)
 ```
 
 ```{r ijf2017graphs, message=FALSE, dependson="ijf2017"}
@@ -99,9 +98,9 @@ khs <- bind_cols(
 GGally::ggpairs(khs)
 
 # 2-d Feature space (Top of Fig 2)
-prcomp(khs[,-1], scale=TRUE)$x %>%
+prcomp(khs, scale=TRUE)$x %>%
   as_tibble() %>%
-  bind_cols(Period=khs$Period) %>%
+  bind_cols(Period=as.factor(khs$Period)) %>%
   ggplot(aes(x=PC1, y=PC2)) +
     geom_point(aes(col=Period))
 ```
