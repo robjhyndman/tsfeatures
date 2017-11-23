@@ -55,7 +55,9 @@ stl_features <- function(x, robust=FALSE, transform=FALSE, lambda=NULL,...)
   {
     if(transform)
     {
-      contx <- forecast::BoxCox(contx, lambda=forecast::BoxCox.lambda(x,...))
+      if(is.null(lambda))
+        lambda <- forecast::BoxCox.lambda(contx, ...)
+      contx <- forecast::BoxCox(contx, lambda=lambda)
     }
     if (freq > 1L) 
     {
