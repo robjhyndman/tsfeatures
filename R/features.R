@@ -29,10 +29,16 @@ acf1 <- function(x) {
 #' Computes the strength of trend and seasonality of a time series using an STL
 #' decomposition (or for non-seasonal time series, a penalized regression spline smoother).
 #' @param x a univariate time series
+#' @param robust A logical variable indicating if robust STL should be applied.
+#' @param transform A logical variable indicating if a Box-Cox transform should be applied
+#' before the STL decomposition.
+#' @param lambda The value of the Box-Cox transformation parameter if \code{transform=TRUE}.
+#' If \code{lambda=NULL}, it is automatically selected using \code{\link[forecast]{BoxCox.lambda}}.
+#' @param ... Other arguments are passed to \code{\link[forecast]{BoxCox.lambda}}.
 #' @return A numeric value.
 #' @export
 
-stl_features <- function(x) 
+stl_features <- function(x, robust=FALSE, transform=FALSE, lambda=NULL,...) 
 {
   x <- as.ts(x)
   tspx <- tsp(x)
@@ -47,9 +53,13 @@ stl_features <- function(x)
   } 
   else 
   {
+    if(transform)
+    {
+      contx <- forecast::BoxCox(contx, lambda=forecast::BoxCox.lambda(x,...))
+    }
     if (freq > 1L) 
     {
-      stlfit <- stl(contx, s.window = "periodic", robust = TRUE)
+      stlfit <- stl(contx, s.window = "periodic", robust = robust)
       trend0 <- stlfit$time.series[, "trend"]
       seasonal <- stlfit$time.series[, "seasonal"]
       remainder <- stlfit$time.series[, "remainder"]
