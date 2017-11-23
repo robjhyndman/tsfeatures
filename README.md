@@ -76,7 +76,7 @@ khs <- cbind(
   tsfeatures(M3data, c("entropy","stl_features","frequency")),
   tsfeatures(M3data, "Lambda", scale=FALSE)) %>% 
   select(frequency, entropy, trend, season, acfremainder, Lambda) %>%
-  replace_na(list(season=1)) %>%
+  replace_na(list(season=0)) %>%
   rename(
     Period = frequency,
     Entropy = entropy,
