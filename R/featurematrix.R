@@ -12,6 +12,7 @@
 #' @param trim if \code{TRUE}, time series are trimmed by \code{trim_amount} before features
 #' are computed. Values larger than \code{trim_amount} in absolute value are set to \code{NA}.
 #' @param trim_amount Default level of trimming if \code{trim==TRUE}.
+#' @param ... Other arguments get passed to the feature functions.
 #' @return A feature matrix (in the form of a tibble) with each row corresponding to
 #' one time series from tslist, and each column being a feature.
 #' @examples
@@ -20,7 +21,7 @@
 #' @export
 tsfeatures <- function(tslist,
                        features = c("frequency","stl_features","entropy","acf1"),
-                       scale=TRUE, trim=FALSE, trim_amount=0.1)
+                       scale=TRUE, trim=FALSE, trim_amount=0.1, ...)
 {
   if(!is.list(tslist))
     tslist <- as.list(tslist)
@@ -35,7 +36,7 @@ tsfeatures <- function(tslist,
 	for(i in seq_along(features))
   {
     flist[[i]] <- map(tslist,
-      function(x){match.fun(features[i])(x)})
+      function(x){match.fun(features[i])(x, ...)})
     # Check names
     if(is.null(names(flist[[i]][[1]])))
       flist[[i]] <- map(flist[[i]],

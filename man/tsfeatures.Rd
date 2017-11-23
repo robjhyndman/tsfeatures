@@ -8,7 +8,7 @@
 \title{Time series feature matrix}
 \usage{
 tsfeatures(tslist, features = c("frequency", "stl_features", "entropy",
-  "acf1"), scale = TRUE, trim = FALSE, trim_amount = 0.1)
+  "acf1"), scale = TRUE, trim = FALSE, trim_amount = 0.1, ...)
 }
 \arguments{
 \item{tslist}{a list of univariate time series, each of class \code{ts} or a numeric vector.
@@ -26,6 +26,8 @@ are computed.}
 are computed. Values larger than \code{trim_amount} in absolute value are set to \code{NA}.}
 
 \item{trim_amount}{Default level of trimming if \code{trim==TRUE}.}
+
+\item{...}{Other arguments get passed to the feature functions.}
 }
 \value{
 A feature matrix (in the form of a tibble) with each row corresponding to
