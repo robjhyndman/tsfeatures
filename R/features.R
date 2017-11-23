@@ -31,14 +31,15 @@ acf1 <- function(x) {
 #' @param x a univariate time series
 #' @param robust A logical variable indicating if robust STL should be applied.
 #' @param transform A logical variable indicating if a Box-Cox transform should be applied
-#' before the STL decomposition.
-#' @param lambda The value of the Box-Cox transformation parameter if \code{transform=TRUE}.
-#' If \code{lambda=NULL}, it is automatically selected using \code{\link[forecast]{BoxCox.lambda}}.
+#' before the STL decomposition. If \code{lambda} is not NULL, then \code{transform} is set to TRUE.
+#' @param lambda The value of the Box-Cox transformation parameter.
+#' If \code{lambda=NULL} and \code{transform=TRUE}, then lambda is automatically selected
+#' using \code{\link[forecast]{BoxCox.lambda}}.
 #' @param ... Other arguments are passed to \code{\link[forecast]{BoxCox.lambda}}.
 #' @return A numeric value.
 #' @export
 
-stl_features <- function(x, robust=FALSE, transform=FALSE, lambda=NULL,...) 
+stl_features <- function(x, s.window=15, robust=FALSE, transform=FALSE, lambda=NULL,...) 
 {
   x <- as.ts(x)
   tspx <- tsp(x)
@@ -53,7 +54,7 @@ stl_features <- function(x, robust=FALSE, transform=FALSE, lambda=NULL,...)
   } 
   else 
   {
-    if(transform)
+    if(transform | !is.null(lambda))
     {
       if(is.null(lambda))
         lambda <- forecast::BoxCox.lambda(contx, ...)
@@ -61,7 +62,7 @@ stl_features <- function(x, robust=FALSE, transform=FALSE, lambda=NULL,...)
     }
     if (freq > 1L) 
     {
-      stlfit <- stl(contx, s.window = "periodic", robust = robust)
+      stlfit <- stl(contx, s.window = s.window, robust = robust)
       trend0 <- stlfit$time.series[, "trend"]
       seasonal <- stlfit$time.series[, "seasonal"]
       remainder <- stlfit$time.series[, "remainder"]

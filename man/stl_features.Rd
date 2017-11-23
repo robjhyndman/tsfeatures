@@ -4,7 +4,8 @@
 \alias{stl_features}
 \title{Strength of trend and seasonality of a time series}
 \usage{
-stl_features(x, robust = FALSE, transform = FALSE, lambda = NULL, ...)
+stl_features(x, s.window = 15, robust = FALSE, transform = FALSE,
+  lambda = NULL, ...)
 }
 \arguments{
 \item{x}{a univariate time series}
@@ -12,10 +13,11 @@ stl_features(x, robust = FALSE, transform = FALSE, lambda = NULL, ...)
 \item{robust}{A logical variable indicating if robust STL should be applied.}
 
 \item{transform}{A logical variable indicating if a Box-Cox transform should be applied
-before the STL decomposition.}
+before the STL decomposition. If \code{lambda} is not NULL, then \code{transform} is set to TRUE.}
 
-\item{lambda}{The value of the Box-Cox transformation parameter if \code{transform=TRUE}.
-If \code{lambda=NULL}, it is automatically selected using \code{\link[forecast]{BoxCox.lambda}}.}
+\item{lambda}{The value of the Box-Cox transformation parameter.
+If \code{lambda=NULL} and \code{transform=TRUE}, then lambda is automatically selected
+using \code{\link[forecast]{BoxCox.lambda}}.}
 
 \item{...}{Other arguments are passed to \code{\link[forecast]{BoxCox.lambda}}.}
 }

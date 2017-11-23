@@ -46,8 +46,9 @@ library(anomalous)
 yahoo <- cbind(dat0, dat1, dat2, dat3)
 hwl <- bind_cols(
          tsfeatures(yahoo,
-           c("acf1","stl_features","entropy","lumpiness",
+           c("acf1","entropy","lumpiness",
              "flat_spots","crossing_points")),
+         tsfeatures(yahoo,"stl_features", s.window='periodic'),
          tsfeatures(yahoo, "max_kl_shift", width=48),
          tsfeatures(yahoo,
            c("mean","var"), scale=FALSE, na.rm=TRUE),
@@ -80,7 +81,8 @@ M3data <- purrr::map(Mcomp::M3,
   })
 khs <- bind_cols(
   tsfeatures(M3data, c("frequency", "entropy")),
-  tsfeatures(M3data, "stl_features", scale=FALSE, transform=TRUE, lower=0, upper=1, method='loglik'),
+  tsfeatures(M3data, "stl_features", scale=FALSE, transform=TRUE, 
+    lower=0, upper=1, method='loglik', s.window='periodic'),
   tsfeatures(M3data, "BoxCox.lambda", scale=FALSE, lower=0, upper=1, method="loglik")) %>% 
   select(frequency, entropy, trend, season, acfremainder, BoxCox.lambda) %>%
   replace_na(list(season=0)) %>%
