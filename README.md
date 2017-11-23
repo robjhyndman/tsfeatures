@@ -34,7 +34,7 @@ library(anomalous)
 # package than in the Hyndman et al (2015) paper. Other features are the same.
 # Using the real data from the paper
 yahoo <- cbind(dat0, dat1, dat2, dat3)
-hwl <- cbind(
+hwl <- bind_cols(
          tsfeatures(yahoo,
            c("acf1","stl_features","entropy","lumpiness",
              "flat_spots","crossing_points")),
@@ -63,26 +63,26 @@ prcomp(na.omit(hwl), scale=TRUE)$x %>%
 ``` r
 library(tsfeatures)
 library(tidyverse)
+library(forecast)
 
 M3data <- purrr::map(Mcomp::M3, 
   function(x){
-    tspx <- tsp(x$x)
-    ts(c(x$x,x$xx), start=tspx[1], frequency=tspx[3])
+      tspx <- tsp(x$x)
+      ts(c(x$x,x$xx), start=tspx[1], frequency=tspx[3])
   })
-Lambda <- function(x){
-  suppressWarnings(forecast::BoxCox.lambda(x, lower=0, upper=1, method='loglik'))
-}
-khs <- cbind(
-  tsfeatures(M3data, c("entropy","stl_features","frequency")),
-  tsfeatures(M3data, "Lambda", scale=FALSE)) %>% 
-  select(frequency, entropy, trend, season, acfremainder, Lambda) %>%
+khs <- bind_cols(
+  tsfeatures(M3data, c("frequency", "entropy")),
+  tsfeatures(M3data, "stl_features", scale=FALSE, transform=TRUE, lower=0, upper=1, method='loglik'),
+  tsfeatures(M3data, "BoxCox.lambda", scale=FALSE, lower=0, upper=1, method="loglik")) %>% 
+  select(frequency, entropy, trend, season, acfremainder, BoxCox.lambda) %>%
   replace_na(list(season=0)) %>%
   rename(
     Period = frequency,
     Entropy = entropy,
     Trend = trend,
     Season = season,
-    ACF1 = acfremainder) %>%
+    ACF1 = acfremainder,
+    Lambda = BoxCox.lambda) %>%
   mutate(Period = as.factor(Period))
 ```
 
@@ -136,7 +136,7 @@ features2 <- c(
   "max_var_shift"
 )
 
-yk <- cbind(
+yk <- bind_cols(
         tsfeatures(M3data, features1),
         tsfeatures(M3data, features2, trim=TRUE)) %>% 
   select(entropy, trend, linearity, curvature, acf1,
