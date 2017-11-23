@@ -19,33 +19,44 @@ You can install the **development** version from [Github](https://github.com/rob
 devtools::install_github("robjhyndman/tsfeatures")
 ```
 
-Usage (still in development)
-----------------------------
+Usage
+-----
 
 ### Hyndman, Wang and Laptev (ICDM 2015)
 
 ``` r
 library(tsfeatures)
-library(anomalous)
 library(tidyverse)
+library(anomalous)
 
-yahoo_real <- as.list(cbind(dat0,dat1,dat2,dat3))
-
-KLscore <- function(x){max_kl_shift(x, width=48)}
-real_features <- cbind(
-      tsfeatures(yahoo_real,
-                 c("acf1","stl_features","entropy","lumpiness",
-                   "KLscore","flat_spots","crossing_points")),
-      tsfeatures(yahoo_real,
-                 c("mean","var"), scale=FALSE),
-      tsfeatures(yahoo_real,
-                 c("max_level_shift","max_var_shift"), trim=TRUE)) %>%
+# Compute the features used in Hyndman, Wang & Laptev (ICDM 2015).
+# Note that crossing_points is defined slightly differently in the tsfeatures
+# package than in the Hyndman et al (2015) paper. Other features are the same.
+# Using the real data from the paper
+yahoo <- cbind(dat0, dat1, dat2, dat3)
+hwl <- cbind(
+         tsfeatures(yahoo,
+           c("acf1","stl_features","entropy","lumpiness",
+             "flat_spots","crossing_points")),
+         tsfeatures(yahoo, "max_kl_shift", width=48),
+         tsfeatures(yahoo,
+           c("mean","var"), scale=FALSE, na.rm=TRUE),
+         tsfeatures(yahoo,
+           c("max_level_shift","max_var_shift"), trim=TRUE)) %>%
   select(mean, var, acf1, trend, linearity, curvature, season, peak, trough,
          entropy, lumpiness, spike, max_level_shift, max_var_shift, flat_spots,
          crossing_points, max_kl_shift, time_kl_shift)
-# Note that crossing_points is defined slightly differently in the tsfeatures
-# package than in the Hyndman et al (2015) paper.
 ```
+
+``` r
+# 2-d Feature space
+prcomp(na.omit(hwl), scale=TRUE)$x %>% 
+  as_tibble() %>%
+  ggplot(aes(x=PC1, y=PC2)) +
+    geom_point()
+```
+
+![](READMEfigs/yahoo2-1.png)
 
 ### Kang, Hyndman & Smith-Miles (IJF 2017)
 
@@ -85,7 +96,7 @@ GGally::ggpairs(khs)
 ``` r
 
 # 2-d Feature space (Top of Fig 2)
-prcomp(khs[,-1])$x %>%
+prcomp(khs[,-1], scale=TRUE)$x %>%
   as_tibble() %>%
   bind_cols(Period=khs$Period) %>%
   ggplot(aes(x=PC1, y=PC2)) +
