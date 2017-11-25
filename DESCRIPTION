@@ -13,7 +13,7 @@ Depends:
 Imports:
     ForeCA,
     fracdiff,
-    forecast,
+    forecast (>= 8.3),
     mgcv,
     purrr,
     RcppRoll (>= 0.2.2), 

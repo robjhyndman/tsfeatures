@@ -4,7 +4,12 @@
 \alias{as.list.mts}
 \title{Convert mts object to list of time series}
 \usage{
-\method{as.list}{mts}(x)
+\method{as.list}{mts}(x, ...)
+}
+\arguments{
+\item{x}{multivariate time series of class mts.}
+
+\item{...}{other arguments are ignored.}
 }
 \description{
 Convert mts object to list of time series
