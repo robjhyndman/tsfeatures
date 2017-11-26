@@ -139,11 +139,16 @@ library(tsfeatures)
 library(tidyverse)
 library(forecast)
 
-M3data <- purrr::map(Mcomp::M3, function(x)x$x)
+M3data <- purrr::map(Mcomp::M3, 
+  function(x){
+      tspx <- tsp(x$x)
+      ts(c(x$x,x$xx), start=tspx[1], frequency=tspx[3])
+  })
 
 nsdiffs <- function(x){
   c(nsdiffs=ifelse(frequency(x)==1L, 1L, forecast::nsdiffs(x)))
 }
+
 features1 <- c(
   "entropy",
   "stl_features",
@@ -166,10 +171,24 @@ yk <- bind_cols(
         tsfeatures(M3data, features2, trim=TRUE)) %>% 
   select(entropy, trend, linearity, curvature, acf1,
     acfremainder, max_kl_shift, max_level_shift, max_var_shift, 
-    ndiffs, Nonlinearity, frequency, season, nsdiffs,
-    ARCHtest.p, GARCHtest.p, Boxtest.p, GARCHBoxtest.p, Hetero)
+    ndiffs, Nonlinearity, frequency, seasonal_strength, nsdiffs,
+    ARCHtest.p, GARCHtest.p, Boxtest.p, GARCHBoxtest.p, Hetero) %>%
+  replace_na(list(
+    seasonal_strength=0,
+    max_kl_shift=0))
 # What happened to var change on remainder?
 ```
+
+``` r
+# 2-d Feature space
+prcomp(yk, scale=TRUE)$x %>%
+  as_tibble() %>%
+  bind_cols(Period=as.factor(yk$frequency)) %>%
+  ggplot(aes(x=PC1, y=PC2)) +
+    geom_point(aes(col=Period))
+```
+
+![](READMEfigs/marsgraphs-1.png)
 
 License
 -------
