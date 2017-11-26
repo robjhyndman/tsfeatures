@@ -174,13 +174,17 @@ yk <- bind_cols(
 # What happened to var change on remainder?
 ```
 
-
-```{r marsgraphs, message=FALSE, dependson="mars"}
+```{r marsembed, message=FALSE, dependson="mars"}
 # 2-d Feature space
-prcomp(yk, scale=TRUE)$x %>%
-  as_tibble() %>%
+d <- dist(scale(yk))
+ei <- embedding(d, method="MDS")
+```
+  
+```{r marsgraphs, message=FALSE, dependson="marsembed"}
+# 2-d Feature space
+ei %>%
   bind_cols(Period=as.factor(yk$frequency)) %>%
-  ggplot(aes(x=PC1, y=PC2)) +
+  ggplot(aes(x=Comp1, y=Comp2)) +
     geom_point(aes(col=Period))
 ```
 

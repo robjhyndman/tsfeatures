@@ -181,10 +181,15 @@ yk <- bind_cols(
 
 ``` r
 # 2-d Feature space
-prcomp(yk, scale=TRUE)$x %>%
-  as_tibble() %>%
+d <- dist(scale(yk))
+ei <- embedding(d, method="MDS")
+```
+
+``` r
+# 2-d Feature space
+ei %>%
   bind_cols(Period=as.factor(yk$frequency)) %>%
-  ggplot(aes(x=PC1, y=PC2)) +
+  ggplot(aes(x=Comp1, y=Comp2)) +
     geom_point(aes(col=Period))
 ```
 
