@@ -8,8 +8,7 @@ embedding(distances, k = 2, method = c("Laplacian", "Lrw", "Lsym", "Lsym2",
   "MDS", "MDSiso", "monoMDS", "DPM", "Rtsne"), h = median(distances), ...)
 }
 \arguments{
-\item{distances}{an object of class "dist" (essential the lower triangle of distances matrix). 
-If it is a rectangular matrix, distances are computed.}
+\item{distances}{an object of class "dist" (essentially the lower triangle of distances matrix).}
 
 \item{k}{embedding dimension}
 

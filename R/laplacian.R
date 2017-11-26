@@ -2,8 +2,7 @@
 #'
 #' Various methods for embedding a distance matrix into a low-dimensional matrix
 #'
-#' @param distances an object of class "dist" (essential the lower triangle of distances matrix). 
-#' If it is a rectangular matrix, distances are computed.
+#' @param distances an object of class "dist" (essentially the lower triangle of distances matrix).
 #' @param k  embedding dimension
 #' @param h  bandwidth for computing the similarity matrix. Only used for Laplacian methods,
 #' apart from LaplacianMDS where hs is set to a large h.
@@ -25,8 +24,8 @@ embedding <- function(
 {
   method <- match.arg(method)
 
-  if(class(distances)!="dist")
-    distances <- dist(distances)
+  if(!("dist" %in% class(distances)))
+    stop("distances must be a matrix of distances")
 
   if(method == "Laplacian")
   {
@@ -73,7 +72,7 @@ embedding <- function(
     ei <- Rtsne::Rtsne(distances, dims=k, perplexity=9)$Y
   }
   else if(method=="MDS")
-    ei <- cmdscale(distances, k=k)$points
+    ei <- cmdscale(distances, k=k)
   else if(method=="MDSiso")
   {
     # Multidimensional scaling
@@ -89,7 +88,7 @@ embedding <- function(
   else if(method=="DPM")
   {
     # Density preserving map
-    ei <- dpm(distances, m=k, ...)
+    ei <- dpm(distances, h=h, m=k, ...)
     colnames(ei) <- paste("Comp",1:k, sep="")
     rownames(ei) <- attr(distances, "Labels")
     return(structure(scale(ei),class="embedding"))
@@ -138,6 +137,29 @@ similarity <- function(distances, h,
 }
 
 
+
+# Compute similarity matrix based on pairwise distances
+# Only implements Epanechnikov kernel
+# distances must be a dist class.
+# returns sparse object
+sparsesimilarity <- function(distances, h)
+{
+  if(!is.element("dist",class(distances)))
+    stop("distances must be of class 'dist'")
+
+  if(missing(h))
+    h <- 1000*max(distances)
+
+  n <- attr(distances,"Size")
+  k <- distances < h
+  col <- rep(1:(n-1),(n-1):1)[k]
+  row <- matrix(rep(1:n,n), n,n)[lower.tri(matrix(0,n,n))]
+  row <- row[k]
+  v <- 1-(distances[k]/h)^2
+  sims <- Rcsdp::simple_triplet_sym_matrix(row,col,v,n=n)
+
+  return(sims)
+}
 
 # Compute row means of sparse symmetric matrix
 rowMeansSparse <- function(x)
