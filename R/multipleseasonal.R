@@ -2,8 +2,8 @@
 #' Strength of trend and seasonality of a time series
 #'
 #' Computes various measures of trend and seasonality of a time series based on
-#' an STL decomposition. The number of seasonal periods, and the length of the 
-#' seasonal periods are returned. Also, the strength of seasonality corresponding 
+#' an STL decomposition. The number of seasonal periods, and the length of the
+#' seasonal periods are returned. Also, the strength of seasonality corresponding
 #' to each period is estimated. The \code{\link[forecast]{mstl}} function is used
 #' to do the decomposition.
 #' @param x a univariate time series.
@@ -11,20 +11,20 @@
 #' @return A numeric value.
 #' @export
 
-stl_features <- function(x, ...) 
+stl_features <- function(x, ...)
 {
-  if ("msts" %in% class(x)) 
+  if ("msts" %in% class(x))
   {
     msts <- attributes(x)$msts
     nperiods <- length(msts)
-  } 
-  else if ("ts" %in% class(x)) 
+  }
+  else if ("ts" %in% class(x))
   {
     msts <- frequency(x)
     nperiods <- msts > 1
     season <- 0
-  } 
-  else 
+  }
+  else
   {
     msts <- 1
     nperiods <- 0L
@@ -53,28 +53,27 @@ stl_features <- function(x, ...)
 
   # Measure of trend strength
   if (vardeseason/varx < 1e-10)
-    trend <- 0 
-  else 
+    trend <- 0
+  else
     trend <- max(0, min(1, 1 - vare/vardeseason))
 
-  if (nseas > 0) 
+  if (nseas > 0)
   {
     # Measure of seasonal strength
     season <- numeric(nseas)
-    for (i in seq(nseas)) 
+    for (i in seq(nseas))
       season[i] <- max(0, min(1, 1 - vare/var(remainder + seasonal[, i], na.rm=TRUE)))
 
     # Find time of peak and trough for each component
-    # # measured since start of series
-    # peak <- trough <- numeric(nseas)
-    # for (i in seq(nseas)) 
-    # {
-    #   starty <- start(x)[2L]
-    #   pk <- (starty + which.max(seasonal[, i]) - 1L)%%msts[i]
-    #   th <- (starty + which.min(seasonal[, i]) - 1L)%%msts[i]
-    #   peak[i] <- ifelse(pk == 0, freq, pk) * max(seasonal[, i])
-    #   trough[i] <- ifelse(th == 0, freq, th) * min(seasonal[, i])
-    # }
+    peak <- trough <- numeric(nseas)
+    for (i in seq(nseas))
+    {
+      startx <- start(x)[2L] - 1L
+      pk <- (startx + which.max(seasonal[, i])) %% msts[i]
+      th <- (startx + which.min(seasonal[, i])) %% msts[i]
+      peak[i] <- ifelse(pk == 0, msts[i], pk)
+      trough[i] <- ifelse(th == 0, msts[i], th)
+    }
   }
 
   # Compute measure of spikiness

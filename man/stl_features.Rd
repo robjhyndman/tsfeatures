@@ -16,8 +16,8 @@ A numeric value.
 }
 \description{
 Computes various measures of trend and seasonality of a time series based on
-an STL decomposition. The number of seasonal periods, and the length of the 
-seasonal periods are returned. Also, the strength of seasonality corresponding 
+an STL decomposition. The number of seasonal periods, and the length of the
+seasonal periods are returned. Also, the strength of seasonality corresponding
 to each period is estimated. The \code{\link[forecast]{mstl}} function is used
 to do the decomposition.
 }
