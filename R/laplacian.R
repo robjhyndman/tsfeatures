@@ -2,7 +2,8 @@
 #'
 #' Various methods for embedding a distance matrix into a low-dimensional matrix
 #'
-#' @param distances an object of class "dist" (essential the lower triangle of distances matrix)
+#' @param distances an object of class "dist" (essential the lower triangle of distances matrix). 
+#' If it is a rectangular matrix, distances are computed.
 #' @param k  embedding dimension
 #' @param h  bandwidth for computing the similarity matrix. Only used for Laplacian methods,
 #' apart from LaplacianMDS where hs is set to a large h.
@@ -25,7 +26,7 @@ embedding <- function(
   method <- match.arg(method)
 
   if(class(distances)!="dist")
-    stop("distances should be of class dist")
+    distances <- dist(distances)
 
   if(method == "Laplacian")
   {
@@ -108,7 +109,7 @@ embedding <- function(
   j <- med_ei < 0
   ei[,j] <- -ei[,j]
 
-  return(ei)
+  return(tibble::as_tibble(ei))
 }
 
 # Compute similarity matrix based on pairwise distances
