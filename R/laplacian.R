@@ -18,8 +18,8 @@
 embedding <- function(
   distances,
   k = 2,
-  method = c("Laplacian","Lrw","Lsym","Lsym2",
-            "MDS","MDSiso","monoMDS","DPM","Rtsne"),
+  method = c("Rtsne", "Laplacian","Lrw","Lsym","Lsym2",
+            "MDS","MDSiso","monoMDS","DPM"),
   h = max(distances), ...)
 {
   method <- match.arg(method)
