@@ -182,7 +182,7 @@ yk <- bind_cols(
 ``` r
 # 2-d Feature space
 d <- dist(scale(yk))
-ei <- embedding(d, method="MDS")
+ei <- embedding(d, method="Rtsne")
 ```
 
 ``` r

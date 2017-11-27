@@ -177,7 +177,7 @@ yk <- bind_cols(
 ```{r marsembed, message=FALSE, dependson="mars"}
 # 2-d Feature space
 d <- dist(scale(yk))
-ei <- embedding(d, method="MDS")
+ei <- embedding(d, method="Rtsne")
 ```
   
 ```{r marsgraphs, message=FALSE, dependson="marsembed"}
