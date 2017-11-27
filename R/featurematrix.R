@@ -21,7 +21,7 @@
 #' @export
 tsfeatures <- function(tslist,
                        features = c("frequency","stl_features","entropy","acf1"),
-                       scale=TRUE, trim=FALSE, trim_amount=0.1, ...)
+                       scale=TRUE, trim=FALSE, trim_amount=0.1, parallel=FALSE, ...)
 {
   if(!is.list(tslist))
     tslist <- as.list(tslist)
@@ -60,8 +60,23 @@ tsfeatures <- function(tslist,
   fmat <- matrix(NA_real_, nrow=length(tslist), ncol=length(fnames))
   colnames(fmat) <- fnames
   rownames(fmat) <- names(tslist)
-  for(i in seq_along(tslist))
-    fmat[i,featurenames[[i]]] <- featurelist[[i]][featurenames[[i]]]
+
+  if(parallel)
+  {
+    if(!require(future))
+      stop("future package not available")
+    plan(multiprocess)
+    fmatlist <- list()
+    for(i in seq_along(tslist))
+      fmatlist[[i]] <- future({featurelist[[i]][featurenames[[i]]]})
+    for(i in seq_along(tslist))
+      fmat[i, featurenames[[i]]] <- value(fmatlist[[i]])
+  }
+  else
+  {
+    for(i in seq_along(tslist))
+      fmat[i,featurenames[[i]]] <- featurelist[[i]][featurenames[[i]]]
+  }
 
   return(tibble::as_tibble(fmat))
 }

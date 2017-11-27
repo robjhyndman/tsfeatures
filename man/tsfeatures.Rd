@@ -8,7 +8,8 @@
 \title{Time series feature matrix}
 \usage{
 tsfeatures(tslist, features = c("frequency", "stl_features", "entropy",
-  "acf1"), scale = TRUE, trim = FALSE, trim_amount = 0.1, ...)
+  "acf1"), scale = TRUE, trim = FALSE, trim_amount = 0.1,
+  parallel = FALSE, ...)
 }
 \arguments{
 \item{tslist}{a list of univariate time series, each of class \code{ts} or a numeric vector.
