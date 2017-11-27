@@ -48,7 +48,7 @@ heterogeneity <- function(x)
 
   # For a time series with strong ARCH/GARCH effects, sigma2 will have larger coefficient of variation?
   sigma2 <- garch.fit$fitted.values[,1]
-  cor.sigma2.x <- suppressWarnings(cor(cbind(sigma2, x), 
+  cor.sigma2.x <- suppressWarnings(cor(cbind(sigma2, x),
     use="pairwise.complete.obs")[1,2])
   max.sigma2 <- max(sigma2, na.rm=TRUE)
   min.sigma2 <- min(sigma2, na.rm=TRUE)
@@ -66,13 +66,14 @@ heterogeneity <- function(x)
   x.garch.boxtest <- Box.test(garch.fit.std^2, lag = 12, type = 'Ljung-Box')$p.value
   boxtest.p.diff <- x.garch.boxtest - x.boxtest
 
-  return(c(
+  output <- c(
     ARCHtest.p = unname(x.archtest),
     GARCHtest.p = unname(x.garch.archtest),
     Boxtest.p = x.boxtest,
     GARCHBoxtest.p = x.garch.boxtest,
-    Hetero = max(archtest.p.diff, boxtest.p.diff)
-  ))
+    Hetero = max(archtest.p.diff, boxtest.p.diff))
+  output[is.na(output)] <- 1
+  return(output)
 }
 
 

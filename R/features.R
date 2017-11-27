@@ -45,7 +45,11 @@ lumpiness <- function(x, width=ifelse(frequency(x) > 1,
   nsegs <- nr/width
   varx <- map_dbl(seq_len(nsegs), function(idx)
                  var(x[lo[idx]:up[idx]], na.rm = TRUE))
-  return(c(lumpiness = var(varx, na.rm = TRUE)))
+  if(sum(is.na(varx)) <= 1L)
+    lumpiness <- 0
+  else
+    lumpiness <- var(varx, na.rm=TRUE)
+  return(c(lumpiness = lumpiness))
 }
 
 #' @rdname lumpiness
@@ -61,7 +65,11 @@ stability <- function(x, width=ifelse(frequency(x) > 1,
   nsegs <- nr/width
   meanx <- map_dbl(seq_len(nsegs), function(idx)
                  mean(x[lo[idx]:up[idx]], na.rm = TRUE))
-  return(c(stability = var(meanx, na.rm = TRUE)))
+  if(sum(is.na(meanx)) <= 1L)
+    stability <- 0
+  else
+    stability <- var(meanx, na.rm=TRUE)
+  return(c(stability = stability))
 }
 
 #' Time series features based on sliding windows
@@ -112,7 +120,7 @@ max_var_shift <- function(x, width=ifelse(frequency(x) > 1,
 
   if(length(vars)==0L)
   {
-    maxmeans <- 0
+    maxvar <- 0
     maxidx <- NA_real_
   }
   else if(all(is.na(vars)))
@@ -167,7 +175,7 @@ max_kl_shift <- function(x, width=ifelse(frequency(x) > 1,
                (log(rmean[lo[i], ]) - log(rmean[hi[i], ])) *
                grid, na.rm = TRUE))
   diffkl <- diff(kl, na.rm = TRUE)
-  if(length(diffk)==0L)
+  if(length(diffkl)==0L)
   {
     diffkl <- 0
     maxidx <- NA_real_
