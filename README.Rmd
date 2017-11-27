@@ -162,31 +162,55 @@ features2 <- c(
 )
 
 yk <- bind_cols(
-        tsfeatures(M3data, features1),
-        tsfeatures(M3data, features2, trim=TRUE)) %>% 
-  select(entropy, trend, linearity, curvature, acf1,
-    acfremainder, max_kl_shift, max_level_shift, max_var_shift, 
-    ndiffs, Nonlinearity, frequency, seasonal_strength, nsdiffs,
-    ARCHtest.p, GARCHtest.p, Boxtest.p, GARCHBoxtest.p, Hetero) %>%
+  tsfeatures(M3data, features1),
+  tsfeatures(M3data, features2, trim=TRUE)) %>%
   replace_na(list(
     seasonal_strength=0,
-    max_kl_shift=0))
-# What happened to var change on remainder?
+    max_kl_shift=0)) %>%
+  map_dfr(rank)/length(M3data)
+
+# Retain features that have meaning for M3
+yk <- select(yk,
+             seasonal_period, ndiffs, nsdiffs, entropy, Nonlinearity,
+               trend, spike, seasonal_strength, linearity, curvature,
+               acfremainder, acf1, max_kl_shift, lumpiness,
+               ARCHtest.p, GARCHtest.p, Boxtest.p, GARCHBoxtest.p,
+               Hetero, max_level_shift, max_var_shift)
 ```
 
 ```{r marsembed, message=FALSE, dependson="mars"}
-# 2-d Feature space
-d <- dist(scale(yk))
+# Create distance matrix
+d <- dist(yk)
+# Embed to 2d using tsne
 ei <- embedding(d, method="Rtsne")
 ```
   
 ```{r marsgraphs, message=FALSE, dependson="marsembed"}
-# 2-d Feature space
 ei %>%
-  bind_cols(Period=as.factor(yk$frequency)) %>%
+  bind_cols(tsfeatures(M3data, "frequency")) %>%
+  mutate(Period = as.factor(frequency)) %>%
   ggplot(aes(x=Comp1, y=Comp2)) +
-    geom_point(aes(col=Period))
+  geom_point(aes(col=Period))
 ```
+
+```{r marsnnet, message=FALSE, dependson="marsembed"}
+# Learn Neural net to model tsne embedding
+library(caret)
+df <- bind_cols(ei, yk)
+nn1 <- avNNet(df[,-2],df$Comp1, repeats=10, size=5, linout=TRUE)
+cor(predict(nn1),df$Comp1)
+
+nn2 <- avNNet(df[,-1],df$Comp2, repeats=10, size=5, linout=TRUE)
+cor(predict(nn2),df$Comp2)
+
+# Now plot estimated components
+tibble(Comp1=predict(nn1), Comp2=predict(nn2)) %>%
+  bind_cols(tsfeatures(M3data, "frequency")) %>%
+  mutate(Period = as.factor(frequency)) %>%
+  ggplot(aes(x=Comp1, y=Comp2)) +
+  geom_point(aes(col=Period))
+```
+
 
 ## License
 
