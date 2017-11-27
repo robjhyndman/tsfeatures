@@ -193,14 +193,14 @@ ei %>%
   geom_point(aes(col=Period))
 ```
 
-```{r marsnnet, message=FALSE, dependson="marsembed"}
+```{r marsnnet, message=FALSE, warning=FALSE, dependson="marsembed"}
 # Learn Neural net to model tsne embedding
 library(caret)
 df <- bind_cols(ei, yk)
-nn1 <- avNNet(df[,-2],df$Comp1, repeats=10, size=5, linout=TRUE)
+nn1 <- avNNet(df[,-2],df$Comp1, repeats=10, size=5, linout=TRUE, trace=FALSE)
 cor(predict(nn1),df$Comp1)
 
-nn2 <- avNNet(df[,-1],df$Comp2, repeats=10, size=5, linout=TRUE)
+nn2 <- avNNet(df[,-1],df$Comp2, repeats=10, size=5, linout=TRUE, trace=FALSE)
 cor(predict(nn2),df$Comp2)
 
 # Now plot estimated components
