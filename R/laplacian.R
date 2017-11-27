@@ -69,7 +69,7 @@ embedding <- function(
   }
   else if(method=="Rtsne")
   {
-    ei <- Rtsne::Rtsne(distances, dims=k, perplexity=perplexity, is_distance=TRUE, ...)$Y
+    ei <- Rtsne::Rtsne(distances, dims=k, is_distance=TRUE, ...)$Y
   }
   else if(method=="MDS")
     ei <- cmdscale(distances, k=k,...)
