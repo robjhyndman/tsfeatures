@@ -6,7 +6,7 @@
 #' @param k  embedding dimension
 #' @param h  bandwidth for computing the similarity matrix. Only used for Laplacian methods,
 #' apart from LaplacianMDS where hs is set to a large h.
-#' @param ... any other arguments are ignored.
+#' @param ... any other arguments are passed to the embedding method
 #'
 #' @examples
 #' mylist <- list(sunspot.year, WWWusage, AirPassengers, USAccDeaths)
@@ -30,59 +30,59 @@ embedding <- function(
   if(method == "Laplacian")
   {
     #Laplacian eigenmap with regular h
-    w <- similarity(distances, h=h, ...)
+    w <- similarity(distances, h=h)
     n <- NROW(w)
     D <- diag(rowSums(w))
-    ei <- geigen::geigen(D-w,D,symmetric=TRUE)
+    ei <- geigen::geigen(D-w,D,symmetric=TRUE,...)
     ei <- ei$vectors[,2:(k+1),drop=FALSE]
   }
   else if(method=="Lrw")
   {
     #Laplacian eigenmap. normalized Lrw
-    w <- similarity(distances, h=h, ...)
+    w <- similarity(distances, h=h)
     n <- NROW(w)
     D <- diag(1/rowSums(w))
-    ei <- geigen::geigen(diag(n) - D %*% w,D,symmetric=TRUE)
+    ei <- geigen::geigen(diag(n) - D %*% w,D,symmetric=TRUE,...)
     ei <- ei$vectors[,2:(k+1),drop=FALSE]
   }
   else if(method=="Lsym")
   {
     #Laplacian eigenmap. normalized Lsym
-    w <- similarity(distances, h=h, ...)
+    w <- similarity(distances, h=h)
     n <- NROW(w)
     wden <- rowSums(w)
     D <- diag(1/wden)
     Dhalf <- diag(1/sqrt(wden))
-    ei <- geigen::geigen(diag(n) - Dhalf %*% w %*% Dhalf,D,symmetric=TRUE)
+    ei <- geigen::geigen(diag(n) - Dhalf %*% w %*% Dhalf,D,symmetric=TRUE,...)
     ei <- ei$vectors[,2:(k+1),drop=FALSE]
   }
   else if(method=="Lsym2")
   {
     #Laplacian eigenmap. normalized Lsym
-    w <- similarity(distances, h=h, ...)
+    w <- similarity(distances, h=h)
     n <- NROW(w)
     wden <- rowSums(w)
     D <- diag(1/wden)
     Dhalf <- diag(1/sqrt(wden))
-    ei <- eigen(Dhalf %*% w %*% Dhalf,symmetric=TRUE)
+    ei <- eigen(Dhalf %*% w %*% Dhalf,symmetric=TRUE,...)
     ei <- ei$vectors[,1:k,drop=FALSE]
   }
   else if(method=="Rtsne")
   {
-    ei <- Rtsne::Rtsne(distances, dims=k, perplexity=9)$Y
+    ei <- Rtsne::Rtsne(distances, dims=k, perplexity=perplexity, is_distance=TRUE, ...)$Y
   }
   else if(method=="MDS")
-    ei <- cmdscale(distances, k=k)
+    ei <- cmdscale(distances, k=k,...)
   else if(method=="MDSiso")
   {
     # Multidimensional scaling
-    mds <- MASS::isoMDS(distances, k=k)
+    mds <- MASS::isoMDS(distances, k=k,...)
     ei <- mds$points
   }
   else if(method=="monoMDS")
   {
     # Multidimensional scaling
-    mds <- vegan::monoMDS(distances, k=k, model="local")
+    mds <- vegan::monoMDS(distances, k=k, model="local",...)
     ei <- mds$points
   }
   else if(method=="DPM")

@@ -15,7 +15,7 @@ embedding(distances, k = 2, method = c("Laplacian", "Lrw", "Lsym", "Lsym2",
 \item{h}{bandwidth for computing the similarity matrix. Only used for Laplacian methods,
 apart from LaplacianMDS where hs is set to a large h.}
 
-\item{...}{any other arguments are ignored.}
+\item{...}{any other arguments are passed to the embedding method}
 }
 \description{
 Various methods for embedding a distance matrix into a low-dimensional matrix
