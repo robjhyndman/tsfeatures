@@ -4,6 +4,7 @@
 #'
 #' @param distances an object of class "dist" (essentially the lower triangle of distances matrix).
 #' @param k  embedding dimension
+#' @param method Method to be used for dimension reduction.
 #' @param h  bandwidth for computing the similarity matrix. Only used for Laplacian methods,
 #' apart from LaplacianMDS where hs is set to a large h.
 #' @param ... any other arguments are passed to the embedding method
@@ -11,7 +12,7 @@
 #' @examples
 #' mylist <- list(sunspot.year, WWWusage, AirPassengers, USAccDeaths)
 #' fmat <- tsfeatures(mylist)
-#' z <- embedding(dist(fmat))
+#' z <- embedding(dist(fmat), perplexity=1)
 #' plot(z)
 #' @export
 

@@ -28,6 +28,9 @@ are computed. Values larger than \code{trim_amount} in absolute value are set to
 
 \item{trim_amount}{Default level of trimming if \code{trim==TRUE}.}
 
+\item{parallel}{If TRUE, multiple cores (or multiple sessions) will be used. This only speeds things up
+when there are a large number of time series.}
+
 \item{...}{Other arguments get passed to the feature functions.}
 }
 \value{

@@ -12,6 +12,8 @@
 #' @param trim if \code{TRUE}, time series are trimmed by \code{trim_amount} before features
 #' are computed. Values larger than \code{trim_amount} in absolute value are set to \code{NA}.
 #' @param trim_amount Default level of trimming if \code{trim==TRUE}.
+#' @param parallel If TRUE, multiple cores (or multiple sessions) will be used. This only speeds things up
+#' when there are a large number of time series.
 #' @param ... Other arguments get passed to the feature functions.
 #' @return A feature matrix (in the form of a tibble) with each row corresponding to
 #' one time series from tslist, and each column being a feature.
@@ -63,14 +65,12 @@ tsfeatures <- function(tslist,
 
   if(parallel)
   {
-    if(!require(future))
-      stop("future package not available")
-    plan(multiprocess)
+    future::plan("multiprocess")
     fmatlist <- list()
     for(i in seq_along(tslist))
-      fmatlist[[i]] <- future({featurelist[[i]][featurenames[[i]]]})
+      fmatlist[[i]] <- future::future({featurelist[[i]][featurenames[[i]]]})
     for(i in seq_along(tslist))
-      fmat[i, featurenames[[i]]] <- value(fmatlist[[i]])
+      fmat[i, featurenames[[i]]] <- future::value(fmatlist[[i]])
   }
   else
   {

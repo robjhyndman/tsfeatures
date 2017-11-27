@@ -12,6 +12,8 @@ embedding(distances, k = 2, method = c("Rtsne", "Laplacian", "Lrw", "Lsym",
 
 \item{k}{embedding dimension}
 
+\item{method}{Method to be used for dimension reduction.}
+
 \item{h}{bandwidth for computing the similarity matrix. Only used for Laplacian methods,
 apart from LaplacianMDS where hs is set to a large h.}
 
@@ -23,6 +25,6 @@ Various methods for embedding a distance matrix into a low-dimensional matrix
 \examples{
 mylist <- list(sunspot.year, WWWusage, AirPassengers, USAccDeaths)
 fmat <- tsfeatures(mylist)
-z <- embedding(dist(fmat))
+z <- embedding(dist(fmat), perplexity=1)
 plot(z)
 }
