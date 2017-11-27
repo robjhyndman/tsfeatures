@@ -20,7 +20,7 @@ embedding <- function(
   k = 2,
   method = c("Laplacian","Lrw","Lsym","Lsym2",
             "MDS","MDSiso","monoMDS","DPM","Rtsne"),
-  h = median(distances), ...)
+  h = max(distances), ...)
 {
   method <- match.arg(method)
 

@@ -5,7 +5,7 @@
 \title{Finding embedding based on distances}
 \usage{
 embedding(distances, k = 2, method = c("Laplacian", "Lrw", "Lsym", "Lsym2",
-  "MDS", "MDSiso", "monoMDS", "DPM", "Rtsne"), h = median(distances), ...)
+  "MDS", "MDSiso", "monoMDS", "DPM", "Rtsne"), h = max(distances), ...)
 }
 \arguments{
 \item{distances}{an object of class "dist" (essentially the lower triangle of distances matrix).}
