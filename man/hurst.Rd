@@ -7,7 +7,7 @@
 hurst(x)
 }
 \arguments{
-\item{x}{a univariate time series. If missing values are present, the largest 
+\item{x}{a univariate time series. If missing values are present, the largest
 contiguous portion of the time series is used.}
 }
 \value{

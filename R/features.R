@@ -83,7 +83,12 @@ max_level_shift <- function(x, width=ifelse(frequency(x) > 1,
 {
   rollmean <- RcppRoll::roll_mean(x, width, na.rm = TRUE)
   means <- abs(diff(rollmean, width))
-  if(all(is.na(means)))
+  if(length(means)==0L)
+  {
+    maxmeans <- 0
+    maxidx <- NA_real_
+  }
+  else if(all(is.na(means)))
   {
     maxmeans <- NA_real_
     maxidx <- NA_real_
@@ -104,7 +109,13 @@ max_var_shift <- function(x, width=ifelse(frequency(x) > 1,
 {
   rollvar <- RcppRoll::roll_var(x, width, na.rm = TRUE)
   vars <- abs(diff(rollvar, width))
-  if(all(is.na(vars)))
+
+  if(length(vars)==0L)
+  {
+    maxmeans <- 0
+    maxidx <- NA_real_
+  }
+  else if(all(is.na(vars)))
   {
     maxvar <- NA_real_
     maxidx <- NA_real_
@@ -156,7 +167,13 @@ max_kl_shift <- function(x, width=ifelse(frequency(x) > 1,
                (log(rmean[lo[i], ]) - log(rmean[hi[i], ])) *
                grid, na.rm = TRUE))
   diffkl <- diff(kl, na.rm = TRUE)
-  maxidx <- which.max(diffkl) + 1L
+  if(length(diffk)==0L)
+  {
+    diffkl <- 0
+    maxidx <- NA_real_
+  }
+  else
+    maxidx <- which.max(diffkl) + 1L
   return(c(max_kl_shift = max(diffkl), time_kl_shift = maxidx))
 }
 
@@ -224,7 +241,7 @@ flat_spots <- function(x) {
 #'
 #' Computes the Hurst coefficient indicating the level of fractional differencing
 #' of a time series.
-#' @param x a univariate time series. If missing values are present, the largest 
+#' @param x a univariate time series. If missing values are present, the largest
 #' contiguous portion of the time series is used.
 #' @return A numeric value.
 #' @export
@@ -246,7 +263,7 @@ hurst <- function(x)
 lyapunov <- function(x)
 {
   freq <- frequency(x)
-  n <- length(x) 
+  n <- length(x)
   if(freq >= n)
     stop("Insufficient data")
   Ly <- rep(NA_real_, n-freq)
