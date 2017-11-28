@@ -28,6 +28,7 @@ Imports:
     vegan
 License: GPL-3 + file LICENSE
 LazyData: true
+ByteCompile: true
 URL: https://github.com/robjhyndman/tsfeatures/
 BugReports: https://github.com/robjhyndman/tsfeatures/issues/
 RoxygenNote: 6.0.1
