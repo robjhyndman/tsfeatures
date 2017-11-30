@@ -11,7 +11,9 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "READMEfigs/",
-  cache = TRUE
+  cache = TRUE,
+  message = FALSE,
+  warning = FALSE
 )
 ```
 
@@ -36,7 +38,7 @@ devtools::install_github("robjhyndman/tsfeatures")
 
 ### Hyndman, Wang and Laptev (ICDM 2015)
 
-```{r yahoo, message=FALSE}
+```{r yahoo}
 library(tsfeatures)
 library(tidyverse)
 library(anomalous)
@@ -111,7 +113,7 @@ khs <- bind_cols(
   mutate(Period = as.factor(Frequency))
 ```
 
-```{r ijf2017graphs, message=FALSE, dependson="ijf2017"}
+```{r ijf2017graphs, dependson="ijf2017"}
 # Fig 1 of paper
 khs %>% 
   select(Period, Entropy, Trend, Season, ACF1, Lambda) %>%

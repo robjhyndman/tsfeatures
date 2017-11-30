@@ -48,14 +48,6 @@ hwl <- bind_cols(
          seasonal_strength, peak, trough,
          entropy, lumpiness, spike, max_level_shift, max_var_shift, flat_spots,
          crossing_points, max_kl_shift, time_kl_shift)
-#> Warning in predict.lm(fit, newdata = data.frame(X)): prediction from a
-#> rank-deficient fit may be misleading
-
-#> Warning in predict.lm(fit, newdata = data.frame(X)): prediction from a
-#> rank-deficient fit may be misleading
-
-#> Warning in predict.lm(fit, newdata = data.frame(X)): prediction from a
-#> rank-deficient fit may be misleading
 ```
 
 ``` r
