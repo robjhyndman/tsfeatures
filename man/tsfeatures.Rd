@@ -46,3 +46,6 @@ The tsfeature package provides methods to extract various features from time ser
 mylist <- list(sunspot.year, WWWusage, AirPassengers, USAccDeaths)
 tsfeatures(mylist)
 }
+\author{
+Rob J Hyndman
+}

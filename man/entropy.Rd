@@ -15,3 +15,6 @@ A numeric value.
 \description{
 Computes the spectral entropy of a time series
 }
+\author{
+Rob J Hyndman
+}

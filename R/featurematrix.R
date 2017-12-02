@@ -20,6 +20,7 @@
 #' @examples
 #' mylist <- list(sunspot.year, WWWusage, AirPassengers, USAccDeaths)
 #' tsfeatures(mylist)
+#' @author Rob J Hyndman
 #' @export
 tsfeatures <- function(tslist,
                        features = c("frequency","stl_features","entropy","acf1"),

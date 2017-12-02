@@ -18,6 +18,7 @@ NULL
 #' @method as.list mts
 #' @param x multivariate time series of class mts.
 #' @param ... other arguments are ignored.
+#' @author Rob J Hyndman
 #' @export
 as.list.mts <- function(x, ...)
 {

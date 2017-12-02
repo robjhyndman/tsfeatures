@@ -12,7 +12,7 @@ stl_features(x, ...)
 \item{...}{Other arguments are passed to \code{\link[forecast]{mstl}}.}
 }
 \value{
-A numeric value.
+A vector of numeric values.
 }
 \description{
 Computes various measures of trend and seasonality of a time series based on
@@ -20,4 +20,7 @@ an STL decomposition. The number of seasonal periods, and the length of the
 seasonal periods are returned. Also, the strength of seasonality corresponding
 to each period is estimated. The \code{\link[forecast]{mstl}} function is used
 to do the decomposition.
+}
+\author{
+Rob J Hyndman
 }

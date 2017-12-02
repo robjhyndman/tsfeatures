@@ -30,3 +30,6 @@ two consecutive windows.
 \details{
 Computes the largest level shift and largest variance shift in sliding mean calculations
 }
+\author{
+Earo Wang and Rob J Hyndman
+}

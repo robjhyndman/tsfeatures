@@ -15,3 +15,6 @@ A vector of numeric values.
 \description{
 Computes various measures of heterogeneity of a time series.
 }
+\author{
+Yanfei Kang
+}

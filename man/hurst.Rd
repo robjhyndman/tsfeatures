@@ -17,3 +17,6 @@ A numeric value.
 Computes the Hurst coefficient indicating the level of fractional differencing
 of a time series.
 }
+\author{
+Rob J Hyndman
+}

@@ -3,6 +3,7 @@
 #' Computes various measures of heterogeneity of a time series.
 #' @param x a univariate time series
 #' @return A vector of numeric values.
+#' @author Yanfei Kang
 #' @export
 
 heterogeneity <- function(x)
@@ -82,6 +83,7 @@ heterogeneity <- function(x)
 #' Computes the p-value for Terasvirta's nonlinearity test of a time series.
 #' @param x a univariate time series
 #' @return A numeric value.
+#' @author Yanfei Kang
 #' @export
 
 nonlinearity <- function(x)
@@ -98,6 +100,7 @@ nonlinearity <- function(x)
 #' @param lags Number of lags to use in the test
 #' @param demean Should data have mean removed before test applied?
 #' @return A numeric value.
+#' @author Yanfei Kang
 #' @export
 
 arch_test <- function (x, lags = 12, demean=TRUE)

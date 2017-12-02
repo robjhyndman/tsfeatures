@@ -14,3 +14,6 @@
 \description{
 Convert mts object to list of time series
 }
+\author{
+Rob J Hyndman
+}

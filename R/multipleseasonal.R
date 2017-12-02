@@ -8,7 +8,8 @@
 #' to do the decomposition.
 #' @param x a univariate time series.
 #' @param ... Other arguments are passed to \code{\link[forecast]{mstl}}.
-#' @return A numeric value.
+#' @return A vector of numeric values.
+#' @author Rob J Hyndman
 #' @export
 
 stl_features <- function(x, ...)

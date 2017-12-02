@@ -3,6 +3,7 @@
 #' Computes the spectral entropy of a time series
 #' @param x a univariate time series
 #' @return A numeric value.
+#' @author Rob J Hyndman
 #' @export
 
 entropy <- function(x) {
@@ -18,6 +19,7 @@ entropy <- function(x) {
 #' Computes the first order autocorrelation a time series.
 #' @param x a univariate time series
 #' @return A numeric value.
+#' @author Rob J Hyndman
 #' @export
 
 acf1 <- function(x) {
@@ -33,6 +35,7 @@ acf1 <- function(x) {
 #' @param width size of sliding window
 #' @return A numeric vector of length 2 containing a measure of lumpiness and
 #' a measure of stability.
+#' @author Earo Wang and Rob J Hyndman
 #' @export
 
 lumpiness <- function(x, width=ifelse(frequency(x) > 1,
@@ -84,6 +87,7 @@ stability <- function(x, width=ifelse(frequency(x) > 1,
 #' @param x a univariate time series
 #' @param width size of sliding window
 #' @return A vector of 2 values: the size of the shift, and the time index of the shift.
+#' @author Earo Wang and Rob J Hyndman
 #' @export
 
 max_level_shift <- function(x, width=ifelse(frequency(x) > 1,
@@ -191,6 +195,7 @@ max_kl_shift <- function(x, width=ifelse(frequency(x) > 1,
 #' Computes the number of times a time series crosses the median.
 #' @param x a univariate time series
 #' @return A numeric value.
+#' @author Earo Wang and Rob J Hyndman
 #' @export
 crossing_points <- function(x)
 {
@@ -208,6 +213,7 @@ crossing_points <- function(x)
 #' Number of flat spots in a time series
 #' @param x a univariate time series
 #' @return A numeric value.
+#' @author Earo Wang and Rob J Hyndman
 #' @export
 
 flat_spots <- function(x) {
@@ -252,6 +258,7 @@ flat_spots <- function(x) {
 #' @param x a univariate time series. If missing values are present, the largest
 #' contiguous portion of the time series is used.
 #' @return A numeric value.
+#' @author Rob J Hyndman
 #' @export
 
 hurst <- function(x)

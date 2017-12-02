@@ -23,3 +23,6 @@ Computes feature of a time series based on tiled (non-overlapping) windows.
 Means or variances are produced for all tiled windows. Then stability is
 the variance of the means, while lumpiness is the variance of the variances.
 }
+\author{
+Earo Wang and Rob J Hyndman
+}

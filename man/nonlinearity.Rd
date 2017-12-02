@@ -15,3 +15,6 @@ A numeric value.
 \description{
 Computes the p-value for Terasvirta's nonlinearity test of a time series.
 }
+\author{
+Yanfei Kang
+}

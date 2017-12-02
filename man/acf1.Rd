@@ -15,3 +15,6 @@ A numeric value.
 \description{
 Computes the first order autocorrelation a time series.
 }
+\author{
+Rob J Hyndman
+}

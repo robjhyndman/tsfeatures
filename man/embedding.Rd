@@ -28,3 +28,6 @@ fmat <- tsfeatures(mylist)
 z <- embedding(dist(fmat), perplexity=1)
 plot(z)
 }
+\author{
+Rob J Hyndman
+}

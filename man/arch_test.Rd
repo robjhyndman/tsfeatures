@@ -20,3 +20,6 @@ A numeric value.
 Computes the p-value for the Lagrange Multiplier (LM) test of Engle (1982) for
 autoregressive conditional heteroscedasticity (ARCH).
 }
+\author{
+Yanfei Kang
+}

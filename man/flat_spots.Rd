@@ -15,3 +15,6 @@ A numeric value.
 \description{
 Number of flat spots in a time series
 }
+\author{
+Earo Wang and Rob J Hyndman
+}
