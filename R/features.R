@@ -14,13 +14,17 @@ entropy <- function(x) {
   return(c(entropy=entropy))
 }
 
-#' Autocorrelation function at lag 1
-#'
-#' Computes the first order autocorrelation a time series.
-#' @param x a univariate time series
-#' @return A numeric value.
-#' @author Rob J Hyndman
-#' @export
+#' Time series features based on tiled windows 
+#' 
+#' Computes feature of a time series based on tiled (non-overlapping) windows. 
+#' Means or variances are produced for all tiled windows. Then stability is 
+#' the variance of the means, while lumpiness is the variance of the variances. 
+#' @param x a univariate time series 
+#' @param width size of sliding window 
+#' @return A numeric vector of length 2 containing a measure of lumpiness and 
+#' a measure of stability. 
+#' @author Earo Wang and Rob J Hyndman 
+#' @export 
 
 lumpiness <- function(x, width=ifelse(frequency(x) > 1,
                        frequency(x), 10))
