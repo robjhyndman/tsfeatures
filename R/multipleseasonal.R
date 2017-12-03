@@ -87,13 +87,13 @@ stl_features <- function(x, ...)
   linearity <- tren.coef[1L]
   curvature <- tren.coef[2L]
 
-  # ACF lag 1 of remainder
-  acfremainder <- acf1(remainder)
+  # ACF of remainder
+  acfremainder <- unname(acf_features(remainder))
 
   # Assemble results
   output <- c(nperiods = nperiods, seasonal_period = msts, trend = trend,
     spike = spike, linearity = unname(linearity), curvature = unname(curvature),
-    acfremainder = unname(acfremainder))
+    e_acf1 = acfremainder[1L], e_acf10 = acfremainder[2L])
   if (nseas > 0)
     output <- c(output, seasonal_strength = season, peak = peak, trough = trough)
 

@@ -36,15 +36,15 @@ acf_features <- function(x){
   diff2_acf10 <- sum((acfdiff2x$acf[-1L])^2)
   
   output <- c(
-    x.acf1 = unname(acf_1),
-    x.acf10 = unname(sum_of_sq_acf10),
-    diff1.acf1 = unname(diff1_acf1),
-    diff1.acf10 = unname(diff1_acf10),
-    diff2.acf1 = unname(diff2_acf1),
-    diff2.acf10 = unname(diff2_acf10))
+    x_acf1 = unname(acf_1),
+    x_acf10 = unname(sum_of_sq_acf10),
+    diff1_acf1 = unname(diff1_acf1),
+    diff1_acf10 = unname(diff1_acf10),
+    diff2_acf1 = unname(diff2_acf1),
+    diff2_acf10 = unname(diff2_acf10))
 
   if(m > 1)
-    output <- c(output, seas.acf1 = unname(acfx$acf[m+1L]))
+    output <- c(output, seas_acf1 = unname(acfx$acf[m+1L]))
 
   return(output)
 }
@@ -75,9 +75,9 @@ pacf_features <- function(x){
   # Sum of squared of first 5 partial autocorrelation coefficients of twice differenced series
   diff2_pacf_5 <- sum((pacf(diff(x,2),lag.max=5L,plot=FALSE)$acf)^2)
   
-  output <- c(x.pacf5 = unname(pacf_5),
-              diff1x.pacf5 = unname(diff1_pacf_5),
-              diff2x.pacf5 = unname(diff2_pacf_5))
+  output <- c(x_pacf5 = unname(pacf_5),
+              diff1x_pacf5 = unname(diff1_pacf_5),
+              diff2x_pacf5 = unname(diff2_pacf_5))
   if(m > 1)
     output <- c(output, seas.pacf=pacfx[m])
 

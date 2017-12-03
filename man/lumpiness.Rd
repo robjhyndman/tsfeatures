@@ -3,7 +3,7 @@
 \name{lumpiness}
 \alias{lumpiness}
 \alias{stability}
-\title{Time series features based on tiled windows}
+\title{Autocorrelation function at lag 1}
 \usage{
 lumpiness(x, width = ifelse(frequency(x) > 1, frequency(x), 10))
 
@@ -11,18 +11,13 @@ stability(x, width = ifelse(frequency(x) > 1, frequency(x), 10))
 }
 \arguments{
 \item{x}{a univariate time series}
-
-\item{width}{size of sliding window}
 }
 \value{
-A numeric vector of length 2 containing a measure of lumpiness and
-a measure of stability.
+A numeric value.
 }
 \description{
-Computes feature of a time series based on tiled (non-overlapping) windows.
-Means or variances are produced for all tiled windows. Then stability is
-the variance of the means, while lumpiness is the variance of the variances.
+Computes the first order autocorrelation a time series.
 }
 \author{
-Earo Wang and Rob J Hyndman
+Rob J Hyndman
 }
