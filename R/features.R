@@ -252,6 +252,6 @@ flat_spots <- function(x) {
 hurst <- function(x)
 {
   # Hurst=d+0.5 where d is fractional difference.
-  return(c(hurst = fracdiff::fracdiff(na.contiguous(x),0,0)[["d"]] + 0.5))
+  return(c(hurst = suppressWarnings(fracdiff::fracdiff(na.contiguous(x),0,0)[["d"]] + 0.5)))
 }
 
