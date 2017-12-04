@@ -79,10 +79,10 @@ heterogeneity <- function(x)
   #boxtest.p.diff <- x.garch.boxtest - x.boxtest
 
   output <- c(
-    ARCH_ACF = LBstat,
-    GARCH_ACF = LBstat2,
-    ARCH_R2 = unname(x.archtest),
-    GARCH_R2 = unname(x.garch.archtest)
+    arch_acf = LBstat,
+    garch_acf = LBstat2,
+    arch_r2 = unname(x.archtest),
+    garch_r2 = unname(x.garch.archtest)
     #Hetero = max(archtest.p.diff, boxtest.p.diff)
     )
   output[is.na(output)] <- 1
