@@ -87,6 +87,7 @@ heterogeneity <- function(x)
 #' @param x a univariate time series
 #' @return A numeric value.
 #' @examples 
+#' nonlinearity(lynx)
 #' @author Yanfei Kang and Rob J Hyndman
 #' @export
 
