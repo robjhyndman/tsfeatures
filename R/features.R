@@ -255,30 +255,3 @@ hurst <- function(x)
   return(c(hurst = fracdiff::fracdiff(na.contiguous(x),0,0)[["d"]] + 0.5))
 }
 
-#' Lyapunov coefficent
-#'
-#' Computes the Lyapunov coefficient indicating the level of nonlinearity of
-#' of a time series.
-#' @param x a univariate time series
-#' @return A numeric value.
-#' @export
-
-lyapunov <- function(x)
-{
-  freq <- frequency(x)
-  n <- length(x)
-  if(freq >= n)
-    stop("Insufficient data")
-  Ly <- rep(NA_real_, n-freq)
-  for(i in seq_len(n-freq))
-  {
-    idx <- order(abs(x[i] - x))
-    idx <- idx[idx < (n-freq)]
-    j <- idx[2]
-    Ly[i] <- abs((x[i+freq] - x[j+freq])/(x[i]-x[j]))
-    if(Ly[i] > 0)
-      Ly[i] <- log(Ly[i])/freq
-  }
-  return(lyapunov = mean(Ly,na.rm=TRUE))
-}
-
