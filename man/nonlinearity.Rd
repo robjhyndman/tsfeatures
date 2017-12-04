@@ -14,7 +14,7 @@ A numeric value.
 }
 \description{
 Computes a nonlinearity statistic based on Terasvirta's nonlinearity test of a time series.
-The statistic is \eqn{10X^2/T}{10X^2/T} where \eqn{X^2}{X^2} is the Chi-squared statistic from 
+The statistic is \eqn{10X^2/T}{10X^2/T} where \eqn{X^2}{X^2} is the Chi-squared statistic from
 Terasvirta's test, and T is the length of the time series. This takes large values
 when the series is nonlinear, and values around 0 when the series is linear.
 }

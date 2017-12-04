@@ -2,7 +2,7 @@
 
 S3method(as.list,mts)
 export(acf_features)
-export(arch_test)
+export(arch_stat)
 export(crossing_points)
 export(embedding)
 export(entropy)

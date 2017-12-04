@@ -13,8 +13,17 @@ heterogeneity(x)
 A vector of numeric values.
 }
 \description{
-Computes various measures of heterogeneity of a time series.
+Computes various measures of heterogeneity of a time series. First the series
+is pre-whitened using an AR model to give a new series y. We fit a GARCH(1,1)
+model to y and obtain the residuals, e. Then the four measures of heterogeneity
+are: 
+(1) the sum of squares of the first 12 autocorrelations of \eqn{y^2}{y^2};
+(2) the sum of squares of the first 12 autocorrelations of \eqn{e^2}{e^2};
+(3) the \eqn{R^2}{R^2} value of an AR model applied to \eqn{y^2}{y^2};
+(4) the \eqn{R^2}{R^2} value of an AR model applied to \eqn{e^2}{e^2}.
+The statistics obtained from \eqn{y^2}{y^2} are the ARCH effects, while those
+from \eqn{e^2}{e^2} are the GARCH effects.
 }
 \author{
-Yanfei Kang
+Yanfei Kang and Rob J Hyndman
 }
