@@ -15,5 +15,4 @@ if(require(testthat))
     expect_gt(z[1], 0.96)
     expect_gt(z[2], 0.00)
   })
-  
 }
