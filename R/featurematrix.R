@@ -23,7 +23,7 @@
 #' @author Rob J Hyndman
 #' @export
 tsfeatures <- function(tslist,
-                       features = c("frequency","stl_features","entropy","acf1"),
+                       features = c("frequency","stl_features","entropy","acf_features"),
                        scale=TRUE, trim=FALSE, trim_amount=0.1, parallel=FALSE, ...)
 {
   if(!is.list(tslist))
