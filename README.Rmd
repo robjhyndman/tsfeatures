@@ -50,7 +50,7 @@ library(anomalous)
 yahoo <- cbind(dat0, dat1, dat2, dat3)
 hwl <- bind_cols(
          tsfeatures(yahoo,
-           c("acf1","entropy","lumpiness",
+           c("acf_features","entropy","lumpiness",
              "flat_spots","crossing_points")),
          tsfeatures(yahoo,"stl_features", s.window='periodic', robust=TRUE),
          tsfeatures(yahoo, "max_kl_shift", width=48),
@@ -58,7 +58,7 @@ hwl <- bind_cols(
            c("mean","var"), scale=FALSE, na.rm=TRUE),
          tsfeatures(yahoo,
            c("max_level_shift","max_var_shift"), trim=TRUE)) %>%
-  select(mean, var, acf1, trend, linearity, curvature, 
+  select(mean, var, x_acf1, trend, linearity, curvature, 
          seasonal_strength, peak, trough,
          entropy, lumpiness, spike, max_level_shift, max_var_shift, flat_spots,
          crossing_points, max_kl_shift, time_kl_shift)
@@ -101,14 +101,14 @@ khs_stl <- function(x,...)
 khs <- bind_cols(
   tsfeatures(M3data, c("frequency", "entropy")),
   tsfeatures(M3data, "khs_stl", scale=FALSE)) %>% 
-  select(frequency, entropy, trend, seasonal_strength, acfremainder, lambda) %>%
+  select(frequency, entropy, trend, seasonal_strength, e_acf1, lambda) %>%
   replace_na(list(seasonal_strength=0)) %>%
   rename(
     Frequency = frequency,
     Entropy = entropy,
     Trend = trend,
     Season = seasonal_strength,
-    ACF1 = acfremainder,
+    ACF1 = e_acf1,
     Lambda = lambda) %>%
   mutate(Period = as.factor(Frequency))
 ```
