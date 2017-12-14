@@ -36,17 +36,25 @@ tsfeatures <- function(tslist,
   # Compute all features
 	flist <- funlist <- list()
   # Assuming that didn't generate an error, we will proceed
-	for(i in seq_along(features))
-  {
-    flist[[i]] <- map(tslist,
-      function(x){match.fun(features[i])(x, ...)})
-    # Check names
-    if(is.null(names(flist[[i]][[1]])))
-      flist[[i]] <- map(flist[[i]],
-        function(x){
-          names(x) <- features[i]
-          return(x)})
-  }
+	for(i in seq_along(features)){
+	  if(parallel)
+	  {
+	    num.cores <- detectCores()
+	    registerDoMC(num.cores)
+	    flist[[i]] <- foreach(j = seq_along(tslist))%dopar%{
+	      match.fun(features[i])(tslist[[j]], ...)}
+	  }
+	  else
+	  {
+	    flist[[i]] <- map(tslist, function(x){match.fun(features[i])(x, ...)})
+	  }
+	  # Check names
+	  if(is.null(names(flist[[i]][[1]])))
+	    flist[[i]] <- map(flist[[i]],
+	                      function(x){
+	                        names(x) <- features[i]
+	                        return(x)})
+	}
 
 	# Unpack features into a list of numeric vectors
   featurelist <- list()
@@ -64,21 +72,9 @@ tsfeatures <- function(tslist,
   colnames(fmat) <- fnames
   rownames(fmat) <- names(tslist)
 
-  if(parallel)
-  {
-    future::plan("multiprocess")
-    fmatlist <- list()
-    for(i in seq_along(tslist))
-      fmatlist[[i]] <- future::future({featurelist[[i]][featurenames[[i]]]})
-    for(i in seq_along(tslist))
-      fmat[i, featurenames[[i]]] <- future::value(fmatlist[[i]])
-  }
-  else
-  {
-    for(i in seq_along(tslist))
-      fmat[i,featurenames[[i]]] <- featurelist[[i]][featurenames[[i]]]
-  }
-
+  for(i in seq_along(tslist))
+    fmat[i,featurenames[[i]]] <- featurelist[[i]][featurenames[[i]]]
+  
   return(tibble::as_tibble(fmat))
 }
 
