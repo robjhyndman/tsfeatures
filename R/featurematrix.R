@@ -39,9 +39,10 @@ tsfeatures <- function(tslist,
 	for(i in seq_along(features)){
 	  if(parallel)
 	  {
-	    num.cores <- detectCores()
-	    registerDoMC(num.cores)
-	    flist[[i]] <- foreach(j = seq_along(tslist))%dopar%{
+	    num.cores <- parallel::detectCores()
+	    doMC::registerDoMC(num.cores)
+	    `%dopar%` <- foreach::`%dopar%`
+	    flist[[i]] <- foreach::foreach(j = seq_along(tslist)) %dopar% {
 	      match.fun(features[i])(tslist[[j]], ...)}
 	  }
 	  else
