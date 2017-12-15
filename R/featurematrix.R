@@ -81,8 +81,22 @@ tsfeatures <- function(tslist,
 
 # Scale time series
 scalets <- function(x)
-{
-  y <- as.ts(as.numeric(scale(x, center=TRUE, scale=TRUE)))
+{ 
+  n <- length(x)
+  scaledx <- as.numeric(scale(x, center=TRUE, scale=TRUE))
+  if("msts" %in% class(x)){
+    msts <- attributes(x)$msts
+    if(any(msts >= n/2))
+    {
+      warning("Dropping seasonal components with fewer than two full periods.")
+      msts <- msts[msts < n/2]
+    }
+    y <- forecast::msts(scaledx, seasonal.periods = msts)
+  }
+  else
+  {
+    y <- as.ts(scaledx)
+  }
   tsp(y) <- tsp(x)
   return(y)
 }
