@@ -24,7 +24,7 @@
 #' @export
 tsfeatures <- function(tslist,
                        features = c("frequency","stl_features","entropy","acf_features"),
-                       scale=TRUE, trim=FALSE, trim_amount=0.1, na.action = na.interp, parallel=FALSE, ...)
+                       scale=TRUE, trim=FALSE, trim_amount=0.1, parallel=FALSE, ...)
 {
   if(!is.list(tslist))
     tslist <- as.list(tslist)
@@ -32,7 +32,12 @@ tsfeatures <- function(tslist,
     tslist <- map(tslist, scalets)
   if(trim)
     tslist <- map(tslist, trimts, trim=trim_amount)
-  tslist <- map(tslist, na.action)
+  # Interpolate for missing values
+  tslist <- map(tslist, function(x) {
+    y <- na.interp(x)
+    attributes(y) <- attributes(x)
+    x <- y
+    })
   # Compute all features
 	flist <- funlist <- list()
   # Assuming that didn't generate an error, we will proceed
@@ -86,11 +91,6 @@ scalets <- function(x)
   scaledx <- as.numeric(scale(x, center=TRUE, scale=TRUE))
   if("msts" %in% class(x)){
     msts <- attributes(x)$msts
-    if(any(msts >= n/2))
-    {
-      warning("Dropping seasonal components with fewer than two full periods.")
-      msts <- msts[msts < n/2]
-    }
     y <- forecast::msts(scaledx, seasonal.periods = msts)
   }
   else

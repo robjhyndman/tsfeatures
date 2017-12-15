@@ -34,11 +34,14 @@ stl_features <- function(x, ...)
   trend <- linearity <- curvature <- season <- spike <- peak <- trough <- acfremainder <- NA
 
   # STL fits
-  stlfit <- forecast::mstl(forecast::na.interp(x), ...)
+  stlfit <- forecast::mstl(x, ...)
   trend0 <- stlfit[, "Trend"]
   remainder <- stlfit[, "Remainder"]
   seasonal <- stlfit[, grep("Season", colnames(stlfit)), drop=FALSE]
-
+  
+  # When the maximum frequency is dropped
+  tsp(x) <- tsp(trend0) 
+  
   # De-trended and de-seasonalized data
   detrend <- x - trend0
   deseason <- forecast::seasadj(stlfit)
