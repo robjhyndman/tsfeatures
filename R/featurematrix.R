@@ -24,7 +24,7 @@
 #' @export
 tsfeatures <- function(tslist,
                        features = c("frequency","stl_features","entropy","acf_features"),
-                       scale=TRUE, trim=FALSE, trim_amount=0.1, parallel=FALSE, ...)
+                       scale=TRUE, trim=FALSE, trim_amount=0.1, na.action = na.interp, parallel=FALSE, ...)
 {
   if(!is.list(tslist))
     tslist <- as.list(tslist)
@@ -32,7 +32,7 @@ tsfeatures <- function(tslist,
     tslist <- map(tslist, scalets)
   if(trim)
     tslist <- map(tslist, trimts, trim=trim_amount)
-
+  tslist <- map(tslist, na.action)
   # Compute all features
 	flist <- funlist <- list()
   # Assuming that didn't generate an error, we will proceed
