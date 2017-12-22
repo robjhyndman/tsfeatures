@@ -36,7 +36,7 @@ lumpiness <- function(x, width=ifelse(frequency(x) > 1,
   nsegs <- nr/width
   varx <- map_dbl(seq_len(nsegs), function(idx)
                  var(x[lo[idx]:up[idx]], na.rm = TRUE))
-  if(sum(!is.na(varx)) <= 1L)
+  if(length(x) < 2*width)
     lumpiness <- 0
   else
     lumpiness <- var(varx, na.rm=TRUE)
@@ -56,7 +56,7 @@ stability <- function(x, width=ifelse(frequency(x) > 1,
   nsegs <- nr/width
   meanx <- map_dbl(seq_len(nsegs), function(idx)
                  mean(x[lo[idx]:up[idx]], na.rm = TRUE))
-  if(sum(!is.na(meanx)) <= 1L)
+  if(length(x) < 2*width)
     stability <- 0
   else
     stability <- var(meanx, na.rm=TRUE)
