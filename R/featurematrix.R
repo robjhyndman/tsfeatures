@@ -14,6 +14,7 @@
 #' @param trim_amount Default level of trimming if \code{trim==TRUE}.
 #' @param parallel If TRUE, multiple cores (or multiple sessions) will be used. This only speeds things up
 #' when there are a large number of time series.
+#' @param na.action A function to handle missing values. Use \code{na.interp} to estimate missing values.
 #' @param ... Other arguments get passed to the feature functions.
 #' @return A feature matrix (in the form of a tibble) with each row corresponding to
 #' one time series from tslist, and each column being a feature.
@@ -24,7 +25,7 @@
 #' @export
 tsfeatures <- function(tslist,
                        features = c("frequency","stl_features","entropy","acf_features"),
-                       scale=TRUE, trim=FALSE, trim_amount=0.1, parallel=FALSE, ...)
+                       scale=TRUE, trim=FALSE, trim_amount=0.1, parallel=FALSE, na.action=na.pass, ...)
 {
   if(!is.list(tslist))
     tslist <- as.list(tslist)
@@ -34,7 +35,7 @@ tsfeatures <- function(tslist,
     tslist <- map(tslist, trimts, trim=trim_amount)
   # Interpolate for missing values
   tslist <- map(tslist, function(x) {
-    y <- na.interp(x)
+    y <- na.action(x)
     attributes(y) <- attributes(x)
     x <- y
     })

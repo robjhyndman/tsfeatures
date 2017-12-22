@@ -8,8 +8,8 @@
 \title{Time series feature matrix}
 \usage{
 tsfeatures(tslist, features = c("frequency", "stl_features", "entropy",
-  "acf1"), scale = TRUE, trim = FALSE, trim_amount = 0.1,
-  parallel = FALSE, ...)
+  "acf_features"), scale = TRUE, trim = FALSE, trim_amount = 0.1,
+  parallel = FALSE, na.action = na.pass, ...)
 }
 \arguments{
 \item{tslist}{a list of univariate time series, each of class \code{ts} or a numeric vector.
@@ -30,6 +30,8 @@ are computed. Values larger than \code{trim_amount} in absolute value are set to
 
 \item{parallel}{If TRUE, multiple cores (or multiple sessions) will be used. This only speeds things up
 when there are a large number of time series.}
+
+\item{na.action}{A function to handle missing values. Use \code{na.interp} to estimate missing values.}
 
 \item{...}{Other arguments get passed to the feature functions.}
 }
