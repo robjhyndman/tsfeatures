@@ -46,7 +46,7 @@ tsfeatures <- function(tslist,
 	  if(parallel)
 	  {
 	    num.cores <- parallel::detectCores()
-	    doMC::registerDoMC(num.cores)
+            doParallel::registerDoParallel(cores=num.cores)
 	    `%dopar%` <- foreach::`%dopar%`
 	    flist[[i]] <- foreach::foreach(j = seq_along(tslist)) %dopar% {
 	      match.fun(features[i])(tslist[[j]], ...)}
