@@ -14,7 +14,7 @@ Imports:
     ForeCA,
     fracdiff,
     forecast (>= 8.3),
-    doMC,
+    doParallel,
     geigen,
     MASS,
     mgcv,
