@@ -11,6 +11,7 @@ Description: Methods for extracting various features from time series data.
 Depends:
     R (>= 3.2.3)
 Imports:
+    foreach,
     ForeCA,
     fracdiff,
     forecast (>= 8.3),

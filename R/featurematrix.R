@@ -48,6 +48,7 @@ tsfeatures <- function(tslist,
 	    num.cores <- parallel::detectCores()
             doParallel::registerDoParallel(cores=num.cores)
 	    `%dopar%` <- foreach::`%dopar%`
+      j <- 0 # Just to avoid global variable error in check
 	    flist[[i]] <- foreach::foreach(j = seq_along(tslist)) %dopar% {
 	      match.fun(features[i])(tslist[[j]], ...)}
 	  }
