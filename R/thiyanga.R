@@ -87,10 +87,13 @@ pacf_features <- function(x){
 #' Parameter estimates of Holt's linear trend method
 #'
 #' Estimate the smoothing parameter for the level-alpha and
-#' the smoothing parameter for the trend-beta
+#' the smoothing parameter for the trend-beta.
+#' \code{holt_seas_parameters} considers additive seasonal trend: ets(A,A,N) model. 
 #' @param x a univariate time series
-#' @return A vector of 2 values: alpha, beta
-#' @author Thiyanga Talagala
+#' @return \code{holt_parameters} produces a vector of 2 values: alpha, beta.
+#'
+#' \code{holt_seas_parameters} produces a vector of 3 values: alpha, beta and gamma.
+#' @author Thiyanga Talagala, Pablo Montero-Manso
 #' @export
 
 holt_parameters <- function(x){
@@ -99,7 +102,15 @@ holt_parameters <- function(x){
   return(c(fit$model$par["alpha"],fit$model$par["beta"]))
  }
 
-# #' Autocorrelation coefficient at lag 1 of the residua
+#' @rdname holt_parameters
+#' @export
+hw_seas_parameters <- function(x) {
+  hw_fit <- NULL
+  hw_fit$par <- c(NA, NA, NA)
+  try(hw_fit <- forecast::ets(x, model=c("AAA")), silent=TRUE)
+  hw_fit$par[1:3]
+}
+# #' Autocorrelation coefficient at lag 1 of the residual
 # #'
 # #' Computes the first order autocorrelation of the residual series of the deterministic trend model
 # #' @param x a univariate time series

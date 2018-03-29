@@ -3,7 +3,6 @@
 \docType{package}
 \name{tsfeatures}
 \alias{tsfeatures}
-\alias{tsfeatures}
 \alias{tsfeatures-package}
 \title{Time series feature matrix}
 \usage{

@@ -255,3 +255,22 @@ hurst <- function(x)
   return(c(hurst = suppressWarnings(fracdiff::fracdiff(na.contiguous(x),0,0)[["d"]] + 0.5)))
 }
 
+
+#' Unit Root Test Statistics
+#' 
+#' \code{unitroot_kpss} computes the statistic for the Kwiatkowski et al. unit root test with linear trend and lag 1.
+#' \code{unitroot_pp} computes the statistic for the `'Z-alpha'' version of Phillips & Perron unit root test with constant trend and lag 1.
+#' @param x a univariate time series.
+#' @return A numeric value
+#' @author Pablo Montero-Manso
+#' @export
+unitroot_kpss <- function(x) {
+  urca::ur.kpss(x, type = "tau", use.lag=1)@teststat
+}
+
+
+#' @rdname unitroot_kpss
+#' @export
+unitroot_pp <- function(x) {
+  urca::ur.pp(x, use.lag=1)@teststat
+}
