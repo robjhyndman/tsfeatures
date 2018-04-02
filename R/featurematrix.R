@@ -63,7 +63,10 @@ tsfeatures <- function(tslist,
 	                        names(x) <- features[i]
 	                        return(x)})
 	}
-
+	
+	# Rename duplicate feature names to avoid conflicts
+	flist <- rename_duplicate_features(features, flist)
+	
 	# Unpack features into a list of numeric vectors
   featurelist <- list()
 	for(i in seq_along(tslist))
@@ -71,6 +74,7 @@ tsfeatures <- function(tslist,
 
   # Find feature names
   featurenames <- map(featurelist, names)
+
   fnames <- unique(unlist(featurenames))
   if(any(featurenames==""))
     stop("Some unnamed features")
@@ -109,4 +113,33 @@ trimts <- function(x, trim = 0.1)
   qtl <- quantile(x, c(trim, 1 - trim), na.rm = TRUE)
   x[x < qtl[1L] | x > qtl[2L]] <- NA
   return(x)
+}
+
+
+
+
+#check for duplicate feature names in the feature list and rename by prepending
+#the name of the function that generates them to avoid conflicts: "functionName_featureName"
+#both functions' features are renamed
+#processed in order of appearance in the list
+#a warning is generated when conflicts are found
+rename_duplicate_features <- function(fun_names, feat_list) {
+  if (length(feat_list) < 2) {
+    return(feat_list)
+  }
+  for (i in 1:(length(feat_list) -1)) {
+    for (j in (i+1):length(feat_list)) {
+      names_first_fun <- names(feat_list[[i]][[1]])
+      names_sec_fun <- names(feat_list[[j]][[1]])
+      #look for at least one match in the names of the features
+      if ( Reduce("|", names_first_fun %in% names_sec_fun )) {
+        warning( paste("Conflicting feature names in functions: ", fun_names[[i]], " and ", fun_names[[j]]))
+        names_first_fun <- paste(fun_names[[i]], "_", names_first_fun, sep="")
+        names(feat_list[[i]][[1]]) <- names_first_fun
+        names_sec_fun <- paste(fun_names[[j]], "_", names_sec_fun, sep="")
+        names(feat_list[[j]][[1]]) <- names_sec_fun
+      }
+    }
+  }
+  feat_list
 }
