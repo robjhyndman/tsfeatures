@@ -265,12 +265,12 @@ hurst <- function(x)
 #' @author Pablo Montero-Manso
 #' @export
 unitroot_kpss <- function(x) {
-  urca::ur.kpss(x, type = "tau", use.lag=1)@teststat
+  urca::ur.kpss(x)@teststat
 }
 
 
 #' @rdname unitroot_kpss
 #' @export
 unitroot_pp <- function(x) {
-  urca::ur.pp(x, use.lag=1)@teststat
+  urca::ur.pp(x)@teststat
 }

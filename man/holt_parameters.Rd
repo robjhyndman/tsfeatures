@@ -2,12 +2,12 @@
 % Please edit documentation in R/thiyanga.R
 \name{holt_parameters}
 \alias{holt_parameters}
-\alias{hw_seas_parameters}
+\alias{hw_parameters}
 \title{Parameter estimates of Holt's linear trend method}
 \usage{
 holt_parameters(x)
 
-hw_seas_parameters(x)
+hw_parameters(x)
 }
 \arguments{
 \item{x}{a univariate time series}
@@ -15,12 +15,12 @@ hw_seas_parameters(x)
 \value{
 \code{holt_parameters} produces a vector of 2 values: alpha, beta.
 
-\code{holt_seas_parameters} produces a vector of 3 values: alpha, beta and gamma.
+\code{hw_parameters} produces a vector of 3 values: alpha, beta and gamma.
 }
 \description{
 Estimate the smoothing parameter for the level-alpha and
 the smoothing parameter for the trend-beta.
-\code{holt_seas_parameters} considers additive seasonal trend: ets(A,A,N) model.
+\code{hw_parameters} considers additive seasonal trend: ets(A,A,A) model.
 }
 \author{
 Thiyanga Talagala, Pablo Montero-Manso

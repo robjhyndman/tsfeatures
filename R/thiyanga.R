@@ -88,11 +88,11 @@ pacf_features <- function(x){
 #'
 #' Estimate the smoothing parameter for the level-alpha and
 #' the smoothing parameter for the trend-beta.
-#' \code{holt_seas_parameters} considers additive seasonal trend: ets(A,A,N) model. 
+#' \code{hw_parameters} considers additive seasonal trend: ets(A,A,A) model. 
 #' @param x a univariate time series
 #' @return \code{holt_parameters} produces a vector of 2 values: alpha, beta.
 #'
-#' \code{holt_seas_parameters} produces a vector of 3 values: alpha, beta and gamma.
+#' \code{hw_parameters} produces a vector of 3 values: alpha, beta and gamma.
 #' @author Thiyanga Talagala, Pablo Montero-Manso
 #' @export
 
@@ -104,7 +104,7 @@ holt_parameters <- function(x){
 
 #' @rdname holt_parameters
 #' @export
-hw_seas_parameters <- function(x) {
+hw_parameters <- function(x) {
   hw_fit <- NULL
   hw_fit$par <- c(NA, NA, NA)
   try(hw_fit <- forecast::ets(x, model=c("AAA")), silent=TRUE)
