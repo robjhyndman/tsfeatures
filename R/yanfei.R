@@ -28,7 +28,7 @@ heterogeneity <- function(x)
   x.whitened <- prewhiten.ts(x, AR.max = 24, plot = FALSE, verbose = FALSE)$prew_ar
   
   # perform arch and box test
-  x.archtest <- ArchTest(x.whitened)
+  suppressWarnings(x.archtest <- try(ArchTest(x.whitened), silent = TRUE))
   x.boxtest <- Box.test(x.whitened^2, lag = 12, type = 'Ljung-Box')
   
   # fit garch model to capture the variance dynamics.
@@ -38,8 +38,8 @@ heterogeneity <- function(x)
   # garch.fit.std <- residuals(garch.fit, standardize = T)
   garch.fit.std <- residuals(garch.fit)
   suppressWarnings(x.garch.archtest <- try(ArchTest(garch.fit.std), silent = TRUE))
-  if (class(x.garch.archtest) == "try-error") {
-    output.yanfei <- c(arch_p = unname(x.archtest$p.value),
+  if (class(x.garch.archtest) == "try-error" | class(x.archtest) == 'try-error') {
+    output.yanfei <- c(arch_p = NA,
                        garch_arch_p = NA,
                        box_p = unname(x.boxtest$p.value),
                        garch_box_p = NA,
