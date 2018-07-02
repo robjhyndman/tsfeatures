@@ -37,19 +37,27 @@ heterogeneity <- function(x)
   # compare arch test before and after fitting garch
   # garch.fit.std <- residuals(garch.fit, standardize = T)
   garch.fit.std <- residuals(garch.fit)
-  x.garch.archtest <- ArchTest(garch.fit.std)
-  archtest.p.diff <- x.garch.archtest$p.value - x.archtest$p.value
-  
-  # compare Box test of squared residuals before and after fitting garch
-  x.garch.boxtest <- Box.test(garch.fit.std^2, lag = 12, type = 'Ljung-Box')
-  boxtest.p.diff <- x.garch.boxtest$p.value - x.boxtest$p.value
-  
-  # output
-  output.yanfei <- c(arch_p = unname(x.archtest$p.value),
-                     garch_arch_p = unname(x.garch.archtest$p.value),
-                     box_p = unname(x.boxtest$p.value),
-                     garch_box_p = unname(x.garch.boxtest$p.value),
-                     Hetero = max(archtest.p.diff, boxtest.p.diff))
+  suppressWarnings(x.garch.archtest <- try(ArchTest(garch.fit.std), silent = TRUE))
+  if (class(x.garch.archtest) == "try-error") {
+    output.yanfei <- c(arch_p = unname(x.archtest$p.value),
+                       garch_arch_p = NA,
+                       box_p = unname(x.boxtest$p.value),
+                       garch_box_p = NA,
+                       Hetero = NA)
+  }else{
+    archtest.p.diff <- x.garch.archtest$p.value - x.archtest$p.value
+    
+    # compare Box test of squared residuals before and after fitting garch
+    x.garch.boxtest <- Box.test(garch.fit.std^2, lag = 12, type = 'Ljung-Box')
+    boxtest.p.diff <- x.garch.boxtest$p.value - x.boxtest$p.value
+    
+    # output
+    output.yanfei <- c(arch_p = unname(x.archtest$p.value),
+                       garch_arch_p = unname(x.garch.archtest$p.value),
+                       box_p = unname(x.boxtest$p.value),
+                       garch_box_p = unname(x.garch.boxtest$p.value),
+                       Hetero = max(archtest.p.diff, boxtest.p.diff))
+  }
   ## From Rob
   # pre-whiten a series before Garch modeling
   x.whitened <- na.contiguous(ar(x)$resid)
