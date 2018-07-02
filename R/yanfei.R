@@ -66,8 +66,9 @@ heterogeneity <- function(x)
   x.garch.archtest <- arch_stat(garch.fit.std)
 
   # compare Box test of squared residuals before and after fitting garch
-  LBstat2 <- sum(acf(na.contiguous(garch.fit.std^2), lag.max=12L, plot=FALSE)$acf[-1L]^2)
-
+  LBstat2 <- NA
+  try(LBstat2 <- sum(acf(na.contiguous(garch.fit.std^2), lag.max=12L, plot=FALSE)$acf[-1L]^2),
+      silent = TRUE)
   output <- c(
     arch_acf = LBstat,
     garch_acf = LBstat2,
