@@ -87,8 +87,8 @@ stl_features <- function(x, ...)
 
   # Compute measures of linearity and curvature
   tren.coef <- coef(lm(trend0 ~ poly(seq(n), degree = 2L)))[2L:3L]
-  linearity <- tren.coef[1L]
-  curvature <- tren.coef[2L]
+  linearity <- abs(tren.coef[1L])
+  curvature <- abs(tren.coef[2L])
 
   # ACF of remainder
   acfremainder <- unname(acf_features(remainder))
