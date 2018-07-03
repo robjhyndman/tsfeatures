@@ -81,23 +81,27 @@ stability <- function(x, width=ifelse(frequency(x) > 1,
 max_level_shift <- function(x, width=ifelse(frequency(x) > 1,
                        frequency(x), 10))
 {
-  rollmean <- RcppRoll::roll_mean(x, width, na.rm = TRUE)
-  means <- abs(diff(rollmean, width))
-  if(length(means)==0L)
-  {
-    maxmeans <- 0
-    maxidx <- NA_real_
-  }
-  else if(all(is.na(means)))
-  {
+  suppressWarnings(rollmean <- try(RcppRoll::roll_mean(x, width, na.rm = TRUE), silent = TRUE))
+  if (class(rollmean) == "try-error"){
     maxmeans <- NA_real_
     maxidx <- NA_real_
-  }
-  else
-  {
-    maxmeans <- max(means, na.rm=TRUE)
-    maxidx <- which.max(means)+1L
-  }
+  }else{
+    means <- abs(diff(rollmean, width))
+    if(length(means)==0L)
+    {
+      maxmeans <- 0
+      maxidx <- NA_real_
+    }
+    else if(all(is.na(means)))
+    {
+      maxmeans <- NA_real_
+      maxidx <- NA_real_
+    }
+    else
+    {
+      maxmeans <- max(means, na.rm=TRUE)
+      maxidx <- which.max(means)+1L
+    }}
   return(c(max_level_shift=maxmeans, time_level_shift=maxidx))
 }
 
@@ -107,24 +111,28 @@ max_level_shift <- function(x, width=ifelse(frequency(x) > 1,
 max_var_shift <- function(x, width=ifelse(frequency(x) > 1,
                        frequency(x), 10))
 {
-  rollvar <- RcppRoll::roll_var(x, width, na.rm = TRUE)
-  vars <- abs(diff(rollvar, width))
-
-  if(length(vars)==0L)
-  {
-    maxvar <- 0
-    maxidx <- NA_real_
-  }
-  else if(all(is.na(vars)))
-  {
+  suppressWarnings(rollvar <- try(RcppRoll::roll_var(x, width, na.rm = TRUE), silent = TRUE))
+  if (class(rollvar) == "try-error"){
     maxvar <- NA_real_
     maxidx <- NA_real_
-  }
-  else
-  {
-    maxvar <- max(vars, na.rm=TRUE)
-    maxidx <- which.max(vars)+1L
-  }
+  }else{
+    vars <- abs(diff(rollvar, width))
+    
+    if(length(vars)==0L)
+    {
+      maxvar <- 0
+      maxidx <- NA_real_
+    }
+    else if(all(is.na(vars)))
+    {
+      maxvar <- NA_real_
+      maxidx <- NA_real_
+    }
+    else
+    {
+      maxvar <- max(vars, na.rm=TRUE)
+      maxidx <- which.max(vars)+1L
+    }}
   return(c(max_var_shift=maxvar, time_var_shift=maxidx))
 }
 
