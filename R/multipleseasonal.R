@@ -34,7 +34,8 @@ stl_features <- function(x, ...)
   trend <- linearity <- curvature <- season <- spike <- peak <- trough <- acfremainder <- NA
 
   # STL fits
-  stlfit <- forecast::mstl(x, ...)
+  # yanfei changed the following args
+  stlfit <- forecast::mstl(x, s.window = 'per', na.action = na.contiguous, robust = TRUE)
   trend0 <- stlfit[, "Trend"]
   remainder <- stlfit[, "Remainder"]
   seasonal <- stlfit[, grep("Season", colnames(stlfit)), drop=FALSE]
@@ -87,8 +88,8 @@ stl_features <- function(x, ...)
 
   # Compute measures of linearity and curvature
   tren.coef <- coef(lm(trend0 ~ poly(seq(n), degree = 2L)))[2L:3L]
-  linearity <- abs(tren.coef[1L])
-  curvature <- abs(tren.coef[2L])
+  linearity <- abs(tren.coef[1L]/10)
+  curvature <- abs(tren.coef[2L]/10)
 
   # ACF of remainder
   acfremainder <- unname(acf_features(remainder))

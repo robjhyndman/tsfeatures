@@ -32,11 +32,9 @@ heterogeneity <- function(x)
   x.boxtest <- Box.test(x.whitened^2, lag = 12, type = 'Ljung-Box')
   
   # fit garch model to capture the variance dynamics.
-  # garch.fit <- garchFit(~ garch(1,1), data = x.whitened, trace = FALSE)
-  garch.fit <- suppressWarnings(tseries::garch(x.whitened, trace=FALSE))
+  garch.fit <- garchFit(~ garch(1,1), data = x.whitened, trace = FALSE)
   # compare arch test before and after fitting garch
-  # garch.fit.std <- residuals(garch.fit, standardize = T)
-  garch.fit.std <- residuals(garch.fit)
+  garch.fit.std <- residuals(garch.fit, standardize = T)
   suppressWarnings(x.garch.archtest <- try(ArchTest(garch.fit.std), silent = TRUE))
   if (class(x.garch.archtest) == "try-error" | class(x.archtest) == 'try-error') {
     output.yanfei <- c(arch_p = NA,
@@ -105,8 +103,9 @@ heterogeneity <- function(x)
 
 nonlinearity <- function(x)
 {
-  X2 <- tseries::terasvirta.test(as.ts(x),type = "Chisq")$stat
-  c(nonlinearity = 10*unname(X2)/length(x))
+  X2 <- tseries::terasvirta.test(as.ts(x),type = "Chisq")
+  c(nonlinearity = 10*unname(X2$stat)/length(x),
+    nonlinearity_p = X2$p.value)
 }
 
 
