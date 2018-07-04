@@ -149,7 +149,7 @@ max_kl_shift <- function(x, width=ifelse(frequency(x) > 1,
   bw <- bw.nrd0(tmpx)
   lenx <- length(x)
   if (lenx <= (2 * width)) {
-    return(c(max_kl_shift = NA_real_, time_kl_shift = NA_real_))
+    return(c(max_kl_shift = 0, time_kl_shift = NA_real_))
   }
   # Using binning algorithm to achieve efficiency but obsecure exact positions.
   # lastrep <- ceiling(lenx/5)
@@ -182,7 +182,7 @@ max_kl_shift <- function(x, width=ifelse(frequency(x) > 1,
   }
   else
     maxidx <- which.max(diffkl) + 1L
-  return(c(max_kl_shift = max(diffkl), time_kl_shift = maxidx))
+  return(c(max_kl_shift = max(diffkl, na.rm = TRUE), time_kl_shift = maxidx))
 }
 
 
