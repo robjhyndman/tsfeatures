@@ -6,7 +6,7 @@
 #' @author Rob J Hyndman
 #' @export
 
-entropy <- function(x) {
+entropy <- function(x, ...) {
   entropy <- try(ForeCA::spectral_entropy(na.contiguous(x))[1L], silent = TRUE)
   if (class(entropy) == "try-error") {
     entropy <- NA
