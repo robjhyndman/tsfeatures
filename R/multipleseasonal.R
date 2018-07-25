@@ -35,7 +35,7 @@ stl_features <- function(x, ...)
 
   # STL fits
   # yanfei changed the following args
-  stlfit <- forecast::mstl(x, s.window = 'per', na.action = na.contiguous, robust = TRUE)
+  stlfit <- forecast::mstl(x, na.action = na.contiguous, ...)
   trend0 <- stlfit[, "Trend"]
   remainder <- stlfit[, "Remainder"]
   seasonal <- stlfit[, grep("Season", colnames(stlfit)), drop=FALSE]
