@@ -23,48 +23,6 @@ heterogeneity <- function(x)
   # of the series. But the GARCH type hetero could be high when the variation
   # changes independently of the level of the series.
 
-  ## From yanfei
-  # pre-whiten a series before Garch modeling
-  x.whitened <- prewhiten.ts(x, AR.max = 24, plot = FALSE, verbose = FALSE)$prew_ar
-  
-  # perform arch and box test
-  suppressWarnings(x.archtest <- try(ArchTest(x.whitened), silent = TRUE))
-  x.boxtest <- Box.test(x.whitened^2, lag = 12, type = 'Ljung-Box')
-  
-  # fit garch model to capture the variance dynamics.
-  suppressWarnings(garch.fit <- try(garchFit(~ garch(1,1), data = x.whitened, trace = FALSE), silent = TRUE))
-  if (class(garch.fit) == 'try-error'){
-    output.yanfei <- c(arch_p = NA,
-                       garch_arch_p = NA,
-                       box_p = NA,
-                       garch_box_p = NA,
-                       Hetero = NA)
-  }else{
-    # compare arch test before and after fitting garch
-    garch.fit.std <- garch.fit@residuals/garch.fit@sigma.t
-    suppressWarnings(x.garch.archtest <- try(ArchTest(garch.fit.std), silent = TRUE))
-    if (class(x.garch.archtest) == "try-error" | class(x.archtest) == 'try-error') {
-      output.yanfei <- c(arch_p = NA,
-                         garch_arch_p = NA,
-                         box_p = unname(x.boxtest$p.value),
-                         garch_box_p = NA,
-                         Hetero = NA)
-    }else{
-      archtest.p.diff <- x.garch.archtest$p.value - x.archtest$p.value
-      
-      # compare Box test of squared residuals before and after fitting garch
-      x.garch.boxtest <- Box.test(garch.fit.std^2, lag = 12, type = 'Ljung-Box')
-      boxtest.p.diff <- x.garch.boxtest$p.value - x.boxtest$p.value
-      
-      # output
-      output.yanfei <- c(arch_p = unname(x.archtest$p.value),
-                         garch_arch_p = unname(x.garch.archtest$p.value),
-                         box_p = unname(x.boxtest$p.value),
-                         garch_box_p = unname(x.garch.boxtest$p.value),
-                         Hetero = max(archtest.p.diff, boxtest.p.diff))
-    }
-  }
-  ## From Rob
   # pre-whiten a series before Garch modeling
   x.whitened <- na.contiguous(ar(x)$resid)
  
@@ -88,8 +46,7 @@ heterogeneity <- function(x)
     arch_acf = LBstat,
     garch_acf = LBstat2,
     arch_r2 = unname(x.archtest),
-    garch_r2 = unname(x.garch.archtest),
-    output.yanfei
+    garch_r2 = unname(x.garch.archtest)
     )
   # output[is.na(output)] <- 1
   return(output)
@@ -111,9 +68,8 @@ heterogeneity <- function(x)
 
 nonlinearity <- function(x)
 {
-  X2 <- tseries::terasvirta.test(as.ts(x),type = "Chisq")
-  c(nonlinearity = 10*unname(X2$stat)/length(x),
-    nonlinearity_p = X2$p.value)
+  X2 <- tseries::terasvirta.test(as.ts(x),type = "Chisq")$stat
+  c(nonlinearity = 10*unname(X2)/length(x))
 }
 
 
