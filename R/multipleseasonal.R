@@ -34,8 +34,7 @@ stl_features <- function(x, ...)
   trend <- linearity <- curvature <- season <- spike <- peak <- trough <- acfremainder <- NA
 
   # STL fits
-  # yanfei changed the following args
-  stlfit <- forecast::mstl(x, na.action = na.contiguous, ...)
+  stlfit <- forecast::mstl(x, ...)
   trend0 <- stlfit[, "Trend"]
   remainder <- stlfit[, "Remainder"]
   seasonal <- stlfit[, grep("Season", colnames(stlfit)), drop=FALSE]

@@ -22,22 +22,21 @@ heterogeneity <- function(x)
   # is of a particular type, namely that the variation increases with the level
   # of the series. But the GARCH type hetero could be high when the variation
   # changes independently of the level of the series.
-
+  
   # pre-whiten a series before Garch modeling
   x.whitened <- na.contiguous(ar(x)$resid)
- 
+  
   # perform arch and box test
   x.archtest <- arch_stat(x.whitened)
   LBstat <- sum(acf(x.whitened^2, lag.max=12L, plot=FALSE)$acf[-1L]^2)
   
   # fit garch model to capture the variance dynamics.
   garch.fit <- suppressWarnings(tseries::garch(x.whitened, trace=FALSE))
-
-
+  
   # compare arch test before and after fitting garch
   garch.fit.std <- residuals(garch.fit)
   x.garch.archtest <- arch_stat(garch.fit.std)
-
+  
   # compare Box test of squared residuals before and after fitting garch
   LBstat2 <- NA
   try(LBstat2 <- sum(acf(na.contiguous(garch.fit.std^2), lag.max=12L, plot=FALSE)$acf[-1L]^2),
@@ -47,7 +46,7 @@ heterogeneity <- function(x)
     garch_acf = LBstat2,
     arch_r2 = unname(x.archtest),
     garch_r2 = unname(x.garch.archtest)
-    )
+  )
   # output[is.na(output)] <- 1
   return(output)
 }
@@ -100,7 +99,6 @@ arch_stat <- function (x, lags = 12, demean=TRUE)
   {
     arch.lm <- summary(fit)
     S <- arch.lm$r.squared #* NROW(mat)
-#    p2 <- 1 - pchisq(S, df=lags)
     return(c(ARCH.LM=S))
   }
 }

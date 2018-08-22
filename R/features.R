@@ -6,7 +6,7 @@
 #' @author Rob J Hyndman
 #' @export
 
-entropy <- function(x) {
+entropy <- function(x, ...) {
   entropy <- try(ForeCA::spectral_entropy(na.contiguous(x))[1L], silent = TRUE)
   if (class(entropy) == "try-error") {
     entropy <- NA
@@ -149,7 +149,7 @@ max_kl_shift <- function(x, width=ifelse(frequency(x) > 1,
   bw <- bw.nrd0(tmpx)
   lenx <- length(x)
   if (lenx <= (2 * width)) {
-    return(c(max_kl_shift = 0, time_kl_shift = NA_real_))
+    return(c(max_kl_shift = NA_real_, time_kl_shift = NA_real_))
   }
   # Using binning algorithm to achieve efficiency but obsecure exact positions.
   # lastrep <- ceiling(lenx/5)
