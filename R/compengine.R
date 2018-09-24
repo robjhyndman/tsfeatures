@@ -15,10 +15,14 @@ hctsa_autocorrelation <- function(x){
 }
 
 hctsa_predictability <- function(x){
-  output <- c()
+  output <- c(FC_LocalSimple_mean1_taures = FC_LocalSimple_taures(x, "mean"), 
+              FC_LocalSimple_lfit_taures = FC_LocalSimple_taures(x, "lfit"), 
+              EN_SampEn_1 = EN_SampEn_5_03_sampen1(x))
   return(output)
 }
 
+
+# autocorr ----------------------------------------------------------------
 
 
 #' Points inside a given circular boundary in a 2-d embedding space from software package \code{hctsa}
@@ -26,13 +30,17 @@ hctsa_predictability <- function(x){
 #' The time lag is set to the first zero crossing of the autocorrelation function.
 #'
 #' @param y the input time series
-#' @param boundary the given circular boundary, setting to 1 or 2 in CompEngine
+#' @param boundary the given circular boundary, setting to 1 or 2 in CompEngine. Default to 1.
 #' @return Points inside a given circular boundary
 #' @references B.D. Fulcher and N.S. Jones. hctsa: A computational framework for automated time-series phenotyping using massive feature extraction. Cell Systems 5, 527 (2017).
 #' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
 #' @author Yangzhuoran Yang
 #' @export
-CO_Embed2_Basic_tau_incircle <- function(y, boundary){
+CO_Embed2_Basic_tau_incircle <- function(y, boundary = NULL){
+  if(is.null(boundary)){
+    warning("`CO_Embed2_Basic_tau_incircle()` using `boundary = 1. Set value with `boundary`.")
+    boundary <- 1
+  }
   tau <- CO_FirstZero_ac(y)
   xt <- y[1:(length(y)-tau)]# part of the time series
   xtp <- y[(1+tau):length(y)]# time-lagged time series
@@ -232,5 +240,147 @@ PH_Walker_prop_01_sw_propcross <- function(y){
 }
 
 
-FC_LocalSimple_taures <- function(x, )
+# pred --------------------------------------------------------------------
+
+
+#' The first zero crossing of the autocorrelation function of the residuals from Simple local time-series forecasting
+#' 
+#' Simple predictors using the past trainLength values of the time series to
+#' predict its next value.
+#' 
+#' @param y the input time series
+#' @param forecastMeth the forecasting method, default to \code{mean}. 
+#' \code{mean}: local mean prediction using the past trainLength time-series values.  
+#' \code{lfit}: local linear prediction using the past trainLength time-series values.  
+#' @param trainLength the number of time-series values to use to forecast the next value. 
+#' Default to 1 when using method \code{mean} and 3 when using method \code{lfit}.
+#' @return The first zero crossing of the autocorrelation function of the residuals
+#' @export
+FC_LocalSimple_taures <- function(y, forecastMeth = NULL, trainLength = NULL ){
+  if(is.null(forecastMeth)) forecastMeth <- "mean"
+  if(!forecastMeth %in% c("mean", "lfit")) stop("`FC_LocalSimple_taures`:Unknown forecasting method")
+  if(forecastMeth == "mean" && is.null(trainLength)) trainLength <- 1 
+  if(forecastMeth == "lfit" && is.null(trainLength)) trainLength <- 3
+  lp <- trainLength
+  
+  N <- length(y)
+  evalr <-  (lp+1):N
+  if( length(evalr)==0)  stop('Time series too short for forecasting in `FC_LocalSimple_taures`')
+  
+  res <- numeric(length(evalr))
+  if(forecastMeth == "mean"){
+    for(i in 1:length(evalr))
+      res[i] <- mean(y[(evalr[i]-lp):(evalr[i]-1)]) - y[evalr[i]]
+  }
+  if(forecastMeth == "lfit"){
+    for(i in 1:length(evalr)){
+       # Fit linear
+      a <- 1:lp
+      b <- y[(evalr[i]-lp):(evalr[i]-1)]
+      lm.ab <- lm(b~a, data = data.frame(a,b))
+      res[i] <- predict(lm.ab, newdata = data.frame(a=lp+1))-y[evalr[i]]
+      # p = polyfit((1:lp)',y(evalr(i)-lp:evalr(i)-1),1)
+      #       res(i) = polyval(p,lp+1) - y(evalr(i)); % prediction - value
+    }
+  }
+  out.taures <- CO_FirstZero_ac(res)
+  return(out.taures)
+}
+
+
+
+#' First Sample Entropy of a time series
+#' 
+#' Modified from the Ben Fulcher's \code{EN_SampEn} which uses code from PhysioNet.
+#' The publicly-available PhysioNet Matlab code, sampenc (renamed here to
+#' RN_sampenc) is available from:
+#' http://www.physionet.org/physiotools/sampen/matlab/1.1/sampenc.m
+#' 
+#' Embedding dimension is set to 5.
+#' The threshold is set to 0.3.
+#'
+#'
+#' @param y the input time series
+#' @references cf. "Physiological time-series analysis using approximate entropy and sample
+#' entropy", J. S. Richman and J. R. Moorman, Am. J. Physiol. Heart Circ.
+#' Physiol., 278(6) H2039 (2000)
+#' @references B.D. Fulcher and N.S. Jones. hctsa: A computational framework for automated time-series phenotyping using massive feature extraction. Cell Systems 5, 527 (2017).
+#' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
+#' @author Yangzhuoran Yang
+#' @export
+EN_SampEn_5_03_sampen1 <- function(y){
+  M <- 5
+  r <- 0.3
+  sampEn = PN_sampenc(y,M+1,r)
+  return(sampEn)
+}
+
+
+
+
+#' Sample Entropy
+#' 
+#' Modified from the Ben Fulcher version of original code sampenc.m from
+#' http://physionet.org/physiotools/sampen/
+#' http://www.physionet.org/physiotools/sampen/matlab/1.1/sampenc.m
+#' Code by DK Lake (dlake@virginia.edu), JR Moorman and Cao Hanqing.
+#' 
+#' 
+#' @references cf. "Physiological time-series analysis using approximate entropy and sample
+#' entropy", J. S. Richman and J. R. Moorman, Am. J. Physiol. Heart Circ.
+#' Physiol., 278(6) H2039 (2000)
+#' @references B.D. Fulcher and N.S. Jones. hctsa: A computational framework for automated time-series phenotyping using massive feature extraction. Cell Systems 5, 527 (2017).
+#' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
+#' @author Yangzhuoran Yang
+PN_sampenc <- function(y,M,r){
+  N <- length(y)
+  lastrun <- numeric(N) #zeros(1,N)
+  run <- numeric(N) #zeros(1,N)
+  A <- numeric(M) #zeros(M,1)
+  B <- numeric(M) #zeros(M,1)
+  #-------------------------------------------------------------------------------
+    # Get counting:
+    #-------------------------------------------------------------------------------
+  for(i in 1:(N-1)){ # go through each point in the time series, counting matches
+    y1 <- y[i]
+    for(jj in 1:(N-i)){ # compare to points through the rest of the time series
+      # Compare to future index, j:
+      j <- i + jj
+      # This future point, j, matches the time-series value at i:
+      if (abs(y[j]-y1) < r){
+        run[jj] <- lastrun[jj] + 1 # increase run count for this lag
+        M1 <- min(M, run[jj])
+        for (m in 1:M1){
+          A[m] <- A[m] + 1
+          if (j < N){
+            B[m] <- B[m] + 1
+          }
+        }
+      } else{
+        run[jj] <- 0
+      }
+    }
+    for( j in 1:N-i){
+      lastrun[j] <- run[j]
+    }
+  }
+    #-------------------------------------------------------------------------------
+      # Calculate for m <- 1
+    NN <- N*(N-1)/2
+    p <- A[1]/NN
+    e <- -log(p)  
+    return(e)
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
