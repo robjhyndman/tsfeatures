@@ -21,6 +21,13 @@ hctsa_predictability <- function(x){
   return(output)
 }
 
+hctsa_stationarity <- function(x){
+  output <- c(SY_StdNthDer_1 = SY_StdNthDer_1(x), 
+              SY_SpreadRandomLocal_meantaul_50 = SY_SpreadRandomLocal_100_meantaul(x, 50), 
+              SY_SpreadRandomLocal_meantaul_ac2 = SY_SpreadRandomLocal_100_meantaul(x, "ac2"))
+  return(output)
+}
+
 
 # autocorr ----------------------------------------------------------------
 
@@ -338,9 +345,7 @@ PN_sampenc <- function(y,M,r){
   run <- numeric(N) #zeros(1,N)
   A <- numeric(M) #zeros(M,1)
   B <- numeric(M) #zeros(M,1)
-  #-------------------------------------------------------------------------------
     # Get counting:
-    #-------------------------------------------------------------------------------
   for(i in 1:(N-1)){ # go through each point in the time series, counting matches
     y1 <- y[i]
     for(jj in 1:(N-i)){ # compare to points through the rest of the time series
@@ -364,7 +369,6 @@ PN_sampenc <- function(y,M,r){
       lastrun[j] <- run[j]
     }
   }
-    #-------------------------------------------------------------------------------
       # Calculate for m <- 1
     NN <- N*(N-1)/2
     p <- A[1]/NN
@@ -373,8 +377,65 @@ PN_sampenc <- function(y,M,r){
 }
 
 
+# stationarity ------------------------------------------------------------
 
 
+
+
+
+#' Standard deviation of the first derivative of the time series.
+#'
+#' Modified from \code{SY_StdNthDer} in \code{kctsa}. Based on an idea by Vladimir Vassilevsky.
+#' 
+#' @param y the input time series
+#' @return Standard deviation of the first derivative of the time series.
+#' @references cf. http://www.mathworks.de/matlabcentral/newsreader/view_thread/136539
+#' @references B.D. Fulcher and N.S. Jones. hctsa: A computational framework for automated time-series phenotyping using massive feature extraction. Cell Systems 5, 527 (2017).
+#' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
+#' @author Yangzhuoran Yang
+#' @export
+SY_StdNthDer_1 <- function(y){
+  if(length(y)<2) stop("Time series is too short to compute differences")
+  yd <- diff(y)
+  return(sd(yd))
+}
+
+#'  Bootstrap-based stationarity measure.
+#' 
+#' 100 time-series segments of length \code{l} are selected at random from the time series and 
+#' the mean of the first zero-crossings of the autocorrelation function in each segment is calculated.
+#' 
+#' 
+#' @param y the input time series
+#' @param l the length of local time-series segments to analyze as a positive integer. Can also be a specified character string: "ac2": twice the first zero-crossing of the autocorrelation function
+#' @return mean of the first zero-crossings of the autocorrelation function
+#' @references B.D. Fulcher and N.S. Jones. hctsa: A computational framework for automated time-series phenotyping using massive feature extraction. Cell Systems 5, 527 (2017).
+#' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
+#' @author Yangzhuoran Yang
+#' @export
+SY_SpreadRandomLocal_100_meantaul <- function(y, l = NULL){
+  if(is.null(l)) l <- 50
+  if(is.character(l) && "ac2" %in% l) l <- 2*CO_FirstZero_ac(y)
+  if(!is.numeric(l)) stop("Unknown specifier `l`")
+  numSegs  <-  100
+  N <- length(y)
+  if(l>0.9*N) stop("This time series is too short. Specify proper segment lengrh in `l`")
+
+  qs <- numeric(numSegs)  
+  
+  for (j in 1:numSegs){
+  # pick a range
+  # in this implementation, ranges CAN overlap
+  ist <- sample(N-1-l,1) # random start point (not exceeding the endpoint)
+  ifh <- ist+l-1 # finish index
+  rs <- ist:ifh # sample range (from starting to finishing index)
+  ysub <- y[rs] # subsection of the time series
+  taul <- CO_FirstZero_ac(ysub)
+  qs[j] <- taul
+  }
+  return(mean(qs,na.rm = TRUE))
+  
+}
 
 
 
