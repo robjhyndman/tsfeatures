@@ -28,6 +28,11 @@ hctsa_stationarity <- function(x){
   return(output)
 }
 
+hctsa_distribution <- function(x){
+  output <- c(DN_HistogramMode_10 = DN_HistogramMode(x),
+              DN_OutlierInclude_mdrmd = DN_OutlierInclude_abs_001_mdrmd(x))
+}
+
 
 # autocorr ----------------------------------------------------------------
 
@@ -438,10 +443,123 @@ SY_SpreadRandomLocal_100_meantaul <- function(y, l = NULL){
 }
 
 
+# distribution ------------------------------------------------------------
+
+
+#' Mode of a data vector
+#' 
+#' Measures the mode of the data vector using histograms with a given number of bins as suggestion.
+#' The value calculated is different from \code{kctsa} and \code{CompEngine} as the histogram edges are calculated differently.
+#' 
+#' @param y the input data vector
+#' @param numBins the number of bins to use in the histogram.
+#' @return the mode
+#' @references B.D. Fulcher and N.S. Jones. hctsa: A computational framework for automated time-series phenotyping using massive feature extraction. Cell Systems 5, 527 (2017).
+#' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
+#' @author Yangzhuoran Yang
+#' @export
+DN_HistogramMode <- function(y, numBins = 10){
+
+  # Compute the histogram from the data:
+    if (is.numeric(numBins)){
+      histdata <- hist(y,plot = FALSE)
+      binCenters <- histdata$mids
+  } else {
+    stop('Unknown format for numBins')
+  }
+  # Compute bin centers from bin edges:
+    # binCenters <- mean([binEdges(1:end-1) binEdges(2:end)])
+  # Mean position of maximums (if multiple):
+    out <- mean(binCenters[which.max(histdata$counts)])
+ return(out)
+}
 
 
 
 
 
 
+#' How median depend on distributional outliers.
+#'
+#' Measures meidan as more and
+#' more outliers are included in the calculation according to a specified rule,
+#' of outliers being furthest from the mean, greatest positive, or negative
+#' deviations.
+#'
+#' The threshold for including time-series data points in the analysis increases
+#' from zero to the maximum deviation, in increments of 0.01*sigma (by default), 
+#' where sigma is the standard deviation of the time series.
+#'
+#' At each threshold,  proportion of time series points
+#' included and median are calculated, and outputs from the
+#' algorithm measure how these statistical quantities change as more extreme
+#' points are included in the calculation.
+#' 
+#' Outliers are defined as furthest from the mean.
+#' 
+#' @param y the input time series (ideally z-scored)
+#' @return median  of the median of range indices
+#' @references B.D. Fulcher and N.S. Jones. hctsa: A computational framework for automated time-series phenotyping using massive feature extraction. Cell Systems 5, 527 (2017).
+#' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
+#' @author Yangzhuoran Yang
+#' @export
+DN_OutlierInclude_abs_001_mdrmd <- function(y){
+  if(length(unique(y))==1) stop("The time series is a constant!")
+  if(!BF_iszscored(y)) {
+    warning('The input time series should be z-scored')
+    isd <- sd(y) # Modified to fit the 0.01*sigma increment in discription
+    } else isd <- 1
+  N <- length(y)
+  inc <- 0.01*isd
+  thr <- seq(from = 0, to = max(abs(y)), by = inc)
+  tot <- N
+  if(length(thr) == 0) stop("peculiar time series")
+  
+  msDt <- numeric(length(thr))
+  msDtp <- numeric(length(thr))
+  for (i in 1:length(thr)){
+    th <- thr[i] # the threshold
+    # Construct a time series consisting of inter-event intervals for parts
+    # of the time serie exceeding the threshold, th
+    r <- which(abs(y) >= th)
+    
+    Dt_exc <- diff(r)  # Delta t (interval) time series exceeding threshold
+    msDt[i] <- median(r)/(N/2)-1
+    msDtp[i] <-  length(Dt_exc)/tot*100 
+    # this is just really measuring the distribution: 
+    # the proportion of possible values
+    # that are actually used in
+    # calculation
+  }
+  
+  
+   # Trim off where the statistic power is lacking: less than 2% of data
+   # included
+  trimthr <- 2  # percent
+  mj <- which(msDtp > trimthr)[length(which(msDtp > trimthr))]
+  if (length(mj) != 0){
+    msDt <- msDt[1:mj]
+    msDtp <- msDtp[1:mj]
+    thr <- thr[1:mj]
+  } else stop("the statistic power is lacking: less than 2% of data included")
+  
+  out.mdrmd <-  median(msDt)
+  return(out.mdrmd)
+}
+
+#' Crude check for whether a data vector is (eps-close to being) z-scored.
+#' 
+#' Used for displaying warning messages for functions that require z-scored inputs.
+#' 
+#' @param x the input time series (or any vector)
+#' @return a logical with the verdict.
+#' #' @references B.D. Fulcher and N.S. Jones. hctsa: A computational framework for automated time-series phenotyping using massive feature extraction. Cell Systems 5, 527 (2017).
+#' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
+#' @author Yangzhuoran Yang
+#' @export
+BF_iszscored <- function(x){
+  numericThreshold <- 100*.Machine$double.eps
+  iszscored <- ((abs(mean(x)) < numericThreshold) && (abs(sd(x)-1) < numericThreshold))
+  return(iszscored)
+}
 
