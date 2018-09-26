@@ -4,7 +4,7 @@
 \alias{SY_SpreadRandomLocal_100_meantaul}
 \title{Bootstrap-based stationarity measure.}
 \usage{
-SY_SpreadRandomLocal_100_meantaul(y, l = NULL)
+SY_SpreadRandomLocal_100_meantaul(y, l = 50)
 }
 \arguments{
 \item{y}{the input time series}

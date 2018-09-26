@@ -1,38 +1,43 @@
 
 
-compengine <- function(x, ...){
-  hctsa_autocorrelation(x, ...)
+compengine <- function(x){
+  c(hctsa_autocorr(x), hctsa_pred(x), hctsa_station(x), hctsa_dist(x), hctsa_scal(x))
 }
 
-hctsa_autocorrelation <- function(x){
+hctsa_autocorr <- function(x){
   output <- c(CO_FirstMin = CO_FirstMin_ac(x),
               CO_trevnum = CO_trev_1_num(x),
               CO_Embed2_First0_incircle_1 = CO_Embed2_Basic_tau_incircle(x,1),
               CO_Embed2_First0_incircle_2 = CO_Embed2_Basic_tau_incircle(x,2), 
               SB_MotifTwo_mean_hhh = SB_MotifTwo_mean_hhh(x), 
               PH_Walker_sw_propcross = PH_Walker_prop_01_sw_propcross(x))
- return(output)
+  return(output)
 }
 
-hctsa_predictability <- function(x){
+hctsa_pred <- function(x){
   output <- c(FC_LocalSimple_mean1_taures = FC_LocalSimple_taures(x, "mean"), 
               FC_LocalSimple_lfit_taures = FC_LocalSimple_taures(x, "lfit"), 
               EN_SampEn_1 = EN_SampEn_5_03_sampen1(x))
   return(output)
 }
 
-hctsa_stationarity <- function(x){
+hctsa_station <- function(x){
   output <- c(SY_StdNthDer_1 = SY_StdNthDer_1(x), 
               SY_SpreadRandomLocal_meantaul_50 = SY_SpreadRandomLocal_100_meantaul(x, 50), 
               SY_SpreadRandomLocal_meantaul_ac2 = SY_SpreadRandomLocal_100_meantaul(x, "ac2"))
   return(output)
 }
 
-hctsa_distribution <- function(x){
+hctsa_dist <- function(x){
   output <- c(DN_HistogramMode_10 = DN_HistogramMode(x),
               DN_OutlierInclude_mdrmd = DN_OutlierInclude_abs_001_mdrmd(x))
+  return(output)
 }
 
+hctsa_scal <- function(x){
+  output <- c(SC_FluctAnal_prop_r1 = SC_FluctAnal_2_rsrangefit_50_1_logi_prop_r1(x))
+  return(output)
+}
 
 # autocorr ----------------------------------------------------------------
 
@@ -50,7 +55,7 @@ hctsa_distribution <- function(x){
 #' @export
 CO_Embed2_Basic_tau_incircle <- function(y, boundary = NULL){
   if(is.null(boundary)){
-    warning("`CO_Embed2_Basic_tau_incircle()` using `boundary = 1. Set value with `boundary`.")
+    warning("`CO_Embed2_Basic_tau_incircle()` using `boundary = 1`. Set value with `boundary`.")
     boundary <- 1
   }
   tau <- CO_FirstZero_ac(y)
@@ -160,7 +165,7 @@ SB_MotifTwo_mean_hhh <- function(y){
   
   r1 <- yBin == 1
   r0 <- yBin == 0
-
+  
   r1 <- r1[1:(length(r1)-1)]
   r0 <- r0[1:(length(r0)-1)]
   
@@ -168,7 +173,7 @@ SB_MotifTwo_mean_hhh <- function(y){
   r01 <- r0 & yBin[2:N] == 1
   r10 <- r1 & yBin[2:N] == 0
   r11 <- r1 & yBin[2:N] == 1
-
+  
   r00 <- r00[1:(length(r00)-1)]
   r01 <- r01[1:(length(r01)-1)]
   r10 <- r10[1:(length(r10)-1)]
@@ -240,8 +245,8 @@ f_entropy <- function(x){
 PH_Walker_prop_01_sw_propcross <- function(y){
   N <- length(y)
   p <- 0.1
-#   walker starts at zero and narrows the gap between its position
-#   and the time series value at that point by 0.1, to give the value at the subsequent time step
+  #   walker starts at zero and narrows the gap between its position
+  #   and the time series value at that point by 0.1, to give the value at the subsequent time step
   w <- numeric(N)
   w[1] <- 0 # start at zero
   for(i in 2:N){
@@ -286,7 +291,7 @@ FC_LocalSimple_taures <- function(y, forecastMeth = NULL, trainLength = NULL ){
   }
   if(forecastMeth == "lfit"){
     for(i in 1:length(evalr)){
-       # Fit linear
+      # Fit linear
       a <- 1:lp
       b <- y[(evalr[i]-lp):(evalr[i]-1)]
       lm.ab <- lm(b~a, data = data.frame(a,b))
@@ -350,7 +355,7 @@ PN_sampenc <- function(y,M,r){
   run <- numeric(N) #zeros(1,N)
   A <- numeric(M) #zeros(M,1)
   B <- numeric(M) #zeros(M,1)
-    # Get counting:
+  # Get counting:
   for(i in 1:(N-1)){ # go through each point in the time series, counting matches
     y1 <- y[i]
     for(jj in 1:(N-i)){ # compare to points through the rest of the time series
@@ -374,11 +379,11 @@ PN_sampenc <- function(y,M,r){
       lastrun[j] <- run[j]
     }
   }
-      # Calculate for m <- 1
-    NN <- N*(N-1)/2
-    p <- A[1]/NN
-    e <- -log(p)  
-    return(e)
+  # Calculate for m <- 1
+  NN <- N*(N-1)/2
+  p <- A[1]/NN
+  e <- -log(p)  
+  return(e)
 }
 
 
@@ -418,25 +423,24 @@ SY_StdNthDer_1 <- function(y){
 #' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
 #' @author Yangzhuoran Yang
 #' @export
-SY_SpreadRandomLocal_100_meantaul <- function(y, l = NULL){
-  if(is.null(l)) l <- 50
+SY_SpreadRandomLocal_100_meantaul <- function(y, l =50){
   if(is.character(l) && "ac2" %in% l) l <- 2*CO_FirstZero_ac(y)
   if(!is.numeric(l)) stop("Unknown specifier `l`")
   numSegs  <-  100
   N <- length(y)
   if(l>0.9*N) stop("This time series is too short. Specify proper segment lengrh in `l`")
-
+  
   qs <- numeric(numSegs)  
   
   for (j in 1:numSegs){
-  # pick a range
-  # in this implementation, ranges CAN overlap
-  ist <- sample(N-1-l,1) # random start point (not exceeding the endpoint)
-  ifh <- ist+l-1 # finish index
-  rs <- ist:ifh # sample range (from starting to finishing index)
-  ysub <- y[rs] # subsection of the time series
-  taul <- CO_FirstZero_ac(ysub)
-  qs[j] <- taul
+    # pick a range
+    # in this implementation, ranges CAN overlap
+    ist <- sample(N-1-l,1) # random start point (not exceeding the endpoint)
+    ifh <- ist+l-1 # finish index
+    rs <- ist:ifh # sample range (from starting to finishing index)
+    ysub <- y[rs] # subsection of the time series
+    taul <- CO_FirstZero_ac(ysub)
+    qs[j] <- taul
   }
   return(mean(qs,na.rm = TRUE))
   
@@ -459,19 +463,19 @@ SY_SpreadRandomLocal_100_meantaul <- function(y, l = NULL){
 #' @author Yangzhuoran Yang
 #' @export
 DN_HistogramMode <- function(y, numBins = 10){
-
+  
   # Compute the histogram from the data:
-    if (is.numeric(numBins)){
-      histdata <- hist(y,plot = FALSE)
-      binCenters <- histdata$mids
+  if (is.numeric(numBins)){
+    histdata <- hist(y,plot = FALSE, breaks = 10)
+    binCenters <- histdata$mids
   } else {
     stop('Unknown format for numBins')
   }
   # Compute bin centers from bin edges:
-    # binCenters <- mean([binEdges(1:end-1) binEdges(2:end)])
+  # binCenters <- mean([binEdges(1:end-1) binEdges(2:end)])
   # Mean position of maximums (if multiple):
-    out <- mean(binCenters[which.max(histdata$counts)])
- return(out)
+  out <- mean(binCenters[which.max(histdata$counts)])
+  return(out)
 }
 
 
@@ -508,7 +512,7 @@ DN_OutlierInclude_abs_001_mdrmd <- function(y){
   if(!BF_iszscored(y)) {
     warning('The input time series should be z-scored')
     isd <- sd(y) # Modified to fit the 0.01*sigma increment in discription
-    } else isd <- 1
+  } else isd <- 1
   N <- length(y)
   inc <- 0.01*isd
   thr <- seq(from = 0, to = max(abs(y)), by = inc)
@@ -533,8 +537,8 @@ DN_OutlierInclude_abs_001_mdrmd <- function(y){
   }
   
   
-   # Trim off where the statistic power is lacking: less than 2% of data
-   # included
+  # Trim off where the statistic power is lacking: less than 2% of data
+  # included
   trimthr <- 2  # percent
   mj <- which(msDtp > trimthr)[length(which(msDtp > trimthr))]
   if (length(mj) != 0){
@@ -553,7 +557,7 @@ DN_OutlierInclude_abs_001_mdrmd <- function(y){
 #' 
 #' @param x the input time series (or any vector)
 #' @return a logical with the verdict.
-#' #' @references B.D. Fulcher and N.S. Jones. hctsa: A computational framework for automated time-series phenotyping using massive feature extraction. Cell Systems 5, 527 (2017).
+#' @references B.D. Fulcher and N.S. Jones. hctsa: A computational framework for automated time-series phenotyping using massive feature extraction. Cell Systems 5, 527 (2017).
 #' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
 #' @author Yangzhuoran Yang
 #' @export
@@ -563,3 +567,99 @@ BF_iszscored <- function(x){
   return(iszscored)
 }
 
+
+# scaling ----------------------------------------------------------------
+
+
+#' Implements fluctuation analysis
+#' 
+#' Fits a polynomial of order 1 and then returns the
+#' range. The order of fluctuations is 2, corresponding to root mean
+#' square fluctuations.
+#' 
+#' 
+#' @param x the input time series (or any vector)
+#' @references B.D. Fulcher and N.S. Jones. hctsa: A computational framework for automated time-series phenotyping using massive feature extraction. Cell Systems 5, 527 (2017).
+#' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
+#' @author Yangzhuoran Yang
+#' @export
+SC_FluctAnal_2_rsrangefit_50_1_logi_prop_r1 <- function(x){
+  q <- 2
+  tauStep <- 50
+  k <- 1
+  
+  N <- length(x)
+  y <- cumsum(x)
+  taur <- unique(round(exp(seq(from = log(5),to = log(floor(N/2)),length.out = tauStep))))
+  ntau <- length(taur)
+  if (ntau < 8) # fewer than 8 points
+    stop("This time series is too short to analyze using this fluctuation analysis")
+  
+  Fl <- numeric(ntau)
+  
+  for (i in 1:ntau){
+    # buffer the time series at the scale tau
+    tau <- taur[i] # the scale on which to compute fluctuations
+    y_buff <- split(y, ceiling(seq_along(y)/tau))
+    
+    if (length(y_buff) > floor(N/tau)) # zero-padded, remove trailing set of points...
+        y_buff <- y_buff[-length(y_buff)]
+    
+    # analyzed length of time series (with trailing end-points removed)
+    nn <- length(y_buff)*tau
+    tt <- (1:tau) # faux time range
+
+    for (j in 1:length(y_buff)){
+      # fit a polynomial of order k in each subsegment
+      lm.tt <- lm(lmy~tt, data = data.frame(tt,lmy=y_buff[[j]]))
+      # remove the trend, store back in y_buff
+      y_buff[[j]] <- residuals(lm.tt)
+      
+    }
+    
+    tem <- sapply(y_buff, range)
+    y_dt <- tem[2,]-tem[1,]
+    
+    # Compute fluctuation function:
+    
+    Fl[i] <- (mean(y_dt^q))^(1/q)
+  }
+  logtt <- log(taur)
+  logFF <- log(Fl)
+  ntt <- ntau
+  
+  
+  ## Try assuming two components (2 distinct scaling regimes)
+    # Move through, and fit a straight line to loglog before and after each point.
+  # Find point with the minimum sum of squared errors
+  # First spline interpolate to get an even sampling of the interval
+  # (currently, in the log scale, there are relatively more at large scales
+     # Determine the errors
+     sserr <- rep(NA, ntt) # don't choose the end points
+     minPoints <- 6
+     for (i in minPoints:(ntt-minPoints)){
+       r1 <- 1:i
+       # p1 <- polyfit(logtt(r1),logFF(r1),1)
+       p1 <- lm(y~x, data=data.frame(x = logtt[r1], y = logFF[r1]))
+       r2 <- i:ntt
+       # p2 <- polyfit(logtt(r2),logFF(r2),1)
+       p2 <- lm(y~x, data=data.frame(x = logtt[r2], y = logFF[r2]))
+       # Sum of errors from fitting lines to both segments:
+       sserr[i] <- norm(-residuals(p1), type = "2") + norm(-residuals(p2), type = "2")
+     }
+     
+     # breakPt is the point where it's best to fit a line before and another line after
+     breakPt <- which.min(sserr)
+     r1 <- 1:breakPt
+     r2 <- breakPt:ntt
+     
+     prop_r1 <- length(r1)/ntt
+     return(prop_r1)
+}
+
+
+
+a <- function(x, ...){
+  c(sum(c(x,...),...), mean(c(x)))
+
+}
