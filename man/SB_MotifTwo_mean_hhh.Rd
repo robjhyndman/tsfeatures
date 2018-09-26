@@ -2,7 +2,7 @@
 % Please edit documentation in R/compengine.R
 \name{SB_MotifTwo_mean_hhh}
 \alias{SB_MotifTwo_mean_hhh}
-\title{Local motifs in a binary symbolization of the time series}
+\title{Local motifs in a binary symbolization of the time series from software package \code{hctsa}}
 \usage{
 SB_MotifTwo_mean_hhh(y)
 }

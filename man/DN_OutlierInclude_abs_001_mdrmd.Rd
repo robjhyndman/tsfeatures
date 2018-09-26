@@ -2,7 +2,7 @@
 % Please edit documentation in R/compengine.R
 \name{DN_OutlierInclude_abs_001_mdrmd}
 \alias{DN_OutlierInclude_abs_001_mdrmd}
-\title{How median depend on distributional outliers.}
+\title{How median depend on distributional outliers from software package \code{hctsa}}
 \usage{
 DN_OutlierInclude_abs_001_mdrmd(y)
 }

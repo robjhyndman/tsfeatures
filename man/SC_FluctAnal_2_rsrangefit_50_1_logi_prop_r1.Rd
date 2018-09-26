@@ -2,7 +2,7 @@
 % Please edit documentation in R/compengine.R
 \name{SC_FluctAnal_2_rsrangefit_50_1_logi_prop_r1}
 \alias{SC_FluctAnal_2_rsrangefit_50_1_logi_prop_r1}
-\title{Implements fluctuation analysis}
+\title{Implements fluctuation analysis from software package \code{hctsa}}
 \usage{
 SC_FluctAnal_2_rsrangefit_50_1_logi_prop_r1(x)
 }

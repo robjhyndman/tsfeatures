@@ -2,7 +2,7 @@
 % Please edit documentation in R/compengine.R
 \name{BF_iszscored}
 \alias{BF_iszscored}
-\title{Crude check for whether a data vector is (eps-close to being) z-scored.}
+\title{Crude check for whether a data vector is (eps-close to being) z-scored from software package \code{hctsa}}
 \usage{
 BF_iszscored(x)
 }

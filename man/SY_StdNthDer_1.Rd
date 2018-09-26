@@ -2,7 +2,7 @@
 % Please edit documentation in R/compengine.R
 \name{SY_StdNthDer_1}
 \alias{SY_StdNthDer_1}
-\title{Standard deviation of the first derivative of the time series.}
+\title{Standard deviation of the first derivative of the time series from software package \code{hctsa}}
 \usage{
 SY_StdNthDer_1(y)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/compengine.R
 \name{EN_SampEn_5_03_sampen1}
 \alias{EN_SampEn_5_03_sampen1}
-\title{First Sample Entropy of a time series}
+\title{First Sample Entropy of a time series from software package \code{hctsa}}
 \usage{
 EN_SampEn_5_03_sampen1(y)
 }
