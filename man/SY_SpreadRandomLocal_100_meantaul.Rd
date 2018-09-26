@@ -2,7 +2,7 @@
 % Please edit documentation in R/compengine.R
 \name{SY_SpreadRandomLocal_100_meantaul}
 \alias{SY_SpreadRandomLocal_100_meantaul}
-\title{Bootstrap-based stationarity measure.}
+\title{Bootstrap-based stationarity measure from software package \code{hctsa}}
 \usage{
 SY_SpreadRandomLocal_100_meantaul(y, l = 50)
 }

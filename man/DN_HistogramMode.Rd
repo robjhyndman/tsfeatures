@@ -2,7 +2,7 @@
 % Please edit documentation in R/compengine.R
 \name{DN_HistogramMode}
 \alias{DN_HistogramMode}
-\title{Mode of a data vector}
+\title{Mode of a data vector from software package \code{hctsa}}
 \usage{
 DN_HistogramMode(y, numBins = 10)
 }

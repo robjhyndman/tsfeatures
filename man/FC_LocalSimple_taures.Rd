@@ -2,9 +2,9 @@
 % Please edit documentation in R/compengine.R
 \name{FC_LocalSimple_taures}
 \alias{FC_LocalSimple_taures}
-\title{The first zero crossing of the autocorrelation function of the residuals from Simple local time-series forecasting}
+\title{The first zero crossing of the autocorrelation function of the residuals from Simple local time-series forecasting from software package \code{hctsa}}
 \usage{
-FC_LocalSimple_taures(y, forecastMeth = NULL, trainLength = NULL)
+FC_LocalSimple_taures(y, forecastMeth = "mean", trainLength = NULL)
 }
 \arguments{
 \item{y}{the input time series}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/compengine.R
 \name{PH_Walker_prop_01_sw_propcross}
 \alias{PH_Walker_prop_01_sw_propcross}
-\title{Simulates a hypothetical walker moving through the time domain.}
+\title{Simulates a hypothetical walker moving through the time domain from software package \code{hctsa}}
 \usage{
 PH_Walker_prop_01_sw_propcross(y)
 }
