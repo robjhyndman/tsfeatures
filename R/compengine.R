@@ -9,17 +9,17 @@
 #'
 #' @param y the input time series
 #' @return a vector with CompEngine features
-#' @seealso \code{\link{hctsa_autocorr}}
-#' @seealso \code{\link{hctsa_pred}}
-#' @seealso \code{\link{hctsa_station}}
-#' @seealso \code{\link{hctsa_dist}}
-#' @seealso \code{\link{hctsa_scal}}
+#' @seealso \code{\link{autocorr_features}}
+#' @seealso \code{\link{pred_features}}
+#' @seealso \code{\link{station_features}}
+#' @seealso \code{\link{dist_features}}
+#' @seealso \code{\link{scal_features}}
 #' @references B.D. Fulcher and N.S. Jones. hctsa: A computational framework for automated time-series phenotyping using massive feature extraction. Cell Systems 5, 527 (2017).
 #' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
 #' @author Yangzhuoran Yang
 #' @export
 compengine <- function(x){
-  c(hctsa_autocorr(x), hctsa_pred(x), hctsa_station(x), hctsa_dist(x), hctsa_scal(x))
+  c(autocorr_features(x), pred_features(x), station_features(x), dist_features(x), scal_features(x))
 }
 
 
@@ -28,34 +28,34 @@ compengine <- function(x){
 #' Calculate the features that grouped as autocorrelation set, 
 #' which have been used in CompEngine database, using method introduced in package \code{kctsa}. 
 #' 
-#' Features in this set are \code{CO_Embed2_Basic_tau_incircle_1}, 
-#' \code{CO_Embed2_Basic_tau_incircle_2}, 
+#' Features in this set are \code{Embed2_incircle_1}, 
+#' \code{Embed2_incircle_2}, 
 #' \code{AC_9}, 
-#' \code{CO_FirstMin_ac}, 
-#' \code{CO_trev_1_num}, 
-#' \code{SB_MotifTwo_mean_hhh}, 
-#' and \code{PH_Walker_prop_01_sw_propcross}.
+#' \code{FirstMin_ac}, 
+#' \code{trev_num}, 
+#' \code{MotifTwo_entro3}, 
+#' and \code{Walker_propcross}.
 #'
 #' @param y the input time series
 #' @return a vector with autocorrelation features
-#' @seealso \code{\link{CO_Embed2_Basic_tau_incircle}}
+#' @seealso \code{\link{Embed2_incircle}}
 #' @seealso \code{\link{AC_9}}
-#' @seealso \code{\link{CO_FirstMin_ac}}
-#' @seealso \code{\link{CO_trev_1_num}}
-#' @seealso \code{\link{SB_MotifTwo_mean_hhh}}
-#' @seealso \code{\link{PH_Walker_prop_01_sw_propcross}}
+#' @seealso \code{\link{FirstMin_ac}}
+#' @seealso \code{\link{trev_num}}
+#' @seealso \code{\link{MotifTwo_entro3}}
+#' @seealso \code{\link{Walker_propcross}}
 #' @references B.D. Fulcher and N.S. Jones. hctsa: A computational framework for automated time-series phenotyping using massive feature extraction. Cell Systems 5, 527 (2017).
 #' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
 #' @author Yangzhuoran Yang
 #' @export
-hctsa_autocorr <- function(x){
-  output <- c(CO_Embed2_First0_incircle_1 = CO_Embed2_Basic_tau_incircle(x,1),
-              CO_Embed2_First0_incircle_2 = CO_Embed2_Basic_tau_incircle(x,2),
+autocorr_features <- function(x){
+  output <- c(Embed2_incircle_1 = Embed2_incircle(x,1),
+              Embed2_incircle_2 = Embed2_incircle(x,2),
               AC_9 = AC_9(x),
-              CO_FirstMin = CO_FirstMin_ac(x),
-              CO_trevnum = CO_trev_1_num(x),
-              SB_MotifTwo_mean_hhh = SB_MotifTwo_mean_hhh(x), 
-              PH_Walker_sw_propcross = PH_Walker_prop_01_sw_propcross(x))
+              FirstMin_ac = FirstMin_ac(x),
+              trev_num = trev_num(x),
+              MotifTwo_entro3 = MotifTwo_entro3(x), 
+              Walker_propcross = Walker_propcross(x))
   return(output)
 }
 
@@ -65,22 +65,22 @@ hctsa_autocorr <- function(x){
 #' Calculate the features that grouped as prediction set, 
 #' which have been used in CompEngine database, using method introduced in package \code{kctsa}. 
 #' 
-#' Features in this set are \code{FC_LocalSimple_mean1_taures}, 
-#' \code{FC_LocalSimple_lfit_taures}, 
-#' and \code{EN_SampEn_5_03_sampen1}.
+#' Features in this set are \code{LocalSimple_mean1}, 
+#' \code{LocalSimple_lfitac}, 
+#' and \code{SampEn_first}.
 #'
 #' @param y the input time series
 #' @return a vector with autocorrelation features
-#' @seealso \code{\link{FC_LocalSimple_taures}}
-#' @seealso \code{\link{EN_SampEn_5_03_sampen1}}
+#' @seealso \code{\link{LocalSimple_taures}}
+#' @seealso \code{\link{SampEn_first}}
 #' @references B.D. Fulcher and N.S. Jones. hctsa: A computational framework for automated time-series phenotyping using massive feature extraction. Cell Systems 5, 527 (2017).
 #' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
 #' @author Yangzhuoran Yang
 #' @export
-hctsa_pred <- function(x){
-  output <- c(FC_LocalSimple_mean1_taures = FC_LocalSimple_taures(x, "mean"), 
-              FC_LocalSimple_lfit_taures = FC_LocalSimple_taures(x, "lfit"), 
-              EN_SampEn_1 = EN_SampEn_5_03_sampen1(x))
+pred_features <- function(x){
+  output <- c(LocalSimple_mean1 = LocalSimple_taures(x, "mean"), 
+              LocalSimple_lfitac = LocalSimple_taures(x, "lfit"), 
+              SampEn_first = SampEn_first(x))
   return(output)
 }
 
@@ -90,22 +90,22 @@ hctsa_pred <- function(x){
 #' Calculate the features that grouped as stationarity set, 
 #' which have been used in CompEngine database, using method introduced in package \code{kctsa}. 
 #' 
-#' Features in this set are \code{SY_StdNthDer_1}, 
-#' \code{SY_SpreadRandomLocal_50_100_meantaul}, 
-#' and \code{SY_SpreadRandomLocal_ac2_100_meantaul}.
+#' Features in this set are \code{Std1stDer}, 
+#' \code{SpreadRandomLocal_meantaul_50}, 
+#' and \code{SpreadRandomLocal_meantaul_ac2}.
 #'
 #' @param y the input time series
 #' @return a vector with autocorrelation features
-#' @seealso \code{\link{SY_StdNthDer_1}}
-#' @seealso \code{\link{SY_SpreadRandomLocal_100_meantaul}}
+#' @seealso \code{\link{Std1stDer}}
+#' @seealso \code{\link{SpreadRandomLocal_meantaul}}
 #' @references B.D. Fulcher and N.S. Jones. hctsa: A computational framework for automated time-series phenotyping using massive feature extraction. Cell Systems 5, 527 (2017).
 #' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
 #' @author Yangzhuoran Yang
 #' @export
-hctsa_station <- function(x){
-  output <- c(SY_StdNthDer_1 = SY_StdNthDer_1(x), 
-              SY_SpreadRandomLocal_meantaul_50 = SY_SpreadRandomLocal_100_meantaul(x, 50), 
-              SY_SpreadRandomLocal_meantaul_ac2 = SY_SpreadRandomLocal_100_meantaul(x, "ac2"))
+station_features <- function(x){
+  output <- c(Std1stDer = Std1stDer(x), 
+              SpreadRandomLocal_meantaul_50 = SpreadRandomLocal_meantaul(x, 50), 
+              SpreadRandomLocal_meantaul_ac2 = SpreadRandomLocal_meantaul(x, "ac2"))
   return(output)
 }
 
@@ -116,20 +116,20 @@ hctsa_station <- function(x){
 #' Calculate the features that grouped as distribution set, 
 #' which have been used in CompEngine database, using method introduced in package \code{kctsa}. 
 #' 
-#' Features in this set are \code{DN_HistogramMode_10}
-#' and \code{DN_OutlierInclude_abs_001_mdrmd}.
+#' Features in this set are \code{HistogramMode_10}
+#' and \code{OutlierInclude_mdrmd}.
 #'
 #' @param y the input time series
 #' @return a vector with autocorrelation features
-#' @seealso \code{\link{DN_HistogramMode}}
-#' @seealso \code{\link{DN_OutlierInclude_abs_001_mdrmd}}
+#' @seealso \code{\link{HistogramMode}}
+#' @seealso \code{\link{OutlierInclude_mdrmd}}
 #' @references B.D. Fulcher and N.S. Jones. hctsa: A computational framework for automated time-series phenotyping using massive feature extraction. Cell Systems 5, 527 (2017).
 #' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
 #' @author Yangzhuoran Yang
 #' @export
-hctsa_dist <- function(x){
-  output <- c(DN_HistogramMode_10 = DN_HistogramMode(x),
-              DN_OutlierInclude_mdrmd = DN_OutlierInclude_abs_001_mdrmd(x))
+dist_features <- function(x){
+  output <- c(HistogramMode_10 = HistogramMode(x),
+              OutlierInclude_mdrmd = OutlierInclude_mdrmd(x))
   return(output)
 }
 
@@ -138,23 +138,25 @@ hctsa_dist <- function(x){
 #' Calculate the features that grouped as scaling set, 
 #' which have been used in CompEngine database, using method introduced in package \code{kctsa}. 
 #' 
-#' Feature in this set is \code{SC_FluctAnal_2_rsrangefit_50_1_logi_prop_r1}.
+#' Feature in this set is \code{FluctAnal_prop_r1}.
 #'
 #' @param y the input time series
 #' @return a vector with autocorrelation features
-#' @seealso \code{\link{SC_FluctAnal_2_rsrangefit_50_1_logi_prop_r1}}
+#' @seealso \code{\link{FluctAnal_prop_r1}}
 #' @references B.D. Fulcher and N.S. Jones. hctsa: A computational framework for automated time-series phenotyping using massive feature extraction. Cell Systems 5, 527 (2017).
 #' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
 #' @author Yangzhuoran Yang
 #' @export
-hctsa_scal <- function(x){
-  output <- c(SC_FluctAnal_prop_r1 = SC_FluctAnal_2_rsrangefit_50_1_logi_prop_r1(x))
+scal_features <- function(x){
+  output <- c(FluctAnal_prop_r1 = FluctAnal_prop_r1(x))
   return(output)
 }
 
 # autocorr ----------------------------------------------------------------
 
 
+# CO_Embed2_Basic_tau_incircle_1
+# CO_Embed2_Basic_tau_incircle_1
 #' Points inside a given circular boundary in a 2-d embedding space from software package \code{hctsa}
 #'
 #' The time lag is set to the first zero crossing of the autocorrelation function.
@@ -166,12 +168,12 @@ hctsa_scal <- function(x){
 #' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
 #' @author Yangzhuoran Yang
 #' @export
-CO_Embed2_Basic_tau_incircle <- function(y, boundary = NULL){
+Embed2_incircle <- function(y, boundary = NULL){
   if(is.null(boundary)){
-    warning("`CO_Embed2_Basic_tau_incircle()` using `boundary = 1`. Set value with `boundary`.")
+    warning("`Embed2_incircle()` using `boundary = 1`. Set value with `boundary`.")
     boundary <- 1
   }
-  tau <- CO_FirstZero_ac(y)
+  tau <- FirstZero_ac(y)
   xt <- y[1:(length(y)-tau)]# part of the time series
   xtp <- y[(1+tau):length(y)]# time-lagged time series
   N <- length(y) - tau# Length of each time series subsegment
@@ -180,6 +182,7 @@ CO_Embed2_Basic_tau_incircle <- function(y, boundary = NULL){
   return(sum(xtp^2+xt^2 < boundary)/N)
 }
 
+# CO_FirstZero_ac
 #' The first zero crossing of the autocorrelation function from software package \code{hctsa}
 #' 
 #' Search up to a maximum of the length of the time series
@@ -189,7 +192,7 @@ CO_Embed2_Basic_tau_incircle <- function(y, boundary = NULL){
 #' @references B.D. Fulcher and N.S. Jones. hctsa: A computational framework for automated time-series phenotyping using massive feature extraction. Cell Systems 5, 527 (2017).
 #' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
 #' @author Yangzhuoran Yang
-CO_FirstZero_ac <- function(y){
+FirstZero_ac <- function(y){
   N <- length(y)
   corrs <- acf(y, N-1, plot=FALSE)$acf[-1]
   for(tau in 1:(N-1)){
@@ -198,6 +201,7 @@ CO_FirstZero_ac <- function(y){
   return(N) # If haven't left yet, set output to sample size
 }
 
+# AC_9
 #' Autocorrelation at lag 9
 #' 
 #' @param y the input time series
@@ -210,7 +214,7 @@ AC_9 <- function(y){
 }
 
 
-
+# CO_FirstMin_ac
 #' Time of first minimum in the autocorrelation function from software package \code{hctsa}
 #' 
 #'
@@ -220,9 +224,9 @@ AC_9 <- function(y){
 #' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
 #' @author Yangzhuoran Yang
 #' @examples
-#' CO_FirstMin_ac(WWWusage)
+#' FirstMin_ac(WWWusage)
 #' @export
-CO_FirstMin_ac <- function(x){
+FirstMin_ac <- function(x){
   # hctsa uses autocorr in MatLab to calculate autocorrelation
   N <- length(x)
   # getting acf for all lags
@@ -243,7 +247,7 @@ CO_FirstMin_ac <- function(x){
   return(N-1)
 }
 
-
+# CO_trev_1_num
 #' Normalized nonlinear autocorrelation, the numerator of the trev function of a time series from software package \code{hctsa}
 #' 
 #' Calculates the numerator of the trev function, a normalized nonlinear autocorrelation,
@@ -256,14 +260,15 @@ CO_FirstMin_ac <- function(x){
 #' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
 #' @author Yangzhuoran Yang
 #' @examples
-#' CO_trev_1_num(WWWusage)
+#' trev_num(WWWusage)
 #' @export
-CO_trev_1_num <- function(y){
+trev_num <- function(y){
   yn <-  y[1:(length(y)-1)]
   yn1  <-  y[2:length(y)]
   mean((yn1-yn)^3)
 }
 
+# SB_MotifTwo_mean_hhh
 #' Local motifs in a binary symbolization of the time series from software package \code{hctsa}
 #'
 #'
@@ -276,10 +281,10 @@ CO_trev_1_num <- function(y){
 #' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
 #' @author Yangzhuoran Yang
 #' @examples
-#' SB_MotifTwo_mean_hhh(WWWusage)
+#' MotifTwo_entro3(WWWusage)
 #' @export
 #'
-SB_MotifTwo_mean_hhh <- function(y){
+MotifTwo_entro3 <- function(y){
   yBin <- BF_Binarize_mean(y)
   N <- length(yBin)
   if(N<5) warning('Time series too short')
@@ -346,7 +351,7 @@ f_entropy <- function(x){
 }
 
 
-
+# PH_Walker_prop_01_sw_propcross
 #' Simulates a hypothetical walker moving through the time domain from software package \code{hctsa}
 #' 
 #' The hypothetical particle (or 'walker') moves in response to values of the
@@ -363,7 +368,7 @@ f_entropy <- function(x){
 #' @export
 #' 
 #' 
-PH_Walker_prop_01_sw_propcross <- function(y){
+Walker_propcross <- function(y){
   N <- length(y)
   p <- 0.1
   #   walker starts at zero and narrows the gap between its position
@@ -381,6 +386,8 @@ PH_Walker_prop_01_sw_propcross <- function(y){
 # pred --------------------------------------------------------------------
 
 
+# FC_LocalSimple_mean1_taures
+# FC_LocalSimple_lfit_taures
 #' The first zero crossing of the autocorrelation function of the residuals from Simple local time-series forecasting from software package \code{hctsa}
 #' 
 #' Simple predictors using the past trainLength values of the time series to
@@ -394,15 +401,22 @@ PH_Walker_prop_01_sw_propcross <- function(y){
 #' Default to 1 when using method \code{mean} and 3 when using method \code{lfit}.
 #' @return The first zero crossing of the autocorrelation function of the residuals
 #' @export
-FC_LocalSimple_taures <- function(y, forecastMeth = "mean", trainLength = NULL ){
-  if(!forecastMeth %in% c("mean", "lfit")) stop("`FC_LocalSimple_taures`:Unknown forecasting method")
+LocalSimple_taures <- function(y, forecastMeth = "mean", trainLength = NULL ){
+  if(!forecastMeth %in% c("mean", "lfit")) stop("`LocalSimple_taures`:Unknown forecasting method")
   if(forecastMeth == "mean" && is.null(trainLength)) trainLength <- 1 
-  if(forecastMeth == "lfit" && is.null(trainLength)) trainLength <- 3
-  lp <- trainLength
-  
+  if(forecastMeth == "lfit" && is.null(trainLength)) trainLength <- "ac"
+    
+  if("ac" %in% trainLength) {
+    lp <- FirstZero_ac(y)
+    } else {
+    lp <- trainLength
+  }
+    
+    
+    
   N <- length(y)
   evalr <-  (lp+1):N
-  if( length(evalr)==0)  stop('Time series too short for forecasting in `FC_LocalSimple_taures`')
+  if( length(evalr)==0)  stop('Time series too short for forecasting in `LocalSimple_taures`')
   
   res <- numeric(length(evalr))
   if(forecastMeth == "mean"){
@@ -420,12 +434,12 @@ FC_LocalSimple_taures <- function(y, forecastMeth = "mean", trainLength = NULL )
       #       res(i) = polyval(p,lp+1) - y(evalr(i)); % prediction - value
     }
   }
-  out.taures <- CO_FirstZero_ac(res)
+  out.taures <- FirstZero_ac(res)
   return(out.taures)
 }
 
 
-
+# EN_SampEn_5_03_sampen1
 #' First Sample Entropy of a time series from software package \code{hctsa}
 #' 
 #' Modified from the Ben Fulcher's \code{EN_SampEn} which uses code from PhysioNet.
@@ -445,7 +459,7 @@ FC_LocalSimple_taures <- function(y, forecastMeth = "mean", trainLength = NULL )
 #' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
 #' @author Yangzhuoran Yang
 #' @export
-EN_SampEn_5_03_sampen1 <- function(y){
+SampEn_first <- function(y){
   M <- 5
   r <- 0.3
   sampEn = PN_sampenc(y,M+1,r)
@@ -512,7 +526,7 @@ PN_sampenc <- function(y,M,r){
 
 
 
-
+# SY_StdNthDer_1
 #' Standard deviation of the first derivative of the time series from software package \code{hctsa}
 #'
 #' Modified from \code{SY_StdNthDer} in \code{kctsa}. Based on an idea by Vladimir Vassilevsky.
@@ -524,12 +538,16 @@ PN_sampenc <- function(y,M,r){
 #' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
 #' @author Yangzhuoran Yang
 #' @export
-SY_StdNthDer_1 <- function(y){
+Std1stDer <- function(y){
   if(length(y)<2) stop("Time series is too short to compute differences")
   yd <- diff(y)
   return(sd(yd))
 }
 
+
+
+# SY_SpreadRandomLocal_50_100_meantaul
+# SY_SpreadRandomLocal_ac2_100_meantaul
 #'  Bootstrap-based stationarity measure from software package \code{hctsa}
 #' 
 #' 100 time-series segments of length \code{l} are selected at random from the time series and 
@@ -543,8 +561,8 @@ SY_StdNthDer_1 <- function(y){
 #' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
 #' @author Yangzhuoran Yang
 #' @export
-SY_SpreadRandomLocal_100_meantaul <- function(y, l =50){
-  if(is.character(l) && "ac2" %in% l) l <- 2*CO_FirstZero_ac(y)
+SpreadRandomLocal_meantaul <- function(y, l =50){
+  if(is.character(l) && "ac2" %in% l) l <- 2*FirstZero_ac(y)
   if(!is.numeric(l)) stop("Unknown specifier `l`")
   numSegs  <-  100
   N <- length(y)
@@ -559,7 +577,7 @@ SY_SpreadRandomLocal_100_meantaul <- function(y, l =50){
     ifh <- ist+l-1 # finish index
     rs <- ist:ifh # sample range (from starting to finishing index)
     ysub <- y[rs] # subsection of the time series
-    taul <- CO_FirstZero_ac(ysub)
+    taul <- FirstZero_ac(ysub)
     qs[j] <- taul
   }
   return(mean(qs,na.rm = TRUE))
@@ -569,7 +587,7 @@ SY_SpreadRandomLocal_100_meantaul <- function(y, l =50){
 
 # distribution ------------------------------------------------------------
 
-
+# DN_HistogramMode_10
 #' Mode of a data vector from software package \code{hctsa}
 #' 
 #' Measures the mode of the data vector using histograms with a given number of bins as suggestion.
@@ -582,7 +600,7 @@ SY_SpreadRandomLocal_100_meantaul <- function(y, l =50){
 #' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
 #' @author Yangzhuoran Yang
 #' @export
-DN_HistogramMode <- function(y, numBins = 10){
+HistogramMode <- function(y, numBins = 10){
   
   # Compute the histogram from the data:
   if (is.numeric(numBins)){
@@ -602,7 +620,7 @@ DN_HistogramMode <- function(y, numBins = 10){
 
 
 
-
+# DN_OutlierInclude_abs_001_mdrmd
 #' How median depend on distributional outliers from software package \code{hctsa}
 #'
 #' Measures meidan as more and
@@ -627,14 +645,17 @@ DN_HistogramMode <- function(y, numBins = 10){
 #' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
 #' @author Yangzhuoran Yang
 #' @export
-DN_OutlierInclude_abs_001_mdrmd <- function(y){
+OutlierInclude_mdrmd <- function(y){
   if(length(unique(y))==1) stop("The time series is a constant!")
-  if(!BF_iszscored(y)) {
+  if(!iszscored(y)) {
     warning('The input time series should be z-scored')
-    isd <- sd(y) # Modified to fit the 0.01*sigma increment in discription
-  } else isd <- 1
+    # isd <- sd(y) # Modified to fit the 0.01*sigma increment in discription
+  } else {
+    # isd <- 1
+    }
   N <- length(y)
-  inc <- 0.01*isd
+  # inc <- 0.01*isd
+  inc <- 0.01
   thr <- seq(from = 0, to = max(abs(y)), by = inc)
   tot <- N
   if(length(thr) == 0) stop("peculiar time series")
@@ -671,6 +692,8 @@ DN_OutlierInclude_abs_001_mdrmd <- function(y){
   return(out.mdrmd)
 }
 
+
+# BF_iszscored
 #' Crude check for whether a data vector is (eps-close to being) z-scored from software package \code{hctsa}
 #' 
 #' Used for displaying warning messages for functions that require z-scored inputs.
@@ -681,7 +704,7 @@ DN_OutlierInclude_abs_001_mdrmd <- function(y){
 #' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
 #' @author Yangzhuoran Yang
 #' @export
-BF_iszscored <- function(x){
+iszscored <- function(x){
   numericThreshold <- 100*.Machine$double.eps
   iszscored <- ((abs(mean(x)) < numericThreshold) && (abs(sd(x)-1) < numericThreshold))
   return(iszscored)
@@ -691,6 +714,7 @@ BF_iszscored <- function(x){
 # scaling ----------------------------------------------------------------
 
 
+# SC_FluctAnal_2_rsrangefit_50_1_logi_prop_r1
 #' Implements fluctuation analysis from software package \code{hctsa}
 #' 
 #' Fits a polynomial of order 1 and then returns the
@@ -703,7 +727,7 @@ BF_iszscored <- function(x){
 #' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
 #' @author Yangzhuoran Yang
 #' @export
-SC_FluctAnal_2_rsrangefit_50_1_logi_prop_r1 <- function(x){
+FluctAnal_prop_r1 <- function(x){
   q <- 2
   tauStep <- 50
   k <- 1

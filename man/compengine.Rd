@@ -26,15 +26,15 @@ B.D. Fulcher and N.S. Jones. hctsa: A computational framework for automated time
 B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
 }
 \seealso{
-\code{\link{hctsa_autocorr}}
+\code{\link{autocorr_features}}
 
-\code{\link{hctsa_pred}}
+\code{\link{pred_features}}
 
-\code{\link{hctsa_station}}
+\code{\link{station_features}}
 
-\code{\link{hctsa_dist}}
+\code{\link{dist_features}}
 
-\code{\link{hctsa_scal}}
+\code{\link{scal_features}}
 }
 \author{
 Yangzhuoran Yang
