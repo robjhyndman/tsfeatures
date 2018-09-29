@@ -15,8 +15,7 @@ median  of the median of range indices
 \description{
 Measures meidan as more and
 more outliers are included in the calculation according to a specified rule,
-of outliers being furthest from the mean, greatest positive, or negative
-deviations.
+of outliers being furthest from the mean.
 }
 \details{
 The threshold for including time-series data points in the analysis increases

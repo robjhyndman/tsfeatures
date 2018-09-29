@@ -1,0 +1,526 @@
+---
+title: "Introduction to tsfeatures package"
+author: "Yangzhuoran Yang"
+date: "`r Sys.Date()`"
+output: 
+  rmarkdown::html_vignette:
+    toc: true
+    toc_depth: 3
+vignette: >
+  %\VignetteIndexEntry{Introduction to tsfeatures package}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>", 
+  warning = FALSE, 
+  fig.align = "center"
+)
+```
+
+# tsfeatures
+
+The R package *tsfeatures* provides methods for extracting various features from time series data.
+
+## Installation
+
+The **stable** version on R CRAN is coming soon.
+
+You can install the **development** version from [Github](https://github.com/robjhyndman/tsfeatures) with:
+
+```{r gh-installation, eval = FALSE}
+# install.packages("devtools")
+devtools::install_github("robjhyndman/tsfeatures")
+```
+
+## Usage
+
+The function `tsfeatures` computes a matrix of time series features from a list of time series.  
+
+```{r}
+library(tsfeatures)
+mylist <- list(sunspot.year, WWWusage, AirPassengers, USAccDeaths)
+tsfeatures(mylist)
+```
+
+The default function that `tsfeatures` uses to compute features are `frequency`, `stl_features`, `entropy` and `acf_features`. Each of them can produce one or more than one features. Functions from `tsfeatures` package and existing functions from other installed packages may be used. Detailed information of features included in `tsfeatures` package are described below.  
+
+```{r}
+# Function from outside of tsfeatures package being used
+is.monthly <- function(x){
+  frequency(x) == 12
+}
+tsfeatures(mylist, features = "is.monthly")
+```
+
+The function `embedding` provides various methods for embedding a distance matrix into a low-dimensional matrix. See more details in the help page `?embedding`.  
+
+```{r}
+mylist <- list(sunspot.year, WWWusage, AirPassengers, USAccDeaths)
+fmat <- tsfeatures(mylist)
+z <- embedding(dist(fmat), perplexity=1)
+plot(z)
+```
+
+
+
+
+## List of features
+
+|FEATURES||||
+|:-------|:-------|:-------|:-------|
+|[acf_features](#acf_features)      |[max_kl_shift](#max_shift)       |[compengine](#compengine)                |[OutlierInclude_mdrmd](#OutlierInclude_mdrmd)|
+|[arch_stat](#arch_stat)            |[max_level_shift](#max_shift)    |[AC_9](#AC_9)                            |[OutlierInclude_mdrmd](#OutlierInclude_mdrmd)|
+|[crossing_points](#crossing_points)|[max_var_shift](#max_shift)      |[Binarize_mean](#Binarize_mean)          |[sampenc](#sampen)|
+|[entropy](#entropy)                |[nonlinearity](#nonlinearity)    |[Embed2_incircle](#Embed2_incircle)      |[SampEn_first](#sampen)|
+|[flat_spots](#flat_spots)          |[pacf_features](#pacf_features)  |[FirstMin_ac](#FirstMin_ac)              |[SpreadRandomLocal_meantaul](#SpreadRandomLocal_meantaul)|
+|[heterogeneity](#heterogeneity)    |[stability](#lumpiness_stability)|[FirstZero_ac](#FirstZero_ac)            |[Std1stDer](#Std1stDer)|
+|[holt_parameters](#holt_hw)        |[stl_features](#stl_features)    |[FluctAnal_prop_r1](#FluctAnal_prop_r1)  |[trev_num](#trev_num)|
+|[hurst](#hurst)                    |[unitroot_kpss](#uniroot)        |[HistogramMode](#HistogramMode)          |[Walker_propcross](#Walker_propcross)|
+|[hw_parameters](#holt_hw)          |[unitroot_pp](#uniroot)          |[LocalSimple_taures](#LocalSimple_taures)|  |
+|[lumpiness](#lumpiness_stability)  |                                  |[MotifTwo_entro3](#MotifTwo_entro3)      |  |
+ 
+
+
+
+### entropy {#entropy}
+
+The spectral `entropy` is the Shannon entropy  
+
+$$-\int^\pi_{-\pi}\hat{f}(\lambda)\log\hat{f}(\lambda) d\lambda$$
+
+where $\hat{f}(\lambda)$ is an estimate of the spectral density of the data. This measures the “forecastability” of a time series, where low values indicate a high signal-to-noise ratio, and large values occur when a series is difﬁcult to forecast.  
+
+```{r}
+entropy(AirPassengers)
+```
+
+
+### lumpiness and stability {#lumpiness_stability}
+
+`Stability` and `lumpiness` are two time series features based on tiled (non-overlapping) windows. Means or variances are produced for all tiled windows. Then `stability` is the variance of the means, while `lumpiness` is the variance of the variances.  
+
+```{r}
+stability(AirPassengers)
+lumpiness(AirPassengers)
+```
+
+
+### max_level_shift, max_var_shift and max_kl_shift {#max_shift}
+
+These three features compute features of a time series based on sliding (overlapping) windows.  
+`max_level_shift` ﬁnds the largest mean shift between two consecutive windows.  
+`max_var-shift` ﬁnds the largest variance shift between two consecutive windows.  
+`max_kl_shift` ﬁnds the largest shift in Kulback-Leibler divergence between two consecutive windows.  
+Each feature returns a vector of 2 values: the size of the shift, and the time index of the shift.  
+
+```{r}
+max_level_shift(AirPassengers)
+max_var_shift(AirPassengers)
+max_kl_shift(AirPassengers)
+```
+
+### crossing_points {#crossing_points}
+
+`crossing points` are deﬁned as the number of times a time series crosses the mean line.   
+
+```{r}
+crossing_points(AirPassengers)
+```
+
+### flat_spots {#flat_spots}
+
+`flat_spots` are computed by dividing the sample space of a time series into ten equal-sized intervals, and computing the maximum run length within any single interval.  
+
+```{r}
+flat_spots(AirPassengers)
+```
+
+### hurst {#hurst}
+
+We use a measure of the long-term memory of a time series (`hurst`), computed as 0.5 plus the maximum likelihood estimate of the fractional differencing order $d$ given by Haslett & Raftery ([1989](#ref)). We add 0.5 to make it consistent with the Hurst coefﬁcient. Note that the fractal dimension can be estimated as $D = 2 - \text{hurst}$.  
+
+```{r}
+hurst(AirPassengers)
+```
+
+
+
+### unitroot_kpss and unitroot_pp {#uniroot}
+
+`unitroot_kpss` is a vector comprising the statistic for the KPSS unit root test with linear trend and lag one, and `unitroot_pp` is the statistic for the “Z-alpha” version of PP unit root test with constant trend and lag one.
+
+
+```{r}
+unitroot_kpss(AirPassengers)
+unitroot_pp(AirPassengers)
+```
+
+
+### stl_features {#stl_features}
+
+
+`stl_features` Computes various measures of trend and seasonality of a time series based on an STL decomposition.  The `mstl` function is used to do the decomposition.
+
+`nperiods` is the number of seasonal periods in the data (determined by the frequency of observation, not the observations themselves) and set to 1 for non-seasonal data. `seasonal_period` is a vector of seasonal periods and set to 1 for non-seasonal data. 
+
+The size and location of the peaks and troughs in the seasonal component are used to compute strength of peaks (`peak`) and strength of trough (`trough`).  
+
+The rest of the features are modifications of features used in Kang, Hyndman & Smith-Miles ([2017](#ref)). We extend the STL decomposition approach (Clevelandetal.[1990](#ref)) to handle multiple seasonalities. Thus, the decomposition contains a trend, up to $M$ seasonal components and a remainder component:  
+
+$$x_t=f_t+s_{1,t}+\cdots+s_{M.t}+e_t$$  
+
+where $f_t$ is the smoothed trend component, $s_{i,t}$ is the $i$th seasonal component and $e_t$ is a remainder component. The components are estimated iteratively. Let $s^{(k)}_{i,t}$ be the estimate of $s_i,t$ at the $k$th iteration, with initial values given as $s^{(0)}_{i,t}=0$. The we apply an STL decomposition to $x_t-\sum^{j=1}_{j\neq1}{}^{^{M}}s^{k-1}_{j,t}$ to obtained updated estimates $s^{(k)}_{i,t}$ for $k=1,2,\ldots$. In practice, this converges quickly and only two iterations are required. To allow the procedure to be applied automatically, we set the seasonal window span for STL to be 21 in all cases. For a non-seasonal time series, we simply estimate $x_t=f_t+e_t$ where $f_t$ is computed using  Friedman’s “super smoother” (Friedman [1984](#ref)).  
+
+Strength of trend (`trend`) and strength of seasonality (`seasonal.strength`) are defined as  
+
+$$\text{trend}=1-\frac{\text{Var}(e_t)}{\text{Var}(f_t+e_t)}\quad \text{and}\quad \text{seasonal.strength}=1-\frac{\text{Var}(e_t)}{\text{Var}(s_{i,t}+e_t)}$$  
+If their values are less than 0, they are set to 0, while values greater than 1 are set to 1. For non-seasonal time series `seasonal.strength` is 0.  For seasonal time series, `seasonal.strength` is an M-vector, where M is the number of periods. This is analogous to the way the strength of trend and seasonality were deﬁned in Wang, Smith & Hyndman ([2006](#ref)), Hyndman, Wang & Laptev ([2015]#ref) and Kang, Hyndman & Smith-Miles ([2017]#ref).  
+
+`spike`  measures the “spikiness” of a time series, and is computed as the variance of the leave-one-out variances of the remainder component $e_t$.  
+ 
+`linearity` and `curvature` measures the linearity and curvature of a time series calculated based on the coefﬁcients of an orthogonal quadratic regression.  
+
+We compute the autocorrelation function of $e_t$, and `e_acf1` and `e_acf10` contain the ﬁrst autocorrelation coefﬁcient and the sum of the ﬁrst ten squared autocorrelation coefﬁcients.
+
+
+
+```{r}
+stl_features(AirPassengers)
+```
+
+
+### acf_features {#acf_features}
+
+We compute the autocorrelation function of the series, the differenced series, and the twicedifferenced series. `acf_features` produces a vector comprising the ﬁrst autocorrelation coefﬁcient in each case, and the sum of squares of the ﬁrst 10 autocorrelation coefﬁcients in each case. 
+
+```{r}
+acf_features(AirPassengers)
+```
+
+### pacf_features {#pacf_features}
+
+We compute the partial autocorrelation function of the series, the differenced series, and the second-order differenced series. Then `pacf_features` produces a vector comprising the sum of squares of the ﬁrst 5 partial autocorrelation coefﬁcients in each case. 
+
+```{r}
+pacf_features(AirPassengers)
+```
+
+### holt_parameters and hw_parameters {#holt_hw}
+
+`holt_parameters` Estimate the smoothing parameter for the level-alpha and the smoothing parameter for the trend-beta of Holt's linear trend method. `hw_parameters` considers additive seasonal trend: ets(A,A,A) model, returning a vector of 3 values: alpha, beta and gamma.  
+
+```{r}
+holt_parameters(AirPassengers)
+hw_parameters(AirPassengers)
+```
+
+
+### heterogeneity {#heterogeneity}
+
+The `heterogeneity` features measure the heterogeneity of the time series. 
+First, we pre-whiten the time series to remove the mean, trend, and autoregressive (AR) information (Barbour & Parker [2014](#ref)). Then we ﬁt a $GARCH(1,1)$ model to the pre-whitened time series, $x_t$, to measure for autoregressive conditional heteroskedasticity (ARCH) effects. The residuals from this model, $z_t$, are also measured for ARCH effects using a second $GARCH(1,1)$ model.  
+
+* `arch_acf` is the sum of squares of the ﬁrst 12 autocorrelations of $\{x^2_t\}$.  
+* `garch_acf` is the sum of squares of the ﬁrst 12 autocorrelations of $\{z^2_t\}$.  
+* `arch_r2` is the $R^2$ value of an AR model applied to $\{x^2_t\}$.  
+* `garch_r2` is the $R^2$ value of an AR model applied to $\{z^2_t\}$.  
+
+The statistics obtained from $\{x^2_t\}$ are the ARCH effects, while those from $\{z^2_t\}$ are the GARCH effects. Note that the two $R^2$ values are used in the Lagrange-multiplier test of Engle ([1982](#ref)), and the sum of squared autocorrelations are used in the Ljung-Box test proposed by Ljung & Box ([1978](#ref)).
+
+
+```{r}
+heterogeneity(AirPassengers)
+```
+
+
+
+### nonlinearity {#nonlinearity}  
+
+The `nonlinearity` coefficient is computed using a modification of the statistic used in Teräsvirta’s nonlinearity test. Teräsvirta’s test uses a statustuc $X^2=T\log(\text{SSE}1/\text{SSE}0)$ where SSE1 and SSE0 are the sum of squared residuals from a nonlinear and linear autorgression respectively. This is non-ergodic, so instead, we define it as $10X^2/T$ which will converge to a value indicating the extent of nonlinearity as $T\rightarrow\infty$. This takes large values when the series is nonlinear, and values around 0 when the series is linear.  
+
+```{r}
+nonlinearity(AirPassengers)
+```
+
+### arch_stat {#arch_stat}  
+
+`arch_stat` Computes a statistic based on the Lagrange Multiplier (LM) test of Engle ([1982](#ref)) for autoregressive conditional heteroscedasticity (ARCH). The statistic returned is the $R^2$ value of an autoregressive model of order specified as lags applied to $x^2$.  
+
+```{r}
+arch_stat(AirPassengers)
+```
+
+
+### compengine feature set {#compengine}
+
+`comengine` calculate the features that have been used in CompEngine database, using method introduced in sftware package `kctsa`.  
+
+The features involved can be grouped as autocorrelation, prediction, stationarity, distribution, and scaling, which can be computed using `autocorr_features`, `pred_features`, `station_features`, `dist_features`, and `scal_features`.  
+
+```{r}
+comp <- compengine(AirPassengers)
+knitr::kable(comp)
+```
+
+
+### Embed2_incircle {#Embed2_incircle} 
+
+`Embed2_incircle` gives proportion of points inside a given circular boundary in a 2-d embedding space.
+
+```{r}
+Embed2_incircle(AirPassengers, boundary = 1e5)
+```
+
+### AC_9 {#AC_9} 
+
+`AC_9` is just the autocorrelation at lag 9, included here for completion and consistency.  
+
+```{r}
+AC_9(AirPassengers)
+```
+
+### FirstMin_ac {#FirstMin_ac}  
+
+`FirstMin_ac` returns the time of first minimum in the autocorrelation function.  
+
+```{r}
+FirstMin_ac(AirPassengers)
+```
+
+### FirstZero_ac {#FirstZero_ac}
+
+`FirstZero_ac` returns the first zero crossing of the autocorrelation function.  
+
+```{r}
+FirstZero_ac(AirPassengers)
+```
+
+### trev_num  {#trev_num}
+
+`trev_num` returens the numerator of the trev function of a time series, a normalized nonlinear autocorrelation. The time lag is set to 1.  
+
+```{r}
+trev_num(AirPassengers)
+```
+
+### MotifTwo_entro3 {#MotifTwo_entro3}
+
+Local motifs in a binary symbolization of the time series. Coarse-graining is performed. Time-series values above its mean are given 1, and those below the mean are 0. `MotifTwo_entro3` returns the entropie of words in the binary alphabet of length 3.  
+
+```{r}
+MotifTwo_entro3(AirPassengers)
+```
+
+### Binarize_mean {#Binarize_mean}
+
+`Binarize_mean` converts an input vector into a binarized version. Time-series values above its mean are given 1, and those below the mean are 0.  
+
+```{r}
+str(Binarize_mean(AirPassengers))
+```
+
+### Walker_propcross {#Walker_propcross}
+
+Simulates a hypothetical walker moving through the time domain. The hypothetical particle (or 'walker') moves in response to values of the time series at each point. The walker narrows the gap between its value and that of the time series by 10. `Walker_propcross` returns the fraction of time series length that walker crosses time series.  
+
+```{r}
+Walker_propcross(AirPassengers)
+```
+
+### LocalSimple_taures {#LocalSimple_taures}
+
+Simple predictors using the past trainLength values of the time series to predict its next value. `LocalSimple_taures` returns the first zero crossing of the autocorrelation function of the residuals from this Simple local time-series forecasting.  
+
+```{r}
+LocalSimple_taures(AirPassengers)
+```
+
+### SampEn_first and sampenc {#sampen}
+
+`SampEn_first` returns the first Sample Entropy of a time series where the embedding dimension is set to 5 and the threshold is set to 0.3. `sampenc` is the underlying function to calculate the first sample entropy with optional dimension and threshold settings.  
+
+```{r}
+SampEn_first(AirPassengers)
+sampenc(AirPassengers, M = 5, r = 0.3)
+```
+
+
+### Std1stDer {#Std1stDer}
+
+`Std1stDer` returns the standard deviation of the first derivative of the time series.
+
+```{r}
+Std1stDer(AirPassengers)
+```
+
+### SpreadRandomLocal_meantaul {#SpreadRandomLocal_meantaul}
+
+100 time-series segments of length l are selected at random from the time series and the mean of the first zero-crossings of the autocorrelation function in each segment is calculated using `SpreadRandomLocal_meantaul`.  
+
+```{r}
+SpreadRandomLocal_meantaul(AirPassengers)
+```
+
+### HistogramMode {#HistogramMode}
+
+`HistogramMode` measures the mode of the data vector using histograms with a given number of bins (default to 10) as suggestion.  
+
+```{r}
+HistogramMode(AirPassengers, numBins = 10)
+```
+
+### OutlierInclude_mdrmd {#OutlierInclude_mdrmd}
+
+`OutlierInclude_mdrmd` measures meidan as more and more outliers are included in the calculation according to a specified rule, of outliers being furthest from the mean. 
+
+The threshold for including time-series data points in the analysis increases from zero to the maximum deviation, in increments of 0.01*sigma (by default), where sigma is the standard deviation of the time series.  
+
+At each threshold, proportion of time series points included and median are calculated, and outputs from the algorithm measure how these statistical quantities change as more extreme points are included in the calculation.  
+
+`OutlierInclude_mdrmd` essentially returns the median of the median of range indices.  
+
+```{r}
+OutlierInclude_mdrmd(AirPassengers)
+```
+
+
+### FluctAnal_prop_r1 {#FluctAnal_prop_r1}  
+
+`FluctAnal_prop_r1` implements fluctuation analysis. It fits a polynomial of order 1 and then returns the range. The order of fluctuations is 2, corresponding to root mean square fluctuations.  
+
+```{r}
+FluctAnal_prop_r1(AirPassengers)
+```
+
+
+
+
+
+## Reproducing papers  
+
+
+
+### Hyndman, Wang and Laptev (ICDM 2015)
+
+Compute the features used in Hyndman, Wang & Laptev (ICDM 2015). Note that crossing_points, peak and trough are defined differently in the tsfeatures package than in the Hyndman et al (2015) paper. Other features are the same. Using the real data from the paper.  
+
+```{r yahoo}
+library(tsfeatures)
+library(tidyverse)
+library(anomalous)
+
+
+yahoo <- cbind(dat0, dat1, dat2, dat3)
+hwl <- bind_cols(
+         tsfeatures(yahoo,
+           c("acf_features","entropy","lumpiness",
+             "flat_spots","crossing_points")),
+         tsfeatures(yahoo,"stl_features", s.window='periodic', robust=TRUE),
+         tsfeatures(yahoo, "max_kl_shift", width=48),
+         tsfeatures(yahoo,
+           c("mean","var"), scale=FALSE, na.rm=TRUE),
+         tsfeatures(yahoo,
+           c("max_level_shift","max_var_shift"), trim=TRUE)) %>%
+  select(mean, var, x_acf1, trend, linearity, curvature, 
+         seasonal_strength, peak, trough,
+         entropy, lumpiness, spike, max_level_shift, max_var_shift, flat_spots,
+         crossing_points, max_kl_shift, time_kl_shift)
+```
+
+```{r yahoo2, dependson="yahoo"}
+# 2-d Feature space
+prcomp(na.omit(hwl), scale=TRUE)$x %>% 
+  as_tibble() %>%
+  ggplot(aes(x=PC1, y=PC2)) +
+    geom_point()
+```
+
+
+
+### Kang, Hyndman & Smith-Miles (IJF 2017)
+
+Compute the features used in Kang, Hyndman & Smith-Miles (IJF 2017).  
+Note that the trend and ACF1 are computed differently for non-seasonal data in the tsfeatures package than in the Kang et al (2017). `tsfeatures` uses `mstl` which uses `supsmu` for the trend calculation with non-seasonal data, whereas Kang et al used a penalized regression spline computed using `mgcv` instead.  Other features are the same.
+
+```{r ijf2017}
+library(tsfeatures)
+library(tidyverse)
+library(forecast)
+
+
+
+
+M3data <- purrr::map(Mcomp::M3, 
+  function(x){
+      tspx <- tsp(x$x)
+      ts(c(x$x,x$xx), start=tspx[1], frequency=tspx[3])
+  })
+khs_stl <- function(x,...)
+{
+  lambda <- BoxCox.lambda(x, lower=0, upper=1, method='loglik')
+  y <- BoxCox(x, lambda)
+  c(stl_features(y,s.window='periodic', robust=TRUE, ...), lambda=lambda)
+}
+khs <- bind_cols(
+  tsfeatures(M3data, c("frequency", "entropy")),
+  tsfeatures(M3data, "khs_stl", scale=FALSE)) %>% 
+  select(frequency, entropy, trend, seasonal_strength, e_acf1, lambda) %>%
+  replace_na(list(seasonal_strength=0)) %>%
+  rename(
+    Frequency = frequency,
+    Entropy = entropy,
+    Trend = trend,
+    Season = seasonal_strength,
+    ACF1 = e_acf1,
+    Lambda = lambda) %>%
+  mutate(Period = as.factor(Frequency))
+```
+
+```{r ijf2017graphs, dependson="ijf2017"}
+# Fig 1 of paper
+khs %>% 
+  select(Period, Entropy, Trend, Season, ACF1, Lambda) %>%
+  GGally::ggpairs()
+
+# 2-d Feature space (Top of Fig 2)
+prcomp(select(khs, -Period), scale=TRUE)$x %>%
+  as_tibble() %>%
+  bind_cols(Period=khs$Period) %>%
+  ggplot(aes(x=PC1, y=PC2)) +
+    geom_point(aes(col=Period))
+```
+
+
+
+## Resources  {#ref}
+
+[Hyndman, R. J., Wang, E., & Laptev, N. (2015, November). Large-scale unusual time series detection. In Data Mining Workshop (ICDMW), 2015 IEEE International Conference on (pp. 1616-1619). IEEE.](https://doi.org/10.1109/ICDMW.2015.104)
+
+[Kang, Y., Hyndman, R. J., & Li, F. (2018). Efficient generation of time series with diverse and controllable characteristics.](https://robjhyndman.com/publications/tsgeneration/)
+
+[Haslett, J., & Raftery, A. E. (1989). Space-time modelling with long-memory dependence: Assessing Ireland's wind power resource. Applied Statistics, 1-50.](https://doi.org/10.2307/2347679 )
+
+[Barbour, A. J., & Parker, R. L. (2014). psd: Adaptive, sine multitaper power spectral density estimation for R. Computers & Geosciences, 63, 1-8.](https://doi.org/10.1016/j.cageo.2013.09.015)  
+
+[Engle, R. F. (1982). Autoregressive conditional heteroscedasticity with estimates of the variance of United Kingdom inflation. Econometrica: Journal of the Econometric Society, 987-1007.](https://doi.org/10.2307/1912773)  
+
+[Ljung, G. M., & Box, G. E. (1978). On a measure of lack of fit in time series models. Biometrika, 65(2), 297-303.](https://doi.org/10.1093/biomet/65.2.297 )
+
+[Kang, Y., Hyndman, R. J., & Smith-Miles, K. (2017). Visualising forecasting algorithm performance using time series instance spaces. International Journal of Forecasting, 33(2), 345-358.](https://doi.org/10.1016/j.ijforecast.2016.09.004)
+
+Cleveland, R. B., Cleveland, W. S., McRae, J. E., & Terpenning, I. (1990). STL: A Seasonal-Trend Decomposition. Journal of Official Statistics, 6(1), 3-73.
+
+Friedman, JH (1984). _A variable span scatterplot smoother_. Technical Report 5. Laboratory for Computational Statistics, Stanford University.
+
+[Wang, X, KA Smith & RJ Hyndman (2006). Characteristic-based clustering for time series data. Data Mining and Knowledge Discovery 13(3), 335–364.](https://doi.org/10.1007/s10618-005-0039-x)
+
+[Kang, Y., Hyndman, R. J., & Smith-Miles, K. (2017). Visualising forecasting algorithm performance using time series instance spaces. International Journal of Forecasting, 33(2), 345-358.](https://doi.org/10.1016/j.ijforecast.2016.09.004)
+
+
+## License
+
+This package is free and open source software, licensed under GPL-3.

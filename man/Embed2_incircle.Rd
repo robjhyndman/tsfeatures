@@ -4,15 +4,18 @@
 \alias{Embed2_incircle}
 \title{Points inside a given circular boundary in a 2-d embedding space from software package \code{hctsa}}
 \usage{
-Embed2_incircle(y, boundary = NULL)
+Embed2_incircle(y, boundary = NULL, acfv = stats::acf(y, length(y) - 1,
+  plot = FALSE))
 }
 \arguments{
 \item{y}{the input time series}
 
 \item{boundary}{the given circular boundary, setting to 1 or 2 in CompEngine. Default to 1.}
+
+\item{acfv}{vector of autocorrelation, if exist, used to avoid repeated computation.}
 }
 \value{
-Points inside a given circular boundary
+the proportion of points inside a given circular boundary
 }
 \description{
 The time lag is set to the first zero crossing of the autocorrelation function.

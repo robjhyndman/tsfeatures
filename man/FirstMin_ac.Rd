@@ -4,10 +4,12 @@
 \alias{FirstMin_ac}
 \title{Time of first minimum in the autocorrelation function from software package \code{hctsa}}
 \usage{
-FirstMin_ac(x)
+FirstMin_ac(x, acfv = stats::acf(x, lag.max = N - 1, plot = FALSE))
 }
 \arguments{
 \item{x}{the input time series}
+
+\item{acfv}{vector of autocorrelation, if exist, used to avoid repeated computation.}
 }
 \value{
 The lag of the first minimum

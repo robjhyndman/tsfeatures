@@ -2,18 +2,20 @@
 % Please edit documentation in R/compengine.R
 \name{AC_9}
 \alias{AC_9}
-\title{Autocorrelation at lag 9}
+\title{Autocorrelation at lag 9. Included for completion and consistency.}
 \usage{
-AC_9(y)
+AC_9(y, acfv = stats::acf(y, 9, plot = FALSE))
 }
 \arguments{
 \item{y}{the input time series}
+
+\item{acfv}{vector of autocorrelation, if exist, used to avoid repeated computation.}
 }
 \value{
 autocorrelation at lag 9
 }
 \description{
-Autocorrelation at lag 9
+Autocorrelation at lag 9. Included for completion and consistency.
 }
 \references{
 B.D. Fulcher and N.S. Jones. hctsa: A computational framework for automated time-series phenotyping using massive feature extraction. Cell Systems 5, 527 (2017).

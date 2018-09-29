@@ -49,10 +49,11 @@ compengine <- function(x){
 #' @author Yangzhuoran Yang
 #' @export
 autocorr_features <- function(x){
-  output <- c(Embed2_incircle_1 = Embed2_incircle(x,1),
-              Embed2_incircle_2 = Embed2_incircle(x,2),
-              AC_9 = AC_9(x),
-              FirstMin_ac = FirstMin_ac(x),
+  acfv <- stats::acf(x, length(x)-1, plot = FALSE)
+  output <- c(Embed2_incircle_1 = Embed2_incircle(x,1, acfv = acfv),
+              Embed2_incircle_2 = Embed2_incircle(x,2, acfv = acfv),
+              AC_9 = AC_9(x, acfv),
+              FirstMin_ac = FirstMin_ac(x, acfv),
               trev_num = trev_num(x),
               MotifTwo_entro3 = MotifTwo_entro3(x), 
               Walker_propcross = Walker_propcross(x))
@@ -163,17 +164,18 @@ scal_features <- function(x){
 #'
 #' @param y the input time series
 #' @param boundary the given circular boundary, setting to 1 or 2 in CompEngine. Default to 1.
-#' @return Points inside a given circular boundary
+#' @param acfv vector of autocorrelation, if exist, used to avoid repeated computation.
+#' @return the proportion of points inside a given circular boundary
 #' @references B.D. Fulcher and N.S. Jones. hctsa: A computational framework for automated time-series phenotyping using massive feature extraction. Cell Systems 5, 527 (2017).
 #' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
 #' @author Yangzhuoran Yang
 #' @export
-Embed2_incircle <- function(y, boundary = NULL){
+Embed2_incircle <- function(y, boundary = NULL, acfv = stats::acf(y, length(y)-1, plot = FALSE)){
   if(is.null(boundary)){
     warning("`Embed2_incircle()` using `boundary = 1`. Set value with `boundary`.")
     boundary <- 1
   }
-  tau <- FirstZero_ac(y)
+  tau <- FirstZero_ac(y, acfv)
   xt <- y[1:(length(y)-tau)]# part of the time series
   xtp <- y[(1+tau):length(y)]# time-lagged time series
   N <- length(y) - tau# Length of each time series subsegment
@@ -188,13 +190,15 @@ Embed2_incircle <- function(y, boundary = NULL){
 #' Search up to a maximum of the length of the time series
 #' 
 #' @param y the input time series
+#' @param acfv vector of autocorrelation, if exist, used to avoid repeated computation.
 #' @return The first zero crossing of the autocorrelation function
 #' @references B.D. Fulcher and N.S. Jones. hctsa: A computational framework for automated time-series phenotyping using massive feature extraction. Cell Systems 5, 527 (2017).
 #' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
 #' @author Yangzhuoran Yang
-FirstZero_ac <- function(y){
+#' @export
+FirstZero_ac <- function(y, acfv = stats::acf(y, N-1, plot=FALSE)){
   N <- length(y)
-  corrs <- acf(y, N-1, plot=FALSE)$acf[-1]
+  corrs <- acfv$acf[-1]
   for(tau in 1:(N-1)){
     if(corrs[tau]<0) return(tau) # we know it starts 1, so first negative will be the zero-crossing
   }
@@ -202,15 +206,17 @@ FirstZero_ac <- function(y){
 }
 
 # AC_9
-#' Autocorrelation at lag 9
+#' Autocorrelation at lag 9. Included for completion and consistency.  
 #' 
 #' @param y the input time series
+#' @param acfv vector of autocorrelation, if exist, used to avoid repeated computation.
 #' @return autocorrelation at lag 9
 #' @references B.D. Fulcher and N.S. Jones. hctsa: A computational framework for automated time-series phenotyping using massive feature extraction. Cell Systems 5, 527 (2017).
 #' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
 #' @author Yangzhuoran Yang
-AC_9 <- function(y){
-  acf(y, 9, plot = FALSE)$acf[10]
+#' @export 
+AC_9 <- function(y, acfv = stats::acf(y, 9, plot = FALSE)){
+  acfv$acf[10]
 }
 
 
@@ -219,6 +225,7 @@ AC_9 <- function(y){
 #' 
 #'
 #' @param x the input time series
+#' @param acfv vector of autocorrelation, if exist, used to avoid repeated computation.
 #' @return The lag of the first minimum
 #' @references B.D. Fulcher and N.S. Jones. hctsa: A computational framework for automated time-series phenotyping using massive feature extraction. Cell Systems 5, 527 (2017).
 #' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
@@ -226,13 +233,13 @@ AC_9 <- function(y){
 #' @examples
 #' FirstMin_ac(WWWusage)
 #' @export
-FirstMin_ac <- function(x){
+FirstMin_ac <- function(x, acfv = stats::acf(x,lag.max = N-1, plot = FALSE)){
   # hctsa uses autocorr in MatLab to calculate autocorrelation
   N <- length(x)
   # getting acf for all lags
   # possible delay when sample size is too big 
   autoCorr <- numeric(N-1)
-  autoCorr[1:N-1] <- stats::acf(x,lag.max = N-1, plot = FALSE)$acf[-1]
+  autoCorr[1:N-1] <- acfv$acf[-1]
   for(i in 1:length(autoCorr)){
     if(is.na(autoCorr[i])){
       warning("No minimum was found.")
@@ -285,7 +292,7 @@ trev_num <- function(y){
 #' @export
 #'
 MotifTwo_entro3 <- function(y){
-  yBin <- BF_Binarize_mean(y)
+  yBin <- Binarize_mean(y)
   N <- length(yBin)
   if(N<5) warning('Time series too short')
   
@@ -327,7 +334,7 @@ MotifTwo_entro3 <- function(y){
   return(out.hhh)
 }
 
-
+# BF_BF_Binarize_mean
 #' Converts an input vector into a binarized version from software package \code{hctsa}
 #' 
 #' 
@@ -338,7 +345,7 @@ MotifTwo_entro3 <- function(y){
 #' @author Yangzhuoran Yang
 #' @export
 
-BF_Binarize_mean <- function(y){
+Binarize_mean <- function(y){
   y <- y-mean(y)
   Y <-  numeric(length(y))
   Y[y > 0] <-  1
@@ -462,13 +469,13 @@ LocalSimple_taures <- function(y, forecastMeth = "mean", trainLength = NULL ){
 SampEn_first <- function(y){
   M <- 5
   r <- 0.3
-  sampEn = PN_sampenc(y,M+1,r)
+  sampEn = sampenc(y,M+1,r)
   return(sampEn)
 }
 
 
 
-
+# PN_sampenc
 #' Sample Entropy from software package \code{hctsa}
 #' 
 #' Modified from the Ben Fulcher version of original code sampenc.m from
@@ -477,13 +484,18 @@ SampEn_first <- function(y){
 #' Code by DK Lake (dlake@virginia.edu), JR Moorman and Cao Hanqing.
 #' 
 #' 
+#' @param y the input time series
+#' @param M embedding dimension
+#' @param r threshold
+#' 
 #' @references cf. "Physiological time-series analysis using approximate entropy and sample
 #' entropy", J. S. Richman and J. R. Moorman, Am. J. Physiol. Heart Circ.
 #' Physiol., 278(6) H2039 (2000)
 #' @references B.D. Fulcher and N.S. Jones. hctsa: A computational framework for automated time-series phenotyping using massive feature extraction. Cell Systems 5, 527 (2017).
 #' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
 #' @author Yangzhuoran Yang
-PN_sampenc <- function(y,M,r){
+#' @export
+sampenc <- function(y,M = 6,r = 0.3){
   N <- length(y)
   lastrun <- numeric(N) #zeros(1,N)
   run <- numeric(N) #zeros(1,N)
@@ -625,8 +637,7 @@ HistogramMode <- function(y, numBins = 10){
 #'
 #' Measures meidan as more and
 #' more outliers are included in the calculation according to a specified rule,
-#' of outliers being furthest from the mean, greatest positive, or negative
-#' deviations.
+#' of outliers being furthest from the mean.
 #'
 #' The threshold for including time-series data points in the analysis increases
 #' from zero to the maximum deviation, in increments of 0.01*sigma (by default), 

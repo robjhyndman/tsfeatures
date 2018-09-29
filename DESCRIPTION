@@ -35,4 +35,7 @@ ByteCompile: true
 URL: https://github.com/robjhyndman/tsfeatures/
 BugReports: https://github.com/robjhyndman/tsfeatures/issues/
 RoxygenNote: 6.1.0
-Suggests: testthat
+Suggests: testthat,
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

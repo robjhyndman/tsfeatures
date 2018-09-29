@@ -4,10 +4,12 @@
 \alias{FirstZero_ac}
 \title{The first zero crossing of the autocorrelation function from software package \code{hctsa}}
 \usage{
-FirstZero_ac(y)
+FirstZero_ac(y, acfv = stats::acf(y, N - 1, plot = FALSE))
 }
 \arguments{
 \item{y}{the input time series}
+
+\item{acfv}{vector of autocorrelation, if exist, used to avoid repeated computation.}
 }
 \value{
 The first zero crossing of the autocorrelation function
