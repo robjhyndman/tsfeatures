@@ -16,7 +16,7 @@ vignette: >
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>", 
-  warning = FALSE, 
+  warning = FALSE,
   fig.align = "center"
 )
 ```
@@ -178,7 +178,7 @@ where $f_t$ is the smoothed trend component, $s_{i,t}$ is the $i$th seasonal com
 Strength of trend (`trend`) and strength of seasonality (`seasonal.strength`) are defined as  
 
 $$\text{trend}=1-\frac{\text{Var}(e_t)}{\text{Var}(f_t+e_t)}\quad \text{and}\quad \text{seasonal.strength}=1-\frac{\text{Var}(e_t)}{\text{Var}(s_{i,t}+e_t)}$$  
-If their values are less than 0, they are set to 0, while values greater than 1 are set to 1. For non-seasonal time series `seasonal.strength` is 0.  For seasonal time series, `seasonal.strength` is an M-vector, where M is the number of periods. This is analogous to the way the strength of trend and seasonality were deﬁned in Wang, Smith & Hyndman ([2006](#ref)), Hyndman, Wang & Laptev ([2015]#ref) and Kang, Hyndman & Smith-Miles ([2017]#ref).  
+If their values are less than 0, they are set to 0, while values greater than 1 are set to 1. For non-seasonal time series `seasonal.strength` is 0.  For seasonal time series, `seasonal.strength` is an M-vector, where M is the number of periods. This is analogous to the way the strength of trend and seasonality were deﬁned in Wang, Smith & Hyndman ([2006](#ref)), Hyndman, Wang & Laptev ([2015](#ref)) and Kang, Hyndman & Smith-Miles ([2017](#ref)).  
 
 `spike`  measures the “spikiness” of a time series, and is computed as the variance of the leave-one-out variances of the remainder component $e_t$.  
  
@@ -301,7 +301,7 @@ FirstZero_ac(AirPassengers)
 
 ### trev_num  {#trev_num}
 
-`trev_num` returens the numerator of the trev function of a time series, a normalized nonlinear autocorrelation. The time lag is set to 1.  
+`trev_num` returns the numerator of the trev function of a time series, a normalized nonlinear autocorrelation. The time lag is set to 1.  
 
 ```{r}
 trev_num(AirPassengers)
