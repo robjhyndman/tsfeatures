@@ -17,7 +17,7 @@ Calculate the features that grouped as scaling set,
 which have been used in CompEngine database, using method introduced in package \code{kctsa}.
 }
 \details{
-Feature in this set is \code{FluctAnal_prop_r1}.
+Feature in this set is \code{fluctanal_prop_r1}.
 }
 \references{
 B.D. Fulcher and N.S. Jones. hctsa: A computational framework for automated time-series phenotyping using massive feature extraction. Cell Systems 5, 527 (2017).
@@ -25,7 +25,7 @@ B.D. Fulcher and N.S. Jones. hctsa: A computational framework for automated time
 B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
 }
 \seealso{
-\code{\link{FluctAnal_prop_r1}}
+\code{\link{fluctanal_prop_r1}}
 }
 \author{
 Yangzhuoran Yang

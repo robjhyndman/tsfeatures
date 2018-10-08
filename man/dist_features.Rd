@@ -17,8 +17,8 @@ Calculate the features that grouped as distribution set,
 which have been used in CompEngine database, using method introduced in package \code{kctsa}.
 }
 \details{
-Features in this set are \code{HistogramMode_10}
-and \code{OutlierInclude_mdrmd}.
+Features in this set are \code{histogram_mode_10}
+and \code{outlierinclude_mdrmd}.
 }
 \references{
 B.D. Fulcher and N.S. Jones. hctsa: A computational framework for automated time-series phenotyping using massive feature extraction. Cell Systems 5, 527 (2017).
@@ -26,9 +26,9 @@ B.D. Fulcher and N.S. Jones. hctsa: A computational framework for automated time
 B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
 }
 \seealso{
-\code{\link{HistogramMode}}
+\code{\link{histogram_mode}}
 
-\code{\link{OutlierInclude_mdrmd}}
+\code{\link{outlierinclude_mdrmd}}
 }
 \author{
 Yangzhuoran Yang

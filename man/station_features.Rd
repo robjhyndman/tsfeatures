@@ -17,9 +17,9 @@ Calculate the features that grouped as stationarity set,
 which have been used in CompEngine database, using method introduced in package \code{kctsa}.
 }
 \details{
-Features in this set are \code{Std1stDer}, 
-\code{SpreadRandomLocal_meantaul_50}, 
-and \code{SpreadRandomLocal_meantaul_ac2}.
+Features in this set are \code{std1st_der}, 
+\code{spreadrandomlocal_meantaul_50}, 
+and \code{spreadrandomlocal_meantaul_ac2}.
 }
 \references{
 B.D. Fulcher and N.S. Jones. hctsa: A computational framework for automated time-series phenotyping using massive feature extraction. Cell Systems 5, 527 (2017).
@@ -27,9 +27,9 @@ B.D. Fulcher and N.S. Jones. hctsa: A computational framework for automated time
 B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
 }
 \seealso{
-\code{\link{Std1stDer}}
+\code{\link{std1st_der}}
 
-\code{\link{SpreadRandomLocal_meantaul}}
+\code{\link{spreadrandomlocal_meantaul}}
 }
 \author{
 Yangzhuoran Yang

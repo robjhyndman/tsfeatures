@@ -17,13 +17,13 @@ Calculate the features that grouped as autocorrelation set,
 which have been used in CompEngine database, using method introduced in package \code{kctsa}.
 }
 \details{
-Features in this set are \code{Embed2_incircle_1}, 
-\code{Embed2_incircle_2}, 
-\code{AC_9}, 
-\code{FirstMin_ac}, 
+Features in this set are \code{embed2_incircle_1}, 
+\code{embed2_incircle_2}, 
+\code{ac_9}, 
+\code{firstmin_ac}, 
 \code{trev_num}, 
-\code{MotifTwo_entro3}, 
-and \code{Walker_propcross}.
+\code{motiftwo_entro3}, 
+and \code{walker_propcross}.
 }
 \references{
 B.D. Fulcher and N.S. Jones. hctsa: A computational framework for automated time-series phenotyping using massive feature extraction. Cell Systems 5, 527 (2017).
@@ -31,17 +31,17 @@ B.D. Fulcher and N.S. Jones. hctsa: A computational framework for automated time
 B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
 }
 \seealso{
-\code{\link{Embed2_incircle}}
+\code{\link{embed2_incircle}}
 
-\code{\link{AC_9}}
+\code{\link{ac_9}}
 
-\code{\link{FirstMin_ac}}
+\code{\link{firstmin_ac}}
 
 \code{\link{trev_num}}
 
-\code{\link{MotifTwo_entro3}}
+\code{\link{motiftwo_entro3}}
 
-\code{\link{Walker_propcross}}
+\code{\link{walker_propcross}}
 }
 \author{
 Yangzhuoran Yang

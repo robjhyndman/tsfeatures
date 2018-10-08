@@ -72,16 +72,16 @@ plot(z)
 
 |FEATURES||||
 |:-------|:-------|:-------|:-------|
-|[acf_features](#acf_features)      |[max_kl_shift](#max_shift)       |[compengine](#compengine)                |[OutlierInclude_mdrmd](#OutlierInclude_mdrmd)|
-|[arch_stat](#arch_stat)            |[max_level_shift](#max_shift)    |[AC_9](#AC_9)                            |[OutlierInclude_mdrmd](#OutlierInclude_mdrmd)|
-|[crossing_points](#crossing_points)|[max_var_shift](#max_shift)      |[Binarize_mean](#Binarize_mean)          |[sampenc](#sampen)|
-|[entropy](#entropy)                |[nonlinearity](#nonlinearity)    |[Embed2_incircle](#Embed2_incircle)      |[SampEn_first](#sampen)|
-|[flat_spots](#flat_spots)          |[pacf_features](#pacf_features)  |[FirstMin_ac](#FirstMin_ac)              |[SpreadRandomLocal_meantaul](#SpreadRandomLocal_meantaul)|
-|[heterogeneity](#heterogeneity)    |[stability](#lumpiness_stability)|[FirstZero_ac](#FirstZero_ac)            |[Std1stDer](#Std1stDer)|
-|[holt_parameters](#holt_hw)        |[stl_features](#stl_features)    |[FluctAnal_prop_r1](#FluctAnal_prop_r1)  |[trev_num](#trev_num)|
-|[hurst](#hurst)                    |[unitroot_kpss](#uniroot)        |[HistogramMode](#HistogramMode)          |[Walker_propcross](#Walker_propcross)|
-|[hw_parameters](#holt_hw)          |[unitroot_pp](#uniroot)          |[LocalSimple_taures](#LocalSimple_taures)|  |
-|[lumpiness](#lumpiness_stability)  |                                  |[MotifTwo_entro3](#MotifTwo_entro3)      |  |
+|[acf_features](#acf_features)      |[max_kl_shift](#max_shift)       |[compengine](#compengine)                |[outlierinclude_mdrmd](#outlierinclude_mdrmd)|
+|[arch_stat](#arch_stat)            |[max_level_shift](#max_shift)    |[ac_9](#ac_9)                            |[sampenc](#sampen)|
+|[crossing_points](#crossing_points)|[max_var_shift](#max_shift)      |[binarize_mean](#binarize_mean)          |[sampen_first](#sampen)|
+|[entropy](#entropy)                |[nonlinearity](#nonlinearity)    |[embed2_incircle](#embed2_incircle)      |[spreadrandomlocal_meantaul](#spreadrandomlocal_meantaul)|
+|[flat_spots](#flat_spots)          |[pacf_features](#pacf_features)  |[firstmin_ac](#firstmin_ac)              |[std1st_der](#std1st_der)|
+|[heterogeneity](#heterogeneity)    |[stability](#lumpiness_stability)|[firstzero_ac](#firstzero_ac)            |[trev_num](#trev_num)|
+|[holt_parameters](#holt_hw)        |[stl_features](#stl_features)    |[fluctanal_prop_r1](#fluctanal_prop_r1)  |[walker_propcross](#walker_propcross)|
+|[hurst](#hurst)                    |[unitroot_kpss](#uniroot)        |[histogram_mode](#histogram_mode)          | |
+|[hw_parameters](#holt_hw)          |[unitroot_pp](#uniroot)          |[localsimple_taures](#localsimple_taures)|  |
+|[lumpiness](#lumpiness_stability)  |                                  |[motiftwo_entro3](#motiftwo_entro3)      |  |
  
 
 
@@ -267,36 +267,36 @@ knitr::kable(comp)
 ```
 
 
-### Embed2_incircle {#Embed2_incircle} 
+### embed2_incircle {#embed2_incircle} 
 
-`Embed2_incircle` gives proportion of points inside a given circular boundary in a 2-d embedding space.
+`embed2_incircle` gives proportion of points inside a given circular boundary in a 2-d embedding space.
 
 ```{r}
-Embed2_incircle(AirPassengers, boundary = 1e5)
+embed2_incircle(AirPassengers, boundary = 1e5)
 ```
 
-### AC_9 {#AC_9} 
+### ac_9 {#ac_9} 
 
-`AC_9` is just the autocorrelation at lag 9, included here for completion and consistency.  
+`ac_9` is just the autocorrelation at lag 9, included here for completion and consistency.  
 
 ```{r}
-AC_9(AirPassengers)
+ac_9(AirPassengers)
 ```
 
-### FirstMin_ac {#FirstMin_ac}  
+### firstmin_ac {#firstmin_ac}  
 
-`FirstMin_ac` returns the time of first minimum in the autocorrelation function.  
+`firstmin_ac` returns the time of first minimum in the autocorrelation function.  
 
 ```{r}
-FirstMin_ac(AirPassengers)
+firstmin_ac(AirPassengers)
 ```
 
-### FirstZero_ac {#FirstZero_ac}
+### firstzero_ac {#firstzero_ac}
 
-`FirstZero_ac` returns the first zero crossing of the autocorrelation function.  
+`firstzero_ac` returns the first zero crossing of the autocorrelation function.  
 
 ```{r}
-FirstZero_ac(AirPassengers)
+firstzero_ac(AirPassengers)
 ```
 
 ### trev_num  {#trev_num}
@@ -307,93 +307,93 @@ FirstZero_ac(AirPassengers)
 trev_num(AirPassengers)
 ```
 
-### MotifTwo_entro3 {#MotifTwo_entro3}
+### motiftwo_entro3 {#motiftwo_entro3}
 
-Local motifs in a binary symbolization of the time series. Coarse-graining is performed. Time-series values above its mean are given 1, and those below the mean are 0. `MotifTwo_entro3` returns the entropie of words in the binary alphabet of length 3.  
+Local motifs in a binary symbolization of the time series. Coarse-graining is performed. Time-series values above its mean are given 1, and those below the mean are 0. `motiftwo_entro3` returns the entropie of words in the binary alphabet of length 3.  
 
 ```{r}
-MotifTwo_entro3(AirPassengers)
+motiftwo_entro3(AirPassengers)
 ```
 
-### Binarize_mean {#Binarize_mean}
+### binarize_mean {#binarize_mean}
 
-`Binarize_mean` converts an input vector into a binarized version. Time-series values above its mean are given 1, and those below the mean are 0.  
+`binarize_mean` converts an input vector into a binarized version. Time-series values above its mean are given 1, and those below the mean are 0.  
 
 ```{r}
-str(Binarize_mean(AirPassengers))
+str(binarize_mean(AirPassengers))
 ```
 
-### Walker_propcross {#Walker_propcross}
+### walker_propcross {#walker_propcross}
 
-Simulates a hypothetical walker moving through the time domain. The hypothetical particle (or 'walker') moves in response to values of the time series at each point. The walker narrows the gap between its value and that of the time series by 10. `Walker_propcross` returns the fraction of time series length that walker crosses time series.  
+Simulates a hypothetical walker moving through the time domain. The hypothetical particle (or 'walker') moves in response to values of the time series at each point. The walker narrows the gap between its value and that of the time series by 10. `walker_propcross` returns the fraction of time series length that walker crosses time series.  
 
 ```{r}
-Walker_propcross(AirPassengers)
+walker_propcross(AirPassengers)
 ```
 
-### LocalSimple_taures {#LocalSimple_taures}
+### localsimple_taures {#localsimple_taures}
 
-Simple predictors using the past trainLength values of the time series to predict its next value. `LocalSimple_taures` returns the first zero crossing of the autocorrelation function of the residuals from this Simple local time-series forecasting.  
+Simple predictors using the past trainLength values of the time series to predict its next value. `localsimple_taures` returns the first zero crossing of the autocorrelation function of the residuals from this Simple local time-series forecasting.  
 
 ```{r}
-LocalSimple_taures(AirPassengers)
+localsimple_taures(AirPassengers)
 ```
 
-### SampEn_first and sampenc {#sampen}
+### sampen_first and sampenc {#sampen}
 
-`SampEn_first` returns the first Sample Entropy of a time series where the embedding dimension is set to 5 and the threshold is set to 0.3. `sampenc` is the underlying function to calculate the first sample entropy with optional dimension and threshold settings.  
+`sampen_first` returns the first Sample Entropy of a time series where the embedding dimension is set to 5 and the threshold is set to 0.3. `sampenc` is the underlying function to calculate the first sample entropy with optional dimension and threshold settings.  
 
 ```{r}
-SampEn_first(AirPassengers)
+sampen_first(AirPassengers)
 sampenc(AirPassengers, M = 5, r = 0.3)
 ```
 
 
-### Std1stDer {#Std1stDer}
+### std1st_der {#std1st_der}
 
-`Std1stDer` returns the standard deviation of the first derivative of the time series.
-
-```{r}
-Std1stDer(AirPassengers)
-```
-
-### SpreadRandomLocal_meantaul {#SpreadRandomLocal_meantaul}
-
-100 time-series segments of length l are selected at random from the time series and the mean of the first zero-crossings of the autocorrelation function in each segment is calculated using `SpreadRandomLocal_meantaul`.  
+`std1st_der` returns the standard deviation of the first derivative of the time series.
 
 ```{r}
-SpreadRandomLocal_meantaul(AirPassengers)
+std1st_der(AirPassengers)
 ```
 
-### HistogramMode {#HistogramMode}
+### spreadrandomlocal_meantaul {#spreadrandomlocal_meantaul}
 
-`HistogramMode` measures the mode of the data vector using histograms with a given number of bins (default to 10) as suggestion.  
+100 time-series segments of length l are selected at random from the time series and the mean of the first zero-crossings of the autocorrelation function in each segment is calculated using `spreadrandomlocal_meantaul`.  
 
 ```{r}
-HistogramMode(AirPassengers, numBins = 10)
+spreadrandomlocal_meantaul(AirPassengers)
 ```
 
-### OutlierInclude_mdrmd {#OutlierInclude_mdrmd}
+### histogram_mode {#histogram_mode}
 
-`OutlierInclude_mdrmd` measures meidan as more and more outliers are included in the calculation according to a specified rule, of outliers being furthest from the mean. 
+`histogram_mode` measures the mode of the data vector using histograms with a given number of bins (default to 10) as suggestion.  
+
+```{r}
+histogram_mode(AirPassengers, numBins = 10)
+```
+
+### outlierinclude_mdrmd {#outlierinclude_mdrmd}
+
+`outlierinclude_mdrmd` measures meidan as more and more outliers are included in the calculation according to a specified rule, of outliers being furthest from the mean. 
 
 The threshold for including time-series data points in the analysis increases from zero to the maximum deviation, in increments of 0.01*sigma (by default), where sigma is the standard deviation of the time series.  
 
 At each threshold, proportion of time series points included and median are calculated, and outputs from the algorithm measure how these statistical quantities change as more extreme points are included in the calculation.  
 
-`OutlierInclude_mdrmd` essentially returns the median of the median of range indices.  
+`outlierinclude_mdrmd` essentially returns the median of the median of range indices.  
 
 ```{r}
-OutlierInclude_mdrmd(AirPassengers)
+outlierinclude_mdrmd(AirPassengers)
 ```
 
 
-### FluctAnal_prop_r1 {#FluctAnal_prop_r1}  
+### fluctanal_prop_r1 {#fluctanal_prop_r1}  
 
-`FluctAnal_prop_r1` implements fluctuation analysis. It fits a polynomial of order 1 and then returns the range. The order of fluctuations is 2, corresponding to root mean square fluctuations.  
+`fluctanal_prop_r1` implements fluctuation analysis. It fits a polynomial of order 1 and then returns the range. The order of fluctuations is 2, corresponding to root mean square fluctuations.  
 
 ```{r}
-FluctAnal_prop_r1(AirPassengers)
+fluctanal_prop_r1(AirPassengers)
 ```
 
 

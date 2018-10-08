@@ -17,9 +17,9 @@ Calculate the features that grouped as prediction set,
 which have been used in CompEngine database, using method introduced in package \code{kctsa}.
 }
 \details{
-Features in this set are \code{LocalSimple_mean1}, 
-\code{LocalSimple_lfitac}, 
-and \code{SampEn_first}.
+Features in this set are \code{localsimple_mean1}, 
+\code{localsimple_lfitac}, 
+and \code{sampen_first}.
 }
 \references{
 B.D. Fulcher and N.S. Jones. hctsa: A computational framework for automated time-series phenotyping using massive feature extraction. Cell Systems 5, 527 (2017).
@@ -27,9 +27,9 @@ B.D. Fulcher and N.S. Jones. hctsa: A computational framework for automated time
 B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
 }
 \seealso{
-\code{\link{LocalSimple_taures}}
+\code{\link{localsimple_taures}}
 
-\code{\link{SampEn_first}}
+\code{\link{sampen_first}}
 }
 \author{
 Yangzhuoran Yang
