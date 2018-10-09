@@ -239,7 +239,7 @@ firstmin_ac <- function(x, acfv = stats::acf(x,lag.max = N-1, plot = FALSE)){
   # getting acf for all lags
   # possible delay when sample size is too big 
   autoCorr <- numeric(N-1)
-  autoCorr[1:N-1] <- acfv$acf[-1]
+  autoCorr[1:(N-1)] <- acfv$acf[-1]
   for(i in 1:length(autoCorr)){
     if(is.na(autoCorr[i])){
       warning("No minimum was found.")
@@ -447,7 +447,7 @@ localsimple_taures <- function(y, forecastMeth = "mean", trainLength = NULL ){
 
 
 # EN_SampEn_5_03_sampen1
-#' First Sample Entropy of a time series from software package \code{hctsa}
+#' Second Sample Entropy of a time series from software package \code{hctsa}
 #' 
 #' Modified from the Ben Fulcher's \code{EN_SampEn} which uses code from PhysioNet.
 #' The publicly-available PhysioNet Matlab code, sampenc (renamed here to
@@ -476,7 +476,7 @@ sampen_first <- function(y){
 
 
 # PN_sampenc
-#' Sample Entropy from software package \code{hctsa}
+#' Second Sample Entropy from software package \code{hctsa}
 #' 
 #' Modified from the Ben Fulcher version of original code sampenc.m from
 #' http://physionet.org/physiotools/sampen/
@@ -511,23 +511,20 @@ sampenc <- function(y,M = 6,r = 0.3){
       if (abs(y[j]-y1) < r){
         run[jj] <- lastrun[jj] + 1 # increase run count for this lag
         M1 <- min(M, run[jj])
-        for (m in 1:M1){
-          A[m] <- A[m] + 1
-          if (j < N){
-            B[m] <- B[m] + 1
-          }
-        }
+
+        A[1:M1] <- A[1:M1]+1
+        if (j < N) B[1:M1] <- B[1:M1] + 1
       } else{
         run[jj] <- 0
       }
     }
-    for( j in 1:N-i){
+    for( j in 1:(N-i)){
       lastrun[j] <- run[j]
     }
   }
-  # Calculate for m <- 1
-  NN <- N*(N-1)/2
-  p <- A[1]/NN
+  # Calculate for m <- 2
+  # NN <- N*(N-1)/2
+  p <- A[2]/B[1]
   e <- -log(p)  
   return(e)
 }
@@ -543,7 +540,7 @@ sampenc <- function(y,M = 6,r = 0.3){
 #'
 #' Modified from \code{SY_StdNthDer} in \code{kctsa}. Based on an idea by Vladimir Vassilevsky.
 #' 
-#' @param y the input time series
+#' @param y the input time series. Missing values will be removed.
 #' @return Standard deviation of the first derivative of the time series.
 #' @references cf. http://www.mathworks.de/matlabcentral/newsreader/view_thread/136539
 #' @references B.D. Fulcher and N.S. Jones. hctsa: A computational framework for automated time-series phenotyping using massive feature extraction. Cell Systems 5, 527 (2017).
@@ -553,7 +550,7 @@ sampenc <- function(y,M = 6,r = 0.3){
 std1st_der <- function(y){
   if(length(y)<2) stop("Time series is too short to compute differences")
   yd <- diff(y)
-  return(sd(yd))
+  return(sd(yd, na.rm = TRUE))
 }
 
 
@@ -659,14 +656,14 @@ histogram_mode <- function(y, numBins = 10){
 outlierinclude_mdrmd <- function(y){
   if(length(unique(y))==1) stop("The time series is a constant!")
   if(!iszscored(y)) {
-    warning('The input time series should be z-scored')
-    # isd <- sd(y) # Modified to fit the 0.01*sigma increment in discription
+    warning('The input time series ideally should be z-scored')
+    isd <- sd(y) # Modified to fit the 0.01*sigma increment in discription
   } else {
-    # isd <- 1
+    isd <- 1
     }
   N <- length(y)
-  # inc <- 0.01*isd
-  inc <- 0.01
+  inc <- 0.01*isd
+  # inc <- 0.01
   thr <- seq(from = 0, to = max(abs(y)), by = inc)
   tot <- N
   if(length(thr) == 0) stop("peculiar time series")
