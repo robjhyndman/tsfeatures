@@ -21,16 +21,14 @@ if(require(testthat))
     expect_gt(z[6], 1.83)
     expect_lt(z[3], -0.0647)
   })
-  # test_that("tests for compengine results on data with missing values", {
-  #   y_WWWusage <- WWWusage
-  #   y_WWWusage[c(16:17, 78)] <- NA
-  #   z <- compengine(y_WWWusage)
-  #   expect_that(length(z), equals(15L))
-  #   expect_equal(z[1], c(nperiods=2))
-  #   expect_equal(z[2], c(seasonal_period1=48))
-  #   expect_equal(z[3], c(seasonal_period2=336))
-  #   expect_gt(z[4], 0.79)
-  # })
+  test_that("tests for compengine results on data with missing values", {
+    y_WWWusage <- WWWusage
+    y_WWWusage[c(16:17, 78)] <- NA
+    z <- compengine(y_WWWusage)
+    expect_equal(length(which(is.na(z))),0)
+    expect_gt(z[3], 0.2845)
+    expect_equal(z[4], c(firstmin_ac = 21))
+  })
 }
 
 

@@ -49,7 +49,7 @@ compengine <- function(x){
 #' @author Yangzhuoran Yang
 #' @export
 autocorr_features <- function(x){
-  acfv <- stats::acf(x, length(x)-1, plot = FALSE)
+  acfv <- stats::acf(x, length(x)-1, plot = FALSE, na.action = na.pass)
   output <- c(embed2_incircle_1 = embed2_incircle(x,1, acfv = acfv),
               embed2_incircle_2 = embed2_incircle(x,2, acfv = acfv),
               ac_9 = ac_9(x, acfv),
@@ -170,7 +170,7 @@ scal_features <- function(x){
 #' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
 #' @author Yangzhuoran Yang
 #' @export
-embed2_incircle <- function(y, boundary = NULL, acfv = stats::acf(y, length(y)-1, plot = FALSE)){
+embed2_incircle <- function(y, boundary = NULL, acfv = stats::acf(y, length(y)-1, plot = FALSE, na.action = na.pass)){
   if(is.null(boundary)){
     warning("`embed2_incircle()` using `boundary = 1`. Set value with `boundary`.")
     boundary <- 1
@@ -181,7 +181,7 @@ embed2_incircle <- function(y, boundary = NULL, acfv = stats::acf(y, length(y)-1
   N <- length(y) - tau# Length of each time series subsegment
   
   # CIRCLES (points inside a given circular boundary)
-  return(sum(xtp^2+xt^2 < boundary)/N)
+  return(sum(xtp^2+xt^2 < boundary, na.rm=TRUE)/N)
 }
 
 # CO_firstzero_ac
@@ -196,7 +196,7 @@ embed2_incircle <- function(y, boundary = NULL, acfv = stats::acf(y, length(y)-1
 #' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
 #' @author Yangzhuoran Yang
 #' @export
-firstzero_ac <- function(y, acfv = stats::acf(y, N-1, plot=FALSE)){
+firstzero_ac <- function(y, acfv = stats::acf(y, N-1, plot=FALSE, na.action = na.pass)){
   N <- length(y)
   corrs <- acfv$acf[-1]
   for(tau in 1:(N-1)){
@@ -215,7 +215,7 @@ firstzero_ac <- function(y, acfv = stats::acf(y, N-1, plot=FALSE)){
 #' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
 #' @author Yangzhuoran Yang
 #' @export 
-ac_9 <- function(y, acfv = stats::acf(y, 9, plot = FALSE)){
+ac_9 <- function(y, acfv = stats::acf(y, 9, plot = FALSE, na.action = na.pass)){
   acfv$acf[10]
 }
 
@@ -233,7 +233,7 @@ ac_9 <- function(y, acfv = stats::acf(y, 9, plot = FALSE)){
 #' @examples
 #' firstmin_ac(WWWusage)
 #' @export
-firstmin_ac <- function(x, acfv = stats::acf(x,lag.max = N-1, plot = FALSE)){
+firstmin_ac <- function(x, acfv = stats::acf(x,lag.max = N-1, plot = FALSE, na.action = na.pass)){
   # hctsa uses autocorr in MatLab to calculate autocorrelation
   N <- length(x)
   # getting acf for all lags
@@ -272,7 +272,7 @@ firstmin_ac <- function(x, acfv = stats::acf(x,lag.max = N-1, plot = FALSE)){
 trev_num <- function(y){
   yn <-  y[1:(length(y)-1)]
   yn1  <-  y[2:length(y)]
-  mean((yn1-yn)^3)
+  mean((yn1-yn)^3, na.rm = T)
 }
 
 # SB_MotifTwo_mean_hhh
@@ -385,7 +385,7 @@ walker_propcross <- function(y){
   for(i in 2:N){
     w[i] = w[i-1] + p*(y[i-1]-w[i-1])
   }
-  out.sw_propcross <-  sum((w[1:(N-1)]-y[1:(N-1)])*(w[2:N]-y[2:N]) < 0)/(N-1)
+  out.sw_propcross <-  sum((w[1:(N-1)]-y[1:(N-1)])*(w[2:N]-y[2:N]) < 0, na.rm = T)/(N-1)
   return(out.sw_propcross)
 }
 
@@ -508,7 +508,7 @@ sampenc <- function(y,M = 6,r = 0.3){
       # Compare to future index, j:
       j <- i + jj
       # This future point, j, matches the time-series value at i:
-      if (abs(y[j]-y1) < r){
+      if (isTRUE(abs(y[j]-y1) < r) ){
         run[jj] <- lastrun[jj] + 1 # increase run count for this lag
         M1 <- min(M, run[jj])
 
@@ -657,14 +657,14 @@ outlierinclude_mdrmd <- function(y){
   if(length(unique(y))==1) stop("The time series is a constant!")
   if(!iszscored(y)) {
     warning('The input time series ideally should be z-scored')
-    isd <- sd(y) # Modified to fit the 0.01*sigma increment in discription
+    isd <- sd(y, na.rm = T) # Modified to fit the 0.01*sigma increment in discription
   } else {
     isd <- 1
     }
   N <- length(y)
   inc <- 0.01*isd
   # inc <- 0.01
-  thr <- seq(from = 0, to = max(abs(y)), by = inc)
+  thr <- seq(from = 0, to = max(abs(y), na.rm = T), by = inc)
   tot <- N
   if(length(thr) == 0) stop("peculiar time series")
   
@@ -714,7 +714,7 @@ outlierinclude_mdrmd <- function(y){
 #' @export
 iszscored <- function(x){
   numericThreshold <- 100*.Machine$double.eps
-  iszscored <- ((abs(mean(x)) < numericThreshold) && (abs(sd(x)-1) < numericThreshold))
+  iszscored <- ((abs(mean(x, na.rm = TRUE)) < numericThreshold) && (abs(sd(x, na.rm = TRUE)-1) < numericThreshold))
   return(iszscored)
 }
 
@@ -741,7 +741,9 @@ fluctanal_prop_r1 <- function(x){
   k <- 1
   
   N <- length(x)
-  y <- cumsum(x)
+  x_NA0 <- ifelse(!is.na(x), x, 0)
+  
+  y <- cumsum(x_NA0)
   taur <- unique(round(exp(seq(from = log(5),to = log(floor(N/2)),length.out = tauStep))))
   ntau <- length(taur)
   if (ntau < 8) # fewer than 8 points
