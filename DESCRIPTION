@@ -6,6 +6,7 @@ Authors@R: c(
     person("Earo", "Wang", role = "aut"),
     person("Yanfei", "Kang", role = "aut"),
     person("Thiyanga", "Talagala", role = "aut"),
+    person("Yangzhuoran", "Yang", role = "aut"),
     person("Souhaib", "Ben Taieb", role = "ctb"))
 Description: Methods for extracting various features from time series data.
 Depends:
@@ -33,5 +34,8 @@ LazyData: true
 ByteCompile: true
 URL: https://github.com/robjhyndman/tsfeatures/
 BugReports: https://github.com/robjhyndman/tsfeatures/issues/
-RoxygenNote: 6.0.1.9000
-Suggests: testthat
+RoxygenNote: 6.1.0
+Suggests: testthat,
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

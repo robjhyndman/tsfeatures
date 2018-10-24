@@ -4,8 +4,9 @@
 \alias{embedding}
 \title{Finding embedding based on distances}
 \usage{
-embedding(distances, k = 2, method = c("Rtsne", "Laplacian", "Lrw", "Lsym",
-  "Lsym2", "MDS", "MDSiso", "monoMDS", "DPM"), h = max(distances), ...)
+embedding(distances, k = 2, method = c("Rtsne", "Laplacian", "Lrw",
+  "Lsym", "Lsym2", "MDS", "MDSiso", "monoMDS", "DPM"),
+  h = max(distances), ...)
 }
 \arguments{
 \item{distances}{an object of class "dist" (essentially the lower triangle of distances matrix).}
