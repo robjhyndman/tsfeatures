@@ -1,0 +1,86 @@
+template:
+  params:
+    bootswatch: flatly
+
+authors:
+  Rob Hyndman:
+    href: http://robjhyndman.com
+
+navbar:
+  structure:
+    left:
+    - home
+    - intro
+    - reference
+    - articles
+    - tutorials
+    - news
+    right: github
+  components:
+    home:
+      icon: fa-home fa-lg
+      href: index.html
+    reference:
+      text: Reference
+      href: reference/index.html
+    intro:
+      text: Get started
+      href: articles/tsfeatures.html
+    github:
+      icon: fa-github fa-lg
+      href: https://github.com/robjhyndman/tsfeatures/
+
+
+
+
+
+reference:
+- title: Non-feature Functions
+  desc: The function for a list of time series and the embedding function.
+  contents:
+  - '`tsfeatures`'
+  - '`embedding`'
+- title: Features
+  desc: ~
+  contents:
+  - '`acf_features`'
+  - '`ac_9`'
+  - '`arch_stat`'
+  - '`as.list.mts`'
+  - '`autocorr_features`'
+  - '`binarize_mean`'
+  - '`compengine`'
+  - '`crossing_points`'
+  - '`dist_features`'
+  - '`embed2_incircle`'
+  - '`entropy`'
+  - '`firstmin_ac`'
+  - '`firstzero_ac`'
+  - '`flat_spots`'
+  - '`fluctanal_prop_r1`'
+  - '`heterogeneity`'
+  - '`histogram_mode`'
+  - '`holt_parameters`'
+  - '`hurst`'
+  - '`iszscored`'
+  - '`localsimple_taures`'
+  - '`lumpiness`'
+  - '`max_level_shift`'
+  - '`motiftwo_entro3`'
+  - '`nonlinearity`'
+  - '`outlierinclude_mdrmd`'
+  - '`pacf_features`'
+  - '`pred_features`'
+  - '`sampenc`'
+  - '`sampen_first`'
+  - '`scal_features`'
+  - '`spreadrandomlocal_meantaul`'
+  - '`station_features`'
+  - '`std1st_der`'
+  - '`stl_features`'
+  - '`trev_num`'
+  - '`unitroot_kpss`'
+  - '`walker_propcross`'
+
+
+

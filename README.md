@@ -41,12 +41,12 @@ myfeatures
 #> #   peak <dbl>, trough <dbl>, seas_acf1 <dbl>
 embedding(dist(myfeatures), perplexity = 1)
 #> # A tibble: 4 x 2
-#>    Comp1  Comp2
-#>    <dbl>  <dbl>
-#> 1 -0.902  0.867
-#> 2 -0.829  0.865
-#> 3  0.886 -0.858
-#> 4  0.845 -0.874
+#>    Comp1   Comp2
+#>    <dbl>   <dbl>
+#> 1  1.07  -0.0481
+#> 2 -1.08   0.0483
+#> 3 -0.586 -1.22  
+#> 4  0.592  1.22
 ```
 
 ## License

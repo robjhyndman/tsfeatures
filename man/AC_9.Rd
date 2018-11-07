@@ -4,7 +4,7 @@
 \alias{ac_9}
 \title{Autocorrelation at lag 9. Included for completion and consistency.}
 \usage{
-ac_9(y, acfv = stats::acf(y, 9, plot = FALSE))
+ac_9(y, acfv = stats::acf(y, 9, plot = FALSE, na.action = na.pass))
 }
 \arguments{
 \item{y}{the input time series}

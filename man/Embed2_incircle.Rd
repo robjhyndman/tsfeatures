@@ -5,7 +5,7 @@
 \title{Points inside a given circular boundary in a 2-d embedding space from software package \code{hctsa}}
 \usage{
 embed2_incircle(y, boundary = NULL, acfv = stats::acf(y, length(y) - 1,
-  plot = FALSE))
+  plot = FALSE, na.action = na.pass))
 }
 \arguments{
 \item{y}{the input time series}
