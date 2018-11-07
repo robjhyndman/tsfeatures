@@ -7,7 +7,7 @@
 std1st_der(y)
 }
 \arguments{
-\item{y}{the input time series}
+\item{y}{the input time series. Missing values will be removed.}
 }
 \value{
 Standard deviation of the first derivative of the time series.

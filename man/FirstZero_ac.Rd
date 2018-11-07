@@ -4,7 +4,8 @@
 \alias{firstzero_ac}
 \title{The first zero crossing of the autocorrelation function from software package \code{hctsa}}
 \usage{
-firstzero_ac(y, acfv = stats::acf(y, N - 1, plot = FALSE))
+firstzero_ac(y, acfv = stats::acf(y, N - 1, plot = FALSE, na.action =
+  na.pass))
 }
 \arguments{
 \item{y}{the input time series}

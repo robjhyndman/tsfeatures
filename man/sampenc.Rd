@@ -2,7 +2,7 @@
 % Please edit documentation in R/compengine.R
 \name{sampenc}
 \alias{sampenc}
-\title{Sample Entropy from software package \code{hctsa}}
+\title{Second Sample Entropy from software package \code{hctsa}}
 \usage{
 sampenc(y, M = 6, r = 0.3)
 }
