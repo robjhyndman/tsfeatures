@@ -34,8 +34,16 @@ LazyData: true
 ByteCompile: true
 URL: https://github.com/robjhyndman/tsfeatures/
 BugReports: https://github.com/robjhyndman/tsfeatures/issues/
-RoxygenNote: 6.1.0
-Suggests: testthat,
+RoxygenNote: 6.1.1
+Suggests: 
+    testthat,
     knitr,
-    rmarkdown
+    rmarkdown,
+    ggplot2,
+    tidyr,
+    dplyr,
+    anomalous,
+    Mcomp,
+    GGally
 VignetteBuilder: knitr
+Encoding: UTF-8
