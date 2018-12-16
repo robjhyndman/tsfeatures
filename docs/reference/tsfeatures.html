@@ -8,20 +8,18 @@
 
 <title>Time series feature matrix — tsfeatures • tsfeatures</title>
 
-<link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
-
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.1/clipboard.min.js" integrity="sha256-hIvIxeqhGZF+VVeM55k0mJvWpQ6gTkWk3Emc+NmowYA=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
 <!-- sticky kit -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
@@ -41,7 +39,8 @@ The tsfeature package provides methods to extract various features from time ser
 
 
 <!-- mathjax -->
-<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -65,7 +64,7 @@ The tsfeature package provides methods to extract various features from time ser
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tsfeatures</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1</span>
       </span>
     </div>
 
@@ -116,7 +115,7 @@ The tsfeature package provides methods to extract various features from time ser
     
     </div>
 
-    <pre class="usage"><span class='fu'>tsfeatures</span>(<span class='no'>tslist</span>, <span class='kw'>features</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"frequency"</span>, <span class='st'>"stl_features"</span>, <span class='st'>"entropy"</span>,
+    <pre class="usage"><span class='fu'>tsfeatures</span>(<span class='no'>tslist</span>, <span class='kw'>features</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"frequency"</span>, <span class='st'>"stl_features"</span>, <span class='st'>"entropy"</span>,
   <span class='st'>"acf_features"</span>), <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>trim</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>trim_amount</span> <span class='kw'>=</span> <span class='fl'>0.1</span>,
   <span class='kw'>parallel</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>na.action</span> <span class='kw'>=</span> <span class='no'>na.pass</span>, <span class='no'>...</span>)</pre>
     
@@ -171,18 +170,18 @@ one time series from tslist, and each column being a feature.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>mylist</span> <span class='kw'>&lt;-</span> <span class='fu'>list</span>(<span class='no'>sunspot.year</span>, <span class='no'>WWWusage</span>, <span class='no'>AirPassengers</span>, <span class='no'>USAccDeaths</span>)
-<span class='fu'>tsfeatures</span>(<span class='no'>mylist</span>)</div><div class='output co'>#&gt; [38;5;246m# A tibble: 4 x 20[39m
+    <pre class="examples"><div class='input'><span class='no'>mylist</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='no'>sunspot.year</span>, <span class='no'>WWWusage</span>, <span class='no'>AirPassengers</span>, <span class='no'>USAccDeaths</span>)
+<span class='fu'>tsfeatures</span>(<span class='no'>mylist</span>)</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 4 x 20</span><span>
 #&gt;   frequency nperiods seasonal_period trend   spike linearity curvature e_acf1
-#&gt;       [3m[38;5;246m&lt;dbl&gt;[39m[23m    [3m[38;5;246m&lt;dbl&gt;[39m[23m           [3m[38;5;246m&lt;dbl&gt;[39m[23m [3m[38;5;246m&lt;dbl&gt;[39m[23m   [3m[38;5;246m&lt;dbl&gt;[39m[23m     [3m[38;5;246m&lt;dbl&gt;[39m[23m     [3m[38;5;246m&lt;dbl&gt;[39m[23m  [3m[38;5;246m&lt;dbl&gt;[39m[23m
-#&gt; [38;5;250m1[39m         1        0               1 0.125 2.10[38;5;246me[39m[31m-5[39m      3.58      1.11  0.793
-#&gt; [38;5;250m2[39m         1        0               1 0.985 3.01[38;5;246me[39m[31m-8[39m      4.45      1.10  0.774
-#&gt; [38;5;250m3[39m        12        1              12 0.989 2.12[38;5;246me[39m[31m-8[39m     11.0       1.10  0.552
-#&gt; [38;5;250m4[39m        12        1              12 0.796 9.67[38;5;246me[39m[31m-7[39m     -[31m2[39m[31m.[39m[31m13[39m      2.85  0.250
-#&gt; [38;5;246m# ... with 12 more variables: e_acf10 [3m[38;5;246m&lt;dbl&gt;[38;5;246m[23m, entropy [3m[38;5;246m&lt;dbl&gt;[38;5;246m[23m, x_acf1 [3m[38;5;246m&lt;dbl&gt;[38;5;246m[23m,
-#&gt; #   x_acf10 [3m[38;5;246m&lt;dbl&gt;[38;5;246m[23m, diff1_acf1 [3m[38;5;246m&lt;dbl&gt;[38;5;246m[23m, diff1_acf10 [3m[38;5;246m&lt;dbl&gt;[38;5;246m[23m, diff2_acf1 [3m[38;5;246m&lt;dbl&gt;[38;5;246m[23m,
-#&gt; #   diff2_acf10 [3m[38;5;246m&lt;dbl&gt;[38;5;246m[23m, seasonal_strength [3m[38;5;246m&lt;dbl&gt;[38;5;246m[23m, peak [3m[38;5;246m&lt;dbl&gt;[38;5;246m[23m, trough [3m[38;5;246m&lt;dbl&gt;[38;5;246m[23m,
-#&gt; #   seas_acf1 [3m[38;5;246m&lt;dbl&gt;[38;5;246m[23m[39m</div></pre>
+#&gt;       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>         1        0               1 0.125 2.10</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-5</span><span>      3.58      1.11  0.793
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>         1        0               1 0.985 3.01</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-8</span><span>      4.45      1.10  0.774
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>        12        1              12 0.989 2.12</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-8</span><span>     11.0       1.10  0.552
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>        12        1              12 0.796 9.67</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-7</span><span>     -</span><span style='color: #BB0000;'>2.13</span><span>      2.85  0.250
+#&gt; </span><span style='color: #949494;'># ... with 12 more variables: e_acf10 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, entropy </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, x_acf1 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>,
+#&gt; #   x_acf10 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, diff1_acf1 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, diff1_acf10 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, diff2_acf1 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>,
+#&gt; #   diff2_acf10 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, seasonal_strength </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, peak </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, trough </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>,
+#&gt; #   seas_acf1 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -195,9 +194,7 @@ one time series from tslist, and each column being a feature.</p>
     </ul>
 
     <h2>Author</h2>
-    
-Rob J Hyndman
-
+    <p>Rob J Hyndman</p>
   </div>
 </div>
 
@@ -207,9 +204,8 @@ Rob J Hyndman
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
 </div>
-
       </footer>
    </div>
 
