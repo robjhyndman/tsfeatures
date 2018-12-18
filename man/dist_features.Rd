@@ -7,7 +7,7 @@
 dist_features(x)
 }
 \arguments{
-\item{y}{the input time series}
+\item{x}{the input time series}
 }
 \value{
 a vector with autocorrelation features
