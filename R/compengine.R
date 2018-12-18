@@ -7,7 +7,7 @@
 #' The features involved can be grouped as \code{autocorrelation}, 
 #' \code{prediction}, \code{stationarity}, \code{distribution}, and \code{scaling}. 
 #'
-#' @param y the input time series
+#' @param x the input time series
 #' @return a vector with CompEngine features
 #' @seealso \code{\link{autocorr_features}}
 #' @seealso \code{\link{pred_features}}
@@ -36,7 +36,7 @@ compengine <- function(x){
 #' \code{motiftwo_entro3}, 
 #' and \code{walker_propcross}.
 #'
-#' @param y the input time series
+#' @param x the input time series
 #' @return a vector with autocorrelation features
 #' @seealso \code{\link{embed2_incircle}}
 #' @seealso \code{\link{ac_9}}
@@ -70,7 +70,7 @@ autocorr_features <- function(x){
 #' \code{localsimple_lfitac}, 
 #' and \code{sampen_first}.
 #'
-#' @param y the input time series
+#' @param x the input time series
 #' @return a vector with autocorrelation features
 #' @seealso \code{\link{localsimple_taures}}
 #' @seealso \code{\link{sampen_first}}
@@ -95,7 +95,7 @@ pred_features <- function(x){
 #' \code{spreadrandomlocal_meantaul_50}, 
 #' and \code{spreadrandomlocal_meantaul_ac2}.
 #'
-#' @param y the input time series
+#' @param x the input time series
 #' @return a vector with autocorrelation features
 #' @seealso \code{\link{std1st_der}}
 #' @seealso \code{\link{spreadrandomlocal_meantaul}}
@@ -120,7 +120,7 @@ station_features <- function(x){
 #' Features in this set are \code{histogram_mode_10}
 #' and \code{outlierinclude_mdrmd}.
 #'
-#' @param y the input time series
+#' @param x the input time series
 #' @return a vector with autocorrelation features
 #' @seealso \code{\link{histogram_mode}}
 #' @seealso \code{\link{outlierinclude_mdrmd}}
@@ -141,7 +141,7 @@ dist_features <- function(x){
 #' 
 #' Feature in this set is \code{fluctanal_prop_r1}.
 #'
-#' @param y the input time series
+#' @param x the input time series
 #' @return a vector with autocorrelation features
 #' @seealso \code{\link{fluctanal_prop_r1}}
 #' @references B.D. Fulcher and N.S. Jones. hctsa: A computational framework for automated time-series phenotyping using massive feature extraction. Cell Systems 5, 527 (2017).
@@ -609,6 +609,9 @@ spreadrandomlocal_meantaul <- function(y, l =50){
 #' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
 #' @author Yangzhuoran Yang
 #' @export
+#' @importFrom graphics hist
+#' @importFrom stats predict 
+
 histogram_mode <- function(y, numBins = 10){
   
   # Compute the histogram from the data:
