@@ -676,7 +676,7 @@ outlierinclude_mdrmd <- function(y, zscored = TRUE) {
     y <- tmp
     isd <- 1
   } else {
-    isd <- sd(y, na.rm = TRUE) # Modified to fit the 0.01*sigma increment in discription
+    isd <- sd(y, na.rm = TRUE) # Modified to fit the 0.01*sigma increment in description
   }
   N <- length(y)
   inc <- 0.01 * isd
