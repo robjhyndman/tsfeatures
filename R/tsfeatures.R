@@ -1,5 +1,5 @@
 #' Time Series Feature Extraction
-#' 
+#'
 #' The tsfeature package provides methods to extract various features from time series data
 #'
 #' @docType package
@@ -11,7 +11,7 @@
 #' @importFrom forecast mstl
 #' @importFrom foreach "%dopar%" foreach
 NULL
-#> NULL
+# > NULL
 
 
 
@@ -21,15 +21,16 @@ NULL
 #' @param ... other arguments are ignored.
 #' @author Rob J Hyndman
 #' @export
-as.list.mts <- function(x, ...)
-{
+as.list.mts <- function(x, ...) {
   tspx <- tsp(x)
   listx <- as.list(as.data.frame(x))
-  listx <- purrr::map(listx, 
-            function(u){
-              u <- as.ts(u)
-              tsp(u) <- tspx
-              return(u)
-            })
+  listx <- purrr::map(
+    listx,
+    function(u) {
+      u <- as.ts(u)
+      tsp(u) <- tspx
+      return(u)
+    }
+  )
   return(listx)
 }

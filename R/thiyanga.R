@@ -10,12 +10,11 @@
 #' also returned.
 #' @author Thiyanga Talagala
 #' @export
-acf_features <- function(x){
-
+acf_features <- function(x) {
   m <- frequency(x)
-  acfx <- acf(x, lag.max=max(m,10L), plot = FALSE, na.action = na.pass)
-  acfdiff1x <- acf(diff(x, differences = 1), lag.max=10L, plot = FALSE, na.action = na.pass)
-  acfdiff2x <- acf(diff(x, differences = 2), lag.max=10L, plot = FALSE, na.action = na.pass)
+  acfx <- acf(x, lag.max = max(m, 10L), plot = FALSE, na.action = na.pass)
+  acfdiff1x <- acf(diff(x, differences = 1), lag.max = 10L, plot = FALSE, na.action = na.pass)
+  acfdiff2x <- acf(diff(x, differences = 2), lag.max = 10L, plot = FALSE, na.action = na.pass)
 
   # first autocorrelation coefficient
   acf_1 <- acfx$acf[2L]
@@ -26,13 +25,13 @@ acf_features <- function(x){
   # first autocorrelation coefficient of differenced series
   diff1_acf1 <- acfdiff1x$acf[2L]
 
-  #Sum of squared of first 10 autocorrelation coefficients of differenced series
+  # Sum of squared of first 10 autocorrelation coefficients of differenced series
   diff1_acf10 <- sum((acfdiff1x$acf[-1L])^2)
 
   # first autocorrelation coefficient of twice-differenced series
   diff2_acf1 <- acfdiff2x$acf[2L]
 
-  #Sum of squared of first 10 autocorrelation coefficients of twice-differenced series
+  # Sum of squared of first 10 autocorrelation coefficients of twice-differenced series
   diff2_acf10 <- sum((acfdiff2x$acf[-1L])^2)
 
   output <- c(
@@ -41,10 +40,12 @@ acf_features <- function(x){
     diff1_acf1 = unname(diff1_acf1),
     diff1_acf10 = unname(diff1_acf10),
     diff2_acf1 = unname(diff2_acf1),
-    diff2_acf10 = unname(diff2_acf10))
+    diff2_acf10 = unname(diff2_acf10)
+  )
 
-  if(m > 1)
-    output <- c(output, seas_acf1 = unname(acfx$acf[m+1L]))
+  if (m > 1) {
+    output <- c(output, seas_acf1 = unname(acfx$acf[m + 1L]))
+  }
 
   return(output)
 }
@@ -61,25 +62,27 @@ acf_features <- function(x){
 #' lag is also returned.
 #' @author Thiyanga Talagala
 #' @export
-pacf_features <- function(x){
-
+pacf_features <- function(x) {
   m <- frequency(x)
 
-  pacfx <- pacf(x, lag.max=max(5L,m), plot=FALSE)$acf
+  pacfx <- pacf(x, lag.max = max(5L, m), plot = FALSE)$acf
   # Sum of squared of first 5 partial autocorrelation coefficients
   pacf_5 <- sum((pacfx[seq(5L)])^2)
 
   # Sum of squared of first 5 partial autocorrelation coefficients of difference series
-  diff1_pacf_5 <- sum((pacf(diff(x, differences = 1),lag.max=5L,plot=FALSE)$acf)^2)
+  diff1_pacf_5 <- sum((pacf(diff(x, differences = 1), lag.max = 5L, plot = FALSE)$acf)^2)
 
   # Sum of squared of first 5 partial autocorrelation coefficients of twice differenced series
-  diff2_pacf_5 <- sum((pacf(diff(x, differences = 2),lag.max=5L,plot=FALSE)$acf)^2)
+  diff2_pacf_5 <- sum((pacf(diff(x, differences = 2), lag.max = 5L, plot = FALSE)$acf)^2)
 
-  output <- c(x_pacf5 = unname(pacf_5),
-              diff1x_pacf5 = unname(diff1_pacf_5),
-              diff2x_pacf5 = unname(diff2_pacf_5))
-  if(m > 1)
-    output <- c(output, seas_pacf=pacfx[m])
+  output <- c(
+    x_pacf5 = unname(pacf_5),
+    diff1x_pacf5 = unname(diff1_pacf_5),
+    diff2x_pacf5 = unname(diff2_pacf_5)
+  )
+  if (m > 1) {
+    output <- c(output, seas_pacf = pacfx[m])
+  }
 
   return(output)
 }
@@ -88,7 +91,7 @@ pacf_features <- function(x){
 #'
 #' Estimate the smoothing parameter for the level-alpha and
 #' the smoothing parameter for the trend-beta.
-#' \code{hw_parameters} considers additive seasonal trend: ets(A,A,A) model. 
+#' \code{hw_parameters} considers additive seasonal trend: ets(A,A,A) model.
 #' @param x a univariate time series
 #' @return \code{holt_parameters} produces a vector of 2 values: alpha, beta.
 #'
@@ -96,18 +99,18 @@ pacf_features <- function(x){
 #' @author Thiyanga Talagala, Pablo Montero-Manso
 #' @export
 
-holt_parameters <- function(x){
+holt_parameters <- function(x) {
   # parameter estimates of holt linear trend model
   fit <- forecast::holt(x)
-  return(c(fit$model$par["alpha"],fit$model$par["beta"]))
- }
+  return(c(fit$model$par["alpha"], fit$model$par["beta"]))
+}
 
 #' @rdname holt_parameters
 #' @export
 hw_parameters <- function(x) {
   hw_fit <- NULL
   hw_fit$par <- c(NA, NA, NA)
-  try(hw_fit <- forecast::ets(x, model=c("AAA")), silent=TRUE)
+  try(hw_fit <- forecast::ets(x, model = c("AAA")), silent = TRUE)
   hw_fit$par[1:3]
 }
 # #' Autocorrelation coefficient at lag 1 of the residual
@@ -123,4 +126,3 @@ hw_parameters <- function(x) {
 #   Res<-resid(linear_mod)
 #   return(stats::acf(Res,lag.max=1L,plot=FALSE)$acf[-1])
 # }
-

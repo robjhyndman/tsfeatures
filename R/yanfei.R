@@ -15,8 +15,7 @@
 #' @author Yanfei Kang and Rob J Hyndman
 #' @export
 
-heterogeneity <- function(x)
-{
+heterogeneity <- function(x) {
   # One possible issue when applied to the ETS/ARIMA comparison is that it will
   # be high for any type of heteroskedasticity, whereas ETS heteroskedasticity
   # is of a particular type, namely that the variation increases with the level
@@ -28,10 +27,10 @@ heterogeneity <- function(x)
 
   # perform arch and box test
   x.archtest <- arch_stat(x.whitened)
-  LBstat <- sum(acf(x.whitened^2, lag.max=12L, plot=FALSE)$acf[-1L]^2)
+  LBstat <- sum(acf(x.whitened^2, lag.max = 12L, plot = FALSE)$acf[-1L]^2)
 
   # fit garch model to capture the variance dynamics.
-  garch.fit <- suppressWarnings(tseries::garch(x.whitened, trace=FALSE))
+  garch.fit <- suppressWarnings(tseries::garch(x.whitened, trace = FALSE))
 
   # compare arch test before and after fitting garch
   garch.fit.std <- residuals(garch.fit)
@@ -39,8 +38,9 @@ heterogeneity <- function(x)
 
   # compare Box test of squared residuals before and after fitting garch
   LBstat2 <- NA
-  try(LBstat2 <- sum(acf(na.contiguous(garch.fit.std^2), lag.max=12L, plot=FALSE)$acf[-1L]^2),
-      silent = TRUE)
+  try(LBstat2 <- sum(acf(na.contiguous(garch.fit.std^2), lag.max = 12L, plot = FALSE)$acf[-1L]^2),
+    silent = TRUE
+  )
   output <- c(
     arch_acf = LBstat,
     garch_acf = LBstat2,
@@ -65,10 +65,9 @@ heterogeneity <- function(x)
 #' @author Yanfei Kang and Rob J Hyndman
 #' @export
 
-nonlinearity <- function(x)
-{
-  X2 <- tseries::terasvirta.test(as.ts(x),type = "Chisq")$stat
-  c(nonlinearity = 10*unname(X2)/length(x))
+nonlinearity <- function(x) {
+  X2 <- tseries::terasvirta.test(as.ts(x), type = "Chisq")$stat
+  c(nonlinearity = 10 * unname(X2) / length(x))
 }
 
 
@@ -85,20 +84,20 @@ nonlinearity <- function(x)
 #' @author Yanfei Kang
 #' @export
 
-arch_stat <- function (x, lags = 12, demean=TRUE)
-{
-  if(length(x) <= 13)
-    return(c(ARCH.LM=NA_real_))
-  if(demean)
-    x <- x - mean(x, na.rm=TRUE)
-  mat <- embed(x^2, lags+1)
-  fit <- try(lm(mat[, 1] ~ mat[, -1]), silent=TRUE)
-  if("try-error" %in% class(fit))
-    return(c(ARCH.LM=NA_real_))
-  else
-  {
+arch_stat <- function(x, lags = 12, demean = TRUE) {
+  if (length(x) <= 13) {
+    return(c(ARCH.LM = NA_real_))
+  }
+  if (demean) {
+    x <- x - mean(x, na.rm = TRUE)
+  }
+  mat <- embed(x^2, lags + 1)
+  fit <- try(lm(mat[, 1] ~ mat[, -1]), silent = TRUE)
+  if ("try-error" %in% class(fit)) {
+    return(c(ARCH.LM = NA_real_))
+  } else {
     arch.lm <- summary(fit)
     S <- arch.lm$r.squared #* NROW(mat)
-    return(c(ARCH.LM=S))
+    return(c(ARCH.LM = S))
   }
 }

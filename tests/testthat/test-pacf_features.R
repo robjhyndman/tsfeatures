@@ -1,7 +1,6 @@
 # A unit tests for pacf_features() function
 
-if(require(testthat))
-{
+if (require(testthat)) {
   context("Tests on output")
   test_that("test for pacf_features() results on non-seasonal ts data", {
     z <- pacf_features(WWWusage)
@@ -19,4 +18,3 @@ if(require(testthat))
     expect_gt(z[4], 0.12)
   })
 }
-

@@ -1,7 +1,6 @@
 # A unit tests for acf_features() function
 
-if(require(testthat))
-{
+if (require(testthat)) {
   context("Tests on output")
   test_that("test for acf_features() results on non-seasonal ts data", {
     z <- acf_features(WWWusage)
@@ -25,4 +24,3 @@ if(require(testthat))
     expect_gt(z[7], 0.62)
   })
 }
-

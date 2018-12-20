@@ -1,7 +1,6 @@
 # A unit tests for holt_parameters() function
 
-if(require(testthat))
-{
+if (require(testthat)) {
   context("Tests on output")
   test_that("test for holt_parameters() results on non-seasonal ts data", {
     z <- holt_parameters(WWWusage)

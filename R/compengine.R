@@ -18,7 +18,7 @@
 #' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
 #' @author Yangzhuoran Yang
 #' @export
-compengine <- function(x){
+compengine <- function(x) {
   c(autocorr_features(x), pred_features(x), station_features(x), dist_features(x), scal_features(x))
 }
 
@@ -48,15 +48,17 @@ compengine <- function(x){
 #' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
 #' @author Yangzhuoran Yang
 #' @export
-autocorr_features <- function(x){
-  acfv <- stats::acf(x, length(x)-1, plot = FALSE, na.action = na.pass)
-  output <- c(embed2_incircle_1 = embed2_incircle(x,1, acfv = acfv),
-              embed2_incircle_2 = embed2_incircle(x,2, acfv = acfv),
-              ac_9 = ac_9(x, acfv),
-              firstmin_ac = firstmin_ac(x, acfv),
-              trev_num = trev_num(x),
-              motiftwo_entro3 = motiftwo_entro3(x),
-              walker_propcross = walker_propcross(x))
+autocorr_features <- function(x) {
+  acfv <- stats::acf(x, length(x) - 1, plot = FALSE, na.action = na.pass)
+  output <- c(
+    embed2_incircle_1 = embed2_incircle(x, 1, acfv = acfv),
+    embed2_incircle_2 = embed2_incircle(x, 2, acfv = acfv),
+    ac_9 = ac_9(x, acfv),
+    firstmin_ac = firstmin_ac(x, acfv),
+    trev_num = trev_num(x),
+    motiftwo_entro3 = motiftwo_entro3(x),
+    walker_propcross = walker_propcross(x)
+  )
   return(output)
 }
 
@@ -78,10 +80,12 @@ autocorr_features <- function(x){
 #' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
 #' @author Yangzhuoran Yang
 #' @export
-pred_features <- function(x){
-  output <- c(localsimple_mean1 = localsimple_taures(x, "mean"),
-              localsimple_lfitac = localsimple_taures(x, "lfit"),
-              sampen_first = sampen_first(x))
+pred_features <- function(x) {
+  output <- c(
+    localsimple_mean1 = localsimple_taures(x, "mean"),
+    localsimple_lfitac = localsimple_taures(x, "lfit"),
+    sampen_first = sampen_first(x)
+  )
   return(output)
 }
 
@@ -103,10 +107,12 @@ pred_features <- function(x){
 #' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
 #' @author Yangzhuoran Yang
 #' @export
-station_features <- function(x){
-  output <- c(std1st_der = std1st_der(x),
-              spreadrandomlocal_meantaul_50 = spreadrandomlocal_meantaul(x, 50),
-              spreadrandomlocal_meantaul_ac2 = spreadrandomlocal_meantaul(x, "ac2"))
+station_features <- function(x) {
+  output <- c(
+    std1st_der = std1st_der(x),
+    spreadrandomlocal_meantaul_50 = spreadrandomlocal_meantaul(x, 50),
+    spreadrandomlocal_meantaul_ac2 = spreadrandomlocal_meantaul(x, "ac2")
+  )
   return(output)
 }
 
@@ -128,9 +134,11 @@ station_features <- function(x){
 #' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
 #' @author Yangzhuoran Yang
 #' @export
-dist_features <- function(x){
-  output <- c(histogram_mode_10 = histogram_mode(x),
-              outlierinclude_mdrmd = outlierinclude_mdrmd(x))
+dist_features <- function(x) {
+  output <- c(
+    histogram_mode_10 = histogram_mode(x),
+    outlierinclude_mdrmd = outlierinclude_mdrmd(x)
+  )
   return(output)
 }
 
@@ -148,7 +156,7 @@ dist_features <- function(x){
 #' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
 #' @author Yangzhuoran Yang
 #' @export
-scal_features <- function(x){
+scal_features <- function(x) {
   output <- c(fluctanal_prop_r1 = fluctanal_prop_r1(x))
   return(output)
 }
@@ -170,18 +178,18 @@ scal_features <- function(x){
 #' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
 #' @author Yangzhuoran Yang
 #' @export
-embed2_incircle <- function(y, boundary = NULL, acfv = stats::acf(y, length(y)-1, plot = FALSE, na.action = na.pass)){
-  if(is.null(boundary)){
+embed2_incircle <- function(y, boundary = NULL, acfv = stats::acf(y, length(y) - 1, plot = FALSE, na.action = na.pass)) {
+  if (is.null(boundary)) {
     warning("`embed2_incircle()` using `boundary = 1`. Set value with `boundary`.")
     boundary <- 1
   }
   tau <- firstzero_ac(y, acfv)
-  xt <- y[1:(length(y)-tau)]# part of the time series
-  xtp <- y[(1+tau):length(y)]# time-lagged time series
-  N <- length(y) - tau# Length of each time series subsegment
+  xt <- y[1:(length(y) - tau)] # part of the time series
+  xtp <- y[(1 + tau):length(y)] # time-lagged time series
+  N <- length(y) - tau # Length of each time series subsegment
 
   # CIRCLES (points inside a given circular boundary)
-  return(sum(xtp^2+xt^2 < boundary, na.rm=TRUE)/N)
+  return(sum(xtp^2 + xt^2 < boundary, na.rm = TRUE) / N)
 }
 
 # CO_firstzero_ac
@@ -196,11 +204,11 @@ embed2_incircle <- function(y, boundary = NULL, acfv = stats::acf(y, length(y)-1
 #' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
 #' @author Yangzhuoran Yang
 #' @export
-firstzero_ac <- function(y, acfv = stats::acf(y, N-1, plot=FALSE, na.action = na.pass)){
+firstzero_ac <- function(y, acfv = stats::acf(y, N - 1, plot = FALSE, na.action = na.pass)) {
   N <- length(y)
   corrs <- acfv$acf[-1]
-  for(tau in 1:(N-1)){
-    if(corrs[tau]<0) return(tau) # we know it starts 1, so first negative will be the zero-crossing
+  for (tau in 1:(N - 1)) {
+    if (corrs[tau] < 0) return(tau) # we know it starts 1, so first negative will be the zero-crossing
   }
   return(N) # If haven't left yet, set output to sample size
 }
@@ -215,7 +223,7 @@ firstzero_ac <- function(y, acfv = stats::acf(y, N-1, plot=FALSE, na.action = na
 #' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
 #' @author Yangzhuoran Yang
 #' @export
-ac_9 <- function(y, acfv = stats::acf(y, 9, plot = FALSE, na.action = na.pass)){
+ac_9 <- function(y, acfv = stats::acf(y, 9, plot = FALSE, na.action = na.pass)) {
   acfv$acf[10]
 }
 
@@ -233,25 +241,25 @@ ac_9 <- function(y, acfv = stats::acf(y, 9, plot = FALSE, na.action = na.pass)){
 #' @examples
 #' firstmin_ac(WWWusage)
 #' @export
-firstmin_ac <- function(x, acfv = stats::acf(x,lag.max = N-1, plot = FALSE, na.action = na.pass)){
+firstmin_ac <- function(x, acfv = stats::acf(x, lag.max = N - 1, plot = FALSE, na.action = na.pass)) {
   # hctsa uses autocorr in MatLab to calculate autocorrelation
   N <- length(x)
   # getting acf for all lags
   # possible delay when sample size is too big
-  autoCorr <- numeric(N-1)
-  autoCorr[1:(N-1)] <- acfv$acf[-1]
-  for(i in 1:length(autoCorr)){
-    if(is.na(autoCorr[i])){
+  autoCorr <- numeric(N - 1)
+  autoCorr[1:(N - 1)] <- acfv$acf[-1]
+  for (i in 1:length(autoCorr)) {
+    if (is.na(autoCorr[i])) {
       warning("No minimum was found.")
       return(NA)
     }
-    if(i==2 && autoCorr[2] > autoCorr[1]) {
+    if (i == 2 && autoCorr[2] > autoCorr[1]) {
       return(1)
-    } else if(i>2 && autoCorr[i-2] > autoCorr[i-1] && autoCorr[i-1] < autoCorr[i]){
-      return(i-1)
+    } else if (i > 2 && autoCorr[i - 2] > autoCorr[i - 1] && autoCorr[i - 1] < autoCorr[i]) {
+      return(i - 1)
     }
   }
-  return(N-1)
+  return(N - 1)
 }
 
 # CO_trev_1_num
@@ -269,10 +277,10 @@ firstmin_ac <- function(x, acfv = stats::acf(x,lag.max = N-1, plot = FALSE, na.a
 #' @examples
 #' trev_num(WWWusage)
 #' @export
-trev_num <- function(y){
-  yn <-  y[1:(length(y)-1)]
-  yn1  <-  y[2:length(y)]
-  mean((yn1-yn)^3, na.rm = TRUE)
+trev_num <- function(y) {
+  yn <- y[1:(length(y) - 1)]
+  yn1 <- y[2:length(y)]
+  mean((yn1 - yn)^3, na.rm = TRUE)
 }
 
 # SB_MotifTwo_mean_hhh
@@ -291,26 +299,26 @@ trev_num <- function(y){
 #' motiftwo_entro3(WWWusage)
 #' @export
 #'
-motiftwo_entro3 <- function(y){
+motiftwo_entro3 <- function(y) {
   yBin <- binarize_mean(y)
   N <- length(yBin)
-  if(N<5) warning('Time series too short')
+  if (N < 5) warning("Time series too short")
 
   r1 <- yBin == 1
   r0 <- yBin == 0
 
-  r1 <- r1[1:(length(r1)-1)]
-  r0 <- r0[1:(length(r0)-1)]
+  r1 <- r1[1:(length(r1) - 1)]
+  r0 <- r0[1:(length(r0) - 1)]
 
   r00 <- r0 & yBin[2:N] == 0
   r01 <- r0 & yBin[2:N] == 1
   r10 <- r1 & yBin[2:N] == 0
   r11 <- r1 & yBin[2:N] == 1
 
-  r00 <- r00[1:(length(r00)-1)]
-  r01 <- r01[1:(length(r01)-1)]
-  r10 <- r10[1:(length(r10)-1)]
-  r11 <- r11[1:(length(r11)-1)]
+  r00 <- r00[1:(length(r00) - 1)]
+  r01 <- r01[1:(length(r01) - 1)]
+  r10 <- r10[1:(length(r10) - 1)]
+  r11 <- r11[1:(length(r11) - 1)]
 
   r000 <- r00 & yBin[3:N] == 0
   r001 <- r00 & yBin[3:N] == 1
@@ -345,16 +353,16 @@ motiftwo_entro3 <- function(y){
 #' @author Yangzhuoran Yang
 #' @export
 
-binarize_mean <- function(y){
-  y <- y-mean(y)
-  Y <-  numeric(length(y))
-  Y[y > 0] <-  1
+binarize_mean <- function(y) {
+  y <- y - mean(y)
+  Y <- numeric(length(y))
+  Y[y > 0] <- 1
   return(Y)
 }
 
-f_entropy <- function(x){
+f_entropy <- function(x) {
   # entropy of a set of counts, log(0)=0
-  -sum(x[x>0]*log(x[x>0]))
+  -sum(x[x > 0] * log(x[x > 0]))
 }
 
 
@@ -375,17 +383,17 @@ f_entropy <- function(x){
 #' @export
 #'
 #'
-walker_propcross <- function(y){
+walker_propcross <- function(y) {
   N <- length(y)
   p <- 0.1
   #   walker starts at zero and narrows the gap between its position
   #   and the time series value at that point by 0.1, to give the value at the subsequent time step
   w <- numeric(N)
   w[1] <- 0 # start at zero
-  for(i in 2:N){
-    w[i] = w[i-1] + p*(y[i-1]-w[i-1])
+  for (i in 2:N) {
+    w[i] <- w[i - 1] + p * (y[i - 1] - w[i - 1])
   }
-  out.sw_propcross <-  sum((w[1:(N-1)]-y[1:(N-1)])*(w[2:N]-y[2:N]) < 0, na.rm = TRUE)/(N-1)
+  out.sw_propcross <- sum((w[1:(N - 1)] - y[1:(N - 1)]) * (w[2:N] - y[2:N]) < 0, na.rm = TRUE) / (N - 1)
   return(out.sw_propcross)
 }
 
@@ -408,35 +416,35 @@ walker_propcross <- function(y){
 #' Default to 1 when using method \code{mean} and 3 when using method \code{lfit}.
 #' @return The first zero crossing of the autocorrelation function of the residuals
 #' @export
-localsimple_taures <- function(y, forecastMeth = "mean", trainLength = NULL ){
-  if(!forecastMeth %in% c("mean", "lfit")) stop("`localsimple_taures`:Unknown forecasting method")
-  if(forecastMeth == "mean" && is.null(trainLength)) trainLength <- 1
-  if(forecastMeth == "lfit" && is.null(trainLength)) trainLength <- "ac"
+localsimple_taures <- function(y, forecastMeth = "mean", trainLength = NULL) {
+  if (!forecastMeth %in% c("mean", "lfit")) stop("`localsimple_taures`:Unknown forecasting method")
+  if (forecastMeth == "mean" && is.null(trainLength)) trainLength <- 1
+  if (forecastMeth == "lfit" && is.null(trainLength)) trainLength <- "ac"
 
-  if("ac" %in% trainLength) {
+  if ("ac" %in% trainLength) {
     lp <- firstzero_ac(y)
-    } else {
+  } else {
     lp <- trainLength
   }
 
 
 
   N <- length(y)
-  evalr <-  (lp+1):N
-  if( length(evalr)==0)  stop('Time series too short for forecasting in `localsimple_taures`')
+  evalr <- (lp + 1):N
+  if (length(evalr) == 0) stop("Time series too short for forecasting in `localsimple_taures`")
 
   res <- numeric(length(evalr))
-  if(forecastMeth == "mean"){
-    for(i in 1:length(evalr))
-      res[i] <- mean(y[(evalr[i]-lp):(evalr[i]-1)]) - y[evalr[i]]
+  if (forecastMeth == "mean") {
+    for (i in 1:length(evalr))
+      res[i] <- mean(y[(evalr[i] - lp):(evalr[i] - 1)]) - y[evalr[i]]
   }
-  if(forecastMeth == "lfit"){
-    for(i in 1:length(evalr)){
+  if (forecastMeth == "lfit") {
+    for (i in 1:length(evalr)) {
       # Fit linear
       a <- 1:lp
-      b <- y[(evalr[i]-lp):(evalr[i]-1)]
-      lm.ab <- lm(b~a, data = data.frame(a,b))
-      res[i] <- predict(lm.ab, newdata = data.frame(a=lp+1))-y[evalr[i]]
+      b <- y[(evalr[i] - lp):(evalr[i] - 1)]
+      lm.ab <- lm(b ~ a, data = data.frame(a, b))
+      res[i] <- predict(lm.ab, newdata = data.frame(a = lp + 1)) - y[evalr[i]]
       # p = polyfit((1:lp)',y(evalr(i)-lp:evalr(i)-1),1)
       #       res(i) = polyval(p,lp+1) - y(evalr(i)); % prediction - value
     }
@@ -466,10 +474,10 @@ localsimple_taures <- function(y, forecastMeth = "mean", trainLength = NULL ){
 #' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
 #' @author Yangzhuoran Yang
 #' @export
-sampen_first <- function(y){
+sampen_first <- function(y) {
   M <- 5
   r <- 0.3
-  sampEn = sampenc(y,M+1,r)
+  sampEn <- sampenc(y, M + 1, r)
   return(sampEn)
 }
 
@@ -495,36 +503,36 @@ sampen_first <- function(y){
 #' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
 #' @author Yangzhuoran Yang
 #' @export
-sampenc <- function(y,M = 6,r = 0.3){
+sampenc <- function(y, M = 6, r = 0.3) {
   N <- length(y)
-  lastrun <- numeric(N) #zeros(1,N)
-  run <- numeric(N) #zeros(1,N)
-  A <- numeric(M) #zeros(M,1)
-  B <- numeric(M) #zeros(M,1)
+  lastrun <- numeric(N) # zeros(1,N)
+  run <- numeric(N) # zeros(1,N)
+  A <- numeric(M) # zeros(M,1)
+  B <- numeric(M) # zeros(M,1)
   # Get counting:
-  for(i in 1:(N-1)){ # go through each point in the time series, counting matches
+  for (i in 1:(N - 1)) { # go through each point in the time series, counting matches
     y1 <- y[i]
-    for(jj in 1:(N-i)){ # compare to points through the rest of the time series
+    for (jj in 1:(N - i)) { # compare to points through the rest of the time series
       # Compare to future index, j:
       j <- i + jj
       # This future point, j, matches the time-series value at i:
-      if (isTRUE(abs(y[j]-y1) < r) ){
+      if (isTRUE(abs(y[j] - y1) < r)) {
         run[jj] <- lastrun[jj] + 1 # increase run count for this lag
         M1 <- min(M, run[jj])
 
-        A[1:M1] <- A[1:M1]+1
+        A[1:M1] <- A[1:M1] + 1
         if (j < N) B[1:M1] <- B[1:M1] + 1
-      } else{
+      } else {
         run[jj] <- 0
       }
     }
-    for( j in 1:(N-i)){
+    for (j in 1:(N - i)) {
       lastrun[j] <- run[j]
     }
   }
   # Calculate for m <- 2
   # NN <- N*(N-1)/2
-  p <- A[2]/B[1]
+  p <- A[2] / B[1]
   e <- -log(p)
   return(e)
 }
@@ -547,8 +555,8 @@ sampenc <- function(y,M = 6,r = 0.3){
 #' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
 #' @author Yangzhuoran Yang
 #' @export
-std1st_der <- function(y){
-  if(length(y)<2) stop("Time series is too short to compute differences")
+std1st_der <- function(y) {
+  if (length(y) < 2) stop("Time series is too short to compute differences")
   yd <- diff(y)
   return(sd(yd, na.rm = TRUE))
 }
@@ -570,27 +578,26 @@ std1st_der <- function(y){
 #' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
 #' @author Yangzhuoran Yang
 #' @export
-spreadrandomlocal_meantaul <- function(y, l =50){
-  if(is.character(l) && "ac2" %in% l) l <- 2*firstzero_ac(y)
-  if(!is.numeric(l)) stop("Unknown specifier `l`")
-  numSegs  <-  100
+spreadrandomlocal_meantaul <- function(y, l = 50) {
+  if (is.character(l) && "ac2" %in% l) l <- 2 * firstzero_ac(y)
+  if (!is.numeric(l)) stop("Unknown specifier `l`")
+  numSegs <- 100
   N <- length(y)
-  if(l>0.9*N) stop("This time series is too short. Specify proper segment lengrh in `l`")
+  if (l > 0.9 * N) stop("This time series is too short. Specify proper segment lengrh in `l`")
 
   qs <- numeric(numSegs)
 
-  for (j in 1:numSegs){
+  for (j in 1:numSegs) {
     # pick a range
     # in this implementation, ranges CAN overlap
-    ist <- sample(N-1-l,1) # random start point (not exceeding the endpoint)
-    ifh <- ist+l-1 # finish index
+    ist <- sample(N - 1 - l, 1) # random start point (not exceeding the endpoint)
+    ifh <- ist + l - 1 # finish index
     rs <- ist:ifh # sample range (from starting to finishing index)
     ysub <- y[rs] # subsection of the time series
     taul <- firstzero_ac(ysub)
     qs[j] <- taul
   }
-  return(mean(qs,na.rm = TRUE))
-
+  return(mean(qs, na.rm = TRUE))
 }
 
 
@@ -612,14 +619,14 @@ spreadrandomlocal_meantaul <- function(y, l =50){
 #' @importFrom graphics hist
 #' @importFrom stats predict
 
-histogram_mode <- function(y, numBins = 10){
+histogram_mode <- function(y, numBins = 10) {
 
   # Compute the histogram from the data:
-  if (is.numeric(numBins)){
-    histdata <- hist(y,plot = FALSE, breaks = 10)
+  if (is.numeric(numBins)) {
+    histdata <- hist(y, plot = FALSE, breaks = 10)
     binCenters <- histdata$mids
   } else {
-    stop('Unknown format for numBins')
+    stop("Unknown format for numBins")
   }
   # Compute bin centers from bin edges:
   # binCenters <- mean([binEdges(1:end-1) binEdges(2:end)])
@@ -659,10 +666,11 @@ histogram_mode <- function(y, numBins = 10){
 #' @export
 #' @importFrom stats ts tsp sd
 
-outlierinclude_mdrmd <- function(y, zscored=TRUE) {
-  if(length(unique(y))==1L)
+outlierinclude_mdrmd <- function(y, zscored = TRUE) {
+  if (length(unique(y)) == 1L) {
     stop("The time series is a constant!")
-  if(zscored) {
+  }
+  if (zscored) {
     tmp <- ts(c(scale(y)))
     tsp(tmp) <- tsp(y)
     y <- tmp
@@ -671,23 +679,23 @@ outlierinclude_mdrmd <- function(y, zscored=TRUE) {
     isd <- sd(y, na.rm = TRUE) # Modified to fit the 0.01*sigma increment in discription
   }
   N <- length(y)
-  inc <- 0.01*isd
+  inc <- 0.01 * isd
   # inc <- 0.01
   thr <- seq(from = 0, to = max(abs(y), na.rm = TRUE), by = inc)
   tot <- N
-  if(length(thr) == 0) stop("peculiar time series")
+  if (length(thr) == 0) stop("peculiar time series")
 
   msDt <- numeric(length(thr))
   msDtp <- numeric(length(thr))
-  for (i in 1:length(thr)){
+  for (i in 1:length(thr)) {
     th <- thr[i] # the threshold
     # Construct a time series consisting of inter-event intervals for parts
     # of the time serie exceeding the threshold, th
     r <- which(abs(y) >= th)
 
-    Dt_exc <- diff(r)  # Delta t (interval) time series exceeding threshold
-    msDt[i] <- median(r)/(N/2)-1
-    msDtp[i] <-  length(Dt_exc)/tot*100
+    Dt_exc <- diff(r) # Delta t (interval) time series exceeding threshold
+    msDt[i] <- median(r) / (N / 2) - 1
+    msDtp[i] <- length(Dt_exc) / tot * 100
     # this is just really measuring the distribution:
     # the proportion of possible values
     # that are actually used in
@@ -697,15 +705,17 @@ outlierinclude_mdrmd <- function(y, zscored=TRUE) {
 
   # Trim off where the statistic power is lacking: less than 2% of data
   # included
-  trimthr <- 2  # percent
+  trimthr <- 2 # percent
   mj <- which(msDtp > trimthr)[length(which(msDtp > trimthr))]
-  if (length(mj) != 0){
+  if (length(mj) != 0) {
     msDt <- msDt[1:mj]
     msDtp <- msDtp[1:mj]
     thr <- thr[1:mj]
-  } else stop("the statistic power is lacking: less than 2% of data included")
+  } else {
+    stop("the statistic power is lacking: less than 2% of data included")
+  }
 
-  out.mdrmd <-  median(msDt)
+  out.mdrmd <- median(msDt)
   return(out.mdrmd)
 }
 
@@ -726,7 +736,7 @@ outlierinclude_mdrmd <- function(y, zscored=TRUE) {
 #' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
 #' @author Yangzhuoran Yang
 #' @export
-fluctanal_prop_r1 <- function(x){
+fluctanal_prop_r1 <- function(x) {
   q <- 2
   tauStep <- 50
   k <- 1
@@ -735,39 +745,40 @@ fluctanal_prop_r1 <- function(x){
   x_NA0 <- ifelse(!is.na(x), x, 0)
 
   y <- cumsum(x_NA0)
-  taur <- unique(round(exp(seq(from = log(5),to = log(floor(N/2)),length.out = tauStep))))
+  taur <- unique(round(exp(seq(from = log(5), to = log(floor(N / 2)), length.out = tauStep))))
   ntau <- length(taur)
-  if (ntau < 8) # fewer than 8 points
+  if (ntau < 8) { # fewer than 8 points
     stop("This time series is too short to analyze using this fluctuation analysis")
+  }
 
   Fl <- numeric(ntau)
 
-  for (i in 1:ntau){
+  for (i in 1:ntau) {
     # buffer the time series at the scale tau
     tau <- taur[i] # the scale on which to compute fluctuations
-    y_buff <- split(y, ceiling(seq_along(y)/tau))
+    y_buff <- split(y, ceiling(seq_along(y) / tau))
 
-    if (length(y_buff) > floor(N/tau)) # zero-padded, remove trailing set of points...
-        y_buff <- y_buff[-length(y_buff)]
+    if (length(y_buff) > floor(N / tau)) { # zero-padded, remove trailing set of points...
+      y_buff <- y_buff[-length(y_buff)]
+    }
 
     # analyzed length of time series (with trailing end-points removed)
-    nn <- length(y_buff)*tau
+    nn <- length(y_buff) * tau
     tt <- (1:tau) # faux time range
 
-    for (j in 1:length(y_buff)){
+    for (j in 1:length(y_buff)) {
       # fit a polynomial of order k in each subsegment
-      lm.tt <- lm(lmy~tt, data = data.frame(tt,lmy=y_buff[[j]]))
+      lm.tt <- lm(lmy ~ tt, data = data.frame(tt, lmy = y_buff[[j]]))
       # remove the trend, store back in y_buff
       y_buff[[j]] <- residuals(lm.tt)
-
     }
 
     tem <- sapply(y_buff, range)
-    y_dt <- tem[2,]-tem[1,]
+    y_dt <- tem[2, ] - tem[1, ]
 
     # Compute fluctuation function:
 
-    Fl[i] <- (mean(y_dt^q))^(1/q)
+    Fl[i] <- (mean(y_dt^q))^(1 / q)
   }
   logtt <- log(taur)
   logFF <- log(Fl)
@@ -775,31 +786,29 @@ fluctanal_prop_r1 <- function(x){
 
 
   ## Try assuming two components (2 distinct scaling regimes)
-    # Move through, and fit a straight line to loglog before and after each point.
+  # Move through, and fit a straight line to loglog before and after each point.
   # Find point with the minimum sum of squared errors
   # First spline interpolate to get an even sampling of the interval
   # (currently, in the log scale, there are relatively more at large scales
-     # Determine the errors
-     sserr <- rep(NA, ntt) # don't choose the end points
-     minPoints <- 6
-     for (i in minPoints:(ntt-minPoints)){
-       r1 <- 1:i
-       # p1 <- polyfit(logtt(r1),logFF(r1),1)
-       p1 <- lm(y~x, data=data.frame(x = logtt[r1], y = logFF[r1]))
-       r2 <- i:ntt
-       # p2 <- polyfit(logtt(r2),logFF(r2),1)
-       p2 <- lm(y~x, data=data.frame(x = logtt[r2], y = logFF[r2]))
-       # Sum of errors from fitting lines to both segments:
-       sserr[i] <- norm(-residuals(p1), type = "2") + norm(-residuals(p2), type = "2")
-     }
+  # Determine the errors
+  sserr <- rep(NA, ntt) # don't choose the end points
+  minPoints <- 6
+  for (i in minPoints:(ntt - minPoints)) {
+    r1 <- 1:i
+    # p1 <- polyfit(logtt(r1),logFF(r1),1)
+    p1 <- lm(y ~ x, data = data.frame(x = logtt[r1], y = logFF[r1]))
+    r2 <- i:ntt
+    # p2 <- polyfit(logtt(r2),logFF(r2),1)
+    p2 <- lm(y ~ x, data = data.frame(x = logtt[r2], y = logFF[r2]))
+    # Sum of errors from fitting lines to both segments:
+    sserr[i] <- norm(-residuals(p1), type = "2") + norm(-residuals(p2), type = "2")
+  }
 
-     # breakPt is the point where it's best to fit a line before and another line after
-     breakPt <- which.min(sserr)
-     r1 <- 1:breakPt
-     r2 <- breakPt:ntt
+  # breakPt is the point where it's best to fit a line before and another line after
+  breakPt <- which.min(sserr)
+  r1 <- 1:breakPt
+  r2 <- breakPt:ntt
 
-     prop_r1 <- length(r1)/ntt
-     return(prop_r1)
+  prop_r1 <- length(r1) / ntt
+  return(prop_r1)
 }
-
-

@@ -12,21 +12,17 @@
 #' @author Rob J Hyndman
 #' @export
 
-stl_features <- function(x, ...)
-{
-  if ("msts" %in% class(x))
-  {
+stl_features <- function(x, ...) {
+  if ("msts" %in% class(x)) {
     msts <- attributes(x)$msts
     nperiods <- length(msts)
   }
-  else if ("ts" %in% class(x))
-  {
+  else if ("ts" %in% class(x)) {
     msts <- frequency(x)
     nperiods <- msts > 1
     season <- 0
   }
-  else
-  {
+  else {
     msts <- 1
     nperiods <- 0L
     season <- 0
@@ -37,11 +33,11 @@ stl_features <- function(x, ...)
   stlfit <- forecast::mstl(x, ...)
   trend0 <- stlfit[, "Trend"]
   remainder <- stlfit[, "Remainder"]
-  seasonal <- stlfit[, grep("Season", colnames(stlfit)), drop=FALSE]
-  
+  seasonal <- stlfit[, grep("Season", colnames(stlfit)), drop = FALSE]
+
   # When the maximum frequency is dropped
-  tsp(x) <- tsp(trend0) 
-  
+  tsp(x) <- tsp(trend0)
+
   # De-trended and de-seasonalized data
   detrend <- x - trend0
   deseason <- forecast::seasadj(stlfit)
@@ -56,17 +52,17 @@ stl_features <- function(x, ...)
   nseas <- NCOL(seasonal)
 
   # Measure of trend strength
-  if (vardeseason/varx < 1e-10)
+  if (vardeseason / varx < 1e-10) {
     trend <- 0
-  else
-    trend <- max(0, min(1, 1 - vare/vardeseason))
+  } else {
+    trend <- max(0, min(1, 1 - vare / vardeseason))
+  }
 
-  if (nseas > 0)
-  {
+  if (nseas > 0) {
     # Measure of seasonal strength
     season <- numeric(nseas)
     for (i in seq(nseas))
-      season[i] <- max(0, min(1, 1 - vare/var(remainder + seasonal[, i], na.rm=TRUE)))
+      season[i] <- max(0, min(1, 1 - vare / var(remainder + seasonal[, i], na.rm = TRUE)))
 
     # Find time of peak and trough for each component
     peak <- trough <- numeric(nseas)
@@ -82,7 +78,7 @@ stl_features <- function(x, ...)
 
   # Compute measure of spikiness
   d <- (remainder - mean(remainder, na.rm = TRUE))^2
-  varloo <- (vare * (n - 1) - d)/(n - 2)
+  varloo <- (vare * (n - 1) - d) / (n - 2)
   spike <- var(varloo, na.rm = TRUE)
 
   # Compute measures of linearity and curvature
@@ -94,12 +90,14 @@ stl_features <- function(x, ...)
   acfremainder <- unname(acf_features(remainder))
 
   # Assemble results
-  output <- c(nperiods = nperiods, seasonal_period = msts, trend = trend,
+  output <- c(
+    nperiods = nperiods, seasonal_period = msts, trend = trend,
     spike = spike, linearity = unname(linearity), curvature = unname(curvature),
-    e_acf1 = acfremainder[1L], e_acf10 = acfremainder[2L])
-  if (nseas > 0)
+    e_acf1 = acfremainder[1L], e_acf10 = acfremainder[2L]
+  )
+  if (nseas > 0) {
     output <- c(output, seasonal_strength = season, peak = peak, trough = trough)
+  }
 
   return(output)
 }
-

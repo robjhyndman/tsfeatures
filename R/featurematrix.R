@@ -24,83 +24,89 @@
 #' @author Rob J Hyndman
 #' @export
 tsfeatures <- function(tslist,
-                       features = c("frequency","stl_features","entropy","acf_features"),
-                       scale=TRUE, trim=FALSE, trim_amount=0.1, parallel=FALSE, na.action=na.pass, ...)
-{
-  if(!is.list(tslist))
+                       features = c("frequency", "stl_features", "entropy", "acf_features"),
+                       scale = TRUE, trim = FALSE, trim_amount = 0.1, parallel = FALSE, na.action = na.pass, ...) {
+  if (!is.list(tslist)) {
     tslist <- as.list(tslist)
-  if(scale)
+  }
+  if (scale) {
     tslist <- map(tslist, scalets)
-  if(trim)
-    tslist <- map(tslist, trimts, trim=trim_amount)
+  }
+  if (trim) {
+    tslist <- map(tslist, trimts, trim = trim_amount)
+  }
   # Interpolate for missing values
   tslist <- map(tslist, function(x) {
     y <- na.action(x)
     attributes(y) <- attributes(x)
     x <- y
-    })
+  })
   # Compute all features
-	flist <- funlist <- list()
+  flist <- funlist <- list()
   # Assuming that didn't generate an error, we will proceed
-	for(i in seq_along(features)){
-	  if(parallel)
-	  {
-	    num.cores <- parallel::detectCores()
-            doParallel::registerDoParallel(cores=num.cores)
-	    `%dopar%` <- foreach::`%dopar%`
+  for (i in seq_along(features)) {
+    if (parallel) {
+      num.cores <- parallel::detectCores()
+      doParallel::registerDoParallel(cores = num.cores)
+      `%dopar%` <- foreach::`%dopar%`
       j <- 0 # Just to avoid global variable error in check
-	    flist[[i]] <- foreach::foreach(j = seq_along(tslist)) %dopar% {
-	      match.fun(features[i])(tslist[[j]], ...)}
-	  }
-	  else
-	  {
-	    flist[[i]] <- map(tslist, function(x){match.fun(features[i])(x, ...)})
-	  }
-	  # Check names
-	  if(is.null(names(flist[[i]][[1]])))
-	    flist[[i]] <- map(flist[[i]],
-	                      function(x){
-	                        names(x) <- features[i]
-	                        return(x)})
-	}
-	
-	# Rename duplicate feature names to avoid conflicts
-	flist <- rename_duplicate_features(features, flist)
-	
-	# Unpack features into a list of numeric vectors
+      flist[[i]] <- foreach::foreach(j = seq_along(tslist)) %dopar% {
+        match.fun(features[i])(tslist[[j]], ...)
+      }
+    }
+    else {
+      flist[[i]] <- map(tslist, function(x) {
+        match.fun(features[i])(x, ...)
+      })
+    }
+    # Check names
+    if (is.null(names(flist[[i]][[1]]))) {
+      flist[[i]] <- map(
+        flist[[i]],
+        function(x) {
+          names(x) <- features[i]
+          return(x)
+        }
+      )
+    }
+  }
+
+  # Rename duplicate feature names to avoid conflicts
+  flist <- rename_duplicate_features(features, flist)
+
+  # Unpack features into a list of numeric vectors
   featurelist <- list()
-	for(i in seq_along(tslist))
-    featurelist[[i]] <- unlist(map(flist, function(u)u[[i]]))
+  for (i in seq_along(tslist))
+    featurelist[[i]] <- unlist(map(flist, function(u) u[[i]]))
 
   # Find feature names
   featurenames <- map(featurelist, names)
 
   fnames <- unique(unlist(featurenames))
-  if(any(featurenames==""))
+  if (any(featurenames == "")) {
     stop("Some unnamed features")
+  }
 
   # Create feature matrix
-  fmat <- matrix(NA_real_, nrow=length(tslist), ncol=length(fnames))
+  fmat <- matrix(NA_real_, nrow = length(tslist), ncol = length(fnames))
   colnames(fmat) <- fnames
   rownames(fmat) <- names(tslist)
 
-  for(i in seq_along(tslist))
-    fmat[i,featurenames[[i]]] <- featurelist[[i]][featurenames[[i]]]
-  
+  for (i in seq_along(tslist))
+    fmat[i, featurenames[[i]]] <- featurelist[[i]][featurenames[[i]]]
+
   return(tibble::as_tibble(fmat))
 }
 
 # Scale time series
-scalets <- function(x)
-{ 
+scalets <- function(x) {
   n <- length(x)
-  scaledx <- as.numeric(scale(x, center=TRUE, scale=TRUE))
-  if("msts" %in% class(x)){
+  scaledx <- as.numeric(scale(x, center = TRUE, scale = TRUE))
+  if ("msts" %in% class(x)) {
     msts <- attributes(x)$msts
     y <- forecast::msts(scaledx, seasonal.periods = msts)
   }
-  else
-  {
+  else {
     y <- as.ts(scaledx)
   }
   tsp(y) <- tsp(x)
@@ -108,8 +114,7 @@ scalets <- function(x)
 }
 
 # Trim time series
-trimts <- function(x, trim = 0.1)
-{
+trimts <- function(x, trim = 0.1) {
   qtl <- quantile(x, c(trim, 1 - trim), na.rm = TRUE)
   x[x < qtl[1L] | x > qtl[2L]] <- NA
   return(x)
@@ -118,25 +123,25 @@ trimts <- function(x, trim = 0.1)
 
 
 
-#check for duplicate feature names in the feature list and rename by prepending
-#the name of the function that generates them to avoid conflicts: "functionName_featureName"
-#both functions' features are renamed
-#processed in order of appearance in the list
-#a warning is generated when conflicts are found
+# check for duplicate feature names in the feature list and rename by prepending
+# the name of the function that generates them to avoid conflicts: "functionName_featureName"
+# both functions' features are renamed
+# processed in order of appearance in the list
+# a warning is generated when conflicts are found
 rename_duplicate_features <- function(fun_names, feat_list) {
   if (length(feat_list) < 2) {
     return(feat_list)
   }
-  for (i in 1:(length(feat_list) -1)) {
-    for (j in (i+1):length(feat_list)) {
+  for (i in 1:(length(feat_list) - 1)) {
+    for (j in (i + 1):length(feat_list)) {
       names_first_fun <- names(feat_list[[i]][[1]])
       names_sec_fun <- names(feat_list[[j]][[1]])
-      #look for at least one match in the names of the features
-      if ( Reduce("|", names_first_fun %in% names_sec_fun )) {
-        warning( paste("Conflicting feature names in functions: ", fun_names[[i]], " and ", fun_names[[j]]))
-        names_first_fun <- paste(fun_names[[i]], "_", names_first_fun, sep="")
+      # look for at least one match in the names of the features
+      if (Reduce("|", names_first_fun %in% names_sec_fun)) {
+        warning(paste("Conflicting feature names in functions: ", fun_names[[i]], " and ", fun_names[[j]]))
+        names_first_fun <- paste(fun_names[[i]], "_", names_first_fun, sep = "")
         names(feat_list[[i]][[1]]) <- names_first_fun
-        names_sec_fun <- paste(fun_names[[j]], "_", names_sec_fun, sep="")
+        names_sec_fun <- paste(fun_names[[j]], "_", names_sec_fun, sep = "")
         names(feat_list[[j]][[1]]) <- names_sec_fun
       }
     }
