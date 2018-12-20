@@ -15,7 +15,7 @@ spreadrandomlocal_meantaul(y, l = 50)
 mean of the first zero-crossings of the autocorrelation function
 }
 \description{
-100 time-series segments of length \code{l} are selected at random from the time series and 
+100 time-series segments of length \code{l} are selected at random from the time series and
 the mean of the first zero-crossings of the autocorrelation function in each segment is calculated.
 }
 \references{

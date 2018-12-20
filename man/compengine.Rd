@@ -17,7 +17,7 @@ Calculate the features that have been used in CompEngine database, using method 
 \code{kctsa}.
 }
 \details{
-The features involved can be grouped as \code{autocorrelation}, 
+The features involved can be grouped as \code{autocorrelation},
 \code{prediction}, \code{stationarity}, \code{distribution}, and \code{scaling}.
 }
 \references{

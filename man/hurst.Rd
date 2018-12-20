@@ -2,7 +2,7 @@
 % Please edit documentation in R/features.R
 \name{hurst}
 \alias{hurst}
-\title{Hurst coefficent}
+\title{Hurst coefficient}
 \usage{
 hurst(x)
 }

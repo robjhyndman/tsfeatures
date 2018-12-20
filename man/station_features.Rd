@@ -13,12 +13,12 @@ station_features(x)
 a vector with autocorrelation features
 }
 \description{
-Calculate the features that grouped as stationarity set, 
+Calculate the features that grouped as stationarity set,
 which have been used in CompEngine database, using method introduced in package \code{kctsa}.
 }
 \details{
-Features in this set are \code{std1st_der}, 
-\code{spreadrandomlocal_meantaul_50}, 
+Features in this set are \code{std1st_der},
+\code{spreadrandomlocal_meantaul_50},
 and \code{spreadrandomlocal_meantaul_ac2}.
 }
 \references{

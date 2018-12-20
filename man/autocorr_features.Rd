@@ -13,16 +13,16 @@ autocorr_features(x)
 a vector with autocorrelation features
 }
 \description{
-Calculate the features that grouped as autocorrelation set, 
+Calculate the features that grouped as autocorrelation set,
 which have been used in CompEngine database, using method introduced in package \code{kctsa}.
 }
 \details{
-Features in this set are \code{embed2_incircle_1}, 
-\code{embed2_incircle_2}, 
-\code{ac_9}, 
-\code{firstmin_ac}, 
-\code{trev_num}, 
-\code{motiftwo_entro3}, 
+Features in this set are \code{embed2_incircle_1},
+\code{embed2_incircle_2},
+\code{ac_9},
+\code{firstmin_ac},
+\code{trev_num},
+\code{motiftwo_entro3},
 and \code{walker_propcross}.
 }
 \references{

@@ -651,13 +651,16 @@ histogram_mode <- function(y, numBins = 10){
 #' Outliers are defined as furthest from the mean.
 #'
 #' @param y the input time series (ideally z-scored)
+#' @param zscored Should y be z-scored before computing the statistic. Default: TRUE
 #' @return median  of the median of range indices
 #' @references B.D. Fulcher and N.S. Jones. hctsa: A computational framework for automated time-series phenotyping using massive feature extraction. Cell Systems 5, 527 (2017).
 #' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
 #' @author Yangzhuoran Yang
 #' @export
+#' @importFrom stats ts tsp sd
+
 outlierinclude_mdrmd <- function(y, zscored=TRUE) {
-  if(length(unique(y))==1)
+  if(length(unique(y))==1L)
     stop("The time series is a constant!")
   if(zscored) {
     tmp <- ts(c(scale(y)))

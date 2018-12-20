@@ -10,10 +10,10 @@ motiftwo_entro3(y)
 \item{y}{the input time series}
 }
 \value{
-Entropie of words in the binary alphabet of length 3.
+Entropy of words in the binary alphabet of length 3.
 }
 \description{
-Coarse-graining is performed. Time-series values above its mean are given 1, 
+Coarse-graining is performed. Time-series values above its mean are given 1,
 and those below the mean are 0.
 }
 \examples{

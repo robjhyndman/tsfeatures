@@ -9,11 +9,11 @@ localsimple_taures(y, forecastMeth = "mean", trainLength = NULL)
 \arguments{
 \item{y}{the input time series}
 
-\item{forecastMeth}{the forecasting method, default to \code{mean}. 
-\code{mean}: local mean prediction using the past trainLength time-series values.  
+\item{forecastMeth}{the forecasting method, default to \code{mean}.
+\code{mean}: local mean prediction using the past trainLength time-series values.
 \code{lfit}: local linear prediction using the past trainLength time-series values.}
 
-\item{trainLength}{the number of time-series values to use to forecast the next value. 
+\item{trainLength}{the number of time-series values to use to forecast the next value.
 Default to 1 when using method \code{mean} and 3 when using method \code{lfit}.}
 }
 \value{

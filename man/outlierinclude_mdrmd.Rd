@@ -4,10 +4,12 @@
 \alias{outlierinclude_mdrmd}
 \title{How median depend on distributional outliers from software package \code{hctsa}}
 \usage{
-outlierinclude_mdrmd(y)
+outlierinclude_mdrmd(y, zscored = TRUE)
 }
 \arguments{
 \item{y}{the input time series (ideally z-scored)}
+
+\item{zscored}{Should y be z-scored before computing the statistic. Default: TRUE}
 }
 \value{
 median  of the median of range indices
@@ -19,7 +21,7 @@ of outliers being furthest from the mean.
 }
 \details{
 The threshold for including time-series data points in the analysis increases
-from zero to the maximum deviation, in increments of 0.01*sigma (by default), 
+from zero to the maximum deviation, in increments of 0.01*sigma (by default),
 where sigma is the standard deviation of the time series.
 
 At each threshold,  proportion of time series points

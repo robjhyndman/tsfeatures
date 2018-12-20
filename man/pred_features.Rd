@@ -13,12 +13,12 @@ pred_features(x)
 a vector with autocorrelation features
 }
 \description{
-Calculate the features that grouped as prediction set, 
+Calculate the features that grouped as prediction set,
 which have been used in CompEngine database, using method introduced in package \code{kctsa}.
 }
 \details{
-Features in this set are \code{localsimple_mean1}, 
-\code{localsimple_lfitac}, 
+Features in this set are \code{localsimple_mean1},
+\code{localsimple_lfitac},
 and \code{sampen_first}.
 }
 \references{

@@ -16,7 +16,7 @@ A vector of numeric values.
 Computes various measures of heterogeneity of a time series. First the series
 is pre-whitened using an AR model to give a new series y. We fit a GARCH(1,1)
 model to y and obtain the residuals, e. Then the four measures of heterogeneity
-are: 
+are:
 (1) the sum of squares of the first 12 autocorrelations of \eqn{y^2}{y^2};
 (2) the sum of squares of the first 12 autocorrelations of \eqn{e^2}{e^2};
 (3) the \eqn{R^2}{R^2} value of an AR model applied to \eqn{y^2}{y^2};
