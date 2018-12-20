@@ -14,17 +14,17 @@ entropy <- function(x, ...) {
   return(c(entropy=entropy))
 }
 
-#' Time series features based on tiled windows 
-#' 
-#' Computes feature of a time series based on tiled (non-overlapping) windows. 
-#' Means or variances are produced for all tiled windows. Then stability is 
-#' the variance of the means, while lumpiness is the variance of the variances. 
-#' @param x a univariate time series 
-#' @param width size of sliding window 
-#' @return A numeric vector of length 2 containing a measure of lumpiness and 
-#' a measure of stability. 
-#' @author Earo Wang and Rob J Hyndman 
-#' @export 
+#' Time series features based on tiled windows
+#'
+#' Computes feature of a time series based on tiled (non-overlapping) windows.
+#' Means or variances are produced for all tiled windows. Then stability is
+#' the variance of the means, while lumpiness is the variance of the variances.
+#' @param x a univariate time series
+#' @param width size of sliding window
+#' @return A numeric vector of length 2 containing a measure of lumpiness and
+#' a measure of stability.
+#' @author Earo Wang and Rob J Hyndman
+#' @export
 
 lumpiness <- function(x, width=ifelse(frequency(x) > 1,
                        frequency(x), 10))
@@ -117,7 +117,7 @@ max_var_shift <- function(x, width=ifelse(frequency(x) > 1,
     maxidx <- NA_real_
   }else{
     vars <- abs(diff(rollvar, width))
-    
+
     if(length(vars)==0L)
     {
       maxvar <- 0
@@ -247,7 +247,7 @@ flat_spots <- function(x) {
 # }
 
 
-#' Hurst coefficent
+#' Hurst coefficient
 #'
 #' Computes the Hurst coefficient indicating the level of fractional differencing
 #' of a time series.
@@ -265,7 +265,7 @@ hurst <- function(x)
 
 
 #' Unit Root Test Statistics
-#' 
+#'
 #' \code{unitroot_kpss} computes the statistic for the Kwiatkowski et al. unit root test with linear trend and lag 1.
 #' \code{unitroot_pp} computes the statistic for the `'Z-alpha'' version of Phillips & Perron unit root test with constant trend and lag 1.
 #' @param x a univariate time series.

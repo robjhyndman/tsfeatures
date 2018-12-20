@@ -21,7 +21,7 @@ Imports:
     MASS,
     mgcv,
     purrr,
-    RcppRoll (>= 0.2.2), 
+    RcppRoll (>= 0.2.2),
     Rcsdp,
     Rtsne,
     stats,
@@ -34,8 +34,9 @@ LazyData: true
 ByteCompile: true
 URL: https://github.com/robjhyndman/tsfeatures/
 BugReports: https://github.com/robjhyndman/tsfeatures/issues/
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1
 Suggests: testthat,
     knitr,
     rmarkdown
 VignetteBuilder: knitr
+Encoding: UTF-8
