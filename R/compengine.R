@@ -2,10 +2,10 @@
 #' CompEngine feature set
 #'
 #' Calculate the features that have been used in CompEngine database, using method introduced in package
-#' \code{kctsa}. 
-#' 
-#' The features involved can be grouped as \code{autocorrelation}, 
-#' \code{prediction}, \code{stationarity}, \code{distribution}, and \code{scaling}. 
+#' \code{kctsa}.
+#'
+#' The features involved can be grouped as \code{autocorrelation},
+#' \code{prediction}, \code{stationarity}, \code{distribution}, and \code{scaling}.
 #'
 #' @param y the input time series
 #' @return a vector with CompEngine features
@@ -25,15 +25,15 @@ compengine <- function(x){
 
 #' The autocorrelation feature set from software package \code{hctsa}
 #'
-#' Calculate the features that grouped as autocorrelation set, 
-#' which have been used in CompEngine database, using method introduced in package \code{kctsa}. 
-#' 
-#' Features in this set are \code{embed2_incircle_1}, 
-#' \code{embed2_incircle_2}, 
-#' \code{ac_9}, 
-#' \code{firstmin_ac}, 
-#' \code{trev_num}, 
-#' \code{motiftwo_entro3}, 
+#' Calculate the features that grouped as autocorrelation set,
+#' which have been used in CompEngine database, using method introduced in package \code{kctsa}.
+#'
+#' Features in this set are \code{embed2_incircle_1},
+#' \code{embed2_incircle_2},
+#' \code{ac_9},
+#' \code{firstmin_ac},
+#' \code{trev_num},
+#' \code{motiftwo_entro3},
 #' and \code{walker_propcross}.
 #'
 #' @param y the input time series
@@ -55,7 +55,7 @@ autocorr_features <- function(x){
               ac_9 = ac_9(x, acfv),
               firstmin_ac = firstmin_ac(x, acfv),
               trev_num = trev_num(x),
-              motiftwo_entro3 = motiftwo_entro3(x), 
+              motiftwo_entro3 = motiftwo_entro3(x),
               walker_propcross = walker_propcross(x))
   return(output)
 }
@@ -63,11 +63,11 @@ autocorr_features <- function(x){
 
 #' The prediction feature set from software package \code{hctsa}
 #'
-#' Calculate the features that grouped as prediction set, 
-#' which have been used in CompEngine database, using method introduced in package \code{kctsa}. 
-#' 
-#' Features in this set are \code{localsimple_mean1}, 
-#' \code{localsimple_lfitac}, 
+#' Calculate the features that grouped as prediction set,
+#' which have been used in CompEngine database, using method introduced in package \code{kctsa}.
+#'
+#' Features in this set are \code{localsimple_mean1},
+#' \code{localsimple_lfitac},
 #' and \code{sampen_first}.
 #'
 #' @param y the input time series
@@ -79,8 +79,8 @@ autocorr_features <- function(x){
 #' @author Yangzhuoran Yang
 #' @export
 pred_features <- function(x){
-  output <- c(localsimple_mean1 = localsimple_taures(x, "mean"), 
-              localsimple_lfitac = localsimple_taures(x, "lfit"), 
+  output <- c(localsimple_mean1 = localsimple_taures(x, "mean"),
+              localsimple_lfitac = localsimple_taures(x, "lfit"),
               sampen_first = sampen_first(x))
   return(output)
 }
@@ -88,11 +88,11 @@ pred_features <- function(x){
 
 #' The stationarity feature set from software package \code{hctsa}
 #'
-#' Calculate the features that grouped as stationarity set, 
-#' which have been used in CompEngine database, using method introduced in package \code{kctsa}. 
-#' 
-#' Features in this set are \code{std1st_der}, 
-#' \code{spreadrandomlocal_meantaul_50}, 
+#' Calculate the features that grouped as stationarity set,
+#' which have been used in CompEngine database, using method introduced in package \code{kctsa}.
+#'
+#' Features in this set are \code{std1st_der},
+#' \code{spreadrandomlocal_meantaul_50},
 #' and \code{spreadrandomlocal_meantaul_ac2}.
 #'
 #' @param y the input time series
@@ -104,8 +104,8 @@ pred_features <- function(x){
 #' @author Yangzhuoran Yang
 #' @export
 station_features <- function(x){
-  output <- c(std1st_der = std1st_der(x), 
-              spreadrandomlocal_meantaul_50 = spreadrandomlocal_meantaul(x, 50), 
+  output <- c(std1st_der = std1st_der(x),
+              spreadrandomlocal_meantaul_50 = spreadrandomlocal_meantaul(x, 50),
               spreadrandomlocal_meantaul_ac2 = spreadrandomlocal_meantaul(x, "ac2"))
   return(output)
 }
@@ -114,9 +114,9 @@ station_features <- function(x){
 
 #' The distribution feature set from software package \code{hctsa}
 #'
-#' Calculate the features that grouped as distribution set, 
-#' which have been used in CompEngine database, using method introduced in package \code{kctsa}. 
-#' 
+#' Calculate the features that grouped as distribution set,
+#' which have been used in CompEngine database, using method introduced in package \code{kctsa}.
+#'
 #' Features in this set are \code{histogram_mode_10}
 #' and \code{outlierinclude_mdrmd}.
 #'
@@ -136,9 +136,9 @@ dist_features <- function(x){
 
 #' The scaling feature set from software package \code{hctsa}
 #'
-#' Calculate the features that grouped as scaling set, 
-#' which have been used in CompEngine database, using method introduced in package \code{kctsa}. 
-#' 
+#' Calculate the features that grouped as scaling set,
+#' which have been used in CompEngine database, using method introduced in package \code{kctsa}.
+#'
 #' Feature in this set is \code{fluctanal_prop_r1}.
 #'
 #' @param y the input time series
@@ -179,16 +179,16 @@ embed2_incircle <- function(y, boundary = NULL, acfv = stats::acf(y, length(y)-1
   xt <- y[1:(length(y)-tau)]# part of the time series
   xtp <- y[(1+tau):length(y)]# time-lagged time series
   N <- length(y) - tau# Length of each time series subsegment
-  
+
   # CIRCLES (points inside a given circular boundary)
   return(sum(xtp^2+xt^2 < boundary, na.rm=TRUE)/N)
 }
 
 # CO_firstzero_ac
 #' The first zero crossing of the autocorrelation function from software package \code{hctsa}
-#' 
+#'
 #' Search up to a maximum of the length of the time series
-#' 
+#'
 #' @param y the input time series
 #' @param acfv vector of autocorrelation, if exist, used to avoid repeated computation.
 #' @return The first zero crossing of the autocorrelation function
@@ -206,15 +206,15 @@ firstzero_ac <- function(y, acfv = stats::acf(y, N-1, plot=FALSE, na.action = na
 }
 
 # ac_9
-#' Autocorrelation at lag 9. Included for completion and consistency.  
-#' 
+#' Autocorrelation at lag 9. Included for completion and consistency.
+#'
 #' @param y the input time series
 #' @param acfv vector of autocorrelation, if exist, used to avoid repeated computation.
 #' @return autocorrelation at lag 9
 #' @references B.D. Fulcher and N.S. Jones. hctsa: A computational framework for automated time-series phenotyping using massive feature extraction. Cell Systems 5, 527 (2017).
 #' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
 #' @author Yangzhuoran Yang
-#' @export 
+#' @export
 ac_9 <- function(y, acfv = stats::acf(y, 9, plot = FALSE, na.action = na.pass)){
   acfv$acf[10]
 }
@@ -222,7 +222,7 @@ ac_9 <- function(y, acfv = stats::acf(y, 9, plot = FALSE, na.action = na.pass)){
 
 # CO_firstmin_ac
 #' Time of first minimum in the autocorrelation function from software package \code{hctsa}
-#' 
+#'
 #'
 #' @param x the input time series
 #' @param acfv vector of autocorrelation, if exist, used to avoid repeated computation.
@@ -237,7 +237,7 @@ firstmin_ac <- function(x, acfv = stats::acf(x,lag.max = N-1, plot = FALSE, na.a
   # hctsa uses autocorr in MatLab to calculate autocorrelation
   N <- length(x)
   # getting acf for all lags
-  # possible delay when sample size is too big 
+  # possible delay when sample size is too big
   autoCorr <- numeric(N-1)
   autoCorr[1:(N-1)] <- acfv$acf[-1]
   for(i in 1:length(autoCorr)){
@@ -256,10 +256,10 @@ firstmin_ac <- function(x, acfv = stats::acf(x,lag.max = N-1, plot = FALSE, na.a
 
 # CO_trev_1_num
 #' Normalized nonlinear autocorrelation, the numerator of the trev function of a time series from software package \code{hctsa}
-#' 
+#'
 #' Calculates the numerator of the trev function, a normalized nonlinear autocorrelation,
 #' The time lag is set to 1.
-#' 
+#'
 #'
 #' @param y the input time series
 #' @return the numerator of the trev function of a time series
@@ -279,7 +279,7 @@ trev_num <- function(y){
 #' Local motifs in a binary symbolization of the time series from software package \code{hctsa}
 #'
 #'
-#' Coarse-graining is performed. Time-series values above its mean are given 1, 
+#' Coarse-graining is performed. Time-series values above its mean are given 1,
 #' and those below the mean are 0.
 #'
 #' @param y the input time series
@@ -295,23 +295,23 @@ motiftwo_entro3 <- function(y){
   yBin <- binarize_mean(y)
   N <- length(yBin)
   if(N<5) warning('Time series too short')
-  
+
   r1 <- yBin == 1
   r0 <- yBin == 0
-  
+
   r1 <- r1[1:(length(r1)-1)]
   r0 <- r0[1:(length(r0)-1)]
-  
+
   r00 <- r0 & yBin[2:N] == 0
   r01 <- r0 & yBin[2:N] == 1
   r10 <- r1 & yBin[2:N] == 0
   r11 <- r1 & yBin[2:N] == 1
-  
+
   r00 <- r00[1:(length(r00)-1)]
   r01 <- r01[1:(length(r01)-1)]
   r10 <- r10[1:(length(r10)-1)]
   r11 <- r11[1:(length(r11)-1)]
-  
+
   r000 <- r00 & yBin[3:N] == 0
   r001 <- r00 & yBin[3:N] == 1
   r010 <- r01 & yBin[3:N] == 0
@@ -320,7 +320,7 @@ motiftwo_entro3 <- function(y){
   r101 <- r10 & yBin[3:N] == 1
   r110 <- r11 & yBin[3:N] == 0
   r111 <- r11 & yBin[3:N] == 1
-  
+
   out.ddd <- mean(r000)
   out.ddu <- mean(r001)
   out.dud <- mean(r010)
@@ -336,8 +336,8 @@ motiftwo_entro3 <- function(y){
 
 # BF_BF_binarize_mean
 #' Converts an input vector into a binarized version from software package \code{hctsa}
-#' 
-#' 
+#'
+#'
 #' @param y the input time series
 #' @return Time-series values above its mean are given 1, and those below the mean are 0.
 #' @references B.D. Fulcher and N.S. Jones. hctsa: A computational framework for automated time-series phenotyping using massive feature extraction. Cell Systems 5, 527 (2017).
@@ -360,21 +360,21 @@ f_entropy <- function(x){
 
 # PH_Walker_prop_01_sw_propcross
 #' Simulates a hypothetical walker moving through the time domain from software package \code{hctsa}
-#' 
+#'
 #' The hypothetical particle (or 'walker') moves in response to values of the
 #' time series at each point.
 #' The walker narrows the gap between its value and that
 #' of the time series by 10%.
-#' 
-#' 
+#'
+#'
 #' @param y the input time series
 #' @return fraction of time series length that walker crosses time series
 #' @references B.D. Fulcher and N.S. Jones. hctsa: A computational framework for automated time-series phenotyping using massive feature extraction. Cell Systems 5, 527 (2017).
 #' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
 #' @author Yangzhuoran Yang
 #' @export
-#' 
-#' 
+#'
+#'
 walker_propcross <- function(y){
   N <- length(y)
   p <- 0.1
@@ -396,35 +396,35 @@ walker_propcross <- function(y){
 # FC_localsimple_mean1_taures
 # FC_localsimple_lfit_taures
 #' The first zero crossing of the autocorrelation function of the residuals from Simple local time-series forecasting from software package \code{hctsa}
-#' 
+#'
 #' Simple predictors using the past trainLength values of the time series to
 #' predict its next value.
-#' 
+#'
 #' @param y the input time series
-#' @param forecastMeth the forecasting method, default to \code{mean}. 
-#' \code{mean}: local mean prediction using the past trainLength time-series values.  
-#' \code{lfit}: local linear prediction using the past trainLength time-series values.  
-#' @param trainLength the number of time-series values to use to forecast the next value. 
+#' @param forecastMeth the forecasting method, default to \code{mean}.
+#' \code{mean}: local mean prediction using the past trainLength time-series values.
+#' \code{lfit}: local linear prediction using the past trainLength time-series values.
+#' @param trainLength the number of time-series values to use to forecast the next value.
 #' Default to 1 when using method \code{mean} and 3 when using method \code{lfit}.
 #' @return The first zero crossing of the autocorrelation function of the residuals
 #' @export
 localsimple_taures <- function(y, forecastMeth = "mean", trainLength = NULL ){
   if(!forecastMeth %in% c("mean", "lfit")) stop("`localsimple_taures`:Unknown forecasting method")
-  if(forecastMeth == "mean" && is.null(trainLength)) trainLength <- 1 
+  if(forecastMeth == "mean" && is.null(trainLength)) trainLength <- 1
   if(forecastMeth == "lfit" && is.null(trainLength)) trainLength <- "ac"
-    
+
   if("ac" %in% trainLength) {
     lp <- firstzero_ac(y)
     } else {
     lp <- trainLength
   }
-    
-    
-    
+
+
+
   N <- length(y)
   evalr <-  (lp+1):N
   if( length(evalr)==0)  stop('Time series too short for forecasting in `localsimple_taures`')
-  
+
   res <- numeric(length(evalr))
   if(forecastMeth == "mean"){
     for(i in 1:length(evalr))
@@ -448,12 +448,12 @@ localsimple_taures <- function(y, forecastMeth = "mean", trainLength = NULL ){
 
 # EN_SampEn_5_03_sampen1
 #' Second Sample Entropy of a time series from software package \code{hctsa}
-#' 
+#'
 #' Modified from the Ben Fulcher's \code{EN_SampEn} which uses code from PhysioNet.
 #' The publicly-available PhysioNet Matlab code, sampenc (renamed here to
 #' RN_sampenc) is available from:
 #' http://www.physionet.org/physiotools/sampen/matlab/1.1/sampenc.m
-#' 
+#'
 #' Embedding dimension is set to 5.
 #' The threshold is set to 0.3.
 #'
@@ -477,17 +477,17 @@ sampen_first <- function(y){
 
 # PN_sampenc
 #' Second Sample Entropy from software package \code{hctsa}
-#' 
+#'
 #' Modified from the Ben Fulcher version of original code sampenc.m from
 #' http://physionet.org/physiotools/sampen/
 #' http://www.physionet.org/physiotools/sampen/matlab/1.1/sampenc.m
 #' Code by DK Lake (dlake@virginia.edu), JR Moorman and Cao Hanqing.
-#' 
-#' 
+#'
+#'
 #' @param y the input time series
 #' @param M embedding dimension
 #' @param r threshold
-#' 
+#'
 #' @references cf. "Physiological time-series analysis using approximate entropy and sample
 #' entropy", J. S. Richman and J. R. Moorman, Am. J. Physiol. Heart Circ.
 #' Physiol., 278(6) H2039 (2000)
@@ -525,7 +525,7 @@ sampenc <- function(y,M = 6,r = 0.3){
   # Calculate for m <- 2
   # NN <- N*(N-1)/2
   p <- A[2]/B[1]
-  e <- -log(p)  
+  e <- -log(p)
   return(e)
 }
 
@@ -539,7 +539,7 @@ sampenc <- function(y,M = 6,r = 0.3){
 #' Standard deviation of the first derivative of the time series from software package \code{hctsa}
 #'
 #' Modified from \code{SY_StdNthDer} in \code{kctsa}. Based on an idea by Vladimir Vassilevsky.
-#' 
+#'
 #' @param y the input time series. Missing values will be removed.
 #' @return Standard deviation of the first derivative of the time series.
 #' @references cf. http://www.mathworks.de/matlabcentral/newsreader/view_thread/136539
@@ -558,11 +558,11 @@ std1st_der <- function(y){
 # SY_SpreadRandomLocal_50_100_meantaul
 # SY_SpreadRandomLocal_ac2_100_meantaul
 #'  Bootstrap-based stationarity measure from software package \code{hctsa}
-#' 
-#' 100 time-series segments of length \code{l} are selected at random from the time series and 
+#'
+#' 100 time-series segments of length \code{l} are selected at random from the time series and
 #' the mean of the first zero-crossings of the autocorrelation function in each segment is calculated.
-#' 
-#' 
+#'
+#'
 #' @param y the input time series
 #' @param l the length of local time-series segments to analyze as a positive integer. Can also be a specified character string: "ac2": twice the first zero-crossing of the autocorrelation function
 #' @return mean of the first zero-crossings of the autocorrelation function
@@ -576,9 +576,9 @@ spreadrandomlocal_meantaul <- function(y, l =50){
   numSegs  <-  100
   N <- length(y)
   if(l>0.9*N) stop("This time series is too short. Specify proper segment lengrh in `l`")
-  
-  qs <- numeric(numSegs)  
-  
+
+  qs <- numeric(numSegs)
+
   for (j in 1:numSegs){
     # pick a range
     # in this implementation, ranges CAN overlap
@@ -590,7 +590,7 @@ spreadrandomlocal_meantaul <- function(y, l =50){
     qs[j] <- taul
   }
   return(mean(qs,na.rm = TRUE))
-  
+
 }
 
 
@@ -598,10 +598,10 @@ spreadrandomlocal_meantaul <- function(y, l =50){
 
 # DN_histogram_mode_10
 #' Mode of a data vector from software package \code{hctsa}
-#' 
+#'
 #' Measures the mode of the data vector using histograms with a given number of bins as suggestion.
 #' The value calculated is different from \code{kctsa} and \code{CompEngine} as the histogram edges are calculated differently.
-#' 
+#'
 #' @param y the input data vector
 #' @param numBins the number of bins to use in the histogram.
 #' @return the mode
@@ -610,7 +610,7 @@ spreadrandomlocal_meantaul <- function(y, l =50){
 #' @author Yangzhuoran Yang
 #' @export
 histogram_mode <- function(y, numBins = 10){
-  
+
   # Compute the histogram from the data:
   if (is.numeric(numBins)){
     histdata <- hist(y,plot = FALSE, breaks = 10)
@@ -637,37 +637,40 @@ histogram_mode <- function(y, numBins = 10){
 #' of outliers being furthest from the mean.
 #'
 #' The threshold for including time-series data points in the analysis increases
-#' from zero to the maximum deviation, in increments of 0.01*sigma (by default), 
+#' from zero to the maximum deviation, in increments of 0.01*sigma (by default),
 #' where sigma is the standard deviation of the time series.
 #'
 #' At each threshold,  proportion of time series points
 #' included and median are calculated, and outputs from the
 #' algorithm measure how these statistical quantities change as more extreme
 #' points are included in the calculation.
-#' 
+#'
 #' Outliers are defined as furthest from the mean.
-#' 
+#'
 #' @param y the input time series (ideally z-scored)
 #' @return median  of the median of range indices
 #' @references B.D. Fulcher and N.S. Jones. hctsa: A computational framework for automated time-series phenotyping using massive feature extraction. Cell Systems 5, 527 (2017).
 #' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
 #' @author Yangzhuoran Yang
 #' @export
-outlierinclude_mdrmd <- function(y){
-  if(length(unique(y))==1) stop("The time series is a constant!")
-  if(!iszscored(y)) {
-    warning('The input time series ideally should be z-scored')
-    isd <- sd(y, na.rm = T) # Modified to fit the 0.01*sigma increment in discription
-  } else {
+outlierinclude_mdrmd <- function(y, zscored=TRUE) {
+  if(length(unique(y))==1)
+    stop("The time series is a constant!")
+  if(zscored) {
+    tmp <- ts(c(scale(y)))
+    tsp(tmp) <- tsp(y)
+    y <- tmp
     isd <- 1
-    }
+  } else {
+    isd <- sd(y, na.rm = T) # Modified to fit the 0.01*sigma increment in discription
+  }
   N <- length(y)
   inc <- 0.01*isd
   # inc <- 0.01
   thr <- seq(from = 0, to = max(abs(y), na.rm = T), by = inc)
   tot <- N
   if(length(thr) == 0) stop("peculiar time series")
-  
+
   msDt <- numeric(length(thr))
   msDtp <- numeric(length(thr))
   for (i in 1:length(thr)){
@@ -675,17 +678,17 @@ outlierinclude_mdrmd <- function(y){
     # Construct a time series consisting of inter-event intervals for parts
     # of the time serie exceeding the threshold, th
     r <- which(abs(y) >= th)
-    
+
     Dt_exc <- diff(r)  # Delta t (interval) time series exceeding threshold
     msDt[i] <- median(r)/(N/2)-1
-    msDtp[i] <-  length(Dt_exc)/tot*100 
-    # this is just really measuring the distribution: 
+    msDtp[i] <-  length(Dt_exc)/tot*100
+    # this is just really measuring the distribution:
     # the proportion of possible values
     # that are actually used in
     # calculation
   }
-  
-  
+
+
   # Trim off where the statistic power is lacking: less than 2% of data
   # included
   trimthr <- 2  # percent
@@ -695,27 +698,9 @@ outlierinclude_mdrmd <- function(y){
     msDtp <- msDtp[1:mj]
     thr <- thr[1:mj]
   } else stop("the statistic power is lacking: less than 2% of data included")
-  
+
   out.mdrmd <-  median(msDt)
   return(out.mdrmd)
-}
-
-
-# BF_iszscored
-#' Crude check for whether a data vector is (eps-close to being) z-scored from software package \code{hctsa}
-#' 
-#' Used for displaying warning messages for functions that require z-scored inputs.
-#' 
-#' @param x the input time series (or any vector)
-#' @return a logical with the verdict.
-#' @references B.D. Fulcher and N.S. Jones. hctsa: A computational framework for automated time-series phenotyping using massive feature extraction. Cell Systems 5, 527 (2017).
-#' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
-#' @author Yangzhuoran Yang
-#' @export
-iszscored <- function(x){
-  numericThreshold <- 100*.Machine$double.eps
-  iszscored <- ((abs(mean(x, na.rm = TRUE)) < numericThreshold) && (abs(sd(x, na.rm = TRUE)-1) < numericThreshold))
-  return(iszscored)
 }
 
 
@@ -724,12 +709,12 @@ iszscored <- function(x){
 
 # SC_FluctAnal_2_rsrangefit_50_1_logi_prop_r1
 #' Implements fluctuation analysis from software package \code{hctsa}
-#' 
+#'
 #' Fits a polynomial of order 1 and then returns the
 #' range. The order of fluctuations is 2, corresponding to root mean
 #' square fluctuations.
-#' 
-#' 
+#'
+#'
 #' @param x the input time series (or any vector)
 #' @references B.D. Fulcher and N.S. Jones. hctsa: A computational framework for automated time-series phenotyping using massive feature extraction. Cell Systems 5, 527 (2017).
 #' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
@@ -739,26 +724,26 @@ fluctanal_prop_r1 <- function(x){
   q <- 2
   tauStep <- 50
   k <- 1
-  
+
   N <- length(x)
   x_NA0 <- ifelse(!is.na(x), x, 0)
-  
+
   y <- cumsum(x_NA0)
   taur <- unique(round(exp(seq(from = log(5),to = log(floor(N/2)),length.out = tauStep))))
   ntau <- length(taur)
   if (ntau < 8) # fewer than 8 points
     stop("This time series is too short to analyze using this fluctuation analysis")
-  
+
   Fl <- numeric(ntau)
-  
+
   for (i in 1:ntau){
     # buffer the time series at the scale tau
     tau <- taur[i] # the scale on which to compute fluctuations
     y_buff <- split(y, ceiling(seq_along(y)/tau))
-    
+
     if (length(y_buff) > floor(N/tau)) # zero-padded, remove trailing set of points...
         y_buff <- y_buff[-length(y_buff)]
-    
+
     # analyzed length of time series (with trailing end-points removed)
     nn <- length(y_buff)*tau
     tt <- (1:tau) # faux time range
@@ -768,21 +753,21 @@ fluctanal_prop_r1 <- function(x){
       lm.tt <- lm(lmy~tt, data = data.frame(tt,lmy=y_buff[[j]]))
       # remove the trend, store back in y_buff
       y_buff[[j]] <- residuals(lm.tt)
-      
+
     }
-    
+
     tem <- sapply(y_buff, range)
     y_dt <- tem[2,]-tem[1,]
-    
+
     # Compute fluctuation function:
-    
+
     Fl[i] <- (mean(y_dt^q))^(1/q)
   }
   logtt <- log(taur)
   logFF <- log(Fl)
   ntt <- ntau
-  
-  
+
+
   ## Try assuming two components (2 distinct scaling regimes)
     # Move through, and fit a straight line to loglog before and after each point.
   # Find point with the minimum sum of squared errors
@@ -801,12 +786,12 @@ fluctanal_prop_r1 <- function(x){
        # Sum of errors from fitting lines to both segments:
        sserr[i] <- norm(-residuals(p1), type = "2") + norm(-residuals(p2), type = "2")
      }
-     
+
      # breakPt is the point where it's best to fit a line before and another line after
      breakPt <- which.min(sserr)
      r1 <- 1:breakPt
      r2 <- breakPt:ntt
-     
+
      prop_r1 <- length(r1)/ntt
      return(prop_r1)
 }
