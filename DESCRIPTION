@@ -4,8 +4,8 @@ Version: 0.1
 Authors@R: c(
     person("Rob", "Hyndman", email = "Rob.Hyndman@monash.edu", role = c("aut","cre"), comment = c(ORCID = "0000-0002-2140-5352")),
     person("Earo", "Wang", role = "aut"),
-    person("Yanfei", "Kang", role = "aut"),
     person("Thiyanga", "Talagala", role = "aut"),
+    person("Yanfei", "Kang", role = "aut"),
     person("Yangzhuoran", "Yang", email = "Fin.Yang@monash.edu", role = "aut"),
     person("Souhaib", "Ben Taieb", role = "ctb"))
 Description: Methods for extracting various features from time series data.
@@ -35,8 +35,15 @@ ByteCompile: true
 URL: https://github.com/robjhyndman/tsfeatures/
 BugReports: https://github.com/robjhyndman/tsfeatures/issues/
 RoxygenNote: 6.1.1
-Suggests: testthat,
+Suggests:
+    testthat,
     knitr,
-    rmarkdown
+    rmarkdown,
+    ggplot2,
+    tidyr,
+    dplyr,
+    anomalous,
+    Mcomp,
+    GGally
 VignetteBuilder: knitr
 Encoding: UTF-8

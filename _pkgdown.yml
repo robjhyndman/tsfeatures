@@ -4,7 +4,15 @@ template:
 
 authors:
   Rob Hyndman:
-    href: http://robjhyndman.com
+    href: https://robjhyndman.com
+  Earo Wang:
+    href: https://earo.me
+  Thiyanga Talagala:
+    href: https://thiyanga.netlify.com/
+  Yanfei Kang:
+    href: https://yanfei.site/
+  Yangzhuoran Yang:
+    href: https://yangzhuoranyang.com
 
 navbar:
   structure:
