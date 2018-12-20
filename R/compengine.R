@@ -272,7 +272,7 @@ firstmin_ac <- function(x, acfv = stats::acf(x,lag.max = N-1, plot = FALSE, na.a
 trev_num <- function(y){
   yn <-  y[1:(length(y)-1)]
   yn1  <-  y[2:length(y)]
-  mean((yn1-yn)^3, na.rm = T)
+  mean((yn1-yn)^3, na.rm = TRUE)
 }
 
 # SB_MotifTwo_mean_hhh
@@ -385,7 +385,7 @@ walker_propcross <- function(y){
   for(i in 2:N){
     w[i] = w[i-1] + p*(y[i-1]-w[i-1])
   }
-  out.sw_propcross <-  sum((w[1:(N-1)]-y[1:(N-1)])*(w[2:N]-y[2:N]) < 0, na.rm = T)/(N-1)
+  out.sw_propcross <-  sum((w[1:(N-1)]-y[1:(N-1)])*(w[2:N]-y[2:N]) < 0, na.rm = TRUE)/(N-1)
   return(out.sw_propcross)
 }
 
@@ -610,7 +610,7 @@ spreadrandomlocal_meantaul <- function(y, l =50){
 #' @author Yangzhuoran Yang
 #' @export
 #' @importFrom graphics hist
-#' @importFrom stats predict 
+#' @importFrom stats predict
 
 histogram_mode <- function(y, numBins = 10){
 
@@ -668,12 +668,12 @@ outlierinclude_mdrmd <- function(y, zscored=TRUE) {
     y <- tmp
     isd <- 1
   } else {
-    isd <- sd(y, na.rm = T) # Modified to fit the 0.01*sigma increment in discription
+    isd <- sd(y, na.rm = TRUE) # Modified to fit the 0.01*sigma increment in discription
   }
   N <- length(y)
   inc <- 0.01*isd
   # inc <- 0.01
-  thr <- seq(from = 0, to = max(abs(y), na.rm = T), by = inc)
+  thr <- seq(from = 0, to = max(abs(y), na.rm = TRUE), by = inc)
   tot <- N
   if(length(thr) == 0) stop("peculiar time series")
 
