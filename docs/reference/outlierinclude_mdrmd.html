@@ -117,7 +117,7 @@ of outliers being furthest from the mean.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>outlierinclude_mdrmd</span>(<span class='no'>y</span>)</pre>
+    <pre class="usage"><span class='fu'>outlierinclude_mdrmd</span>(<span class='no'>y</span>, <span class='kw'>zscored</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -125,6 +125,10 @@ of outliers being furthest from the mean.</p>
     <tr>
       <th>y</th>
       <td><p>the input time series (ideally z-scored)</p></td>
+    </tr>
+    <tr>
+      <th>zscored</th>
+      <td><p>Should y be z-scored before computing the statistic. Default: TRUE</p></td>
     </tr>
     </table>
     
@@ -135,7 +139,7 @@ of outliers being furthest from the mean.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The threshold for including time-series data points in the analysis increases
-from zero to the maximum deviation, in increments of 0.01*sigma (by default), 
+from zero to the maximum deviation, in increments of 0.01*sigma (by default),
 where sigma is the standard deviation of the time series.</p>
 <p>At each threshold,  proportion of time series points
 included and median are calculated, and outputs from the

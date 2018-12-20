@@ -70,7 +70,6 @@ reference:
   - '`histogram_mode`'
   - '`holt_parameters`'
   - '`hurst`'
-  - '`iszscored`'
   - '`localsimple_taures`'
   - '`lumpiness`'
   - '`max_level_shift`'

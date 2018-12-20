@@ -147,7 +147,7 @@ apart from LaplacianMDS where hs is set to a large h.</p></td>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>mylist</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='no'>sunspot.year</span>, <span class='no'>WWWusage</span>, <span class='no'>AirPassengers</span>, <span class='no'>USAccDeaths</span>)
 <span class='no'>fmat</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='tsfeatures.html'>tsfeatures</a></span>(<span class='no'>mylist</span>)
-<span class='no'>z</span> <span class='kw'>&lt;-</span> <span class='fu'>embedding</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/dist'>dist</a></span>(<span class='no'>fmat</span>), <span class='kw'>perplexity</span><span class='kw'>=</span><span class='fl'>1</span>)
+<span class='no'>z</span> <span class='kw'>&lt;-</span> <span class='fu'>embedding</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/dist'>dist</a></span>(<span class='no'>fmat</span>), <span class='kw'>perplexity</span> <span class='kw'>=</span> <span class='fl'>1</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>z</span>)</div><div class='img'><img src='embedding-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

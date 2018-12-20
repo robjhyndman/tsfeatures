@@ -26,7 +26,7 @@ Various methods for embedding a distance matrix into a low-dimensional matrix
 \examples{
 mylist <- list(sunspot.year, WWWusage, AirPassengers, USAccDeaths)
 fmat <- tsfeatures(mylist)
-z <- embedding(dist(fmat), perplexity=1)
+z <- embedding(dist(fmat), perplexity = 1)
 plot(z)
 }
 \author{

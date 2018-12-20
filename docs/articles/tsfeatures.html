@@ -71,7 +71,7 @@
       <h1>Introduction to tsfeatures package</h1>
                         <h4 class="author">Yangzhuoran Yang</h4>
             
-            <h4 class="date">2018-12-16</h4>
+            <h4 class="date">2018-12-20</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/robjhyndman/tsfeatures/blob/master/vignettes/tsfeatures.Rmd"><code>vignettes/tsfeatures.Rmd</code></a></small>
       <div class="hidden name"><code>tsfeatures.Rmd</code></div>
@@ -95,22 +95,21 @@
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
 <a href="#usage" class="anchor"></a>Usage</h2>
-<p>The function <code>tsfeatures</code> computes a tibble of time series features from a list of time series.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(tsfeatures)</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">mylist &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(sunspot.year, WWWusage, AirPassengers, USAccDeaths)</a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw"><a href="../reference/tsfeatures.html">tsfeatures</a></span>(mylist)</a>
-<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co">#&gt; # A tibble: 4 x 20</span></a>
-<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="co">#&gt;   frequency nperiods seasonal_period trend   spike linearity curvature</span></a>
-<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co">#&gt;       &lt;dbl&gt;    &lt;dbl&gt;           &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="co">#&gt; 1         1        0               1 0.125 2.10e-5      3.58      1.11</span></a>
-<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="co">#&gt; 2         1        0               1 0.985 3.01e-8      4.45      1.10</span></a>
-<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="co">#&gt; 3        12        1              12 0.989 2.12e-8     11.0       1.10</span></a>
-<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="co">#&gt; 4        12        1              12 0.796 9.67e-7     -2.13      2.85</span></a>
-<a class="sourceLine" id="cb2-11" data-line-number="11"><span class="co">#&gt; # ... with 13 more variables: e_acf1 &lt;dbl&gt;, e_acf10 &lt;dbl&gt;, entropy &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb2-12" data-line-number="12"><span class="co">#&gt; #   x_acf1 &lt;dbl&gt;, x_acf10 &lt;dbl&gt;, diff1_acf1 &lt;dbl&gt;, diff1_acf10 &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb2-13" data-line-number="13"><span class="co">#&gt; #   diff2_acf1 &lt;dbl&gt;, diff2_acf10 &lt;dbl&gt;, seasonal_strength &lt;dbl&gt;,</span></a>
-<a class="sourceLine" id="cb2-14" data-line-number="14"><span class="co">#&gt; #   peak &lt;dbl&gt;, trough &lt;dbl&gt;, seas_acf1 &lt;dbl&gt;</span></a></code></pre></div>
-<p>The default function that <code>tsfeatures</code> uses to compute features are <code>frequency</code>, <code>stl_features</code>, <code>entropy</code> and <code>acf_features</code>. Each of them can produce one or more features. Detailed information of features included in <code>tsfeatures</code> package are described below. Functions from other packages, or user-defined functions, may also be used.</p>
+<p>The function <code><a href="../reference/tsfeatures.html">tsfeatures()</a></code> computes a tibble of time series features from a list of time series.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">mylist &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(sunspot.year, WWWusage, AirPassengers, USAccDeaths)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw"><a href="../reference/tsfeatures.html">tsfeatures</a></span>(mylist)</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co">#&gt; # A tibble: 4 x 20</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co">#&gt;   frequency nperiods seasonal_period trend   spike linearity curvature</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="co">#&gt;       &lt;dbl&gt;    &lt;dbl&gt;           &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co">#&gt; 1         1        0               1 0.125 2.10e-5      3.58      1.11</span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="co">#&gt; 2         1        0               1 0.985 3.01e-8      4.45      1.10</span></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="co">#&gt; 3        12        1              12 0.989 2.12e-8     11.0       1.10</span></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="co">#&gt; 4        12        1              12 0.796 9.67e-7     -2.13      2.85</span></a>
+<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="co">#&gt; # ... with 13 more variables: e_acf1 &lt;dbl&gt;, e_acf10 &lt;dbl&gt;, entropy &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb2-11" data-line-number="11"><span class="co">#&gt; #   x_acf1 &lt;dbl&gt;, x_acf10 &lt;dbl&gt;, diff1_acf1 &lt;dbl&gt;, diff1_acf10 &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb2-12" data-line-number="12"><span class="co">#&gt; #   diff2_acf1 &lt;dbl&gt;, diff2_acf10 &lt;dbl&gt;, seasonal_strength &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb2-13" data-line-number="13"><span class="co">#&gt; #   peak &lt;dbl&gt;, trough &lt;dbl&gt;, seas_acf1 &lt;dbl&gt;</span></a></code></pre></div>
+<p>The default functions that <code>tsfeatures</code> uses to compute features are <code>frequency</code>, <code>stl_features</code>, <code>entropy</code> and <code>acf_features</code>. Each of them can produce one or more features. Detailed information of features included in the <em>tsfeatures</em> package are described below. Functions from other packages, or user-defined functions, may also be used.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># Function from outside of tsfeatures package being used</span></a>
 <a class="sourceLine" id="cb3-2" data-line-number="2">is.monthly &lt;-<span class="st"> </span><span class="cf">function</span>(x){</a>
 <a class="sourceLine" id="cb3-3" data-line-number="3">  <span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/time">frequency</a></span>(x) <span class="op">==</span><span class="st"> </span><span class="dv">12</span></a>
@@ -185,13 +184,13 @@
 </tr>
 <tr class="even">
 <td align="left"><a href="#hurst">hurst</a></td>
-<td align="left"><a href="#uniroot">unitroot_kpss</a></td>
+<td align="left"><a href="#unitroot">unitroot_kpss</a></td>
 <td align="left"><a href="#histogram_mode">histogram_mode</a></td>
 <td align="left"></td>
 </tr>
 <tr class="odd">
 <td align="left"><a href="#holt_hw">hw_parameters</a></td>
-<td align="left"><a href="#uniroot">unitroot_pp</a></td>
+<td align="left"><a href="#unitroot">unitroot_pp</a></td>
 <td align="left"><a href="#localsimple_taures">localsimple_taures</a></td>
 <td align="left"></td>
 </tr>
@@ -208,7 +207,7 @@
 <a href="#entropy" class="anchor"></a>entropy</h3>
 <p>The spectral <code>entropy</code> is the Shannon entropy</p>
 <p><span class="math display">\[-\int^\pi_{-\pi}\hat{f}(\lambda)\log\hat{f}(\lambda) d\lambda\]</span></p>
-<p>where <span class="math inline">\(\hat{f}(\lambda)\)</span> is an estimate of the spectral density of the data. This measures the “forecastability” of a time series, where low values indicate a high signal-to-noise ratio, and large values occur when a series is difﬁcult to forecast.</p>
+<p>where <span class="math inline">\(\hat{f}(\lambda)\)</span> is an estimate of the spectral density of the data. This measures the “forecastability” of a time series, where low values indicate a high signal-to-noise ratio, and large values occur when a series is difficult to forecast.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="../reference/entropy.html">entropy</a></span>(AirPassengers)</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co">#&gt;   entropy </span></a>
 <a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt; 0.5876078</span></a></code></pre></div>
@@ -227,7 +226,7 @@
 <div id="max_shift" class="section level3">
 <h3 class="hasAnchor">
 <a href="#max_shift" class="anchor"></a>max_level_shift, max_var_shift and max_kl_shift</h3>
-<p>These three features compute features of a time series based on sliding (overlapping) windows. <code>max_level_shift</code> ﬁnds the largest mean shift between two consecutive windows. <code>max_var-shift</code> ﬁnds the largest variance shift between two consecutive windows. <code>max_kl_shift</code> ﬁnds the largest shift in Kulback-Leibler divergence between two consecutive windows. Each feature returns a vector of 2 values: the size of the shift, and the time index of the shift.</p>
+<p>These three features compute features of a time series based on sliding (overlapping) windows. <code>max_level_shift</code> finds the largest mean shift between two consecutive windows. <code>max_var-shift</code> finds the largest variance shift between two consecutive windows. <code>max_kl_shift</code> finds the largest shift in Kulback-Leibler divergence between two consecutive windows. Each feature returns a vector of 2 values: the size of the shift, and the time index of the shift.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="../reference/max_level_shift.html">max_level_shift</a></span>(AirPassengers)</a>
 <a class="sourceLine" id="cb7-2" data-line-number="2"><span class="co">#&gt;  max_level_shift time_level_shift </span></a>
 <a class="sourceLine" id="cb7-3" data-line-number="3"><span class="co">#&gt;             54.5            117.0</span></a>
@@ -241,7 +240,7 @@
 <div id="crossing_points" class="section level3">
 <h3 class="hasAnchor">
 <a href="#crossing_points" class="anchor"></a>crossing_points</h3>
-<p><code>crossing points</code> are deﬁned as the number of times a time series crosses the mean line.</p>
+<p><code>crossing points</code> are defined as the number of times a time series crosses the mean line.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="../reference/crossing_points.html">crossing_points</a></span>(AirPassengers)</a>
 <a class="sourceLine" id="cb8-2" data-line-number="2"><span class="co">#&gt; crossing_points </span></a>
 <a class="sourceLine" id="cb8-3" data-line-number="3"><span class="co">#&gt;               7</span></a></code></pre></div>
@@ -257,14 +256,14 @@
 <div id="hurst" class="section level3">
 <h3 class="hasAnchor">
 <a href="#hurst" class="anchor"></a>hurst</h3>
-<p>We use a measure of the long-term memory of a time series (<code>hurst</code>), computed as 0.5 plus the maximum likelihood estimate of the fractional differencing order <span class="math inline">\(d\)</span> given by Haslett &amp; Raftery (<a href="#ref">1989</a>). We add 0.5 to make it consistent with the Hurst coefﬁcient. Note that the fractal dimension can be estimated as <span class="math inline">\(D = 2 - \text{hurst}\)</span>.</p>
+<p>We use a measure of the long-term memory of a time series (<code>hurst</code>), computed as 0.5 plus the maximum likelihood estimate of the fractional differencing order <span class="math inline">\(d\)</span> given by Haslett &amp; Raftery (<a href="#ref">1989</a>). We add 0.5 to make it consistent with the Hurst coefficient. Note that the fractal dimension can be estimated as <span class="math inline">\(D = 2 - \text{hurst}\)</span>.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw"><a href="../reference/hurst.html">hurst</a></span>(AirPassengers)</a>
 <a class="sourceLine" id="cb10-2" data-line-number="2"><span class="co">#&gt;     hurst </span></a>
 <a class="sourceLine" id="cb10-3" data-line-number="3"><span class="co">#&gt; 0.9992466</span></a></code></pre></div>
 </div>
-<div id="uniroot" class="section level3">
+<div id="unitroot" class="section level3">
 <h3 class="hasAnchor">
-<a href="#uniroot" class="anchor"></a>unitroot_kpss and unitroot_pp</h3>
+<a href="#unitroot" class="anchor"></a>unitroot_kpss and unitroot_pp</h3>
 <p><code>unitroot_kpss</code> is a vector comprising the statistic for the KPSS unit root test with linear trend and lag one, and <code>unitroot_pp</code> is the statistic for the “Z-alpha” version of PP unit root test with constant trend and lag one.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw"><a href="../reference/unitroot_kpss.html">unitroot_kpss</a></span>(AirPassengers)</a>
 <a class="sourceLine" id="cb11-2" data-line-number="2"><span class="co">#&gt; [1] 2.739474</span></a>
@@ -277,14 +276,14 @@
 <p><code>stl_features</code> Computes various measures of trend and seasonality of a time series based on an STL decomposition. The <code>mstl</code> function is used to do the decomposition.</p>
 <p><code>nperiods</code> is the number of seasonal periods in the data (determined by the frequency of observation, not the observations themselves) and set to 1 for non-seasonal data. <code>seasonal_period</code> is a vector of seasonal periods and set to 1 for non-seasonal data.</p>
 <p>The size and location of the peaks and troughs in the seasonal component are used to compute strength of peaks (<code>peak</code>) and strength of trough (<code>trough</code>).</p>
-<p>The rest of the features are modifications of features used in Kang, Hyndman &amp; Smith-Miles (<a href="#ref">2017</a>). We extend the STL decomposition approach (Clevelandetal.<a href="#ref">1990</a>) to handle multiple seasonalities. Thus, the decomposition contains a trend, up to <span class="math inline">\(M\)</span> seasonal components and a remainder component:</p>
+<p>The rest of the features are modifications of features used in Kang, Hyndman &amp; Smith-Miles (<a href="#ref">2017</a>). We extend the STL decomposition approach (Cleveland et al.<a href="#ref">1990</a>) to handle multiple seasonalities. Thus, the decomposition contains a trend, up to <span class="math inline">\(M\)</span> seasonal components and a remainder component:</p>
 <p><span class="math display">\[x_t=f_t+s_{1,t}+\cdots+s_{M.t}+e_t\]</span></p>
 <p>where <span class="math inline">\(f_t\)</span> is the smoothed trend component, <span class="math inline">\(s_{i,t}\)</span> is the <span class="math inline">\(i\)</span>th seasonal component and <span class="math inline">\(e_t\)</span> is a remainder component. The components are estimated iteratively. Let <span class="math inline">\(s^{(k)}_{i,t}\)</span> be the estimate of <span class="math inline">\(s_i,t\)</span> at the <span class="math inline">\(k\)</span>th iteration, with initial values given as <span class="math inline">\(s^{(0)}_{i,t}=0\)</span>. The we apply an STL decomposition to <span class="math inline">\(x_t-\sum^{j=1}_{j\neq1}{}^{^{M}}s^{k-1}_{j,t}\)</span> to obtained updated estimates <span class="math inline">\(s^{(k)}_{i,t}\)</span> for <span class="math inline">\(k=1,2,\ldots\)</span>. In practice, this converges quickly and only two iterations are required. To allow the procedure to be applied automatically, we set the seasonal window span for STL to be 21 in all cases. For a non-seasonal time series, we simply estimate <span class="math inline">\(x_t=f_t+e_t\)</span> where <span class="math inline">\(f_t\)</span> is computed using Friedman’s “super smoother” (Friedman <a href="#ref">1984</a>).</p>
 <p>Strength of trend (<code>trend</code>) and strength of seasonality (<code>seasonal.strength</code>) are defined as</p>
-<p><span class="math display">\[\text{trend}=1-\frac{\text{Var}(e_t)}{\text{Var}(f_t+e_t)}\quad \text{and}\quad \text{seasonal.strength}=1-\frac{\text{Var}(e_t)}{\text{Var}(s_{i,t}+e_t)}\]</span> If their values are less than 0, they are set to 0, while values greater than 1 are set to 1. For non-seasonal time series <code>seasonal.strength</code> is 0. For seasonal time series, <code>seasonal.strength</code> is an M-vector, where M is the number of periods. This is analogous to the way the strength of trend and seasonality were deﬁned in Wang, Smith &amp; Hyndman (<a href="#ref">2006</a>), Hyndman, Wang &amp; Laptev (<a href="#ref">2015</a>) and Kang, Hyndman &amp; Smith-Miles (<a href="#ref">2017</a>).</p>
+<p><span class="math display">\[\text{trend}=1-\frac{\text{Var}(e_t)}{\text{Var}(f_t+e_t)}\quad \text{and}\quad \text{seasonal.strength}=1-\frac{\text{Var}(e_t)}{\text{Var}(s_{i,t}+e_t)}\]</span> If their values are less than 0, they are set to 0, while values greater than 1 are set to 1. For non-seasonal time series <code>seasonal.strength</code> is 0. For seasonal time series, <code>seasonal.strength</code> is an M-vector, where M is the number of periods. This is analogous to the way the strength of trend and seasonality were defined in Wang, Smith &amp; Hyndman (<a href="#ref">2006</a>), Hyndman, Wang &amp; Laptev (<a href="#ref">2015</a>) and Kang, Hyndman &amp; Smith-Miles (<a href="#ref">2017</a>).</p>
 <p><code>spike</code> measures the “spikiness” of a time series, and is computed as the variance of the leave-one-out variances of the remainder component <span class="math inline">\(e_t\)</span>.</p>
-<p><code>linearity</code> and <code>curvature</code> measures the linearity and curvature of a time series calculated based on the coefﬁcients of an orthogonal quadratic regression.</p>
-<p>We compute the autocorrelation function of <span class="math inline">\(e_t\)</span>, and <code>e_acf1</code> and <code>e_acf10</code> contain the ﬁrst autocorrelation coefﬁcient and the sum of the ﬁrst ten squared autocorrelation coefﬁcients.</p>
+<p><code>linearity</code> and <code>curvature</code> measures the linearity and curvature of a time series calculated based on the coefficients of an orthogonal quadratic regression.</p>
+<p>We compute the autocorrelation function of <span class="math inline">\(e_t\)</span>, and <code>e_acf1</code> and <code>e_acf10</code> contain the first autocorrelation coefficient and the sum of the first ten squared autocorrelation coefficients.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw"><a href="../reference/stl_features.html">stl_features</a></span>(AirPassengers)</a>
 <a class="sourceLine" id="cb12-2" data-line-number="2"><span class="co">#&gt;          nperiods   seasonal_period             trend             spike </span></a>
 <a class="sourceLine" id="cb12-3" data-line-number="3"><span class="co">#&gt;         1.0000000        12.0000000         0.9886426         4.3879083 </span></a>
@@ -296,7 +295,7 @@
 <div id="acf_features" class="section level3">
 <h3 class="hasAnchor">
 <a href="#acf_features" class="anchor"></a>acf_features</h3>
-<p>We compute the autocorrelation function of the series, the differenced series, and the twicedifferenced series. <code>acf_features</code> produces a vector comprising the ﬁrst autocorrelation coefﬁcient in each case, and the sum of squares of the ﬁrst 10 autocorrelation coefﬁcients in each case.</p>
+<p>We compute the autocorrelation function of the series, the differenced series, and the twice-differenced series. <code>acf_features</code> produces a vector comprising the first autocorrelation coefficient in each case, and the sum of squares of the first 10 autocorrelation coefficients in each case.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw"><a href="../reference/acf_features.html">acf_features</a></span>(AirPassengers)</a>
 <a class="sourceLine" id="cb13-2" data-line-number="2"><span class="co">#&gt;      x_acf1     x_acf10  diff1_acf1 diff1_acf10  diff2_acf1 diff2_acf10 </span></a>
 <a class="sourceLine" id="cb13-3" data-line-number="3"><span class="co">#&gt;   0.9480473   5.6700871   0.3028553   0.4088376  -0.1910059   0.2507803 </span></a>
@@ -306,7 +305,7 @@
 <div id="pacf_features" class="section level3">
 <h3 class="hasAnchor">
 <a href="#pacf_features" class="anchor"></a>pacf_features</h3>
-<p>We compute the partial autocorrelation function of the series, the differenced series, and the second-order differenced series. Then <code>pacf_features</code> produces a vector comprising the sum of squares of the ﬁrst 5 partial autocorrelation coefﬁcients in each case.</p>
+<p>We compute the partial autocorrelation function of the series, the differenced series, and the second-order differenced series. Then <code>pacf_features</code> produces a vector comprising the sum of squares of the first 5 partial autocorrelation coefficients in each case.</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw"><a href="../reference/pacf_features.html">pacf_features</a></span>(AirPassengers)</a>
 <a class="sourceLine" id="cb14-2" data-line-number="2"><span class="co">#&gt;      x_pacf5 diff1x_pacf5 diff2x_pacf5    seas_pacf </span></a>
 <a class="sourceLine" id="cb14-3" data-line-number="3"><span class="co">#&gt;    0.9670971    0.2122454    0.2476615   -0.1354311</span></a></code></pre></div>
@@ -325,12 +324,12 @@
 <div id="heterogeneity" class="section level3">
 <h3 class="hasAnchor">
 <a href="#heterogeneity" class="anchor"></a>heterogeneity</h3>
-<p>The <code>heterogeneity</code> features measure the heterogeneity of the time series. First, we pre-whiten the time series to remove the mean, trend, and autoregressive (AR) information (Barbour &amp; Parker <a href="#ref">2014</a>). Then we ﬁt a <span class="math inline">\(GARCH(1,1)\)</span> model to the pre-whitened time series, <span class="math inline">\(x_t\)</span>, to measure for autoregressive conditional heteroskedasticity (ARCH) effects. The residuals from this model, <span class="math inline">\(z_t\)</span>, are also measured for ARCH effects using a second <span class="math inline">\(GARCH(1,1)\)</span> model.</p>
+<p>The <code>heterogeneity</code> features measure the heterogeneity of the time series. First, we pre-whiten the time series to remove the mean, trend, and autoregressive (AR) information (Barbour &amp; Parker <a href="#ref">2014</a>). Then we fit a <span class="math inline">\(GARCH(1,1)\)</span> model to the pre-whitened time series, <span class="math inline">\(x_t\)</span>, to measure for autoregressive conditional heteroskedasticity (ARCH) effects. The residuals from this model, <span class="math inline">\(z_t\)</span>, are also measured for ARCH effects using a second <span class="math inline">\(GARCH(1,1)\)</span> model.</p>
 <ul>
 <li>
-<code>arch_acf</code> is the sum of squares of the ﬁrst 12 autocorrelations of <span class="math inline">\(\{x^2_t\}\)</span>.</li>
+<code>arch_acf</code> is the sum of squares of the first 12 autocorrelations of <span class="math inline">\(\{x^2_t\}\)</span>.</li>
 <li>
-<code>garch_acf</code> is the sum of squares of the ﬁrst 12 autocorrelations of <span class="math inline">\(\{z^2_t\}\)</span>.</li>
+<code>garch_acf</code> is the sum of squares of the first 12 autocorrelations of <span class="math inline">\(\{z^2_t\}\)</span>.</li>
 <li>
 <code>arch_r2</code> is the <span class="math inline">\(R^2\)</span> value of an AR model applied to <span class="math inline">\(\{x^2_t\}\)</span>.</li>
 <li>
@@ -344,7 +343,7 @@
 <div id="nonlinearity" class="section level3">
 <h3 class="hasAnchor">
 <a href="#nonlinearity" class="anchor"></a>nonlinearity</h3>
-<p>The <code>nonlinearity</code> coefficient is computed using a modification of the statistic used in Teräsvirta’s nonlinearity test. Teräsvirta’s test uses a statustuc <span class="math inline">\(X^2=T\log(\text{SSE}1/\text{SSE}0)\)</span> where SSE1 and SSE0 are the sum of squared residuals from a nonlinear and linear autorgression respectively. This is non-ergodic, so instead, we define it as <span class="math inline">\(10X^2/T\)</span> which will converge to a value indicating the extent of nonlinearity as <span class="math inline">\(T\rightarrow\infty\)</span>. This takes large values when the series is nonlinear, and values around 0 when the series is linear.</p>
+<p>The <code>nonlinearity</code> coefficient is computed using a modification of the statistic used in Teräsvirta’s nonlinearity test. Teräsvirta’s test uses a statistic <span class="math inline">\(X^2=T\log(\text{SSE}1/\text{SSE}0)\)</span> where SSE1 and SSE0 are the sum of squared residuals from a nonlinear and linear autoregression respectively. This is non-ergodic, so instead, we define it as <span class="math inline">\(10X^2/T\)</span> which will converge to a value indicating the extent of nonlinearity as <span class="math inline">\(T\rightarrow\infty\)</span>. This takes large values when the series is nonlinear, and values around 0 when the series is linear.</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw"><a href="../reference/nonlinearity.html">nonlinearity</a></span>(AirPassengers)</a>
 <a class="sourceLine" id="cb17-2" data-line-number="2"><span class="co">#&gt; nonlinearity </span></a>
 <a class="sourceLine" id="cb17-3" data-line-number="3"><span class="co">#&gt;    0.4238969</span></a></code></pre></div>
@@ -360,7 +359,7 @@
 <div id="compengine" class="section level3">
 <h3 class="hasAnchor">
 <a href="#compengine" class="anchor"></a>compengine feature set</h3>
-<p><code>comengine</code> calculate the features that have been used in the <a href="https://www.comp-engine.org/">CompEngine</a> database, using a method introduced in package <code>kctsa</code>.</p>
+<p><code>compengine</code> calculate the features that have been used in the <a href="https://www.comp-engine.org/">CompEngine</a> database, using a method introduced in package <code>kctsa</code>.</p>
 <p>The features involved can be grouped as autocorrelation, prediction, stationarity, distribution, and scaling, which can be computed using <code>autocorr_features</code>, <code>pred_features</code>, <code>station_features</code>, <code>dist_features</code>, and <code>scal_features</code>.</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">comp &lt;-<span class="st"> </span><span class="kw"><a href="../reference/compengine.html">compengine</a></span>(AirPassengers)</a>
 <a class="sourceLine" id="cb19-2" data-line-number="2">knitr<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/knitr/topics/kable">kable</a></span>(comp)</a></code></pre></div>
@@ -416,11 +415,11 @@
 </tr>
 <tr class="even">
 <td>spreadrandomlocal_meantaul_50</td>
-<td align="right">12.9200000</td>
+<td align="right">12.6800000</td>
 </tr>
 <tr class="odd">
 <td>spreadrandomlocal_meantaul_ac2</td>
-<td align="right">38.9500000</td>
+<td align="right">38.8700000</td>
 </tr>
 <tr class="even">
 <td>histogram_mode_10</td>
@@ -428,7 +427,7 @@
 </tr>
 <tr class="odd">
 <td>outlierinclude_mdrmd</td>
-<td align="right">0.5416667</td>
+<td align="right">0.4166667</td>
 </tr>
 <tr class="even">
 <td>fluctanal_prop_r1</td>
@@ -475,7 +474,7 @@
 <div id="motiftwo_entro3" class="section level3">
 <h3 class="hasAnchor">
 <a href="#motiftwo_entro3" class="anchor"></a>motiftwo_entro3</h3>
-<p>Local motifs in a binary symbolization of the time series. Coarse-graining is performed. Time-series values above its mean are given 1, and those below the mean are 0. <code>motiftwo_entro3</code> returns the entropie of words in the binary alphabet of length 3.</p>
+<p>Local motifs in a binary symbolization of the time series. Coarse-graining is performed. Time-series values above its mean are given 1, and those below the mean are 0. <code>motiftwo_entro3</code> returns the entropy of words in the binary alphabet of length 3.</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="kw"><a href="../reference/motiftwo_entro3.html">motiftwo_entro3</a></span>(AirPassengers)</a>
 <a class="sourceLine" id="cb25-2" data-line-number="2"><span class="co">#&gt; [1] 1.130244</span></a></code></pre></div>
 </div>
@@ -521,7 +520,7 @@
 <a href="#spreadrandomlocal_meantaul" class="anchor"></a>spreadrandomlocal_meantaul</h3>
 <p>100 time-series segments of length l are selected at random from the time series and the mean of the first zero-crossings of the autocorrelation function in each segment is calculated using <code>spreadrandomlocal_meantaul</code>.</p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="kw"><a href="../reference/spreadrandomlocal_meantaul.html">spreadrandomlocal_meantaul</a></span>(AirPassengers)</a>
-<a class="sourceLine" id="cb31-2" data-line-number="2"><span class="co">#&gt; [1] 12.56</span></a></code></pre></div>
+<a class="sourceLine" id="cb31-2" data-line-number="2"><span class="co">#&gt; [1] 12.79</span></a></code></pre></div>
 </div>
 <div id="histogram_mode" class="section level3">
 <h3 class="hasAnchor">
@@ -533,12 +532,12 @@
 <div id="outlierinclude_mdrmd" class="section level3">
 <h3 class="hasAnchor">
 <a href="#outlierinclude_mdrmd" class="anchor"></a>outlierinclude_mdrmd</h3>
-<p><code>outlierinclude_mdrmd</code> measures meidan as more and more outliers are included in the calculation according to a specified rule, of outliers being furthest from the mean.</p>
+<p><code>outlierinclude_mdrmd</code> measures the median as more and more outliers are included in the calculation according to a specified rule, of outliers being furthest from the mean.</p>
 <p>The threshold for including time-series data points in the analysis increases from zero to the maximum deviation, in increments of 0.01*sigma (by default), where sigma is the standard deviation of the time series.</p>
 <p>At each threshold, proportion of time series points included and median are calculated, and outputs from the algorithm measure how these statistical quantities change as more extreme points are included in the calculation.</p>
 <p><code>outlierinclude_mdrmd</code> essentially returns the median of the median of range indices.</p>
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="kw"><a href="../reference/outlierinclude_mdrmd.html">outlierinclude_mdrmd</a></span>(AirPassengers)</a>
-<a class="sourceLine" id="cb33-2" data-line-number="2"><span class="co">#&gt; [1] 0.5416667</span></a></code></pre></div>
+<a class="sourceLine" id="cb33-2" data-line-number="2"><span class="co">#&gt; [1] 0.4166667</span></a></code></pre></div>
 </div>
 <div id="fluctanal_prop_r1" class="section level3">
 <h3 class="hasAnchor">
@@ -554,7 +553,7 @@
 <div id="hyndman-wang-and-laptev-icdm-2015" class="section level3">
 <h3 class="hasAnchor">
 <a href="#hyndman-wang-and-laptev-icdm-2015" class="anchor"></a>Hyndman, Wang and Laptev (ICDM 2015)</h3>
-<p>Compute the features used in Hyndman, Wang &amp; Laptev (ICDM 2015). Note that crossing_points, peak and trough are defined differently in the tsfeatures package than in the Hyndman et al (2015) paper. Other features are the same. Using the real data from the paper.</p>
+<p>Compute the features used in Hyndman, Wang &amp; Laptev (ICDM 2015). Note that crossing_points, peak and trough are defined differently in the <em>tsfeatures</em> package than in the Hyndman et al (2015) paper. Other features are the same. Using the real data from the paper.</p>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(tsfeatures)</a>
 <a class="sourceLine" id="cb35-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dplyr)</a>
 <a class="sourceLine" id="cb35-3" data-line-number="3"><span class="co">#&gt; </span></a>
@@ -598,7 +597,7 @@
 <div id="kang-hyndman-smith-miles-ijf-2017" class="section level3">
 <h3 class="hasAnchor">
 <a href="#kang-hyndman-smith-miles-ijf-2017" class="anchor"></a>Kang, Hyndman &amp; Smith-Miles (IJF 2017)</h3>
-<p>Compute the features used in Kang, Hyndman &amp; Smith-Miles (IJF 2017). Note that the trend and ACF1 are computed differently for non-seasonal data in the tsfeatures package than in the Kang et al (2017). <code>tsfeatures</code> uses <code>mstl</code> which uses <code>supsmu</code> for the trend calculation with non-seasonal data, whereas Kang et al used a penalized regression spline computed using <code>mgcv</code> instead. Other features are the same.</p>
+<p>Compute the features used in Kang, Hyndman &amp; Smith-Miles (IJF 2017). Note that the trend and ACF1 are computed differently for non-seasonal data in the <em>tsfeatures</em> package than in the Kang et al (2017). <code>tsfeatures</code> uses <code>mstl</code> which uses <code>supsmu</code> for the trend calculation with non-seasonal data, whereas Kang et al used a penalized regression spline computed using <code>mgcv</code> instead. Other features are the same.</p>
 <div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(tsfeatures)</a>
 <a class="sourceLine" id="cb37-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dplyr)</a>
 <a class="sourceLine" id="cb37-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(tidyr)</a>
