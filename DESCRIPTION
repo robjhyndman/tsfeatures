@@ -12,18 +12,18 @@ Description: Methods for extracting various features from time series data.
 Depends:
     R (>= 3.2.3)
 Imports:
-    foreach,
     ForeCA,
     fracdiff,
     forecast (>= 8.3),
-    doParallel,
     mgcv,
     purrr,
     RcppRoll (>= 0.2.2),
     stats,
     tibble,
     tseries,
-    urca
+    urca,
+    future,
+    furrr
 License: GPL-3 + file LICENSE
 LazyData: true
 ByteCompile: true
