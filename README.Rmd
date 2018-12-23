@@ -41,7 +41,6 @@ library(tsfeatures)
 mylist <- list(sunspot.year, WWWusage, AirPassengers, USAccDeaths)
 myfeatures <- tsfeatures(mylist)
 myfeatures
-embedding(dist(myfeatures), perplexity = 1)
 ```
 
 

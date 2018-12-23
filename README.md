@@ -39,14 +39,6 @@ myfeatures
 #> #   x_acf1 <dbl>, x_acf10 <dbl>, diff1_acf1 <dbl>, diff1_acf10 <dbl>,
 #> #   diff2_acf1 <dbl>, diff2_acf10 <dbl>, seasonal_strength <dbl>,
 #> #   peak <dbl>, trough <dbl>, seas_acf1 <dbl>
-embedding(dist(myfeatures), perplexity = 1)
-#> # A tibble: 4 x 2
-#>    Comp1   Comp2
-#>    <dbl>   <dbl>
-#> 1  1.07  -0.0481
-#> 2 -1.08   0.0483
-#> 3 -0.586 -1.22  
-#> 4  0.592  1.22
 ```
 
 ## License
