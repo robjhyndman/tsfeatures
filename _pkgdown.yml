@@ -43,11 +43,10 @@ navbar:
 
 
 reference:
-- title: Non-feature Functions
-  desc: The function for a list of time series and the embedding function.
+- title: tsfeatures Function
+  desc: The function to extract features from a list of time series.
   contents:
   - '`tsfeatures`'
-  - '`embedding`'
 - title: Features
   desc: ~
   contents:

@@ -9,7 +9,6 @@
 #' @importFrom stats quantile acf pacf stl pchisq ar Box.test poly start cmdscale
 #' @importFrom purrr map map_dbl
 #' @importFrom forecast mstl
-#' @importFrom foreach "%dopar%" foreach
 NULL
 # > NULL
 

@@ -44,21 +44,21 @@ tsfeatures <- function(tslist,
   # Compute all features
   flist <- funlist <- list()
   # Assuming that didn't generate an error, we will proceed
+  func <- lapply(features, match.fun)
+  if (parallel) {
+    old_plan <- future::plan(future::multiprocess)
+    on.exit(future::plan(old_plan))
+  }
   for (i in seq_along(features)) {
+    
     if (parallel) {
-      num.cores <- parallel::detectCores()
-      doParallel::registerDoParallel(cores = num.cores)
-      `%dopar%` <- foreach::`%dopar%`
-      j <- 0 # Just to avoid global variable error in check
-      flist[[i]] <- foreach::foreach(j = seq_along(tslist)) %dopar% {
-        match.fun(features[i])(tslist[[j]], ...)
-      }
+      flist[[i]] <- furrr::future_map(tslist, func[[i]])
     }
     else {
-      flist[[i]] <- map(tslist, function(x) {
-        match.fun(features[i])(x, ...)
-      })
+      flist[[i]] <- map(tslist, func[[i]])
     }
+   
+
     # Check names
     if (is.null(names(flist[[i]][[1]]))) {
       flist[[i]] <- map(

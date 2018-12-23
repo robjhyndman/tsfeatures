@@ -56,14 +56,6 @@ is.monthly <- function(x){
 tsfeatures(mylist, features = "is.monthly")
 ```
 
-The function `embedding` provides various methods for embedding a distance matrix into a low-dimensional matrix. See more details in the help page `?embedding`.
-
-```{r}
-mylist <- list(sunspot.year, WWWusage, AirPassengers, USAccDeaths)
-fmat <- tsfeatures(mylist)
-z <- embedding(dist(fmat), perplexity=1)
-plot(z)
-```
 
 ## List of features
 
