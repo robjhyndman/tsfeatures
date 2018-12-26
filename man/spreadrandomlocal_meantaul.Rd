@@ -9,7 +9,7 @@ spreadrandomlocal_meantaul(y, l = 50)
 \arguments{
 \item{y}{the input time series}
 
-\item{l}{the length of local time-series segments to analyze as a positive integer. Can also be a specified character string: "ac2": twice the first zero-crossing of the autocorrelation function}
+\item{l}{the length of local time-series segments to analyse as a positive integer. Can also be a specified character string: "ac2": twice the first zero-crossing of the autocorrelation function}
 }
 \value{
 mean of the first zero-crossings of the autocorrelation function

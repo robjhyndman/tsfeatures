@@ -572,7 +572,7 @@ std1st_der <- function(y) {
 #'
 #'
 #' @param y the input time series
-#' @param l the length of local time-series segments to analyze as a positive integer. Can also be a specified character string: "ac2": twice the first zero-crossing of the autocorrelation function
+#' @param l the length of local time-series segments to analyse as a positive integer. Can also be a specified character string: "ac2": twice the first zero-crossing of the autocorrelation function
 #' @return mean of the first zero-crossings of the autocorrelation function
 #' @references B.D. Fulcher and N.S. Jones. hctsa: A computational framework for automated time-series phenotyping using massive feature extraction. Cell Systems 5, 527 (2017).
 #' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).
@@ -583,7 +583,7 @@ spreadrandomlocal_meantaul <- function(y, l = 50) {
   if (!is.numeric(l)) stop("Unknown specifier `l`")
   numSegs <- 100
   N <- length(y)
-  if (l > 0.9 * N) stop("This time series is too short. Specify proper segment lengrh in `l`")
+  if (l > 0.9 * N) stop("This time series is too short. Specify proper segment length in `l`")
 
   qs <- numeric(numSegs)
 
@@ -642,7 +642,7 @@ histogram_mode <- function(y, numBins = 10) {
 # DN_OutlierInclude_abs_001_mdrmd
 #' How median depend on distributional outliers from software package \code{hctsa}
 #'
-#' Measures meidan as more and
+#' Measures median as more and
 #' more outliers are included in the calculation according to a specified rule,
 #' of outliers being furthest from the mean.
 #'
@@ -748,7 +748,7 @@ fluctanal_prop_r1 <- function(x) {
   taur <- unique(round(exp(seq(from = log(5), to = log(floor(N / 2)), length.out = tauStep))))
   ntau <- length(taur)
   if (ntau < 8) { # fewer than 8 points
-    stop("This time series is too short to analyze using this fluctuation analysis")
+    stop("This time series is too short to analyse using this fluctuation analysis")
   }
 
   Fl <- numeric(ntau)
@@ -762,7 +762,7 @@ fluctanal_prop_r1 <- function(x) {
       y_buff <- y_buff[-length(y_buff)]
     }
 
-    # analyzed length of time series (with trailing end-points removed)
+    # analysed length of time series (with trailing end-points removed)
     nn <- length(y_buff) * tau
     tt <- (1:tau) # faux time range
 

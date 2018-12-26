@@ -15,7 +15,7 @@ outlierinclude_mdrmd(y, zscored = TRUE)
 median  of the median of range indices
 }
 \description{
-Measures meidan as more and
+Measures median as more and
 more outliers are included in the calculation according to a specified rule,
 of outliers being furthest from the mean.
 }
