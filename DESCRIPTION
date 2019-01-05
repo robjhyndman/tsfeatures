@@ -25,12 +25,6 @@ Imports:
     urca,
     future,
     furrr
-License: GPL-3 + file LICENSE
-LazyData: true
-ByteCompile: true
-URL: https://github.com/robjhyndman/tsfeatures/
-BugReports: https://github.com/robjhyndman/tsfeatures/issues/
-RoxygenNote: 6.1.1
 Suggests:
     testthat,
     knitr,
@@ -40,5 +34,11 @@ Suggests:
     dplyr,
     Mcomp,
     GGally
+License: GPL-3
+LazyData: true
+ByteCompile: true
+URL: https://pkg.robjhyndman.com/tsfeatures/
+BugReports: https://github.com/robjhyndman/tsfeatures/issues/
+RoxygenNote: 6.1.1
 VignetteBuilder: knitr
 Encoding: UTF-8
