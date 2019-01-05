@@ -20,9 +20,6 @@ navbar:
     - home
     - intro
     - reference
-    - articles
-    - tutorials
-    - news
     right: github
   components:
     home:
@@ -38,55 +35,52 @@ navbar:
       icon: fa-github fa-lg
       href: https://github.com/robjhyndman/tsfeatures/
 
-
-
-
-
 reference:
-- title: tsfeatures Function
-  desc: The function to extract features from a list of time series.
+- title: tsfeatures
+  desc: The main function to extract features from a list of time series.
   contents:
-  - '`tsfeatures`'
-- title: Features
-  desc: ~
+  - tsfeatures
+- title: Feature functions
+  desc: Functions which compute features from time series
   contents:
-  - '`acf_features`'
-  - '`ac_9`'
-  - '`arch_stat`'
-  - '`as.list.mts`'
-  - '`autocorr_features`'
-  - '`binarize_mean`'
-  - '`compengine`'
-  - '`crossing_points`'
-  - '`dist_features`'
-  - '`embed2_incircle`'
-  - '`entropy`'
-  - '`firstmin_ac`'
-  - '`firstzero_ac`'
-  - '`flat_spots`'
-  - '`fluctanal_prop_r1`'
-  - '`heterogeneity`'
-  - '`histogram_mode`'
-  - '`holt_parameters`'
-  - '`hurst`'
-  - '`localsimple_taures`'
-  - '`lumpiness`'
-  - '`max_level_shift`'
-  - '`motiftwo_entro3`'
-  - '`nonlinearity`'
-  - '`outlierinclude_mdrmd`'
-  - '`pacf_features`'
-  - '`pred_features`'
-  - '`sampenc`'
-  - '`sampen_first`'
-  - '`scal_features`'
-  - '`spreadrandomlocal_meantaul`'
-  - '`station_features`'
-  - '`std1st_der`'
-  - '`stl_features`'
-  - '`trev_num`'
-  - '`unitroot_kpss`'
-  - '`walker_propcross`'
-
-
-
+  - ac_9
+  - acf_features
+  - arch_stat
+  - as.list.mts
+  - autocorr_features
+  - binarize_mean
+  - compengine
+  - crossing_points
+  - dist_features
+  - embed2_incircle
+  - entropy
+  - firstmin_ac
+  - firstzero_ac
+  - flat_spots
+  - fluctanal_prop_r1
+  - heterogeneity
+  - histogram_mode
+  - holt_parameters
+  - hurst
+  - localsimple_taures
+  - lumpiness
+  - max_level_shift
+  - motiftwo_entro3
+  - nonlinearity
+  - outlierinclude_mdrmd
+  - pacf_features
+  - pred_features
+  - sampen_first
+  - sampenc
+  - scal_features
+  - spreadrandomlocal_meantaul
+  - station_features
+  - std1st_der
+  - stl_features
+  - trev_num
+  - unitroot_kpss
+  - walker_propcross
+- title: Data
+  desc: Data from Yahoo comprising server metrics
+  contents:
+  - yahoo
