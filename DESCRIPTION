@@ -7,7 +7,8 @@ Authors@R: c(
     person("Thiyanga", "Talagala", role = "aut"),
     person("Earo", "Wang", role = "aut"),
     person("Yangzhuoran", "Yang", email = "Fin.Yang@monash.edu", role = "aut"),
-    person("Souhaib", "Ben Taieb", role = "ctb"))
+    person("Souhaib", "Ben Taieb", role = "ctb"),
+    person("Nikolay", "Laptev", role="ctb"))
 Description: Methods for extracting various features from time series data.
 Depends:
     R (>= 3.2.3)
@@ -37,7 +38,6 @@ Suggests:
     ggplot2,
     tidyr,
     dplyr,
-    anomalous,
     Mcomp,
     GGally
 VignetteBuilder: knitr
