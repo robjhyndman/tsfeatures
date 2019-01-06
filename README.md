@@ -5,13 +5,23 @@
 
 [![Pending
 Pull-Requests](http://githubbadges.herokuapp.com/robjhyndman/tsfeatures/pulls.svg?style=flat)](https://github.com/robjhyndman/tsfeatures/pulls)
+[![Travis-CI Build
+Status](https://travis-ci.org/robjhyndman/tsfeatures.svg?branch=master)](https://travis-ci.org/robjhyndman/tsfeatures)
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/tsfeatures)](https://cran.r-project.org/package=tsfeatures)
+[![Downloads](http://cranlogs.r-pkg.org/badges/tsfeatures)](https://cran.r-project.org/package=tsfeatures)
+[![Licence](https://img.shields.io/badge/licence-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 
 The R package *tsfeatures* provides methods for extracting various
 features from time series data.
 
 ## Installation
 
-The **stable** version on R CRAN is coming soon.
+You can install the **stable** version on [R
+CRAN](https://cran.r-project.org/package=tsfeatures).
+
+``` r
+install.packages('tsfeatures', dependencies = TRUE)
+```
 
 You can install the **development** version from
 [Github](https://github.com/robjhyndman/tsfeatures) with:
