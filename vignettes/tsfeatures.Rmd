@@ -188,7 +188,7 @@ pacf_features(AirPassengers)
 
 ### holt_parameters and hw_parameters {#holt_hw}
 
-`holt_parameters` Estimate the smoothing parameter for the level-alpha and the smoothing parameter for the trend-beta of Holt's linear trend method. `hw_parameters` considers additive seasonal trend: ets(A,A,A) model, returning a vector of 3 values: alpha, beta and gamma.
+`holt_parameters` Estimate the smoothing parameter for the level-alpha and the smoothing parameter for the trend-beta of Holt's linear trend method. `hw_parameters` considers additive seasonal trend: ETS(A,A,A) model, returning a vector of 3 values: alpha, beta and gamma.
 
 ```{r}
 holt_parameters(AirPassengers)
