@@ -52,10 +52,10 @@ tsfeatures <- function(tslist,
   for (i in seq_along(features)) {
     
     if (parallel) {
-      flist[[i]] <- furrr::future_map(tslist, func[[i]])
+      flist[[i]] <- furrr::future_map(tslist, func[[i]], ...)
     }
     else {
-      flist[[i]] <- map(tslist, func[[i]])
+      flist[[i]] <- map(tslist, func[[i]], ...)
     }
    
 
