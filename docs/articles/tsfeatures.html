@@ -71,7 +71,7 @@
       <h1>Introduction to tsfeatures package</h1>
                         <h4 class="author">Yangzhuoran Yang</h4>
             
-            <h4 class="date">2019-01-05</h4>
+            <h4 class="date">2019-01-09</h4>
       
       
       <div class="hidden name"><code>tsfeatures.Rmd</code></div>
@@ -105,7 +105,7 @@
 <a class="sourceLine" id="cb2-7" data-line-number="7"><span class="co">#&gt; 2         1        0               1 0.985 3.01e-8      4.45      1.10</span></a>
 <a class="sourceLine" id="cb2-8" data-line-number="8"><span class="co">#&gt; 3        12        1              12 0.989 2.12e-8     11.0       1.10</span></a>
 <a class="sourceLine" id="cb2-9" data-line-number="9"><span class="co">#&gt; 4        12        1              12 0.796 9.67e-7     -2.13      2.85</span></a>
-<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="co">#&gt; # ... with 13 more variables: e_acf1 &lt;dbl&gt;, e_acf10 &lt;dbl&gt;, entropy &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="co">#&gt; # … with 13 more variables: e_acf1 &lt;dbl&gt;, e_acf10 &lt;dbl&gt;, entropy &lt;dbl&gt;,</span></a>
 <a class="sourceLine" id="cb2-11" data-line-number="11"><span class="co">#&gt; #   x_acf1 &lt;dbl&gt;, x_acf10 &lt;dbl&gt;, diff1_acf1 &lt;dbl&gt;, diff1_acf10 &lt;dbl&gt;,</span></a>
 <a class="sourceLine" id="cb2-12" data-line-number="12"><span class="co">#&gt; #   diff2_acf1 &lt;dbl&gt;, diff2_acf10 &lt;dbl&gt;, seasonal_strength &lt;dbl&gt;,</span></a>
 <a class="sourceLine" id="cb2-13" data-line-number="13"><span class="co">#&gt; #   peak &lt;dbl&gt;, trough &lt;dbl&gt;, seas_acf1 &lt;dbl&gt;</span></a></code></pre></div>
@@ -307,7 +307,7 @@
 <div id="holt_hw" class="section level3">
 <h3 class="hasAnchor">
 <a href="#holt_hw" class="anchor"></a>holt_parameters and hw_parameters</h3>
-<p><code>holt_parameters</code> Estimate the smoothing parameter for the level-alpha and the smoothing parameter for the trend-beta of Holt’s linear trend method. <code>hw_parameters</code> considers additive seasonal trend: ets(A,A,A) model, returning a vector of 3 values: alpha, beta and gamma.</p>
+<p><code>holt_parameters</code> Estimate the smoothing parameter for the level-alpha and the smoothing parameter for the trend-beta of Holt’s linear trend method. <code>hw_parameters</code> considers additive seasonal trend: ETS(A,A,A) model, returning a vector of 3 values: alpha, beta and gamma.</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw"><a href="../reference/holt_parameters.html">holt_parameters</a></span>(AirPassengers)</a>
 <a class="sourceLine" id="cb14-2" data-line-number="2"><span class="co">#&gt;        alpha         beta </span></a>
 <a class="sourceLine" id="cb14-3" data-line-number="3"><span class="co">#&gt; 0.9998999962 0.0001000071</span></a>
@@ -409,11 +409,11 @@
 </tr>
 <tr class="even">
 <td>spreadrandomlocal_meantaul_50</td>
-<td align="right">13.0700000</td>
+<td align="right">12.2400000</td>
 </tr>
 <tr class="odd">
 <td>spreadrandomlocal_meantaul_ac2</td>
-<td align="right">38.9800000</td>
+<td align="right">38.9400000</td>
 </tr>
 <tr class="even">
 <td>histogram_mode_10</td>
@@ -514,7 +514,7 @@
 <a href="#spreadrandomlocal_meantaul" class="anchor"></a>spreadrandomlocal_meantaul</h3>
 <p>100 time-series segments of length l are selected at random from the time series and the mean of the first zero-crossings of the autocorrelation function in each segment is calculated using <code>spreadrandomlocal_meantaul</code>.</p>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1"><span class="kw"><a href="../reference/spreadrandomlocal_meantaul.html">spreadrandomlocal_meantaul</a></span>(AirPassengers)</a>
-<a class="sourceLine" id="cb30-2" data-line-number="2"><span class="co">#&gt; [1] 12.48</span></a></code></pre></div>
+<a class="sourceLine" id="cb30-2" data-line-number="2"><span class="co">#&gt; [1] 13.31</span></a></code></pre></div>
 </div>
 <div id="histogram_mode" class="section level3">
 <h3 class="hasAnchor">
@@ -559,26 +559,28 @@
 <a class="sourceLine" id="cb34-9" data-line-number="9"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb34-10" data-line-number="10"><span class="co">#&gt;     intersect, setdiff, setequal, union</span></a>
 <a class="sourceLine" id="cb34-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb34-12" data-line-number="12">hwl &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/dplyr/topics/bind">bind_cols</a></span>(</a>
-<a class="sourceLine" id="cb34-13" data-line-number="13">         <span class="kw"><a href="../reference/tsfeatures.html">tsfeatures</a></span>(yahoo,</a>
-<a class="sourceLine" id="cb34-14" data-line-number="14">           <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"acf_features"</span>,<span class="st">"entropy"</span>,<span class="st">"lumpiness"</span>,</a>
-<a class="sourceLine" id="cb34-15" data-line-number="15">             <span class="st">"flat_spots"</span>,<span class="st">"crossing_points"</span>)),</a>
-<a class="sourceLine" id="cb34-16" data-line-number="16">         <span class="kw"><a href="../reference/tsfeatures.html">tsfeatures</a></span>(yahoo,<span class="st">"stl_features"</span>, <span class="dt">s.window=</span><span class="st">'periodic'</span>, <span class="dt">robust=</span><span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb34-17" data-line-number="17">         <span class="kw"><a href="../reference/tsfeatures.html">tsfeatures</a></span>(yahoo, <span class="st">"max_kl_shift"</span>, <span class="dt">width=</span><span class="dv">48</span>),</a>
-<a class="sourceLine" id="cb34-18" data-line-number="18">         <span class="kw"><a href="../reference/tsfeatures.html">tsfeatures</a></span>(yahoo,</a>
-<a class="sourceLine" id="cb34-19" data-line-number="19">           <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"mean"</span>,<span class="st">"var"</span>), <span class="dt">scale=</span><span class="ot">FALSE</span>, <span class="dt">na.rm=</span><span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb34-12" data-line-number="12">yahoo &lt;-<span class="st"> </span><span class="kw"><a href="../reference/yahoo_data.html">yahoo_data</a></span>()</a>
+<a class="sourceLine" id="cb34-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb34-14" data-line-number="14">hwl &lt;-<span class="st"> </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_cols</a></span>(</a>
+<a class="sourceLine" id="cb34-15" data-line-number="15">         <span class="kw"><a href="../reference/tsfeatures.html">tsfeatures</a></span>(yahoo,</a>
+<a class="sourceLine" id="cb34-16" data-line-number="16">           <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"acf_features"</span>,<span class="st">"entropy"</span>,<span class="st">"lumpiness"</span>,</a>
+<a class="sourceLine" id="cb34-17" data-line-number="17">             <span class="st">"flat_spots"</span>,<span class="st">"crossing_points"</span>)),</a>
+<a class="sourceLine" id="cb34-18" data-line-number="18">         <span class="kw"><a href="../reference/tsfeatures.html">tsfeatures</a></span>(yahoo,<span class="st">"stl_features"</span>, <span class="dt">s.window=</span><span class="st">'periodic'</span>, <span class="dt">robust=</span><span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb34-19" data-line-number="19">         <span class="kw"><a href="../reference/tsfeatures.html">tsfeatures</a></span>(yahoo, <span class="st">"max_kl_shift"</span>, <span class="dt">width=</span><span class="dv">48</span>),</a>
 <a class="sourceLine" id="cb34-20" data-line-number="20">         <span class="kw"><a href="../reference/tsfeatures.html">tsfeatures</a></span>(yahoo,</a>
-<a class="sourceLine" id="cb34-21" data-line-number="21">           <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"max_level_shift"</span>,<span class="st">"max_var_shift"</span>), <span class="dt">trim=</span><span class="ot">TRUE</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb34-22" data-line-number="22"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/dplyr/topics/select">select</a></span>(mean, var, x_acf1, trend, linearity, curvature,</a>
-<a class="sourceLine" id="cb34-23" data-line-number="23">         seasonal_strength, peak, trough,</a>
-<a class="sourceLine" id="cb34-24" data-line-number="24">         entropy, lumpiness, spike, max_level_shift, max_var_shift, flat_spots,</a>
-<a class="sourceLine" id="cb34-25" data-line-number="25">         crossing_points, max_kl_shift, time_kl_shift)</a></code></pre></div>
+<a class="sourceLine" id="cb34-21" data-line-number="21">           <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"mean"</span>,<span class="st">"var"</span>), <span class="dt">scale=</span><span class="ot">FALSE</span>, <span class="dt">na.rm=</span><span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb34-22" data-line-number="22">         <span class="kw"><a href="../reference/tsfeatures.html">tsfeatures</a></span>(yahoo,</a>
+<a class="sourceLine" id="cb34-23" data-line-number="23">           <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"max_level_shift"</span>,<span class="st">"max_var_shift"</span>), <span class="dt">trim=</span><span class="ot">TRUE</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb34-24" data-line-number="24"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(mean, var, x_acf1, trend, linearity, curvature,</a>
+<a class="sourceLine" id="cb34-25" data-line-number="25">         seasonal_strength, peak, trough,</a>
+<a class="sourceLine" id="cb34-26" data-line-number="26">         entropy, lumpiness, spike, max_level_shift, max_var_shift, flat_spots,</a>
+<a class="sourceLine" id="cb34-27" data-line-number="27">         crossing_points, max_kl_shift, time_kl_shift)</a></code></pre></div>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1"><span class="co"># 2-d Feature space</span></a>
 <a class="sourceLine" id="cb35-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ggplot2)</a>
 <a class="sourceLine" id="cb35-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/prcomp">prcomp</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/na.fail">na.omit</a></span>(hwl), <span class="dt">scale=</span><span class="ot">TRUE</span>)<span class="op">$</span>x <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb35-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/dplyr/topics/reexports">as_tibble</a></span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb35-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">x=</span>PC1, <span class="dt">y=</span>PC2)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb35-6" data-line-number="6"><span class="st">    </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>()</a></code></pre></div>
+<a class="sourceLine" id="cb35-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/reexports.html">as_tibble</a></span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb35-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">x=</span>PC1, <span class="dt">y=</span>PC2)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb35-6" data-line-number="6"><span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>()</a></code></pre></div>
 <p><img src="tsfeatures_files/figure-html/yahoo2-1.png" width="700" style="display: block; margin: auto;"></p>
 </div>
 <div id="kang-hyndman-smith-miles-ijf-2017" class="section level3">
@@ -590,7 +592,7 @@
 <a class="sourceLine" id="cb36-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(tidyr)</a>
 <a class="sourceLine" id="cb36-4" data-line-number="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(forecast)</a>
 <a class="sourceLine" id="cb36-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb36-6" data-line-number="6">M3data &lt;-<span class="st"> </span>purrr<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/purrr/topics/map">map</a></span>(Mcomp<span class="op">::</span>M3,</a>
+<a class="sourceLine" id="cb36-6" data-line-number="6">M3data &lt;-<span class="st"> </span>purrr<span class="op">::</span><span class="kw"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(Mcomp<span class="op">::</span>M3,</a>
 <a class="sourceLine" id="cb36-7" data-line-number="7">  <span class="cf">function</span>(x){</a>
 <a class="sourceLine" id="cb36-8" data-line-number="8">      tspx &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/tsp">tsp</a></span>(x<span class="op">$</span>x)</a>
 <a class="sourceLine" id="cb36-9" data-line-number="9">      <span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/ts">ts</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(x<span class="op">$</span>x,x<span class="op">$</span>xx), <span class="dt">start=</span>tspx[<span class="dv">1</span>], <span class="dt">frequency=</span>tspx[<span class="dv">3</span>])</a>
@@ -601,22 +603,22 @@
 <a class="sourceLine" id="cb36-14" data-line-number="14">  y &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/forecast/topics/BoxCox">BoxCox</a></span>(x, lambda)</a>
 <a class="sourceLine" id="cb36-15" data-line-number="15">  <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="kw"><a href="../reference/stl_features.html">stl_features</a></span>(y,<span class="dt">s.window=</span><span class="st">'periodic'</span>, <span class="dt">robust=</span><span class="ot">TRUE</span>, ...), <span class="dt">lambda=</span>lambda)</a>
 <a class="sourceLine" id="cb36-16" data-line-number="16">}</a>
-<a class="sourceLine" id="cb36-17" data-line-number="17">khs &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/dplyr/topics/bind">bind_cols</a></span>(</a>
+<a class="sourceLine" id="cb36-17" data-line-number="17">khs &lt;-<span class="st"> </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_cols</a></span>(</a>
 <a class="sourceLine" id="cb36-18" data-line-number="18">  <span class="kw"><a href="../reference/tsfeatures.html">tsfeatures</a></span>(M3data, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"frequency"</span>, <span class="st">"entropy"</span>)),</a>
 <a class="sourceLine" id="cb36-19" data-line-number="19">  <span class="kw"><a href="../reference/tsfeatures.html">tsfeatures</a></span>(M3data, <span class="st">"khs_stl"</span>, <span class="dt">scale=</span><span class="ot">FALSE</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb36-20" data-line-number="20"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/dplyr/topics/select">select</a></span>(frequency, entropy, trend, seasonal_strength, e_acf1, lambda) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb36-21" data-line-number="21"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/tidyr/topics/replace_na">replace_na</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dt">seasonal_strength=</span><span class="dv">0</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb36-22" data-line-number="22"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/dplyr/topics/select">rename</a></span>(</a>
+<a class="sourceLine" id="cb36-20" data-line-number="20"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(frequency, entropy, trend, seasonal_strength, e_acf1, lambda) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb36-21" data-line-number="21"><span class="st">  </span><span class="kw"><a href="https://tidyr.tidyverse.org/reference/replace_na.html">replace_na</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dt">seasonal_strength=</span><span class="dv">0</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb36-22" data-line-number="22"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">rename</a></span>(</a>
 <a class="sourceLine" id="cb36-23" data-line-number="23">    <span class="dt">Frequency =</span> frequency,</a>
 <a class="sourceLine" id="cb36-24" data-line-number="24">    <span class="dt">Entropy =</span> entropy,</a>
 <a class="sourceLine" id="cb36-25" data-line-number="25">    <span class="dt">Trend =</span> trend,</a>
 <a class="sourceLine" id="cb36-26" data-line-number="26">    <span class="dt">Season =</span> seasonal_strength,</a>
 <a class="sourceLine" id="cb36-27" data-line-number="27">    <span class="dt">ACF1 =</span> e_acf1,</a>
 <a class="sourceLine" id="cb36-28" data-line-number="28">    <span class="dt">Lambda =</span> lambda) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb36-29" data-line-number="29"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/dplyr/topics/mutate">mutate</a></span>(<span class="dt">Period =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/factor">as.factor</a></span>(Frequency))</a></code></pre></div>
+<a class="sourceLine" id="cb36-29" data-line-number="29"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">Period =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/factor">as.factor</a></span>(Frequency))</a></code></pre></div>
 <div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="co"># Fig 1 of paper</span></a>
 <a class="sourceLine" id="cb37-2" data-line-number="2">khs <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb37-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/dplyr/topics/select">select</a></span>(Period, Entropy, Trend, Season, ACF1, Lambda) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb37-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(Period, Entropy, Trend, Season, ACF1, Lambda) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb37-4" data-line-number="4"><span class="st">  </span>GGally<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/GGally/topics/ggpairs">ggpairs</a></span>()</a>
 <a class="sourceLine" id="cb37-5" data-line-number="5"><span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></a>
 <a class="sourceLine" id="cb37-6" data-line-number="6"><span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></a>
@@ -626,11 +628,11 @@
 <p><img src="tsfeatures_files/figure-html/ijf2017graphs-1.png" width="700" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1"></a>
 <a class="sourceLine" id="cb38-2" data-line-number="2"><span class="co"># 2-d Feature space (Top of Fig 2)</span></a>
-<a class="sourceLine" id="cb38-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/prcomp">prcomp</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/dplyr/topics/select">select</a></span>(khs, <span class="op">-</span>Period), <span class="dt">scale=</span><span class="ot">TRUE</span>)<span class="op">$</span>x <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb38-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/dplyr/topics/reexports">as_tibble</a></span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb38-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/dplyr/topics/bind">bind_cols</a></span>(<span class="dt">Period=</span>khs<span class="op">$</span>Period) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb38-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">x=</span>PC1, <span class="dt">y=</span>PC2)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb38-7" data-line-number="7"><span class="st">    </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">col=</span>Period))</a></code></pre></div>
+<a class="sourceLine" id="cb38-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/prcomp">prcomp</a></span>(<span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(khs, <span class="op">-</span>Period), <span class="dt">scale=</span><span class="ot">TRUE</span>)<span class="op">$</span>x <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb38-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/reexports.html">as_tibble</a></span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb38-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_cols</a></span>(<span class="dt">Period=</span>khs<span class="op">$</span>Period) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb38-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">x=</span>PC1, <span class="dt">y=</span>PC2)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb38-7" data-line-number="7"><span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>(<span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">col=</span>Period))</a></code></pre></div>
 <p><img src="tsfeatures_files/figure-html/ijf2017graphs-2.png" width="700" style="display: block; margin: auto;"></p>
 </div>
 </div>

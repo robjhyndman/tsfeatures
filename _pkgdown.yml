@@ -5,12 +5,12 @@ template:
 authors:
   Rob Hyndman:
     href: https://robjhyndman.com
-  Earo Wang:
-    href: https://earo.me
-  Thiyanga Talagala:
-    href: https://thiyanga.netlify.com/
   Yanfei Kang:
     href: https://yanfei.site/
+  Thiyanga Talagala:
+    href: https://thiyanga.netlify.com/
+  Earo Wang:
+    href: https://earo.me
   Yangzhuoran Yang:
     href: https://yangzhuoranyang.com
 
@@ -81,6 +81,6 @@ reference:
   - unitroot_kpss
   - walker_propcross
 - title: Data
-  desc: Data from Yahoo comprising server metrics
+  desc: Download data providing Yahoo server metrics
   contents:
-  - yahoo
+  - yahoo_data
