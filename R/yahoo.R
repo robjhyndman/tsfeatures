@@ -18,7 +18,7 @@
 #' @export
 yahoo_data <- function(...){
   tmp <- tempfile()
-  download.file("https://github.com/robjhyndman/tsfeatures/raw/master/extra-data/yahoo.rda", tmp, ...)
+  utils::download.file("https://github.com/robjhyndman/tsfeatures/raw/master/extra-data/yahoo.rda", tmp, ...)
   load(tmp)
   yahoo
 }
