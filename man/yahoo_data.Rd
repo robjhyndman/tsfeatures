@@ -29,5 +29,5 @@ In: \emph{Proceedings of the IEEE International Conference on Data Mining}. Atla
 \url{https://robjhyndman.com/publications/icdm2015/}
 }
 \author{
-Rob Hyndman, Earo Wang, Nikolay Laptev
+Rob Hyndman, Earo Wang, Nikolay Laptev, Mitchell O'Hara-Wild
 }
