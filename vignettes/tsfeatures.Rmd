@@ -20,8 +20,6 @@ knitr::opts_chunk$set(
   fig.align = "center"
 )
 library(tsfeatures)
-download.file("https://github.com/robjhyndman/tsfeatures/raw/master/data/yahoo.rda", yahoo <- tempfile())
-yahoo <- load(yahoo)
 ```
 
 # tsfeatures
@@ -376,6 +374,8 @@ Compute the features used in Hyndman, Wang & Laptev (ICDM 2015). Note that cross
 ```{r yahoo}
 library(tsfeatures)
 library(dplyr)
+
+yahoo <- yahoo_data()
 
 hwl <- bind_cols(
          tsfeatures(yahoo,
