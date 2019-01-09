@@ -20,6 +20,8 @@ knitr::opts_chunk$set(
   fig.align = "center"
 )
 library(tsfeatures)
+download.file("https://github.com/robjhyndman/tsfeatures/raw/master/data/yahoo.rda", yahoo <- tempfile())
+yahoo <- load(yahoo)
 ```
 
 # tsfeatures
