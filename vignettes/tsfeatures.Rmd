@@ -439,7 +439,7 @@ khs <- bind_cols(
   mutate(Period = as.factor(Frequency))
 ```
 
-```{r ijf2017graphs, dependson="ijf2017"}
+```{r ijf2017graphs}
 # Fig 1 of paper
 khs %>%
   select(Period, Entropy, Trend, Season, ACF1, Lambda) %>%
