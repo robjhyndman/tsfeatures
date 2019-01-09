@@ -375,6 +375,8 @@ Compute the features used in Hyndman, Wang & Laptev (ICDM 2015). Note that cross
 library(tsfeatures)
 library(dplyr)
 
+yahoo <- yahoo_data()
+
 hwl <- bind_cols(
          tsfeatures(yahoo,
            c("acf_features","entropy","lumpiness",
