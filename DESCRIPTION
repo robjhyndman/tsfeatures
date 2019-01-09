@@ -3,10 +3,11 @@ Title: Time Series Feature Extraction
 Version: 1.0.0
 Authors@R: c(
     person("Rob", "Hyndman", email = "Rob.Hyndman@monash.edu", role = c("aut","cre"), comment = c(ORCID = "0000-0002-2140-5352")),
-    person("Yanfei", "Kang", role = "aut"),
-    person("Thiyanga", "Talagala", role = "aut"),
-    person("Earo", "Wang", role = "aut"),
+    person("Yanfei", "Kang", role = "aut", comment = c(ORCID = "0000-0001-8769-6650")),
+    person("Thiyanga", "Talagala", role = "aut", comment=c(ORCID = "0000-0002-0656-9789")),
+    person("Earo", "Wang", role = "aut", comment=c(ORCID = "0000-0001-6448-5260")),
     person("Yangzhuoran", "Yang", email = "Fin.Yang@monash.edu", role = "aut"),
+    person("Mitchell", "O'Hara-Wild", role="ctb", comment=c(ORCID = "0000-0001-6729-7695")),
     person("Souhaib", "Ben Taieb", role = "ctb"),
     person("Nikolay", "Laptev", role="ctb"))
 Description: Methods for extracting various features from time series data.
