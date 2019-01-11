@@ -10,7 +10,7 @@ Authors@R: c(
     person("Mitchell", "O'Hara-Wild", role="ctb", comment=c(ORCID = "0000-0001-6729-7695")),
     person("Souhaib", "Ben Taieb", role = "ctb"),
     person("Nikolay", "Laptev", role="ctb"))
-Description: Methods for extracting various features from time series data.
+Description: Methods for extracting various features from time series data. The features provided are those from Hyndman, Wang and Laptev (2013) <doi:10.1109/ICDMW.2015.104>, Kang, Hyndman and Smith-Miles (2017) <doi:10.1016/j.ijforecast.2016.09.004> and from Fulcher, Little and Jones (2013) <doi:10.1098/rsif.2013.0048>. Users can also define their own feature functions.
 Depends:
     R (>= 3.2.3)
 Imports:
