@@ -17,6 +17,7 @@
 #' 
 #' @export
 yahoo_data <- function(...){
+  yahoo <- 1 # Just to avoid a note about undefined global variables.
   tmp <- tempfile()
   utils::download.file("https://github.com/robjhyndman/tsfeatures/raw/master/extra-data/yahoo.rda", tmp, ...)
   load(tmp)
