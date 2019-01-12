@@ -17,7 +17,6 @@ Imports:
     ForeCA,
     fracdiff,
     forecast (>= 8.3),
-    mgcv,
     purrr,
     RcppRoll (>= 0.2.2),
     stats,
