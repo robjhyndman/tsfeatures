@@ -1,13 +1,13 @@
 ---
-title: "Introduction to tsfeatures package"
-author: "Yangzhuoran Yang"
+title: "Introduction to the tsfeatures package"
+author: "Yangzhuoran Yang and Rob J Hyndman"
 date: "`r Sys.Date()`"
 output:
   rmarkdown::html_vignette:
     toc: true
     toc_depth: 3
 vignette: >
-  %\VignetteIndexEntry{Introduction to tsfeatures package}
+  %\VignetteIndexEntry{Introduction to the tsfeatures package}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -76,9 +76,9 @@ tsfeatures(mylist, features = "is.monthly")
 ### entropy {#entropy}
 
 The spectral `entropy` is the Shannon entropy
-
-$$-\int^\pi_{-\pi}\hat{f}(\lambda)\log\hat{f}(\lambda) d\lambda$$
-
+$$
+  -\int^\pi_{-\pi}\hat{f}(\lambda)\log\hat{f}(\lambda) d\lambda,
+$$
 where $\hat{f}(\lambda)$ is an estimate of the spectral density of the data. This measures the “forecastability” of a time series, where low values indicate a high signal-to-noise ratio, and large values occur when a series is difficult to forecast.
 
 ```{r}
@@ -150,14 +150,15 @@ unitroot_pp(AirPassengers)
 The size and location of the peaks and troughs in the seasonal component are used to compute strength of peaks (`peak`) and strength of trough (`trough`).
 
 The rest of the features are modifications of features used in Kang, Hyndman & Smith-Miles ([2017](#ref)). We extend the STL decomposition approach (Cleveland et al.[1990](#ref)) to handle multiple seasonalities. Thus, the decomposition contains a trend, up to $M$ seasonal components and a remainder component:
-
-$$x_t=f_t+s_{1,t}+\cdots+s_{M.t}+e_t$$
-
+$$
+  x_t=f_t+s_{1,t}+\cdots+s_{M.t}+e_t,
+$$
 where $f_t$ is the smoothed trend component, $s_{i,t}$ is the $i$th seasonal component and $e_t$ is a remainder component. The components are estimated iteratively. Let $s^{(k)}_{i,t}$ be the estimate of $s_i,t$ at the $k$th iteration, with initial values given as $s^{(0)}_{i,t}=0$. The we apply an STL decomposition to $x_t-\sum^{j=1}_{j\neq1}{}^{^{M}}s^{k-1}_{j,t}$ to obtained updated estimates $s^{(k)}_{i,t}$ for $k=1,2,\ldots$. In practice, this converges quickly and only two iterations are required. To allow the procedure to be applied automatically, we set the seasonal window span for STL to be 21 in all cases. For a non-seasonal time series, we simply estimate $x_t=f_t+e_t$ where $f_t$ is computed using  Friedman’s “super smoother” (Friedman [1984](#ref)).
 
 Strength of trend (`trend`) and strength of seasonality (`seasonal.strength`) are defined as
-
-$$\text{trend}=1-\frac{\text{Var}(e_t)}{\text{Var}(f_t+e_t)}\quad \text{and}\quad \text{seasonal.strength}=1-\frac{\text{Var}(e_t)}{\text{Var}(s_{i,t}+e_t)}$$
+$$
+  \text{trend} = 1-\frac{\text{Var}(e_t)}{\text{Var}(f_t+e_t)}\quad \text{and}\quad \text{seasonal.strength}=1-\frac{\text{Var}(e_t)}{\text{Var}(s_{i,t}+e_t)}.
+$$
 If their values are less than 0, they are set to 0, while values greater than 1 are set to 1. For non-seasonal time series `seasonal.strength` is 0.  For seasonal time series, `seasonal.strength` is an M-vector, where M is the number of periods. This is analogous to the way the strength of trend and seasonality were defined in Wang, Smith & Hyndman ([2006](#ref)), Hyndman, Wang & Laptev ([2015](#ref)) and Kang, Hyndman & Smith-Miles ([2017](#ref)).
 
 `spike`  measures the “spikiness” of a time series, and is computed as the variance of the leave-one-out variances of the remainder component $e_t$.
@@ -369,14 +370,16 @@ fluctanal_prop_r1(AirPassengers)
 
 ### Hyndman, Wang and Laptev (ICDM 2015)
 
-Compute the features used in Hyndman, Wang & Laptev (ICDM 2015). Note that crossing_points, peak and trough are defined differently in the *tsfeatures* package than in the Hyndman et al (2015) paper. Other features are the same. Using the real data from the paper.
+Here we replicate the analysis in Hyndman, Wang & Laptev (ICDM 2015). However, note that crossing_points, peak and trough are defined differently in the *tsfeatures* package than in the Hyndman et al (2015) paper. Other features are the same.
 
-```{r yahoo}
+```{r yahoo, message=FALSE}
 library(tsfeatures)
 library(dplyr)
 
 yahoo <- yahoo_data()
+```
 
+```{r hwl, eval=FALSE}
 hwl <- bind_cols(
          tsfeatures(yahoo,
            c("acf_features","entropy","lumpiness",
@@ -393,10 +396,25 @@ hwl <- bind_cols(
          crossing_points, max_kl_shift, time_kl_shift)
 ```
 
-```{r yahoo2}
+```{r hwlsave, eval=FALSE, echo=FALSE}
+# Now store the computed results for later use
+save(hwl, file="../extra-data/hwl.rda")
+```
+
+```{r hwlquick, include=FALSE}
+# This replicates the above but uses pre-stored data to speed things up
+tmp <- tempfile()
+utils::download.file("https://github.com/robjhyndman/tsfeatures/raw/master/extra-data/hwl.rda", tmp)
+load(tmp)
+```
+
+```{r yahoographics}
 # 2-d Feature space
 library(ggplot2)
-prcomp(na.omit(hwl), scale=TRUE)$x %>%
+hwl_pca <- hwl %>%
+  na.omit() %>%
+  prcomp(scale=TRUE)
+hwl_pca$x %>%
   as_tibble() %>%
   ggplot(aes(x=PC1, y=PC2)) +
     geom_point()
@@ -407,23 +425,25 @@ prcomp(na.omit(hwl), scale=TRUE)$x %>%
 Compute the features used in Kang, Hyndman & Smith-Miles (IJF 2017).
 Note that the trend and ACF1 are computed differently for non-seasonal data in the *tsfeatures* package than in the Kang et al (2017). `tsfeatures` uses `mstl` which uses `supsmu` for the trend calculation with non-seasonal data, whereas Kang et al used a penalized regression spline computed using `mgcv` instead.  Other features are the same.
 
-```{r ijf2017}
+```{r ijf2017, message=FALSE}
 library(tsfeatures)
 library(dplyr)
 library(tidyr)
 library(forecast)
 
 M3data <- purrr::map(Mcomp::M3,
-  function(x){
+  function(x) {
       tspx <- tsp(x$x)
       ts(c(x$x,x$xx), start=tspx[1], frequency=tspx[3])
   })
-khs_stl <- function(x,...)
-{
+khs_stl <- function(x,...) {
   lambda <- BoxCox.lambda(x, lower=0, upper=1, method='loglik')
   y <- BoxCox(x, lambda)
-  c(stl_features(y,s.window='periodic', robust=TRUE, ...), lambda=lambda)
+  c(stl_features(y, s.window='periodic', robust=TRUE, ...), lambda=lambda)
 }
+```
+
+```{r khs, eval=FALSE}
 khs <- bind_cols(
   tsfeatures(M3data, c("frequency", "entropy")),
   tsfeatures(M3data, "khs_stl", scale=FALSE)) %>%
@@ -439,14 +459,29 @@ khs <- bind_cols(
   mutate(Period = as.factor(Frequency))
 ```
 
-```{r ijf2017graphs}
+```{r khssave, eval=FALSE, echo=FALSE}
+# Now store the computed results for later use
+save(khs, file="../extra-data/khs.rda")
+```
+
+```{r khsquick, include=FALSE}
+# This replicates the above but uses pre-stored data to speed things up
+tmp <- tempfile()
+utils::download.file("https://github.com/robjhyndman/tsfeatures/raw/master/extra-data/khs.rda", tmp)
+load(tmp)
+```
+
+```{r ijf2017graphs, message=FALSE}
 # Fig 1 of paper
 khs %>%
   select(Period, Entropy, Trend, Season, ACF1, Lambda) %>%
   GGally::ggpairs()
 
 # 2-d Feature space (Top of Fig 2)
-prcomp(select(khs, -Period), scale=TRUE)$x %>%
+khs_pca <- khs %>%
+  select(-Period) %>%
+  prcomp(scale=TRUE)
+khs_pca$x %>%
   as_tibble() %>%
   bind_cols(Period=khs$Period) %>%
   ggplot(aes(x=PC1, y=PC2)) +
@@ -471,7 +506,7 @@ prcomp(select(khs, -Period), scale=TRUE)$x %>%
 
 Cleveland, R. B., Cleveland, W. S., McRae, J. E., & Terpenning, I. (1990). STL: A Seasonal-Trend Decomposition. Journal of Official Statistics, 6(1), 3-73.
 
-Friedman, JH (1984). _A variable span scatterplot smoother_. Technical Report 5. Laboratory for Computational Statistics, Stanford University.
+[Friedman, JH (1984). _A variable span scatterplot smoother_. Technical Report 5. Laboratory for Computational Statistics, Stanford University.](https://www.slac.stanford.edu/pubs/slacpubs/3250/slac-pub-3477.pdf)
 
 [Wang, X, KA Smith & RJ Hyndman (2006). Characteristic-based clustering for time series data. Data Mining and Knowledge Discovery 13(3), 335–364.](https://doi.org/10.1007/s10618-005-0039-x)
 
