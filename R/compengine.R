@@ -207,6 +207,10 @@ embed2_incircle <- function(y, boundary = NULL, acfv = stats::acf(y, length(y) -
 firstzero_ac <- function(y, acfv = stats::acf(y, N - 1, plot = FALSE, na.action = na.pass)) {
   N <- length(y)
   corrs <- acfv$acf[-1]
+  # If y doesnt change then then corrs will be a list of NaN
+  if (is.nan(corrs)) {
+    return(0)
+  }
   for (tau in 1:(N - 1)) {
     if (corrs[tau] < 0) return(tau) # we know it starts 1, so first negative will be the zero-crossing
   }
