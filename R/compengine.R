@@ -206,15 +206,16 @@ embed2_incircle <- function(y, boundary = NULL, acfv = stats::acf(y, length(y) -
 #' @export
 firstzero_ac <- function(y, acfv = stats::acf(y, N - 1, plot = FALSE, na.action = na.pass)) {
   N <- length(y)
-  corrs <- acfv$acf[-1]
-  # If y doesnt change then then corrs will be a list of NaN
-  if (is.nan(corrs)) {
+  print(acfv)
+  tau <- which(acfv$acf[-1] < 0)
+  if(length(tau)==0L) # Nothing to see here
     return(0)
-  }
-  for (tau in 1:(N - 1)) {
-    if (corrs[tau] < 0) return(tau) # we know it starts 1, so first negative will be the zero-crossing
-  }
-  return(N) # If haven't left yet, set output to sample size
+  else if(all(is.na(tau))) # All missing
+    return(0)
+  else if(!any(tau))  # No negatives, so set output to sample size
+    return(N)
+  else # Return lag of first negative
+    return(tau[1])
 }
 
 # ac_9
