@@ -628,7 +628,7 @@ histogram_mode <- function(y, numBins = 10) {
 
   # Compute the histogram from the data:
   if (is.numeric(numBins)) {
-    histdata <- hist(y, plot = FALSE, breaks = 10)
+    histdata <- hist(y, plot = FALSE, breaks = numBins)
     binCenters <- histdata$mids
   } else {
     stop("Unknown format for numBins")
