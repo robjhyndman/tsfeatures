@@ -14,7 +14,7 @@ a vector with CompEngine features
 }
 \description{
 Calculate the features that have been used in CompEngine database, using method introduced in package
-\code{kctsa}.
+\code{hctsa}.
 }
 \details{
 The features involved can be grouped as \code{autocorrelation},

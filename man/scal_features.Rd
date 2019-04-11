@@ -14,7 +14,7 @@ a vector with autocorrelation features
 }
 \description{
 Calculate the features that grouped as scaling set,
-which have been used in CompEngine database, using method introduced in package \code{kctsa}.
+which have been used in CompEngine database, using method introduced in package \code{hctsa}.
 }
 \details{
 Feature in this set is \code{fluctanal_prop_r1}.
