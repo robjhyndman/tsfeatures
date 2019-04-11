@@ -2,7 +2,7 @@
 #' CompEngine feature set
 #'
 #' Calculate the features that have been used in CompEngine database, using method introduced in package
-#' \code{kctsa}.
+#' \code{hctsa}.
 #'
 #' The features involved can be grouped as \code{autocorrelation},
 #' \code{prediction}, \code{stationarity}, \code{distribution}, and \code{scaling}.
@@ -26,7 +26,7 @@ compengine <- function(x) {
 #' The autocorrelation feature set from software package \code{hctsa}
 #'
 #' Calculate the features that grouped as autocorrelation set,
-#' which have been used in CompEngine database, using method introduced in package \code{kctsa}.
+#' which have been used in CompEngine database, using method introduced in package \code{hctsa}.
 #'
 #' Features in this set are \code{embed2_incircle_1},
 #' \code{embed2_incircle_2},
@@ -66,7 +66,7 @@ autocorr_features <- function(x) {
 #' The prediction feature set from software package \code{hctsa}
 #'
 #' Calculate the features that grouped as prediction set,
-#' which have been used in CompEngine database, using method introduced in package \code{kctsa}.
+#' which have been used in CompEngine database, using method introduced in package \code{hctsa}.
 #'
 #' Features in this set are \code{localsimple_mean1},
 #' \code{localsimple_lfitac},
@@ -93,7 +93,7 @@ pred_features <- function(x) {
 #' The stationarity feature set from software package \code{hctsa}
 #'
 #' Calculate the features that grouped as stationarity set,
-#' which have been used in CompEngine database, using method introduced in package \code{kctsa}.
+#' which have been used in CompEngine database, using method introduced in package \code{hctsa}.
 #'
 #' Features in this set are \code{std1st_der},
 #' \code{spreadrandomlocal_meantaul_50},
@@ -121,7 +121,7 @@ station_features <- function(x) {
 #' The distribution feature set from software package \code{hctsa}
 #'
 #' Calculate the features that grouped as distribution set,
-#' which have been used in CompEngine database, using method introduced in package \code{kctsa}.
+#' which have been used in CompEngine database, using method introduced in package \code{hctsa}.
 #'
 #' Features in this set are \code{histogram_mode_10}
 #' and \code{outlierinclude_mdrmd}.
@@ -145,7 +145,7 @@ dist_features <- function(x) {
 #' The scaling feature set from software package \code{hctsa}
 #'
 #' Calculate the features that grouped as scaling set,
-#' which have been used in CompEngine database, using method introduced in package \code{kctsa}.
+#' which have been used in CompEngine database, using method introduced in package \code{hctsa}.
 #'
 #' Feature in this set is \code{fluctanal_prop_r1}.
 #'
@@ -551,7 +551,7 @@ sampenc <- function(y, M = 6, r = 0.3) {
 # SY_StdNthDer_1
 #' Standard deviation of the first derivative of the time series from software package \code{hctsa}
 #'
-#' Modified from \code{SY_StdNthDer} in \code{kctsa}. Based on an idea by Vladimir Vassilevsky.
+#' Modified from \code{SY_StdNthDer} in \code{hctsa}. Based on an idea by Vladimir Vassilevsky.
 #'
 #' @param y the input time series. Missing values will be removed.
 #' @return Standard deviation of the first derivative of the time series.
@@ -612,7 +612,7 @@ spreadrandomlocal_meantaul <- function(y, l = 50) {
 #' Mode of a data vector from software package \code{hctsa}
 #'
 #' Measures the mode of the data vector using histograms with a given number of bins as suggestion.
-#' The value calculated is different from \code{kctsa} and \code{CompEngine} as the histogram edges are calculated differently.
+#' The value calculated is different from \code{hctsa} and \code{CompEngine} as the histogram edges are calculated differently.
 #'
 #' @param y the input data vector
 #' @param numBins the number of bins to use in the histogram.

@@ -13,7 +13,7 @@ std1st_der(y)
 Standard deviation of the first derivative of the time series.
 }
 \description{
-Modified from \code{SY_StdNthDer} in \code{kctsa}. Based on an idea by Vladimir Vassilevsky.
+Modified from \code{SY_StdNthDer} in \code{hctsa}. Based on an idea by Vladimir Vassilevsky.
 }
 \references{
 cf. http://www.mathworks.de/matlabcentral/newsreader/view_thread/136539

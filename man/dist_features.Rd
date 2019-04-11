@@ -14,7 +14,7 @@ a vector with autocorrelation features
 }
 \description{
 Calculate the features that grouped as distribution set,
-which have been used in CompEngine database, using method introduced in package \code{kctsa}.
+which have been used in CompEngine database, using method introduced in package \code{hctsa}.
 }
 \details{
 Features in this set are \code{histogram_mode_10}
