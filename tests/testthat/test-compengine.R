@@ -2,7 +2,7 @@
 if (require(testthat)) {
   context("Tests on input")
   test_that("tests for a non-vector object", {
-    expect_that(compengine(matrix(0, 2, 2)), throws_error())
+    expect_that(suppressWarnings(compengine(matrix(0, 2, 2))), throws_error())
   })
 
   context("Tests on output")
