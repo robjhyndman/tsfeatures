@@ -1,4 +1,3 @@
-
 #' CompEngine feature set
 #'
 #' Calculate the features that have been used in CompEngine database, using method introduced in package
@@ -206,7 +205,6 @@ embed2_incircle <- function(y, boundary = NULL, acfv = stats::acf(y, length(y) -
 #' @export
 firstzero_ac <- function(y, acfv = stats::acf(y, N - 1, plot = FALSE, na.action = na.pass)) {
   N <- length(y)
-  print(acfv)
   tau <- which(acfv$acf[-1] < 0)
   if(length(tau)==0L) # Nothing to see here
     return(0)
