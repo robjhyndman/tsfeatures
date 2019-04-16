@@ -419,23 +419,18 @@ walker_propcross <- function(y) {
 #' Default to 1 when using method \code{mean} and 3 when using method \code{lfit}.
 #' @return The first zero crossing of the autocorrelation function of the residuals
 #' @export
-localsimple_taures <- function(y, forecastMeth = "mean", trainLength = NULL) {
-  if (!forecastMeth %in% c("mean", "lfit")) stop("`localsimple_taures`:Unknown forecasting method")
-  if (forecastMeth == "mean" && is.null(trainLength)) trainLength <- 1
-  if (forecastMeth == "lfit" && is.null(trainLength)) trainLength <- "ac"
-
-  if ("ac" %in% trainLength) {
-    lp <- firstzero_ac(y)
-  } else {
-    lp <- trainLength
+localsimple_taures <- function(y, forecastMeth = c("mean", "lfit"), trainLength = NULL) {
+  forecastMeth <- match.arg(forecastMeth)
+  if(is.null(trainLength)){
+    lp <- switch(forecastMeth, mean = 1, lfit = firstzero_ac(y))
   }
-
-
-
+  
   N <- length(y)
   evalr <- (lp + 1):N
-  if (length(evalr) == 0) stop("Time series too short for forecasting in `localsimple_taures`")
-
+  
+  if (lp >= length(y))
+    stop("Time series too short for forecasting in `localsimple_taures`")
+  
   res <- numeric(length(evalr))
   if (forecastMeth == "mean") {
     for (i in 1:length(evalr))
