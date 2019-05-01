@@ -57,10 +57,12 @@ tsfeatures <- function(tslist,
     else {
       flist[[i]] <- map(tslist, func[[i]], ...)
     }
-   
 
     # Check names
     if (is.null(names(flist[[i]][[1]]))) {
+      if(length(flist[[i]][[1]]) != 1L) {
+        stop(paste("Function",features[i],"not returning named feature vector"))
+      }
       flist[[i]] <- map(
         flist[[i]],
         function(x) {
