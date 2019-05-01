@@ -1,6 +1,6 @@
 Package: tsfeatures
 Title: Time Series Feature Extraction
-Version: 1.0.0
+Version: 1.0.1
 Authors@R: c(
     person("Rob", "Hyndman", email = "Rob.Hyndman@monash.edu", role = c("aut","cre"), comment = c(ORCID = "0000-0002-2140-5352")),
     person("Yanfei", "Kang", role = "aut", comment = c(ORCID = "0000-0001-8769-6650")),
@@ -8,12 +8,12 @@ Authors@R: c(
     person("Thiyanga", "Talagala", role = "aut", comment=c(ORCID = "0000-0002-0656-9789")),
     person("Earo", "Wang", role = "aut", comment=c(ORCID = "0000-0001-6448-5260")),
     person("Yangzhuoran", "Yang", email = "Fin.Yang@monash.edu", role = "aut"),
+    person("Mitchell", "O'Hara-Wild", role="aut", comment=c(ORCID = "0000-0001-6729-7695")),
     person("Souhaib", "Ben Taieb", role = "ctb"),
     person("Cao", "Hanqing", role="ctb"),
     person("D K", "Lake", email="dlake@virginia.edu", role="ctb"),
     person("Nikolay", "Laptev", role="ctb"),
-    person("J R", "Moorman", role="ctb"),
-    person("Mitchell", "O'Hara-Wild", role="ctb", comment=c(ORCID = "0000-0001-6729-7695")))
+    person("J R", "Moorman", role="ctb"))
 Description: Methods for extracting various features from time series data. The features provided are those from Hyndman, Wang and Laptev (2013) <doi:10.1109/ICDMW.2015.104>, Kang, Hyndman and Smith-Miles (2017) <doi:10.1016/j.ijforecast.2016.09.004> and from Fulcher, Little and Jones (2013) <doi:10.1098/rsif.2013.0048>. Features include spectral entropy, autocorrelations, measures of the strength of seasonality and trend, and so on. Users can also define their own feature functions.
 Depends:
     R (>= 3.2.3)

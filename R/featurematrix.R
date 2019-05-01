@@ -27,7 +27,10 @@ tsfeatures <- function(tslist,
                        features = c("frequency", "stl_features", "entropy", "acf_features"),
                        scale = TRUE, trim = FALSE, trim_amount = 0.1, parallel = FALSE, na.action = na.pass, ...) {
   if (!is.list(tslist)) {
-    tslist <- as.list(tslist)
+    tslist <- as.list(as.ts(tslist))
+  }
+  else{
+    tslist <- map(tslist, as.ts)
   }
   if (scale) {
     tslist <- map(tslist, scalets)

@@ -16,7 +16,7 @@ the mode
 }
 \description{
 Measures the mode of the data vector using histograms with a given number of bins as suggestion.
-The value calculated is different from \code{kctsa} and \code{CompEngine} as the histogram edges are calculated differently.
+The value calculated is different from \code{hctsa} and \code{CompEngine} as the histogram edges are calculated differently.
 }
 \references{
 B.D. Fulcher and N.S. Jones. hctsa: A computational framework for automated time-series phenotyping using massive feature extraction. Cell Systems 5, 527 (2017).

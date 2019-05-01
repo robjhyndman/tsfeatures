@@ -1,8 +1,7 @@
-
 #' CompEngine feature set
 #'
 #' Calculate the features that have been used in CompEngine database, using method introduced in package
-#' \code{kctsa}.
+#' \code{hctsa}.
 #'
 #' The features involved can be grouped as \code{autocorrelation},
 #' \code{prediction}, \code{stationarity}, \code{distribution}, and \code{scaling}.
@@ -26,7 +25,7 @@ compengine <- function(x) {
 #' The autocorrelation feature set from software package \code{hctsa}
 #'
 #' Calculate the features that grouped as autocorrelation set,
-#' which have been used in CompEngine database, using method introduced in package \code{kctsa}.
+#' which have been used in CompEngine database, using method introduced in package \code{hctsa}.
 #'
 #' Features in this set are \code{embed2_incircle_1},
 #' \code{embed2_incircle_2},
@@ -66,7 +65,7 @@ autocorr_features <- function(x) {
 #' The prediction feature set from software package \code{hctsa}
 #'
 #' Calculate the features that grouped as prediction set,
-#' which have been used in CompEngine database, using method introduced in package \code{kctsa}.
+#' which have been used in CompEngine database, using method introduced in package \code{hctsa}.
 #'
 #' Features in this set are \code{localsimple_mean1},
 #' \code{localsimple_lfitac},
@@ -93,7 +92,7 @@ pred_features <- function(x) {
 #' The stationarity feature set from software package \code{hctsa}
 #'
 #' Calculate the features that grouped as stationarity set,
-#' which have been used in CompEngine database, using method introduced in package \code{kctsa}.
+#' which have been used in CompEngine database, using method introduced in package \code{hctsa}.
 #'
 #' Features in this set are \code{std1st_der},
 #' \code{spreadrandomlocal_meantaul_50},
@@ -121,7 +120,7 @@ station_features <- function(x) {
 #' The distribution feature set from software package \code{hctsa}
 #'
 #' Calculate the features that grouped as distribution set,
-#' which have been used in CompEngine database, using method introduced in package \code{kctsa}.
+#' which have been used in CompEngine database, using method introduced in package \code{hctsa}.
 #'
 #' Features in this set are \code{histogram_mode_10}
 #' and \code{outlierinclude_mdrmd}.
@@ -145,7 +144,7 @@ dist_features <- function(x) {
 #' The scaling feature set from software package \code{hctsa}
 #'
 #' Calculate the features that grouped as scaling set,
-#' which have been used in CompEngine database, using method introduced in package \code{kctsa}.
+#' which have been used in CompEngine database, using method introduced in package \code{hctsa}.
 #'
 #' Feature in this set is \code{fluctanal_prop_r1}.
 #'
@@ -206,7 +205,6 @@ embed2_incircle <- function(y, boundary = NULL, acfv = stats::acf(y, length(y) -
 #' @export
 firstzero_ac <- function(y, acfv = stats::acf(y, N - 1, plot = FALSE, na.action = na.pass)) {
   N <- length(y)
-  print(acfv)
   tau <- which(acfv$acf[-1] < 0)
   if(length(tau)==0L) # Nothing to see here
     return(0)
@@ -421,23 +419,18 @@ walker_propcross <- function(y) {
 #' Default to 1 when using method \code{mean} and 3 when using method \code{lfit}.
 #' @return The first zero crossing of the autocorrelation function of the residuals
 #' @export
-localsimple_taures <- function(y, forecastMeth = "mean", trainLength = NULL) {
-  if (!forecastMeth %in% c("mean", "lfit")) stop("`localsimple_taures`:Unknown forecasting method")
-  if (forecastMeth == "mean" && is.null(trainLength)) trainLength <- 1
-  if (forecastMeth == "lfit" && is.null(trainLength)) trainLength <- "ac"
-
-  if ("ac" %in% trainLength) {
-    lp <- firstzero_ac(y)
-  } else {
-    lp <- trainLength
+localsimple_taures <- function(y, forecastMeth = c("mean", "lfit"), trainLength = NULL) {
+  forecastMeth <- match.arg(forecastMeth)
+  if(is.null(trainLength)){
+    lp <- switch(forecastMeth, mean = 1, lfit = firstzero_ac(y))
   }
-
-
-
+  
   N <- length(y)
   evalr <- (lp + 1):N
-  if (length(evalr) == 0) stop("Time series too short for forecasting in `localsimple_taures`")
-
+  
+  if (lp >= length(y))
+    stop("Time series too short for forecasting in `localsimple_taures`")
+  
   res <- numeric(length(evalr))
   if (forecastMeth == "mean") {
     for (i in 1:length(evalr))
@@ -551,7 +544,7 @@ sampenc <- function(y, M = 6, r = 0.3) {
 # SY_StdNthDer_1
 #' Standard deviation of the first derivative of the time series from software package \code{hctsa}
 #'
-#' Modified from \code{SY_StdNthDer} in \code{kctsa}. Based on an idea by Vladimir Vassilevsky.
+#' Modified from \code{SY_StdNthDer} in \code{hctsa}. Based on an idea by Vladimir Vassilevsky.
 #'
 #' @param y the input time series. Missing values will be removed.
 #' @return Standard deviation of the first derivative of the time series.
@@ -612,7 +605,7 @@ spreadrandomlocal_meantaul <- function(y, l = 50) {
 #' Mode of a data vector from software package \code{hctsa}
 #'
 #' Measures the mode of the data vector using histograms with a given number of bins as suggestion.
-#' The value calculated is different from \code{kctsa} and \code{CompEngine} as the histogram edges are calculated differently.
+#' The value calculated is different from \code{hctsa} and \code{CompEngine} as the histogram edges are calculated differently.
 #'
 #' @param y the input data vector
 #' @param numBins the number of bins to use in the histogram.
@@ -628,7 +621,7 @@ histogram_mode <- function(y, numBins = 10) {
 
   # Compute the histogram from the data:
   if (is.numeric(numBins)) {
-    histdata <- hist(y, plot = FALSE, breaks = 10)
+    histdata <- hist(y, plot = FALSE, breaks = numBins)
     binCenters <- histdata$mids
   } else {
     stop("Unknown format for numBins")

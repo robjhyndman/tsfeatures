@@ -27,6 +27,9 @@ stl_features <- function(x, ...) {
     nperiods <- 0L
     season <- 0
   }
+  if(NCOL(x) > 1){
+    stop("x must be a univariate time series.")
+  }
   trend <- linearity <- curvature <- season <- spike <- peak <- trough <- acfremainder <- NA
 
   # STL fits
