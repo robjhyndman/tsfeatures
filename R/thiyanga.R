@@ -101,17 +101,20 @@ pacf_features <- function(x) {
 
 holt_parameters <- function(x) {
   # parameter estimates of holt linear trend model
-  fit <- forecast::holt(x)
-  return(c(fit$model$par["alpha"], fit$model$par["beta"]))
+  fit <- forecast::ets(x, model = c("AAN"))
+  params <- c(hw_fit$par["alpha"], hw_fit$par["beta"])
+  names(params) <- c("alpha", "beta")
+  return(params)
 }
 
 #' @rdname holt_parameters
 #' @export
 hw_parameters <- function(x) {
-  hw_fit <- NULL
-  hw_fit$par <- c(NA, NA, NA)
-  try(hw_fit <- forecast::ets(x, model = c("AAA")), silent = TRUE)
-  hw_fit$par[1:3]
+  # parameter estimates of holt winters additive trend seasonal model
+  hw_fit <- forecast::ets(x, model = c("AAA"))
+  params <- c(hw_fit$par["alpha"], hw_fit$par["beta"], hw_fit$par["gamma"])
+  names(params) <- c("alpha", "beta", "gamma")
+  return(params)
 }
 # #' Autocorrelation coefficient at lag 1 of the residual
 # #'
