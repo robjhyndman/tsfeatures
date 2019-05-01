@@ -102,7 +102,7 @@ pacf_features <- function(x) {
 holt_parameters <- function(x) {
   # parameter estimates of holt linear trend model
   fit <- forecast::ets(x, model = c("AAN"))
-  params <- c(hw_fit$par["alpha"], hw_fit$par["beta"])
+  params <- c(fit$par["alpha"], fit$par["beta"])
   names(params) <- c("alpha", "beta")
   return(params)
 }
