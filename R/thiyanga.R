@@ -111,8 +111,10 @@ holt_parameters <- function(x) {
 #' @export
 hw_parameters <- function(x) {
   # parameter estimates of holt winters additive trend seasonal model
-  hw_fit <- purrr::possibly(forecast::ets,
-    list(par = c(alpha = NA, beta = NA, gamma = NA)))(x, model = c("AAA"))
+  hw_fit <- purrr::possibly(
+    forecast::ets,
+    list(par = c(alpha = NA, beta = NA, gamma = NA))
+  )(x, model = c("AAA"))
   return(hw_fit$par[c("alpha", "beta", "gamma")])
 }
 # #' Autocorrelation coefficient at lag 1 of the residual

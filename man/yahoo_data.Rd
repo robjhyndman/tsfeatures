@@ -19,9 +19,8 @@ Yahoo server metrics
 }
 \examples{
 yahoo <- yahoo_data()
-plot(yahoo[,1:10])
-plot(yahoo[,1:44], plot.type='single', col=1:44)
-
+plot(yahoo[, 1:10])
+plot(yahoo[, 1:44], plot.type = "single", col = 1:44)
 }
 \references{
 Hyndman, R.J., Wang, E., Laptev, N. (2015) Large-scale unusual time series detection.

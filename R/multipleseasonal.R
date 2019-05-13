@@ -27,13 +27,39 @@ stl_features <- function(x, ...) {
     nperiods <- 0L
     season <- 0
   }
-  if(NCOL(x) > 1){
+  if (NCOL(x) > 1) {
     stop("x must be a univariate time series.")
   }
   trend <- linearity <- curvature <- season <- spike <- peak <- trough <- acfremainder <- NA
 
   # STL fits
-  stlfit <- forecast::mstl(x, ...)
+
+  stlfit <- NULL
+
+  tryCatch({
+    stlfit <- forecast::mstl(x, ...)
+  },
+  error = function(e) {
+    ParallelLogger::logWarn("stl could not be Computed, use dummy values.")
+  }
+  )
+
+  if (is.null(stlfit)) {
+    return(c(
+      nperiods = nperiods,
+      seasonal_period = msts,
+      trend = 0,
+      spike = 0,
+      linearity = 0,
+      curvature = 0,
+      e_acf1 = 0,
+      e_acf10 = 0,
+      seasonal_strength = 0,
+      peak = 0,
+      trough = 0
+    ))
+  }
+
   trend0 <- stlfit[, "Trend"]
   remainder <- stlfit[, "Remainder"]
   seasonal <- stlfit[, grep("Season", colnames(stlfit)), drop = FALSE]
@@ -64,8 +90,9 @@ stl_features <- function(x, ...) {
   if (nseas > 0) {
     # Measure of seasonal strength
     season <- numeric(nseas)
-    for (i in seq(nseas))
+    for (i in seq(nseas)) {
       season[i] <- max(0, min(1, 1 - vare / var(remainder + seasonal[, i], na.rm = TRUE)))
+    }
 
     # Find time of peak and trough for each component
     peak <- trough <- numeric(nseas)

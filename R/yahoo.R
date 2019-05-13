@@ -12,11 +12,10 @@
 #' \url{https://robjhyndman.com/publications/icdm2015/}
 #' @examples
 #' yahoo <- yahoo_data()
-#' plot(yahoo[,1:10])
-#' plot(yahoo[,1:44], plot.type='single', col=1:44)
-#' 
+#' plot(yahoo[, 1:10])
+#' plot(yahoo[, 1:44], plot.type = "single", col = 1:44)
 #' @export
-yahoo_data <- function(...){
+yahoo_data <- function(...) {
   yahoo <- 1 # Just to avoid a note about undefined global variables.
   tmp <- tempfile()
   utils::download.file("https://github.com/robjhyndman/tsfeatures/raw/master/extra-data/yahoo.rda", tmp, ...)

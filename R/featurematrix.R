@@ -29,7 +29,7 @@ tsfeatures <- function(tslist,
   if (!is.list(tslist)) {
     tslist <- as.list(as.ts(tslist))
   }
-  else{
+  else {
     tslist <- map(tslist, as.ts)
   }
   if (scale) {
@@ -53,7 +53,6 @@ tsfeatures <- function(tslist,
     on.exit(future::plan(old_plan))
   }
   for (i in seq_along(features)) {
-    
     if (parallel) {
       flist[[i]] <- furrr::future_map(tslist, func[[i]], ...)
     }
@@ -63,8 +62,8 @@ tsfeatures <- function(tslist,
 
     # Check names
     if (is.null(names(flist[[i]][[1]]))) {
-      if(length(flist[[i]][[1]]) != 1L) {
-        stop(paste("Function",features[i],"not returning named feature vector"))
+      if (length(flist[[i]][[1]]) != 1L) {
+        stop(paste("Function", features[i], "not returning named feature vector"))
       }
       flist[[i]] <- map(
         flist[[i]],
@@ -81,8 +80,9 @@ tsfeatures <- function(tslist,
 
   # Unpack features into a list of numeric vectors
   featurelist <- list()
-  for (i in seq_along(tslist))
+  for (i in seq_along(tslist)) {
     featurelist[[i]] <- unlist(map(flist, function(u) u[[i]]))
+  }
 
   # Find feature names
   featurenames <- map(featurelist, names)
@@ -97,8 +97,9 @@ tsfeatures <- function(tslist,
   colnames(fmat) <- fnames
   rownames(fmat) <- names(tslist)
 
-  for (i in seq_along(tslist))
+  for (i in seq_along(tslist)) {
     fmat[i, featurenames[[i]]] <- featurelist[[i]][featurenames[[i]]]
+  }
 
   return(tibble::as_tibble(fmat))
 }

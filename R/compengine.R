@@ -206,14 +206,15 @@ embed2_incircle <- function(y, boundary = NULL, acfv = stats::acf(y, length(y) -
 firstzero_ac <- function(y, acfv = stats::acf(y, N - 1, plot = FALSE, na.action = na.pass)) {
   N <- length(y)
   tau <- which(acfv$acf[-1] < 0)
-  if(length(tau)==0L) # Nothing to see here
+  if (length(tau) == 0L) { # Nothing to see here
     return(0)
-  else if(all(is.na(tau))) # All missing
+  } else if (all(is.na(tau))) { # All missing
     return(0)
-  else if(!any(tau))  # No negatives, so set output to sample size
+  } else if (!any(tau)) { # No negatives, so set output to sample size
     return(N)
-  else # Return lag of first negative
+  } else { # Return lag of first negative
     return(tau[1])
+  }
 }
 
 # ac_9
@@ -421,20 +422,22 @@ walker_propcross <- function(y) {
 #' @export
 localsimple_taures <- function(y, forecastMeth = c("mean", "lfit"), trainLength = NULL) {
   forecastMeth <- match.arg(forecastMeth)
-  if(is.null(trainLength)){
+  if (is.null(trainLength)) {
     lp <- switch(forecastMeth, mean = 1, lfit = firstzero_ac(y))
   }
-  
+
   N <- length(y)
   evalr <- (lp + 1):N
-  
-  if (lp >= length(y))
+
+  if (lp >= length(y)) {
     stop("Time series too short for forecasting in `localsimple_taures`")
-  
+  }
+
   res <- numeric(length(evalr))
   if (forecastMeth == "mean") {
-    for (i in 1:length(evalr))
+    for (i in 1:length(evalr)) {
       res[i] <- mean(y[(evalr[i] - lp):(evalr[i] - 1)]) - y[evalr[i]]
+    }
   }
   if (forecastMeth == "lfit") {
     for (i in 1:length(evalr)) {
