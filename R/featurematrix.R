@@ -53,7 +53,7 @@ tsfeatures <- function(tslist,
     on.exit(future::plan(old_plan))
   }
   for (i in seq_along(features)) {
-    
+
     if (parallel) {
       flist[[i]] <- furrr::future_map(tslist, func[[i]], ...)
     }
@@ -106,6 +106,9 @@ tsfeatures <- function(tslist,
 # Scale time series
 scalets <- function(x) {
   n <- length(x)
+  if (forecast::is.constant(x)) {
+    return(x)
+  }
   scaledx <- as.numeric(scale(x, center = TRUE, scale = TRUE))
   if ("msts" %in% class(x)) {
     msts <- attributes(x)$msts

@@ -55,7 +55,9 @@ stl_features <- function(x, ...) {
   nseas <- NCOL(seasonal)
 
   # Measure of trend strength
-  if (vardeseason / varx < 1e-10) {
+  if(varx < .Machine$double.eps)
+    trend <- 0
+  else if (vardeseason / varx < 1e-10) {
     trend <- 0
   } else {
     trend <- max(0, min(1, 1 - vare / vardeseason))
