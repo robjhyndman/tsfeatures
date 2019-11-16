@@ -16,7 +16,7 @@ fraction of time series length that walker crosses time series
 The hypothetical particle (or 'walker') moves in response to values of the
 time series at each point.
 The walker narrows the gap between its value and that
-of the time series by 10%.
+of the time series by 10\%.
 }
 \references{
 B.D. Fulcher and N.S. Jones. hctsa: A computational framework for automated time-series phenotyping using massive feature extraction. Cell Systems 5, 527 (2017).

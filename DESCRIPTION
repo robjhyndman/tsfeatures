@@ -43,7 +43,7 @@ LazyData: true
 ByteCompile: true
 URL: https://pkg.robjhyndman.com/tsfeatures/
 BugReports: https://github.com/robjhyndman/tsfeatures/issues/
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.0
 Roxygen: list(markdown = TRUE, roclets=c('rd', 'collate', 'namespace'))
 VignetteBuilder: knitr
 Encoding: UTF-8

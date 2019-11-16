@@ -265,19 +265,23 @@ hurst <- function(x) {
 
 #' Unit Root Test Statistics
 #'
-#' \code{unitroot_kpss} computes the statistic for the Kwiatkowski et al. unit root test with linear trend and lag 1.
-#' \code{unitroot_pp} computes the statistic for the `'Z-alpha'' version of Phillips & Perron unit root test with constant trend and lag 1.
+#' \code{unitroot_kpss} computes the statistic for the Kwiatkowski et al. unit root test 
+#' using the default settings for the \code{\link[urca]{ur.kpss}} function.
+#' \code{unitroot_pp} computes the statistic for the Phillips-Perron unit root test 
+#' using the default settings for the \code{\link[urca]{ur.pp}} function.
 #' @param x a univariate time series.
+#' @param ... Other arguments are passed to the \code{\link[urca]{ur.kpss}} or
+#' \code{\link[urca]{ur.kpss}} functions.
 #' @return A numeric value
 #' @author Pablo Montero-Manso
 #' @export
-unitroot_kpss <- function(x) {
-  urca::ur.kpss(x)@teststat
+unitroot_kpss <- function(x, ...) {
+  urca::ur.kpss(x, ...)@teststat
 }
 
 
 #' @rdname unitroot_kpss
 #' @export
-unitroot_pp <- function(x) {
-  urca::ur.pp(x)@teststat
+unitroot_pp <- function(x, ...) {
+  urca::ur.pp(x, ...)@teststat
 }
