@@ -276,12 +276,22 @@ hurst <- function(x) {
 #' @author Pablo Montero-Manso
 #' @export
 unitroot_kpss <- function(x, ...) {
-  urca::ur.kpss(x, ...)@teststat
+  kpss <- try(urca::ur.kpss(x, ...)@teststat, silent=TRUE)
+  if("try-error" %in% class(kpss)) {
+    warning("Error in unitroot_kpss")
+    kpss <- NA
+  }
+  return(kpss)
 }
 
 
 #' @rdname unitroot_kpss
 #' @export
 unitroot_pp <- function(x, ...) {
-  urca::ur.pp(x, ...)@teststat
+  pp <- try(urca::ur.pp(x, ...)@teststat, silent = TRUE)
+  if("try-error" %in% class(pp)) {
+    warning("Error in unitroot_pp")
+    pp <- NA
+  }
+  return(pp)
 }
