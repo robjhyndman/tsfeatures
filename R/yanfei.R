@@ -66,7 +66,8 @@ heterogeneity <- function(x) {
 #' @export
 
 nonlinearity <- function(x) {
-  X2 <- tseries::terasvirta.test(as.ts(x), type = "Chisq")$stat
+  X2 <- tryCatch(tseries::terasvirta.test(as.ts(x), type = "Chisq")$stat,
+                 error = function(e) NA)
   c(nonlinearity = 10 * unname(X2) / length(x))
 }
 
