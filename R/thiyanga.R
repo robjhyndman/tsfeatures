@@ -12,27 +12,39 @@
 #' @export
 acf_features <- function(x) {
   m <- frequency(x)
-  acfx <- acf(x, lag.max = max(m, 10L), plot = FALSE, na.action = na.pass)
-  acfdiff1x <- acf(diff(x, differences = 1), lag.max = 10L, plot = FALSE, na.action = na.pass)
-  acfdiff2x <- acf(diff(x, differences = 2), lag.max = 10L, plot = FALSE, na.action = na.pass)
+  if(length(x) > 1) {
+    acfx <- acf(x, lag.max = max(10L, m), plot = FALSE, na.action=na.pass)$acf[-1L]
+  } else {
+    acfx <- NA
+  }
+  if(length(x) > 10) {
+    acfdiff1x <- acf(diff(x, differences = 1), lag.max = 10L, plot = FALSE, na.action = na.pass)$acf[-1L]
+  } else {
+    acfdiff1x <- NA
+  }
+  if(length(x) > 11) {
+    acfdiff2x <- acf(diff(x, differences = 2), lag.max = 10L, plot = FALSE, na.action = na.pass)$acf[-1L]
+  } else {
+    acfdiff2x <- NA
+  }
 
   # first autocorrelation coefficient
-  acf_1 <- acfx$acf[2L]
+  acf_1 <- acfx[1L]
 
   # sum of squares of first 10 autocorrelation coefficients
-  sum_of_sq_acf10 <- sum((acfx$acf[2L:11L])^2)
+  sum_of_sq_acf10 <- sum((acfx[seq(10)])^2)
 
   # first autocorrelation coefficient of differenced series
-  diff1_acf1 <- acfdiff1x$acf[2L]
+  diff1_acf1 <- acfdiff1x[1L]
 
   # Sum of squared of first 10 autocorrelation coefficients of differenced series
-  diff1_acf10 <- sum((acfdiff1x$acf[-1L])^2)
+  diff1_acf10 <- sum((acfdiff1x[seq(10)])^2)
 
   # first autocorrelation coefficient of twice-differenced series
-  diff2_acf1 <- acfdiff2x$acf[2L]
+  diff2_acf1 <- acfdiff2x[1L]
 
   # Sum of squared of first 10 autocorrelation coefficients of twice-differenced series
-  diff2_acf10 <- sum((acfdiff2x$acf[-1L])^2)
+  diff2_acf10 <- sum((acfdiff2x[seq(10)])^2)
 
   output <- c(
     x_acf1 = unname(acf_1),
@@ -44,7 +56,7 @@ acf_features <- function(x) {
   )
 
   if (m > 1) {
-    output <- c(output, seas_acf1 = unname(acfx$acf[m + 1L]))
+    output <- c(output, seas_acf1 = unname(acfx[m]))
   }
 
   return(output)
@@ -64,16 +76,32 @@ acf_features <- function(x) {
 #' @export
 pacf_features <- function(x) {
   m <- frequency(x)
+  if(length(x) > 1){
+    pacfx <- pacf(x, lag.max = max(5L, m), plot = FALSE)$acf
+  } else {
+    pacfx <- NA
+  }
 
-  pacfx <- pacf(x, lag.max = max(5L, m), plot = FALSE)$acf
-  # Sum of squared of first 5 partial autocorrelation coefficients
-  pacf_5 <- sum((pacfx[seq(5L)])^2)
+  # Sum of first 5 PACs squared 
+  if(length(x) > 5) {
+    pacf_5 <- sum((pacfx[seq(5L)])^2)
+  } else {
+    pacf_5 <- NA
+  }
 
-  # Sum of squared of first 5 partial autocorrelation coefficients of difference series
-  diff1_pacf_5 <- sum((pacf(diff(x, differences = 1), lag.max = 5L, plot = FALSE)$acf)^2)
+  # Sum of first 5 PACs of difference series squared
+  if(length(x) > 6) {
+    diff1_pacf_5 <- sum(pacf(diff(x, differences = 1L), lag.max = 5L, plot = FALSE)$acf^2)
+  } else {
+    diff1_pacf_5 <- NA
+  }
 
-  # Sum of squared of first 5 partial autocorrelation coefficients of twice differenced series
-  diff2_pacf_5 <- sum((pacf(diff(x, differences = 2), lag.max = 5L, plot = FALSE)$acf)^2)
+  # Sum of first 5 PACs of twice differenced series squared
+  if(length(x) > 7) {
+    diff2_pacf_5 <- sum(pacf(diff(x, differences = 2L), lag.max = 5L, plot = FALSE)$acf^2)
+  } else {
+    diff2_pacf_5 <- NA
+  }
 
   output <- c(
     x_pacf5 = unname(pacf_5),
@@ -83,7 +111,6 @@ pacf_features <- function(x) {
   if (m > 1) {
     output <- c(output, seas_pacf = pacfx[m])
   }
-
   return(output)
 }
 
