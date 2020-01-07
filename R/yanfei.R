@@ -86,7 +86,7 @@ nonlinearity <- function(x) {
 #' @export
 
 arch_stat <- function(x, lags = 12, demean = TRUE) {
-  if (length(x) <= 13) {
+  if (length(x) <= lags+1) {
     return(c(ARCH.LM = NA_real_))
   }
   if (demean) {
@@ -99,6 +99,6 @@ arch_stat <- function(x, lags = 12, demean = TRUE) {
   } else {
     arch.lm <- summary(fit)
     S <- arch.lm$r.squared #* NROW(mat)
-    return(c(ARCH.LM = S))
+    return(c(ARCH.LM = if(is.nan(S)) 1 else S))
   }
 }
