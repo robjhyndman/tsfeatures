@@ -32,7 +32,7 @@ tsfeatures <- function(tslist,
   else{
     tslist <- map(tslist, as.ts)
   }
-  if (scale && any(map_dbl(tslist, var) == 0)){
+  if (scale && any(map_dbl(tslist, var, na.rm=TRUE) == 0)){
     warning("Some series are constant and cannot be scaled, so scaling has been disabled (`scale = FALSE`).")
     scale <- FALSE
   }
