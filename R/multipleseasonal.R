@@ -40,7 +40,7 @@ stl_features <- function(x, ...) {
     stlfit <- forecast::mstl(x, ...)
   },
   error = function(e) {
-    ParallelLogger::logWarn("stl could not be Computed, use dummy values.")
+    warning("stl could not be Computed, use dummy values.")
   }
   )
 
