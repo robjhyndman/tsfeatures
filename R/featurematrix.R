@@ -132,9 +132,6 @@ trimts <- function(x, trim = 0.1) {
   return(x)
 }
 
-
-
-
 # check for duplicate feature names in the feature list and rename by prepending
 # the name of the function that generates them to avoid conflicts: "functionName_featureName"
 # both functions' features are renamed

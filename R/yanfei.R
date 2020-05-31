@@ -51,7 +51,6 @@ heterogeneity <- function(x) {
   return(output)
 }
 
-
 #' Nonlinearity coefficient
 #'
 #' Computes a nonlinearity statistic based on Teräsvirta's nonlinearity test of a time series.
@@ -70,7 +69,6 @@ nonlinearity <- function(x) {
                  error = function(e) NA)
   c(nonlinearity = 10 * unname(X2) / length(x))
 }
-
 
 #' ARCH LM Statistic
 #'

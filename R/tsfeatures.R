@@ -12,8 +12,6 @@
 NULL
 # > NULL
 
-
-
 #' Convert mts object to list of time series
 #' @method as.list mts
 #' @param x multivariate time series of class mts.

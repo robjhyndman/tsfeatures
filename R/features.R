@@ -170,7 +170,6 @@ max_kl_shift <- function(x, width = ifelse(frequency(x) > 1,
   return(c(max_kl_shift = max(diffkl, na.rm = TRUE), time_kl_shift = maxidx))
 }
 
-
 #' Number of crossing points
 #'
 #' Computes the number of times a time series crosses the median.
@@ -231,7 +230,6 @@ flat_spots <- function(x) {
 #     return(c(shapes=xprofile))
 # }
 
-
 #' Hurst coefficient
 #'
 #' Computes the Hurst coefficient indicating the level of fractional differencing
@@ -246,7 +244,6 @@ hurst <- function(x) {
   # Hurst=d+0.5 where d is fractional difference.
   return(c(hurst = suppressWarnings(fracdiff::fracdiff(na.contiguous(x), 0, 0)[["d"]] + 0.5)))
 }
-
 
 #' Unit Root Test Statistics
 #'
@@ -268,7 +265,6 @@ unitroot_kpss <- function(x, ...) {
   }
   return(kpss)
 }
-
 
 #' @rdname unitroot_kpss
 #' @export
