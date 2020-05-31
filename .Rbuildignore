@@ -11,3 +11,4 @@
 ^README\_.*$
 ^READMEfigs
 ^extra-data
+^revdep$
