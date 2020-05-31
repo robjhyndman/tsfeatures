@@ -1,18 +1,3 @@
-#' Spectral entropy of a time series
-#'
-#' Computes the spectral entropy of a time series
-#' @param x a univariate time series
-#' @return A numeric value.
-#' @author Rob J Hyndman
-#' @export
-
-entropy <- function(x) {
-  entropy <- try(ForeCA::spectral_entropy(na.contiguous(x))[1L], silent = TRUE)
-  if (class(entropy) == "try-error") {
-    entropy <- NA
-  }
-  return(c(entropy = entropy))
-}
 
 #' Time series features based on tiled windows
 #'

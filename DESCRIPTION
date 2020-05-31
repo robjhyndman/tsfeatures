@@ -18,7 +18,6 @@ Description: Methods for extracting various features from time series data. The 
 Depends:
     R (>= 3.2.3)
 Imports:
-    ForeCA,
     fracdiff,
     forecast (>= 8.3),
     purrr,
@@ -43,7 +42,7 @@ LazyData: true
 ByteCompile: true
 URL: https://pkg.robjhyndman.com/tsfeatures/
 BugReports: https://github.com/robjhyndman/tsfeatures/issues/
-RoxygenNote: 7.0.0
+RoxygenNote: 7.1.0
 Roxygen: list(markdown = TRUE, roclets=c('rd', 'collate', 'namespace'))
 VignetteBuilder: knitr
 Encoding: UTF-8
