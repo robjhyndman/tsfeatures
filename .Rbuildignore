@@ -13,3 +13,4 @@
 ^extra-data
 ^revdep$
 ^\.github$
+^CRAN-RELEASE$

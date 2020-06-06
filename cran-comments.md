@@ -14,5 +14,5 @@ This submission removes dependency on ForeCA, and hence ifultools.
 ## revdep checks
 
 All reverse dependencies have been checked.
-The seer package has check issues caused by this release, and the maintainer will submit a fix soon.
+The seer package has check issues caused by this release; the maintainer has fixed the problems and is ready to submit.
 
