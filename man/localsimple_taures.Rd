@@ -4,8 +4,7 @@
 \alias{localsimple_taures}
 \title{The first zero crossing of the autocorrelation function of the residuals from Simple local time-series forecasting from software package \code{hctsa}}
 \usage{
-localsimple_taures(y, forecastMeth = c("mean", "lfit"),
-  trainLength = NULL)
+localsimple_taures(y, forecastMeth = c("mean", "lfit"), trainLength = NULL)
 }
 \arguments{
 \item{y}{the input time series}

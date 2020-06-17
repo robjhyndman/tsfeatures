@@ -3,12 +3,18 @@
 \docType{package}
 \name{tsfeatures}
 \alias{tsfeatures}
-\alias{tsfeatures-package}
 \title{Time series feature matrix}
 \usage{
-tsfeatures(tslist, features = c("frequency", "stl_features", "entropy",
-  "acf_features"), scale = TRUE, trim = FALSE, trim_amount = 0.1,
-  parallel = FALSE, na.action = na.pass, ...)
+tsfeatures(
+  tslist,
+  features = c("frequency", "stl_features", "entropy", "acf_features"),
+  scale = TRUE,
+  trim = FALSE,
+  trim_amount = 0.1,
+  parallel = FALSE,
+  na.action = na.pass,
+  ...
+)
 }
 \arguments{
 \item{tslist}{a list of univariate time series, each of class \code{ts} or a numeric vector.
