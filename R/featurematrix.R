@@ -32,6 +32,10 @@ tsfeatures <- function(tslist,
   else {
     tslist <- map(tslist, as.ts)
   }
+  if (scale && any(map_dbl(tslist, var, na.rm=TRUE) == 0)){
+    warning("Some series are constant and cannot be scaled, so scaling has been disabled (`scale = FALSE`).")
+    scale <- FALSE
+  }
   if (scale) {
     tslist <- map(tslist, scalets)
   }
@@ -53,6 +57,7 @@ tsfeatures <- function(tslist,
     on.exit(future::plan(old_plan))
   }
   for (i in seq_along(features)) {
+    
     if (parallel) {
       flist[[i]] <- furrr::future_map(tslist, func[[i]], ...)
     }
@@ -107,6 +112,9 @@ tsfeatures <- function(tslist,
 # Scale time series
 scalets <- function(x) {
   n <- length(x)
+  if (forecast::is.constant(x)) {
+    return(x)
+  }
   scaledx <- as.numeric(scale(x, center = TRUE, scale = TRUE))
   if ("msts" %in% class(x)) {
     msts <- attributes(x)$msts
@@ -125,9 +133,6 @@ trimts <- function(x, trim = 0.1) {
   x[x < qtl[1L] | x > qtl[2L]] <- NA
   return(x)
 }
-
-
-
 
 # check for duplicate feature names in the feature list and rename by prepending
 # the name of the function that generates them to avoid conflicts: "functionName_featureName"

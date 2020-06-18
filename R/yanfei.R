@@ -51,7 +51,6 @@ heterogeneity <- function(x) {
   return(output)
 }
 
-
 #' Nonlinearity coefficient
 #'
 #' Computes a nonlinearity statistic based on Teräsvirta's nonlinearity test of a time series.
@@ -66,10 +65,10 @@ heterogeneity <- function(x) {
 #' @export
 
 nonlinearity <- function(x) {
-  X2 <- tseries::terasvirta.test(as.ts(x), type = "Chisq")$stat
+  X2 <- tryCatch(tseries::terasvirta.test(as.ts(x), type = "Chisq")$stat,
+                 error = function(e) NA)
   c(nonlinearity = 10 * unname(X2) / length(x))
 }
-
 
 #' ARCH LM Statistic
 #'
@@ -85,7 +84,7 @@ nonlinearity <- function(x) {
 #' @export
 
 arch_stat <- function(x, lags = 12, demean = TRUE) {
-  if (length(x) <= 13) {
+  if (length(x) <= lags+1) {
     return(c(ARCH.LM = NA_real_))
   }
   if (demean) {
@@ -98,6 +97,6 @@ arch_stat <- function(x, lags = 12, demean = TRUE) {
   } else {
     arch.lm <- summary(fit)
     S <- arch.lm$r.squared #* NROW(mat)
-    return(c(ARCH.LM = S))
+    return(c(ARCH.LM = if(is.nan(S)) 1 else S))
   }
 }
