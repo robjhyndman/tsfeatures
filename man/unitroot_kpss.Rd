@@ -5,19 +5,24 @@
 \alias{unitroot_pp}
 \title{Unit Root Test Statistics}
 \usage{
-unitroot_kpss(x)
+unitroot_kpss(x, ...)
 
-unitroot_pp(x)
+unitroot_pp(x, ...)
 }
 \arguments{
 \item{x}{a univariate time series.}
+
+\item{...}{Other arguments are passed to the \code{\link[urca]{ur.kpss}} or
+\code{\link[urca]{ur.kpss}} functions.}
 }
 \value{
 A numeric value
 }
 \description{
-\code{unitroot_kpss} computes the statistic for the Kwiatkowski et al. unit root test with linear trend and lag 1.
-\code{unitroot_pp} computes the statistic for the `'Z-alpha'' version of Phillips & Perron unit root test with constant trend and lag 1.
+\code{unitroot_kpss} computes the statistic for the Kwiatkowski et al. unit root test
+using the default settings for the \code{\link[urca]{ur.kpss}} function.
+\code{unitroot_pp} computes the statistic for the Phillips-Perron unit root test
+using the default settings for the \code{\link[urca]{ur.pp}} function.
 }
 \author{
 Pablo Montero-Manso

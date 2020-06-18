@@ -11,3 +11,6 @@
 ^README\_.*$
 ^READMEfigs
 ^extra-data
+^revdep$
+^\.github$
+^CRAN-RELEASE$

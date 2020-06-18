@@ -21,7 +21,6 @@ compengine <- function(x) {
   c(autocorr_features(x), pred_features(x), station_features(x), dist_features(x), scal_features(x))
 }
 
-
 #' The autocorrelation feature set from software package \code{hctsa}
 #'
 #' Calculate the features that grouped as autocorrelation set,
@@ -61,7 +60,6 @@ autocorr_features <- function(x) {
   return(output)
 }
 
-
 #' The prediction feature set from software package \code{hctsa}
 #'
 #' Calculate the features that grouped as prediction set,
@@ -88,7 +86,6 @@ pred_features <- function(x) {
   return(output)
 }
 
-
 #' The stationarity feature set from software package \code{hctsa}
 #'
 #' Calculate the features that grouped as stationarity set,
@@ -114,7 +111,6 @@ station_features <- function(x) {
   )
   return(output)
 }
-
 
 
 #' The distribution feature set from software package \code{hctsa}
@@ -161,7 +157,6 @@ scal_features <- function(x) {
 }
 
 # autocorr ----------------------------------------------------------------
-
 
 # CO_Embed2_Basic_tau_incircle_1
 # CO_Embed2_Basic_tau_incircle_1
@@ -214,7 +209,6 @@ firstzero_ac <- function(y, acfv = stats::acf(y, N - 1, plot = FALSE, na.action 
     return(N)
   } else { # Return lag of first negative
     return(tau[1])
-  }
 }
 
 # ac_9
@@ -230,7 +224,6 @@ firstzero_ac <- function(y, acfv = stats::acf(y, N - 1, plot = FALSE, na.action 
 ac_9 <- function(y, acfv = stats::acf(y, 9, plot = FALSE, na.action = na.pass)) {
   acfv$acf[10]
 }
-
 
 # CO_firstmin_ac
 #' Time of first minimum in the autocorrelation function from software package \code{hctsa}
@@ -369,7 +362,6 @@ f_entropy <- function(x) {
   -sum(x[x > 0] * log(x[x > 0]))
 }
 
-
 # PH_Walker_prop_01_sw_propcross
 #' Simulates a hypothetical walker moving through the time domain from software package \code{hctsa}
 #'
@@ -401,9 +393,7 @@ walker_propcross <- function(y) {
   return(out.sw_propcross)
 }
 
-
 # pred --------------------------------------------------------------------
-
 
 # FC_localsimple_mean1_taures
 # FC_localsimple_lfit_taures
@@ -454,7 +444,6 @@ localsimple_taures <- function(y, forecastMeth = c("mean", "lfit"), trainLength 
   return(out.taures)
 }
 
-
 # EN_SampEn_5_03_sampen1
 #' Second Sample Entropy of a time series from software package \code{hctsa}
 #'
@@ -481,8 +470,6 @@ sampen_first <- function(y) {
   sampEn <- sampenc(y, M + 1, r)
   return(sampEn)
 }
-
-
 
 # PN_sampenc
 #' Second Sample Entropy from software package \code{hctsa}
@@ -538,11 +525,7 @@ sampenc <- function(y, M = 6, r = 0.3) {
   return(e)
 }
 
-
 # stationarity ------------------------------------------------------------
-
-
-
 
 # SY_StdNthDer_1
 #' Standard deviation of the first derivative of the time series from software package \code{hctsa}
@@ -561,8 +544,6 @@ std1st_der <- function(y) {
   yd <- diff(y)
   return(sd(yd, na.rm = TRUE))
 }
-
-
 
 # SY_SpreadRandomLocal_50_100_meantaul
 # SY_SpreadRandomLocal_ac2_100_meantaul
@@ -601,7 +582,6 @@ spreadrandomlocal_meantaul <- function(y, l = 50) {
   return(mean(qs, na.rm = TRUE))
 }
 
-
 # distribution ------------------------------------------------------------
 
 # DN_histogram_mode_10
@@ -635,10 +615,6 @@ histogram_mode <- function(y, numBins = 10) {
   out <- mean(binCenters[which.max(histdata$counts)])
   return(out)
 }
-
-
-
-
 
 # DN_OutlierInclude_abs_001_mdrmd
 #' How median depend on distributional outliers from software package \code{hctsa}
@@ -703,7 +679,6 @@ outlierinclude_mdrmd <- function(y, zscored = TRUE) {
     # calculation
   }
 
-
   # Trim off where the statistic power is lacking: less than 2% of data
   # included
   trimthr <- 2 # percent
@@ -720,9 +695,7 @@ outlierinclude_mdrmd <- function(y, zscored = TRUE) {
   return(out.mdrmd)
 }
 
-
 # scaling ----------------------------------------------------------------
-
 
 # SC_FluctAnal_2_rsrangefit_50_1_logi_prop_r1
 #' Implements fluctuation analysis from software package \code{hctsa}
@@ -784,7 +757,6 @@ fluctanal_prop_r1 <- function(x) {
   logtt <- log(taur)
   logFF <- log(Fl)
   ntt <- ntau
-
 
   ## Try assuming two components (2 distinct scaling regimes)
   # Move through, and fit a straight line to loglog before and after each point.

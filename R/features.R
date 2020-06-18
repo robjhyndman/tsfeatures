@@ -1,18 +1,3 @@
-#' Spectral entropy of a time series
-#'
-#' Computes the spectral entropy of a time series
-#' @param x a univariate time series
-#' @return A numeric value.
-#' @author Rob J Hyndman
-#' @export
-
-entropy <- function(x) {
-  entropy <- try(ForeCA::spectral_entropy(na.contiguous(x))[1L], silent = TRUE)
-  if (class(entropy) == "try-error") {
-    entropy <- NA
-  }
-  return(c(entropy = entropy))
-}
 
 #' Time series features based on tiled windows
 #'
@@ -185,7 +170,6 @@ max_kl_shift <- function(x, width = ifelse(frequency(x) > 1,
   return(c(max_kl_shift = max(diffkl, na.rm = TRUE), time_kl_shift = maxidx))
 }
 
-
 #' Number of crossing points
 #'
 #' Computes the number of times a time series crosses the median.
@@ -246,7 +230,6 @@ flat_spots <- function(x) {
 #     return(c(shapes=xprofile))
 # }
 
-
 #' Hurst coefficient
 #'
 #' Computes the Hurst coefficient indicating the level of fractional differencing
@@ -262,22 +245,34 @@ hurst <- function(x) {
   return(c(hurst = suppressWarnings(fracdiff::fracdiff(na.contiguous(x), 0, 0)[["d"]] + 0.5)))
 }
 
-
 #' Unit Root Test Statistics
 #'
-#' \code{unitroot_kpss} computes the statistic for the Kwiatkowski et al. unit root test with linear trend and lag 1.
-#' \code{unitroot_pp} computes the statistic for the `'Z-alpha'' version of Phillips & Perron unit root test with constant trend and lag 1.
+#' \code{unitroot_kpss} computes the statistic for the Kwiatkowski et al. unit root test 
+#' using the default settings for the \code{\link[urca]{ur.kpss}} function.
+#' \code{unitroot_pp} computes the statistic for the Phillips-Perron unit root test 
+#' using the default settings for the \code{\link[urca]{ur.pp}} function.
 #' @param x a univariate time series.
+#' @param ... Other arguments are passed to the \code{\link[urca]{ur.kpss}} or
+#' \code{\link[urca]{ur.kpss}} functions.
 #' @return A numeric value
 #' @author Pablo Montero-Manso
 #' @export
-unitroot_kpss <- function(x) {
-  urca::ur.kpss(x)@teststat
+unitroot_kpss <- function(x, ...) {
+  kpss <- try(urca::ur.kpss(x, ...)@teststat, silent=TRUE)
+  if("try-error" %in% class(kpss)) {
+    warning("Error in unitroot_kpss")
+    kpss <- NA
+  }
+  return(kpss)
 }
-
 
 #' @rdname unitroot_kpss
 #' @export
-unitroot_pp <- function(x) {
-  urca::ur.pp(x)@teststat
+unitroot_pp <- function(x, ...) {
+  pp <- try(urca::ur.pp(x, ...)@teststat, silent = TRUE)
+  if("try-error" %in% class(pp)) {
+    warning("Error in unitroot_pp")
+    pp <- NA
+  }
+  return(pp)
 }

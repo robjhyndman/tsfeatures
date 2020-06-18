@@ -1,6 +1,6 @@
-pandoc: 2.3.1
-pkgdown: 1.3.0.9000
-pkgdown_sha: 45892dd5fe3c9904e09509694deede0c34d01af9
+pandoc: 2.7.3
+pkgdown: 1.4.1.9000
+pkgdown_sha: d01672efa3baa80fd7ab238b7143080b0daf49a4
 articles:
   tsfeatures: tsfeatures.html
 

@@ -81,7 +81,9 @@ stl_features <- function(x, ...) {
   nseas <- NCOL(seasonal)
 
   # Measure of trend strength
-  if (vardeseason / varx < 1e-10) {
+  if(varx < .Machine$double.eps)
+    trend <- 0
+  else if (vardeseason / varx < 1e-10) {
     trend <- 0
   } else {
     trend <- max(0, min(1, 1 - vare / vardeseason))
@@ -112,7 +114,7 @@ stl_features <- function(x, ...) {
   spike <- var(varloo, na.rm = TRUE)
 
   # Compute measures of linearity and curvature
-  tren.coef <- coef(lm(trend0 ~ poly(seq(n), degree = 2L)))[2L:3L]
+  tren.coef <- coef(lm(trend0 ~ poly(seq(n), degree = min(n-1, 2L))))[2L:3L]
   linearity <- tren.coef[1L]
   curvature <- tren.coef[2L]
 
