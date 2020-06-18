@@ -209,6 +209,7 @@ firstzero_ac <- function(y, acfv = stats::acf(y, N - 1, plot = FALSE, na.action 
     return(N)
   } else { # Return lag of first negative
     return(tau[1])
+  }
 }
 
 # ac_9
