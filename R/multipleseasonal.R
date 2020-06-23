@@ -20,6 +20,10 @@ stl_features <- function(x, ...) {
   else if ("ts" %in% class(x)) {
     msts <- frequency(x)
     nperiods <- msts > 1
+    if(length(x) <= 2*msts) {
+      warning("Insufficient data to compute STL decomposition")
+      x <- c(x)
+    }
     season <- 0
   }
   else {
