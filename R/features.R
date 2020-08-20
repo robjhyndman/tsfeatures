@@ -187,9 +187,9 @@ crossing_points <- function(x) {
   return(c(crossing_points = sum(cross, na.rm = TRUE)))
 }
 
-#' Number of flat spots
+#' Longest flat spot
 #'
-#' Number of flat spots in a time series
+#' "Flat spots” are computed by dividing the sample space of a time series into ten equal-sized intervals, and computing the maximum run length within any single interval.
 #' @param x a univariate time series
 #' @return A numeric value.
 #' @author Earo Wang and Rob J Hyndman
@@ -247,9 +247,9 @@ hurst <- function(x) {
 
 #' Unit Root Test Statistics
 #'
-#' \code{unitroot_kpss} computes the statistic for the Kwiatkowski et al. unit root test 
+#' \code{unitroot_kpss} computes the statistic for the Kwiatkowski et al. unit root test
 #' using the default settings for the \code{\link[urca]{ur.kpss}} function.
-#' \code{unitroot_pp} computes the statistic for the Phillips-Perron unit root test 
+#' \code{unitroot_pp} computes the statistic for the Phillips-Perron unit root test
 #' using the default settings for the \code{\link[urca]{ur.pp}} function.
 #' @param x a univariate time series.
 #' @param ... Other arguments are passed to the \code{\link[urca]{ur.kpss}} or
