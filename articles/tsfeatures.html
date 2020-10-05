@@ -76,7 +76,7 @@
       <h1>Introduction to the tsfeatures package</h1>
                         <h4 class="author">Yangzhuoran Yang and Rob J Hyndman</h4>
             
-            <h4 class="date">2020-08-20</h4>
+            <h4 class="date">2020-10-05</h4>
       
       
       <div class="hidden name"><code>tsfeatures.Rmd</code></div>
@@ -416,11 +416,11 @@
 </tr>
 <tr class="even">
 <td align="left">spreadrandomlocal_meantaul_50</td>
-<td align="right">13.3000000</td>
+<td align="right">12.0900000</td>
 </tr>
 <tr class="odd">
 <td align="left">spreadrandomlocal_meantaul_ac2</td>
-<td align="right">38.9500000</td>
+<td align="right">38.9400000</td>
 </tr>
 <tr class="even">
 <td align="left">histogram_mode_10</td>
@@ -521,7 +521,7 @@
 <a href="#spreadrandomlocal_meantaul" class="anchor"></a>spreadrandomlocal_meantaul</h3>
 <p>100 time-series segments of length l are selected at random from the time series and the mean of the first zero-crossings of the autocorrelation function in each segment is calculated using <code>spreadrandomlocal_meantaul</code>.</p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="kw"><a href="../reference/spreadrandomlocal_meantaul.html">spreadrandomlocal_meantaul</a></span>(AirPassengers)</span>
-<span id="cb31-2"><a href="#cb31-2"></a><span class="co">#&gt; [1] 12.46</span></span></code></pre></div>
+<span id="cb31-2"><a href="#cb31-2"></a><span class="co">#&gt; [1] 13.16</span></span></code></pre></div>
 </div>
 <div id="histogram_mode" class="section level3">
 <h3 class="hasAnchor">
@@ -637,17 +637,16 @@
 <div id="ref" class="section level2">
 <h2 class="hasAnchor">
 <a href="#ref" class="anchor"></a>Resources</h2>
+<p><a href="https://doi.org/10.1016/j.cageo.2013.09.015">Barbour, A. J., &amp; Parker, R. L. (2014). psd: Adaptive, sine multitaper power spectral density estimation for R. Computers &amp; Geosciences, 63, 1-8.</a></p>
+<p><a href="http://bit.ly/stl1990">Cleveland, R. B., Cleveland, W. S., McRae, J. E., &amp; Terpenning, I. (1990). STL: A Seasonal-Trend Decomposition. Journal of Official Statistics, 6(1), 3-73.</a></p>
+<p><a href="https://doi.org/10.2307/1912773">Engle, R. F. (1982). Autoregressive conditional heteroscedasticity with estimates of the variance of United Kingdom inflation. Econometrica: Journal of the Econometric Society, 987-1007.</a></p>
+<p><a href="https://www.slac.stanford.edu/pubs/slacpubs/3250/slac-pub-3477.pdf">Friedman, JH (1984). <em>A variable span scatterplot smoother</em>. Technical Report 5. Laboratory for Computational Statistics, Stanford University.</a></p>
+<p><a href="https://doi.org/10.2307/2347679">Haslett, J., &amp; Raftery, A. E. (1989). Space-time modelling with long-memory dependence: Assessing Ireland’s wind power resource. Applied Statistics, 1-50.</a></p>
 <p><a href="https://doi.org/10.1109/ICDMW.2015.104">Hyndman, R. J., Wang, E., &amp; Laptev, N. (2015, November). Large-scale unusual time series detection. In Data Mining Workshop (ICDMW), 2015 IEEE International Conference on (pp. 1616-1619). IEEE.</a></p>
 <p><a href="https://robjhyndman.com/publications/tsgeneration/">Kang, Y., Hyndman, R. J., &amp; Li, F. (2018). Efficient generation of time series with diverse and controllable characteristics.</a></p>
-<p><a href="https://doi.org/10.2307/2347679">Haslett, J., &amp; Raftery, A. E. (1989). Space-time modelling with long-memory dependence: Assessing Ireland’s wind power resource. Applied Statistics, 1-50.</a></p>
-<p><a href="https://doi.org/10.1016/j.cageo.2013.09.015">Barbour, A. J., &amp; Parker, R. L. (2014). psd: Adaptive, sine multitaper power spectral density estimation for R. Computers &amp; Geosciences, 63, 1-8.</a></p>
-<p><a href="https://doi.org/10.2307/1912773">Engle, R. F. (1982). Autoregressive conditional heteroscedasticity with estimates of the variance of United Kingdom inflation. Econometrica: Journal of the Econometric Society, 987-1007.</a></p>
+<p><a href="https://doi.org/10.1016/j.ijforecast.2016.09.004">Kang, Y., Hyndman, R. J., &amp; Smith-Miles, K. (2017). Visualising forecasting algorithm performance using time series instance spaces. International Journal of Forecasting, 33(2), 345-358.</a></p>
 <p><a href="https://doi.org/10.1093/biomet/65.2.297">Ljung, G. M., &amp; Box, G. E. (1978). On a measure of lack of fit in time series models. Biometrika, 65(2), 297-303.</a></p>
-<p><a href="https://doi.org/10.1016/j.ijforecast.2016.09.004">Kang, Y., Hyndman, R. J., &amp; Smith-Miles, K. (2017). Visualising forecasting algorithm performance using time series instance spaces. International Journal of Forecasting, 33(2), 345-358.</a></p>
-<p>Cleveland, R. B., Cleveland, W. S., McRae, J. E., &amp; Terpenning, I. (1990). STL: A Seasonal-Trend Decomposition. Journal of Official Statistics, 6(1), 3-73.</p>
-<p><a href="https://www.slac.stanford.edu/pubs/slacpubs/3250/slac-pub-3477.pdf">Friedman, JH (1984). <em>A variable span scatterplot smoother</em>. Technical Report 5. Laboratory for Computational Statistics, Stanford University.</a></p>
 <p><a href="https://doi.org/10.1007/s10618-005-0039-x">Wang, X, KA Smith &amp; RJ Hyndman (2006). Characteristic-based clustering for time series data. Data Mining and Knowledge Discovery 13(3), 335–364.</a></p>
-<p><a href="https://doi.org/10.1016/j.ijforecast.2016.09.004">Kang, Y., Hyndman, R. J., &amp; Smith-Miles, K. (2017). Visualising forecasting algorithm performance using time series instance spaces. International Journal of Forecasting, 33(2), 345-358.</a></p>
 </div>
 <div id="license" class="section level2">
 <h2 class="hasAnchor">
