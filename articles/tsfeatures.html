@@ -70,13 +70,14 @@
 
       
 
-      </header><script src="tsfeatures_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="tsfeatures_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="tsfeatures_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
+<script src="tsfeatures_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Introduction to the tsfeatures package</h1>
                         <h4 class="author">Yangzhuoran Yang and Rob J Hyndman</h4>
             
-            <h4 class="date">2020-10-05</h4>
+            <h4 class="date">2020-11-01</h4>
       
       
       <div class="hidden name"><code>tsfeatures.Rmd</code></div>
@@ -226,7 +227,7 @@
 <div id="max_shift" class="section level3">
 <h3 class="hasAnchor">
 <a href="#max_shift" class="anchor"></a>max_level_shift, max_var_shift and max_kl_shift</h3>
-<p>These three features compute features of a time series based on sliding (overlapping) windows. <code>max_level_shift</code> finds the largest mean shift between two consecutive windows. <code>max_var-shift</code> finds the largest variance shift between two consecutive windows. <code>max_kl_shift</code> finds the largest shift in Kulback-Leibler divergence between two consecutive windows. Each feature returns a vector of 2 values: the size of the shift, and the time index of the shift.</p>
+<p>These three features compute features of a time series based on sliding (overlapping) windows. <code>max_level_shift</code> finds the largest mean shift between two consecutive windows. <code>max_var_shift</code> finds the largest variance shift between two consecutive windows. <code>max_kl_shift</code> finds the largest shift in Kulback-Leibler divergence between two consecutive windows. Each feature returns a vector of 2 values: the size of the shift, and the time index of the shift.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw"><a href="../reference/max_level_shift.html">max_level_shift</a></span>(AirPassengers)</span>
 <span id="cb7-2"><a href="#cb7-2"></a><span class="co">#&gt;  max_level_shift time_level_shift </span></span>
 <span id="cb7-3"><a href="#cb7-3"></a><span class="co">#&gt;             54.5            117.0</span></span>
@@ -416,11 +417,11 @@
 </tr>
 <tr class="even">
 <td align="left">spreadrandomlocal_meantaul_50</td>
-<td align="right">13.0800000</td>
+<td align="right">12.2500000</td>
 </tr>
 <tr class="odd">
 <td align="left">spreadrandomlocal_meantaul_ac2</td>
-<td align="right">38.8900000</td>
+<td align="right">38.9100000</td>
 </tr>
 <tr class="even">
 <td align="left">histogram_mode_10</td>
@@ -521,7 +522,7 @@
 <a href="#spreadrandomlocal_meantaul" class="anchor"></a>spreadrandomlocal_meantaul</h3>
 <p>100 time-series segments of length l are selected at random from the time series and the mean of the first zero-crossings of the autocorrelation function in each segment is calculated using <code>spreadrandomlocal_meantaul</code>.</p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="kw"><a href="../reference/spreadrandomlocal_meantaul.html">spreadrandomlocal_meantaul</a></span>(AirPassengers)</span>
-<span id="cb31-2"><a href="#cb31-2"></a><span class="co">#&gt; [1] 12.86</span></span></code></pre></div>
+<span id="cb31-2"><a href="#cb31-2"></a><span class="co">#&gt; [1] 13.83</span></span></code></pre></div>
 </div>
 <div id="histogram_mode" class="section level3">
 <h3 class="hasAnchor">
