@@ -2,7 +2,7 @@
 % Please edit documentation in R/features.R
 \name{flat_spots}
 \alias{flat_spots}
-\title{Number of flat spots}
+\title{Longest flat spot}
 \usage{
 flat_spots(x)
 }
@@ -13,7 +13,7 @@ flat_spots(x)
 A numeric value.
 }
 \description{
-Number of flat spots in a time series
+"Flat spots” are computed by dividing the sample space of a time series into ten equal-sized intervals, and computing the maximum run length within any single interval.
 }
 \author{
 Earo Wang and Rob J Hyndman
