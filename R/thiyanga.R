@@ -160,6 +160,7 @@ hw_parameters <- function(x) {
 #' @export
 zero_proportion <- function(x) {
   # compute proportion of zeros in a time series
-  zero.prop <- sum(x==0L, na.rm=TRUE)/length(x)
+  nonmiss <- x[!is.na(x)]
+  zero.prop <- sum(nonmiss==0L)/length(nonmiss)
   return(zero.prop)
 }
