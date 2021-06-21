@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Time of first minimum in the autocorrelation function from software package hctsa — firstmin_ac • tsfeatures</title>
+<title>Proportion of zeros — zero_proportion • tsfeatures</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Time of first minimum in the autocorrelation function from software package hctsa — firstmin_ac" />
-<meta property="og:description" content="Time of first minimum in the autocorrelation function from software package hctsa" />
+<meta property="og:title" content="Proportion of zeros — zero_proportion" />
+<meta property="og:description" content="Computes proportion of zeros in a time series" />
 
 
 
@@ -114,47 +114,37 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Time of first minimum in the autocorrelation function from software package <code>hctsa</code></h1>
-    <small class="dont-index">Source: <a href='https://github.com/robjhyndman/tsfeatures/blob/master/R/compengine.R'><code>R/compengine.R</code></a></small>
-    <div class="hidden name"><code>firstmin_ac.Rd</code></div>
+    <h1>Proportion of zeros</h1>
+    <small class="dont-index">Source: <a href='https://github.com/robjhyndman/tsfeatures/blob/master/R/thiyanga.R'><code>R/thiyanga.R</code></a></small>
+    <div class="hidden name"><code>zero_proportion.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Time of first minimum in the autocorrelation function from software package <code>hctsa</code></p>
+    <p>Computes proportion of zeros in a time series</p>
     </div>
 
-    <pre class="usage"><span class='fu'>firstmin_ac</span><span class='op'>(</span>
-  <span class='va'>x</span>,
-  acfv <span class='op'>=</span> <span class='fu'>stats</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/r/stats/acf.html'>acf</a></span><span class='op'>(</span><span class='va'>x</span>, lag.max <span class='op'>=</span> <span class='va'>N</span> <span class='op'>-</span> <span class='fl'>1</span>, plot <span class='op'>=</span> <span class='cn'>FALSE</span>, na.action <span class='op'>=</span> <span class='va'>na.pass</span><span class='op'>)</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>zero_proportion</span><span class='op'>(</span><span class='va'>x</span>, tol <span class='op'>=</span> <span class='fl'>1e-08</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>the input time series</p></td>
+      <td><p>a univariate time series</p></td>
     </tr>
     <tr>
-      <th>acfv</th>
-      <td><p>vector of autocorrelation, if exist, used to avoid repeated computation.</p></td>
+      <th>tol</th>
+      <td><p>tolerance level. Absolute values below this are considered zeros.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The lag of the first minimum</p>
-    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
-
-    <p>B.D. Fulcher and N.S. Jones. hctsa: A computational framework for automated time-series phenotyping using massive feature extraction. Cell Systems 5, 527 (2017).</p>
-<p>B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).</p>
+    <p>A numeric value.</p>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
-    <p>Yangzhuoran Yang</p>
+    <p>Thiyanga Talagala</p>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>firstmin_ac</span><span class='op'>(</span><span class='va'>WWWusage</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] 21</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
