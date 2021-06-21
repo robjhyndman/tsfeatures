@@ -155,3 +155,11 @@ hw_parameters <- function(x) {
 #   Res<-resid(linear_mod)
 #   return(stats::acf(Res,lag.max=1L,plot=FALSE)$acf[-1])
 # }
+
+#' @rdname zero_proportion
+#' @export
+zero_proportion <- function(x) {
+  # compute proportion of zeros in a time series
+  zero.prop <- length(x==0L)/ length(x)
+  return(zero.prop)
+}
