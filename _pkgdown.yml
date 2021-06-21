@@ -1,3 +1,5 @@
+url: http://pkg.robjhyndman.com/tsfeatures
+
 template:
   params:
     bootswatch: flatly
@@ -80,6 +82,7 @@ reference:
   - trev_num
   - unitroot_kpss
   - walker_propcross
+  - zero_proportion
 - title: Data
   desc: Download data providing Yahoo server metrics
   contents:
