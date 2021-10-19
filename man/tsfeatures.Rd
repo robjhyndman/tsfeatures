@@ -12,6 +12,7 @@ tsfeatures(
   trim = FALSE,
   trim_amount = 0.1,
   parallel = FALSE,
+  multiprocess = future::multisession,
   na.action = na.pass,
   ...
 )
@@ -35,6 +36,10 @@ are computed. Values larger than \code{trim_amount} in absolute value are set to
 
 \item{parallel}{If TRUE, multiple cores (or multiple sessions) will be used. This only speeds things up
 when there are a large number of time series.}
+
+\item{multiprocess}{The function from the \code{future} package to use for parallel processing. Either
+\code{\link[future]{multisession}} or \code{\link[future]{multicore}}. The latter is preferred
+for Linux and MacOS.}
 
 \item{na.action}{A function to handle missing values. Use \code{na.interp} to estimate missing values.}
 

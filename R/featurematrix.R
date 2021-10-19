@@ -14,6 +14,9 @@
 #' @param trim_amount Default level of trimming if \code{trim==TRUE}.
 #' @param parallel If TRUE, multiple cores (or multiple sessions) will be used. This only speeds things up
 #' when there are a large number of time series.
+#' @param multiprocess The function from the \code{future} package to use for parallel processing. Either
+#' \code{\link[future]{multisession}} or \code{\link[future]{multicore}}. The latter is preferred
+#' for Linux and MacOS.
 #' @param na.action A function to handle missing values. Use \code{na.interp} to estimate missing values.
 #' @param ... Other arguments get passed to the feature functions.
 #' @return A feature matrix (in the form of a tibble) with each row corresponding to
@@ -25,7 +28,8 @@
 #' @export
 tsfeatures <- function(tslist,
                        features = c("frequency", "stl_features", "entropy", "acf_features"),
-                       scale = TRUE, trim = FALSE, trim_amount = 0.1, parallel = FALSE, na.action = na.pass, ...) {
+                       scale = TRUE, trim = FALSE, trim_amount = 0.1,
+                       parallel = FALSE, multiprocess = future::multisession, na.action = na.pass, ...) {
   if (!is.list(tslist)) {
     tslist <- as.list(as.ts(tslist))
   }
@@ -53,7 +57,7 @@ tsfeatures <- function(tslist,
   # Assuming that didn't generate an error, we will proceed
   func <- lapply(features, match.fun)
   if (parallel) {
-    old_plan <- future::plan(future::multiprocess)
+    old_plan <- future::plan(multiprocess)
     on.exit(future::plan(old_plan))
   }
   for (i in seq_along(features)) {
