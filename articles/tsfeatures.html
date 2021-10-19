@@ -76,7 +76,7 @@
       <h1 data-toc-skip>Introduction to the tsfeatures package</h1>
                         <h4 class="author">Yangzhuoran Yang and Rob J Hyndman</h4>
             
-            <h4 class="date">2021-06-21</h4>
+            <h4 class="date">2021-10-19</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/robjhyndman/tsfeatures/blob/master/vignettes/tsfeatures.Rmd"><code>vignettes/tsfeatures.Rmd</code></a></small>
       <div class="hidden name"><code>tsfeatures.Rmd</code></div>
@@ -107,7 +107,7 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mylist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">sunspot.year</span>, <span class="va">WWWusage</span>, <span class="va">AirPassengers</span>, <span class="va">USAccDeaths</span><span class="op">)</span>
 <span class="fu"><a href="../reference/tsfeatures.html">tsfeatures</a></span><span class="op">(</span><span class="va">mylist</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 x 20</span>
+<span class="co">#&gt; # A tibble: 4 × 20</span>
 <span class="co">#&gt;   frequency nperiods seasonal_period trend      spike linearity curvature e_acf1</span>
 <span class="co">#&gt;       &lt;dbl&gt;    &lt;dbl&gt;           &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;</span>
 <span class="co">#&gt; 1         1        0               1 0.125    2.10e-5      3.58      1.11  0.793</span>
@@ -125,7 +125,7 @@
   <span class="fu"><a href="https://rdrr.io/r/stats/time.html">frequency</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">==</span> <span class="fl">12</span>
 <span class="op">}</span>
 <span class="fu"><a href="../reference/tsfeatures.html">tsfeatures</a></span><span class="op">(</span><span class="va">mylist</span>, features <span class="op">=</span> <span class="st">"is.monthly"</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 4 x 1</span>
+<span class="co">#&gt; # A tibble: 4 × 1</span>
 <span class="co">#&gt;   is.monthly</span>
 <span class="co">#&gt;        &lt;dbl&gt;</span>
 <span class="co">#&gt; 1          0</span>
@@ -435,11 +435,11 @@
 </tr>
 <tr class="even">
 <td align="left">spreadrandomlocal_meantaul_50</td>
-<td align="right">12.7400000</td>
+<td align="right">13.3800000</td>
 </tr>
 <tr class="odd">
 <td align="left">spreadrandomlocal_meantaul_ac2</td>
-<td align="right">38.9200000</td>
+<td align="right">38.8900000</td>
 </tr>
 <tr class="even">
 <td align="left">histogram_mode_10</td>
@@ -552,7 +552,7 @@
 <p>100 time-series segments of length l are selected at random from the time series and the mean of the first zero-crossings of the autocorrelation function in each segment is calculated using <code>spreadrandomlocal_meantaul</code>.</p>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/spreadrandomlocal_meantaul.html">spreadrandomlocal_meantaul</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span>
-<span class="co">#&gt; [1] 13.57</span></code></pre></div>
+<span class="co">#&gt; [1] 12.94</span></code></pre></div>
 </div>
 <div id="histogram_mode" class="section level3">
 <h3 class="hasAnchor">

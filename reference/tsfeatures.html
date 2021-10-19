@@ -132,6 +132,7 @@ The tsfeature package provides methods to extract various features from time ser
   trim <span class='op'>=</span> <span class='cn'>FALSE</span>,
   trim_amount <span class='op'>=</span> <span class='fl'>0.1</span>,
   parallel <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  multiprocess <span class='op'>=</span> <span class='fu'>future</span><span class='fu'>::</span><span class='va'><a href='https://future.futureverse.org/reference/multisession.html'>multisession</a></span>,
   na.action <span class='op'>=</span> <span class='va'>na.pass</span>,
   <span class='va'>...</span>
 <span class='op'>)</span></pre>
@@ -171,6 +172,12 @@ are computed. Values larger than <code>trim_amount</code> in absolute value are 
 when there are a large number of time series.</p></td>
     </tr>
     <tr>
+      <th>multiprocess</th>
+      <td><p>The function from the <code>future</code> package to use for parallel processing. Either
+<code><a href='https://future.futureverse.org/reference/multisession.html'>multisession</a></code> or <code><a href='https://future.futureverse.org/reference/multicore.html'>multicore</a></code>. The latter is preferred
+for Linux and MacOS.</p></td>
+    </tr>
+    <tr>
       <th>na.action</th>
       <td><p>A function to handle missing values. Use <code>na.interp</code> to estimate missing values.</p></td>
     </tr>
@@ -191,7 +198,7 @@ one time series from tslist, and each column being a feature.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='va'>mylist</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='va'>sunspot.year</span>, <span class='va'>WWWusage</span>, <span class='va'>AirPassengers</span>, <span class='va'>USAccDeaths</span><span class='op'>)</span>
 <span class='fu'>tsfeatures</span><span class='op'>(</span><span class='va'>mylist</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 4 x 20</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 4 × 20</span>
 #&gt;   frequency nperiods seasonal_period trend      spike linearity curvature e_acf1
 #&gt;       <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>           <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>      <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
 #&gt; <span style='color: #BCBCBC;'>1</span>         1        0               1 0.125    2.10<span style='color: #949494;'>e</span><span style='color: #BB0000;'>-5</span>      3.58      1.11  0.793
