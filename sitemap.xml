@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://pkg.robjhyndman.com/tsfeatures/404.html</loc>
+  </url>
+  <url>
+    <loc>http://pkg.robjhyndman.com/tsfeatures/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>http://pkg.robjhyndman.com/tsfeatures/articles/tsfeatures.html</loc>
+  </url>
+  <url>
+    <loc>http://pkg.robjhyndman.com/tsfeatures/authors.html</loc>
+  </url>
+  <url>
     <loc>http://pkg.robjhyndman.com/tsfeatures/index.html</loc>
+  </url>
+  <url>
+    <loc>http://pkg.robjhyndman.com/tsfeatures/news/index.html</loc>
   </url>
   <url>
     <loc>http://pkg.robjhyndman.com/tsfeatures/reference/ac_9.html</loc>
@@ -59,6 +74,9 @@
   </url>
   <url>
     <loc>http://pkg.robjhyndman.com/tsfeatures/reference/hurst.html</loc>
+  </url>
+  <url>
+    <loc>http://pkg.robjhyndman.com/tsfeatures/reference/index.html</loc>
   </url>
   <url>
     <loc>http://pkg.robjhyndman.com/tsfeatures/reference/localsimple_taures.html</loc>
@@ -122,8 +140,5 @@
   </url>
   <url>
     <loc>http://pkg.robjhyndman.com/tsfeatures/reference/zero_proportion.html</loc>
-  </url>
-  <url>
-    <loc>http://pkg.robjhyndman.com/tsfeatures/articles/tsfeatures.html</loc>
   </url>
 </urlset>

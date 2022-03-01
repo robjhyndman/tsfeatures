@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">tsfeatures</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.2.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.2.9000</span>
       </span>
     </div>
 
@@ -49,13 +51,10 @@
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
-<li>
-  <a href="news/index.html">Changelog</a>
-</li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/robjhyndman/tsfeatures/">
+  <a href="https://github.com/robjhyndman/tsfeatures/" class="external-link">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -72,29 +71,29 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="tsfeatures" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#tsfeatures" class="anchor"></a>tsfeatures</h1></div>
+<div class="section level1">
+<div class="page-header"><h1 id="tsfeatures">tsfeatures<a class="anchor" aria-label="anchor" href="#tsfeatures"></a>
+</h1></div>
 <!-- badges: start -->
 
 <p>The R package <em>tsfeatures</em> provides methods for extracting various features from time series data.</p>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
-<p>You can install the <strong>stable</strong> version on <a href="https://cran.r-project.org/package=tsfeatures">R CRAN</a>.</p>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<p>You can install the <strong>stable</strong> version on <a href="https://cran.r-project.org/package=tsfeatures" class="external-link">R CRAN</a>.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'tsfeatures'</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<p>You can install the <strong>development</strong> version from <a href="https://github.com/robjhyndman/tsfeatures">Github</a> with:</p>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">'tsfeatures'</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<p>You can install the <strong>development</strong> version from <a href="https://github.com/robjhyndman/tsfeatures" class="external-link">Github</a> with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"robjhyndman/tsfeatures"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="usage" class="section level2">
-<h2 class="hasAnchor">
-<a href="#usage" class="anchor"></a>Usage</h2>
+<div class="section level2">
+<h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
+</h2>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://pkg.robjhyndman.com/tsfeatures/">tsfeatures</a></span><span class="op">)</span>
-<span class="va">mylist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">sunspot.year</span>, <span class="va">WWWusage</span>, <span class="va">AirPassengers</span>, <span class="va">USAccDeaths</span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://pkg.robjhyndman.com/tsfeatures/" class="external-link">tsfeatures</a></span><span class="op">)</span>
+<span class="va">mylist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">sunspot.year</span>, <span class="va">WWWusage</span>, <span class="va">AirPassengers</span>, <span class="va">USAccDeaths</span><span class="op">)</span>
 <span class="va">myfeatures</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/tsfeatures.html">tsfeatures</a></span><span class="op">(</span><span class="va">mylist</span><span class="op">)</span>
 <span class="va">myfeatures</span>
 <span class="co">#&gt; # A tibble: 4 x 20</span>
@@ -109,9 +108,9 @@
 <span class="co">#&gt; #   diff2_acf10 &lt;dbl&gt;, seasonal_strength &lt;dbl&gt;, peak &lt;dbl&gt;, trough &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   seas_acf1 &lt;dbl&gt;</span></code></pre></div>
 </div>
-<div id="license" class="section level2">
-<h2 class="hasAnchor">
-<a href="#license" class="anchor"></a>License</h2>
+<div class="section level2">
+<h2 id="license">License<a class="anchor" aria-label="anchor" href="#license"></a>
+</h2>
 <p>This package is free and open source software, licensed under GPL-3.</p>
 </div>
 </div>
@@ -119,60 +118,70 @@
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=tsfeatures">https://​cloud.r-project.org/​package=tsfeatures</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/robjhyndman/tsfeatures/">https://​github.com/​robjhyndman/​tsfeatures/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/robjhyndman/tsfeatures/issues/">https://​github.com/​robjhyndman/​tsfeatures/​issues/​</a>
-</li>
-</ul>
-</div>
-<div class="license">
-<h2>License</h2>
-<ul class="list-unstyled">
-<li><a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a></li>
-</ul>
-</div>
-<div class="developers">
-<h2>Developers</h2>
-<ul class="list-unstyled">
-<li>
-<a href="https://robjhyndman.com">Rob Hyndman</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-2140-5352" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>
-<a href="https://yanfei.site/">Yanfei Kang</a> <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-8769-6650" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>Pablo Montero-Manso <br><small class="roles"> Author </small>  </li>
-<li>
-<a href="https://thiyanga.netlify.com/">Thiyanga Talagala</a> <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-0656-9789" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>
-<a href="https://earo.me">Earo Wang</a> <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-6448-5260" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>
-<a href="https://yangzhuoranyang.com">Yangzhuoran Yang</a> <br><small class="roles"> Author </small>  </li>
-<li>Mitchell O'Hara-Wild <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-6729-7695" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li><a href="authors.html">All authors...</a></li>
+<li><a href="https://cloud.r-project.org/package=tsfeatures" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/robjhyndman/tsfeatures/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/robjhyndman/tsfeatures/issues/" class="external-link">Report a bug</a></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="license">
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
-<li><a href="https://cran.r-project.org/package=tsfeatures"><img src="http://www.r-pkg.org/badges/version/tsfeatures" alt="CRAN_Status_Badge"></a></li>
-<li><a href="https://cran.r-project.org/package=tsfeatures"><img src="http://cranlogs.r-pkg.org/badges/tsfeatures" alt="Downloads"></a></li>
-<li><a href="https://www.gnu.org/licenses/gpl-3.0.en.html"><img src="https://img.shields.io/badge/licence-GPL--3-blue.svg" alt="Licence"></a></li>
-<li><a href="https://github.com/robjhyndman/tsfeatures/actions"><img src="https://github.com/robjhyndman/tsfeatures/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
+<li><a href="https://www.r-project.org/Licenses/GPL-3" class="external-link">GPL-3</a></li>
 </ul>
 </div>
+
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html#citation">Citing tsfeatures</a></li>
+</ul>
 </div>
+
+<div class="developers">
+<h2 data-toc-skip>Developers</h2>
+<ul class="list-unstyled">
+<li>
+<a href="https://robjhyndman.com" class="external-link">Rob Hyndman</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-2140-5352" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>
+<a href="https://yanfei.site/" class="external-link">Yanfei Kang</a> <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-8769-6650" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Pablo Montero-Manso <br><small class="roles"> Author </small>  </li>
+<li>
+<a href="https://thiyanga.netlify.com/" class="external-link">Thiyanga Talagala</a> <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-0656-9789" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>
+<a href="https://earo.me" class="external-link">Earo Wang</a> <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-6448-5260" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>
+<a href="https://yangzhuoranyang.com" class="external-link">Yangzhuoran Yang</a> <br><small class="roles"> Author </small>  </li>
+<li>Mitchell O'Hara-Wild <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-6729-7695" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li><a href="authors.html">More about authors...</a></li>
+</ul>
+</div>
+
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://cran.r-project.org/package=tsfeatures" class="external-link"><img src="http://www.r-pkg.org/badges/version/tsfeatures" alt="CRAN_Status_Badge"></a></li>
+<li><a href="https://cran.r-project.org/package=tsfeatures" class="external-link"><img src="http://cranlogs.r-pkg.org/badges/tsfeatures" alt="Downloads"></a></li>
+<li><a href="https://www.gnu.org/licenses/gpl-3.0.en.html" class="external-link"><img src="https://img.shields.io/badge/licence-GPL--3-blue.svg" alt="Licence"></a></li>
+<li><a href="https://github.com/robjhyndman/tsfeatures/actions" class="external-link"><img src="https://github.com/robjhyndman/tsfeatures/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
+</ul>
+</div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="https://robjhyndman.com">Rob Hyndman</a>, <a href="https://yanfei.site/">Yanfei Kang</a>, Pablo Montero-Manso, <a href="https://thiyanga.netlify.com/">Thiyanga Talagala</a>, <a href="https://earo.me">Earo Wang</a>, <a href="https://yangzhuoranyang.com">Yangzhuoran Yang</a>, Mitchell O'Hara-Wild.</p>
+  <p></p>
+<p>Developed by <a href="https://robjhyndman.com" class="external-link">Rob Hyndman</a>, <a href="https://yanfei.site/" class="external-link">Yanfei Kang</a>, Pablo Montero-Manso, <a href="https://thiyanga.netlify.com/" class="external-link">Thiyanga Talagala</a>, <a href="https://earo.me" class="external-link">Earo Wang</a>, <a href="https://yangzhuoranyang.com" class="external-link">Yangzhuoran Yang</a>, Mitchell O’Hara-Wild.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -180,6 +189,8 @@
 
   
 
+
+  
 
   </body>
 </html>
