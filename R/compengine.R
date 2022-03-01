@@ -562,7 +562,10 @@ spreadrandomlocal_meantaul <- function(y, l = 50) {
   if (!is.numeric(l)) stop("Unknown specifier `l`")
   numSegs <- 100
   N <- length(y)
-  if (l > 0.9 * N) stop("This time series is too short. Specify proper segment length in `l`")
+  if (l > 0.9 * N) {
+    warning("This time series is too short. Specify proper segment length in `l`")
+    return(NA_real_)
+  }
 
   qs <- numeric(numSegs)
 
