@@ -61,17 +61,20 @@ spectral density, estimated using an AR model.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">entropy</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">entropy</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>a univariate time series</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A non-negative real value for the spectral entropy \(H_s(x_t)\).</p>
+    
+
+<p>A non-negative real value for the spectral entropy \(H_s(x_t)\).</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -105,13 +108,13 @@ Available at <a href="http://jmlr.org/proceedings/papers/v28/goerg13.html" class
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">entropy</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> entropy </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       1 </span>
-<span class="r-in"><span class="fu">entropy</span><span class="op">(</span><span class="va">lynx</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">entropy</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  entropy </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 0.999289 </span>
+<span class="r-in"><span><span class="fu">entropy</span><span class="op">(</span><span class="va">lynx</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   entropy </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 0.7331515 </span>
-<span class="r-in"><span class="fu">entropy</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Trig.html" class="external-link">sin</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">20</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">entropy</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Trig.html" class="external-link">sin</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">20</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     entropy </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 0.003481715 </span>
 </code></pre></div>
@@ -128,7 +131,7 @@ Available at <a href="http://jmlr.org/proceedings/papers/v28/goerg13.html" class
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

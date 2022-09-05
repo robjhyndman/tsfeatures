@@ -75,7 +75,7 @@
       <h1 data-toc-skip>Introduction to the tsfeatures package</h1>
                         <h4 data-toc-skip class="author">Yangzhuoran Yang and Rob J Hyndman</h4>
             
-            <h4 data-toc-skip class="date">2022-03-01</h4>
+            <h4 data-toc-skip class="date">2022-09-05</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/robjhyndman/tsfeatures/blob/HEAD/vignettes/tsfeatures.Rmd" class="external-link"><code>vignettes/tsfeatures.Rmd</code></a></small>
       <div class="hidden name"><code>tsfeatures.Rmd</code></div>
@@ -93,44 +93,45 @@
 </h3>
 <p>The <strong>stable</strong> version on R CRAN and can be installed in the usual way:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"tsfeatures"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"tsfeatures"</span><span class="op">)</span></span></code></pre></div>
 <p>You can install the <strong>development</strong> version from <a href="https://github.com/robjhyndman/tsfeatures" class="external-link">Github</a> with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"robjhyndman/tsfeatures"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"robjhyndman/tsfeatures"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
 </h3>
 <p>The function <code><a href="../reference/tsfeatures.html">tsfeatures()</a></code> computes a tibble of time series features from a list of time series.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mylist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">sunspot.year</span>, <span class="va">WWWusage</span>, <span class="va">AirPassengers</span>, <span class="va">USAccDeaths</span><span class="op">)</span>
-<span class="fu"><a href="../reference/tsfeatures.html">tsfeatures</a></span><span class="op">(</span><span class="va">mylist</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 20</span></span>
-<span class="co">#&gt;   frequency nperiods seasonal_period trend      spike linearity curvature e_acf1</span>
-<span class="co">#&gt;       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>         1        0               1 0.125    2.10<span style="color: #949494;">e</span><span style="color: #BB0000;">-5</span>      3.58      1.11  0.793</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>         1        0               1 0.985    3.01<span style="color: #949494;">e</span><span style="color: #BB0000;">-8</span>      4.45      1.10  0.774</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>        12        1              12 0.991    1.46<span style="color: #949494;">e</span><span style="color: #BB0000;">-8</span>     11.0       1.09  0.509</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>        12        1              12 0.802    9.15<span style="color: #949494;">e</span><span style="color: #BB0000;">-7</span>     -<span style="color: #BB0000;">2.12</span>      2.85  0.258</span>
-<span class="co">#&gt; <span style="color: #949494;"># … with 12 more variables: e_acf10 &lt;dbl&gt;, entropy &lt;dbl&gt;, x_acf1 &lt;dbl&gt;,</span></span>
-<span class="co">#&gt; <span style="color: #949494;">#   x_acf10 &lt;dbl&gt;, diff1_acf1 &lt;dbl&gt;, diff1_acf10 &lt;dbl&gt;, diff2_acf1 &lt;dbl&gt;,</span></span>
-<span class="co">#&gt; <span style="color: #949494;">#   diff2_acf10 &lt;dbl&gt;, seasonal_strength &lt;dbl&gt;, peak &lt;dbl&gt;, trough &lt;dbl&gt;,</span></span>
-<span class="co">#&gt; <span style="color: #949494;">#   seas_acf1 &lt;dbl&gt;</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">mylist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">sunspot.year</span>, <span class="va">WWWusage</span>, <span class="va">AirPassengers</span>, <span class="va">USAccDeaths</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/tsfeatures.html">tsfeatures</a></span><span class="op">(</span><span class="va">mylist</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 20</span></span></span>
+<span><span class="co">#&gt;   frequency nperi…¹ seaso…² trend   spike linea…³ curva…⁴ e_acf1 e_acf10 entropy</span></span>
+<span><span class="co">#&gt;       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>         1       0       1 0.125 2.10<span style="color: #949494;">e</span><span style="color: #BB0000;">-5</span>    3.58    1.11  0.793   2.21    0.702</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>         1       0       1 0.985 3.01<span style="color: #949494;">e</span><span style="color: #BB0000;">-8</span>    4.45    1.10  0.774   0.983   0.461</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>        12       1      12 0.991 1.46<span style="color: #949494;">e</span><span style="color: #BB0000;">-8</span>   11.0     1.09  0.509   0.930   0.296</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>        12       1      12 0.802 9.15<span style="color: #949494;">e</span><span style="color: #BB0000;">-7</span>   -<span style="color: #BB0000;">2.12</span>    2.85  0.258   0.341   0.548</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 10 more variables: x_acf1 &lt;dbl&gt;, x_acf10 &lt;dbl&gt;, diff1_acf1 &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   diff1_acf10 &lt;dbl&gt;, diff2_acf1 &lt;dbl&gt;, diff2_acf10 &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   seasonal_strength &lt;dbl&gt;, peak &lt;dbl&gt;, trough &lt;dbl&gt;, seas_acf1 &lt;dbl&gt;, and</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   abbreviated variable names ¹​nperiods, ²​seasonal_period, ³​linearity,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ⁴​curvature</span></span></span></code></pre></div>
 <p>The default functions that <code>tsfeatures</code> uses to compute features are <code>frequency</code>, <code>stl_features</code>, <code>entropy</code> and <code>acf_features</code>. Each of them can produce one or more features. Detailed information of features included in the <em>tsfeatures</em> package are described below. Functions from other packages, or user-defined functions, may also be used.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Function from outside of tsfeatures package being used</span>
-<span class="va">is.monthly</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span>
-  <span class="fu"><a href="https://rdrr.io/r/stats/time.html" class="external-link">frequency</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">==</span> <span class="fl">12</span>
-<span class="op">}</span>
-<span class="fu"><a href="../reference/tsfeatures.html">tsfeatures</a></span><span class="op">(</span><span class="va">mylist</span>, features <span class="op">=</span> <span class="st">"is.monthly"</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 1</span></span>
-<span class="co">#&gt;   is.monthly</span>
-<span class="co">#&gt;        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>          0</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>          0</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>          1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>          1</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Function from outside of tsfeatures package being used</span></span>
+<span><span class="va">is.monthly</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/time.html" class="external-link">frequency</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">==</span> <span class="fl">12</span></span>
+<span><span class="op">}</span></span>
+<span><span class="fu"><a href="../reference/tsfeatures.html">tsfeatures</a></span><span class="op">(</span><span class="va">mylist</span>, features <span class="op">=</span> <span class="st">"is.monthly"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 1</span></span></span>
+<span><span class="co">#&gt;   is.monthly</span></span>
+<span><span class="co">#&gt;        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>          0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>          0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>          1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>          1</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="list-of-features">List of features<a class="anchor" aria-label="anchor" href="#list-of-features"></a>
@@ -212,73 +213,73 @@
   -\int^\pi_{-\pi}\hat{f}(\lambda)\log\hat{f}(\lambda) d\lambda,
 \]</span> where <span class="math inline">\(\hat{f}(\lambda)\)</span> is an estimate of the spectral density of the data. This measures the “forecastability” of a time series, where low values indicate a high signal-to-noise ratio, and large values occur when a series is difficult to forecast.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/entropy.html">entropy</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span>
-<span class="co">#&gt;   entropy </span>
-<span class="co">#&gt; 0.2961049</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/entropy.html">entropy</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   entropy </span></span>
+<span><span class="co">#&gt; 0.2961049</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="lumpiness_stability">lumpiness and stability<a class="anchor" aria-label="anchor" href="#lumpiness_stability"></a>
 </h4>
 <p><code>Stability</code> and <code>lumpiness</code> are two time series features based on tiled (non-overlapping) windows. Means or variances are produced for all tiled windows. Then <code>stability</code> is the variance of the means, while <code>lumpiness</code> is the variance of the variances.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/lumpiness.html">stability</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span>
-<span class="co">#&gt; stability </span>
-<span class="co">#&gt; 0.9330704</span>
-<span class="fu"><a href="../reference/lumpiness.html">lumpiness</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span>
-<span class="co">#&gt;  lumpiness </span>
-<span class="co">#&gt; 0.01924803</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/lumpiness.html">stability</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span></span>
+<span><span class="co">#&gt; stability </span></span>
+<span><span class="co">#&gt; 0.9330704</span></span>
+<span><span class="fu"><a href="../reference/lumpiness.html">lumpiness</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span></span>
+<span><span class="co">#&gt;  lumpiness </span></span>
+<span><span class="co">#&gt; 0.01924803</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="max_shift">max_level_shift, max_var_shift and max_kl_shift<a class="anchor" aria-label="anchor" href="#max_shift"></a>
 </h4>
 <p>These three features compute features of a time series based on sliding (overlapping) windows. <code>max_level_shift</code> finds the largest mean shift between two consecutive windows. <code>max_var_shift</code> finds the largest variance shift between two consecutive windows. <code>max_kl_shift</code> finds the largest shift in Kulback-Leibler divergence between two consecutive windows. Each feature returns a vector of 2 values: the size of the shift, and the time index of the shift.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/max_level_shift.html">max_level_shift</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span>
-<span class="co">#&gt;  max_level_shift time_level_shift </span>
-<span class="co">#&gt;             54.5            117.0</span>
-<span class="fu"><a href="../reference/max_level_shift.html">max_var_shift</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span>
-<span class="co">#&gt;  max_var_shift time_var_shift </span>
-<span class="co">#&gt;       2342.152        107.000</span>
-<span class="fu"><a href="../reference/max_level_shift.html">max_kl_shift</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span>
-<span class="co">#&gt;  max_kl_shift time_kl_shift </span>
-<span class="co">#&gt;     0.1210444   122.0000000</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/max_level_shift.html">max_level_shift</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span></span>
+<span><span class="co">#&gt;  max_level_shift time_level_shift </span></span>
+<span><span class="co">#&gt;             54.5            117.0</span></span>
+<span><span class="fu"><a href="../reference/max_level_shift.html">max_var_shift</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span></span>
+<span><span class="co">#&gt;  max_var_shift time_var_shift </span></span>
+<span><span class="co">#&gt;       2342.152        107.000</span></span>
+<span><span class="fu"><a href="../reference/max_level_shift.html">max_kl_shift</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span></span>
+<span><span class="co">#&gt;  max_kl_shift time_kl_shift </span></span>
+<span><span class="co">#&gt;     0.1210444   122.0000000</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="crossing_points">crossing_points<a class="anchor" aria-label="anchor" href="#crossing_points"></a>
 </h4>
 <p><code>crossing points</code> are defined as the number of times a time series crosses the median line.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/crossing_points.html">crossing_points</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span>
-<span class="co">#&gt; crossing_points </span>
-<span class="co">#&gt;               7</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/crossing_points.html">crossing_points</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span></span>
+<span><span class="co">#&gt; crossing_points </span></span>
+<span><span class="co">#&gt;               7</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="flat_spots">flat_spots<a class="anchor" aria-label="anchor" href="#flat_spots"></a>
 </h4>
 <p><code>flat_spots</code> are computed by dividing the sample space of a time series into ten equal-sized intervals, and computing the maximum run length within any single interval.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/flat_spots.html">flat_spots</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span>
-<span class="co">#&gt; flat_spots </span>
-<span class="co">#&gt;         18</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/flat_spots.html">flat_spots</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span></span>
+<span><span class="co">#&gt; flat_spots </span></span>
+<span><span class="co">#&gt;         18</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="hurst">hurst<a class="anchor" aria-label="anchor" href="#hurst"></a>
 </h4>
 <p>We use a measure of the long-term memory of a time series (<code>hurst</code>), computed as 0.5 plus the maximum likelihood estimate of the fractional differencing order <span class="math inline">\(d\)</span> given by Haslett &amp; Raftery (<a href="#ref">1989</a>). We add 0.5 to make it consistent with the Hurst coefficient. Note that the fractal dimension can be estimated as <span class="math inline">\(D = 2 - \text{hurst}\)</span>.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/hurst.html">hurst</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span>
-<span class="co">#&gt;     hurst </span>
-<span class="co">#&gt; 0.9992466</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/hurst.html">hurst</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span></span>
+<span><span class="co">#&gt;     hurst </span></span>
+<span><span class="co">#&gt; 0.9992466</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="unitroot">unitroot_kpss and unitroot_pp<a class="anchor" aria-label="anchor" href="#unitroot"></a>
 </h4>
 <p><code>unitroot_kpss</code> is a vector comprising the statistic for the KPSS unit root test with linear trend and lag one, and <code>unitroot_pp</code> is the statistic for the “Z-alpha” version of PP unit root test with constant trend and lag one.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/unitroot_kpss.html">unitroot_kpss</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span>
-<span class="co">#&gt; [1] 2.739474</span>
-<span class="fu"><a href="../reference/unitroot_kpss.html">unitroot_pp</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span>
-<span class="co">#&gt; [1] -6.565597</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/unitroot_kpss.html">unitroot_kpss</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 2.739474</span></span>
+<span><span class="fu"><a href="../reference/unitroot_kpss.html">unitroot_pp</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] -6.565597</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="stl_features">stl_features<a class="anchor" aria-label="anchor" href="#stl_features"></a>
@@ -296,45 +297,45 @@
 <p><code>linearity</code> and <code>curvature</code> measures the linearity and curvature of a time series calculated based on the coefficients of an orthogonal quadratic regression.</p>
 <p>We compute the autocorrelation function of <span class="math inline">\(e_t\)</span>, and <code>e_acf1</code> and <code>e_acf10</code> contain the first autocorrelation coefficient and the sum of the first ten squared autocorrelation coefficients.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/stl_features.html">stl_features</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span>
-<span class="co">#&gt;          nperiods   seasonal_period             trend             spike </span>
-<span class="co">#&gt;         1.0000000        12.0000000         0.9909550         3.0277699 </span>
-<span class="co">#&gt;         linearity         curvature            e_acf1           e_acf10 </span>
-<span class="co">#&gt;      1325.3317266       131.0646804         0.5091751         0.9303664 </span>
-<span class="co">#&gt; seasonal_strength              peak            trough </span>
-<span class="co">#&gt;         0.9406725         7.0000000        11.0000000</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/stl_features.html">stl_features</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span></span>
+<span><span class="co">#&gt;          nperiods   seasonal_period             trend             spike </span></span>
+<span><span class="co">#&gt;         1.0000000        12.0000000         0.9909550         3.0277699 </span></span>
+<span><span class="co">#&gt;         linearity         curvature            e_acf1           e_acf10 </span></span>
+<span><span class="co">#&gt;      1325.3317266       131.0646804         0.5091751         0.9303664 </span></span>
+<span><span class="co">#&gt; seasonal_strength              peak            trough </span></span>
+<span><span class="co">#&gt;         0.9406725         7.0000000        11.0000000</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="acf_features">acf_features<a class="anchor" aria-label="anchor" href="#acf_features"></a>
 </h4>
 <p>We compute the autocorrelation function of the series, the differenced series, and the twice-differenced series. <code>acf_features</code> produces a vector comprising the first autocorrelation coefficient in each case, and the sum of squares of the first 10 autocorrelation coefficients in each case.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/acf_features.html">acf_features</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span>
-<span class="co">#&gt;      x_acf1     x_acf10  diff1_acf1 diff1_acf10  diff2_acf1 diff2_acf10 </span>
-<span class="co">#&gt;   0.9480473   5.6700871   0.3028553   0.4088376  -0.1910059   0.2507803 </span>
-<span class="co">#&gt;   seas_acf1 </span>
-<span class="co">#&gt;   0.7603950</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/acf_features.html">acf_features</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span></span>
+<span><span class="co">#&gt;      x_acf1     x_acf10  diff1_acf1 diff1_acf10  diff2_acf1 diff2_acf10 </span></span>
+<span><span class="co">#&gt;   0.9480473   5.6700871   0.3028553   0.4088376  -0.1910059   0.2507803 </span></span>
+<span><span class="co">#&gt;   seas_acf1 </span></span>
+<span><span class="co">#&gt;   0.7603950</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="pacf_features">pacf_features<a class="anchor" aria-label="anchor" href="#pacf_features"></a>
 </h4>
 <p>We compute the partial autocorrelation function of the series, the differenced series, and the second-order differenced series. Then <code>pacf_features</code> produces a vector comprising the sum of squares of the first 5 partial autocorrelation coefficients in each case.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/pacf_features.html">pacf_features</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span>
-<span class="co">#&gt;      x_pacf5 diff1x_pacf5 diff2x_pacf5    seas_pacf </span>
-<span class="co">#&gt;    0.9670971    0.2122454    0.2476615   -0.1354311</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/pacf_features.html">pacf_features</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span></span>
+<span><span class="co">#&gt;      x_pacf5 diff1x_pacf5 diff2x_pacf5    seas_pacf </span></span>
+<span><span class="co">#&gt;    0.9670971    0.2122454    0.2476615   -0.1354311</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="holt_hw">holt_parameters and hw_parameters<a class="anchor" aria-label="anchor" href="#holt_hw"></a>
 </h4>
 <p><code>holt_parameters</code> Estimate the smoothing parameter for the level-alpha and the smoothing parameter for the trend-beta of Holt’s linear trend method. <code>hw_parameters</code> considers additive seasonal trend: ETS(A,A,A) model, returning a vector of 3 values: alpha, beta and gamma.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/holt_parameters.html">holt_parameters</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span>
-<span class="co">#&gt;        alpha         beta </span>
-<span class="co">#&gt; 0.9998999495 0.0001000188</span>
-<span class="fu"><a href="../reference/holt_parameters.html">hw_parameters</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span>
-<span class="co">#&gt;        alpha         beta        gamma </span>
-<span class="co">#&gt; 0.9934803629 0.0001911792 0.0005800325</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/holt_parameters.html">holt_parameters</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span></span>
+<span><span class="co">#&gt;        alpha         beta </span></span>
+<span><span class="co">#&gt; 0.9998999495 0.0001000188</span></span>
+<span><span class="fu"><a href="../reference/holt_parameters.html">hw_parameters</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span></span>
+<span><span class="co">#&gt;        alpha         beta        gamma </span></span>
+<span><span class="co">#&gt; 0.9934803629 0.0001911792 0.0005800325</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="heterogeneity">heterogeneity<a class="anchor" aria-label="anchor" href="#heterogeneity"></a>
@@ -352,27 +353,27 @@
 </ul>
 <p>The statistics obtained from <span class="math inline">\(\{x^2_t\}\)</span> are the ARCH effects, while those from <span class="math inline">\(\{z^2_t\}\)</span> are the GARCH effects. Note that the two <span class="math inline">\(R^2\)</span> values are used in the Lagrange-multiplier test of Engle (<a href="#ref">1982</a>), and the sum of squared autocorrelations are used in the Ljung-Box test proposed by Ljung &amp; Box (<a href="#ref">1978</a>).</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/heterogeneity.html">heterogeneity</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span>
-<span class="co">#&gt;  arch_acf garch_acf   arch_r2  garch_r2 </span>
-<span class="co">#&gt; 0.2295944 0.2277382 0.2106310 0.2101623</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/heterogeneity.html">heterogeneity</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span></span>
+<span><span class="co">#&gt;  arch_acf garch_acf   arch_r2  garch_r2 </span></span>
+<span><span class="co">#&gt; 0.2295944 0.2277382 0.2106310 0.2101623</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="nonlinearity">nonlinearity<a class="anchor" aria-label="anchor" href="#nonlinearity"></a>
 </h4>
 <p>The <code>nonlinearity</code> coefficient is computed using a modification of the statistic used in Teräsvirta’s nonlinearity test. Teräsvirta’s test uses a statistic <span class="math inline">\(X^2=T\log(\text{SSE}1/\text{SSE}0)\)</span> where SSE1 and SSE0 are the sum of squared residuals from a nonlinear and linear autoregression respectively. This is non-ergodic, so instead, we define it as <span class="math inline">\(10X^2/T\)</span> which will converge to a value indicating the extent of nonlinearity as <span class="math inline">\(T\rightarrow\infty\)</span>. This takes large values when the series is nonlinear, and values around 0 when the series is linear.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/nonlinearity.html">nonlinearity</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span>
-<span class="co">#&gt; nonlinearity </span>
-<span class="co">#&gt;    0.4238969</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/nonlinearity.html">nonlinearity</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span></span>
+<span><span class="co">#&gt; nonlinearity </span></span>
+<span><span class="co">#&gt;    0.4238969</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="arch_stat">arch_stat<a class="anchor" aria-label="anchor" href="#arch_stat"></a>
 </h4>
 <p><code>arch_stat</code> Computes a statistic based on the Lagrange Multiplier (LM) test of Engle (<a href="#ref">1982</a>) for autoregressive conditional heteroscedasticity (ARCH). The statistic returned is the <span class="math inline">\(R^2\)</span> value of an autoregressive model of order specified as lags applied to <span class="math inline">\(x^2\)</span>.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/arch_stat.html">arch_stat</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span>
-<span class="co">#&gt;   ARCH.LM </span>
-<span class="co">#&gt; 0.9171945</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/arch_stat.html">arch_stat</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   ARCH.LM </span></span>
+<span><span class="co">#&gt; 0.9171945</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="compengine">compengine feature set<a class="anchor" aria-label="anchor" href="#compengine"></a>
@@ -380,8 +381,8 @@
 <p><code>compengine</code> calculate the features that have been used in the <a href="https://www.comp-engine.org/" class="external-link">CompEngine</a> database, using a method introduced in package <code>kctsa</code>.</p>
 <p>The features involved can be grouped as autocorrelation, prediction, stationarity, distribution, and scaling, which can be computed using <code>autocorr_features</code>, <code>pred_features</code>, <code>station_features</code>, <code>dist_features</code>, and <code>scal_features</code>.</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">comp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/compengine.html">compengine</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span>
-<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">comp</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">comp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/compengine.html">compengine</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span></span>
+<span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">comp</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left"></th>
@@ -434,11 +435,11 @@
 </tr>
 <tr class="even">
 <td align="left">spreadrandomlocal_meantaul_50</td>
-<td align="right">12.9300000</td>
+<td align="right">12.5100000</td>
 </tr>
 <tr class="odd">
 <td align="left">spreadrandomlocal_meantaul_ac2</td>
-<td align="right">38.9600000</td>
+<td align="right">38.9700000</td>
 </tr>
 <tr class="even">
 <td align="left">histogram_mode_10</td>
@@ -460,106 +461,106 @@
 </h4>
 <p><code>embed2_incircle</code> gives proportion of points inside a given circular boundary in a 2-d embedding space.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/embed2_incircle.html">embed2_incircle</a></span><span class="op">(</span><span class="va">AirPassengers</span>, boundary <span class="op">=</span> <span class="fl">1e5</span><span class="op">)</span>
-<span class="co">#&gt; [1] 0.2608696</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/embed2_incircle.html">embed2_incircle</a></span><span class="op">(</span><span class="va">AirPassengers</span>, boundary <span class="op">=</span> <span class="fl">1e5</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0.2608696</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="ac_9">ac_9<a class="anchor" aria-label="anchor" href="#ac_9"></a>
 </h4>
 <p><code>ac_9</code> is just the autocorrelation at lag 9, included here for completion and consistency.</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/ac_9.html">ac_9</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span>
-<span class="co">#&gt; [1] 0.6709483</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/ac_9.html">ac_9</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0.6709483</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="firstmin_ac">firstmin_ac<a class="anchor" aria-label="anchor" href="#firstmin_ac"></a>
 </h4>
 <p><code>firstmin_ac</code> returns the time of first minimum in the autocorrelation function.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/firstmin_ac.html">firstmin_ac</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span>
-<span class="co">#&gt; [1] 8</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/firstmin_ac.html">firstmin_ac</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 8</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="firstzero_ac">firstzero_ac<a class="anchor" aria-label="anchor" href="#firstzero_ac"></a>
 </h4>
 <p><code>firstzero_ac</code> returns the first zero crossing of the autocorrelation function.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/firstzero_ac.html">firstzero_ac</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span>
-<span class="co">#&gt; [1] 52</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/firstzero_ac.html">firstzero_ac</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 52</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="trev_num">trev_num<a class="anchor" aria-label="anchor" href="#trev_num"></a>
 </h4>
 <p><code>trev_num</code> returns the numerator of the trev function of a time series, a normalized nonlinear autocorrelation. The time lag is set to 1.</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/trev_num.html">trev_num</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span>
-<span class="co">#&gt; [1] -4902.196</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/trev_num.html">trev_num</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] -4902.196</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="motiftwo_entro3">motiftwo_entro3<a class="anchor" aria-label="anchor" href="#motiftwo_entro3"></a>
 </h4>
 <p>Local motifs in a binary symbolization of the time series. Coarse-graining is performed. Time-series values above its mean are given 1, and those below the mean are 0. <code>motiftwo_entro3</code> returns the entropy of words in the binary alphabet of length 3.</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/motiftwo_entro3.html">motiftwo_entro3</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span>
-<span class="co">#&gt; [1] 1.130244</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/motiftwo_entro3.html">motiftwo_entro3</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 1.130244</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="binarize_mean">binarize_mean<a class="anchor" aria-label="anchor" href="#binarize_mean"></a>
 </h4>
 <p><code>binarize_mean</code> converts an input vector into a binarized version. Time-series values above its mean are given 1, and those below the mean are 0.</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="fu"><a href="../reference/binarize_mean.html">binarize_mean</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt;  num [1:144] 0 0 0 0 0 0 0 0 0 0 ...</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="fu"><a href="../reference/binarize_mean.html">binarize_mean</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt;  num [1:144] 0 0 0 0 0 0 0 0 0 0 ...</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="walker_propcross">walker_propcross<a class="anchor" aria-label="anchor" href="#walker_propcross"></a>
 </h4>
 <p>Simulates a hypothetical walker moving through the time domain. The hypothetical particle (or ‘walker’) moves in response to values of the time series at each point. The walker narrows the gap between its value and that of the time series by 10. <code>walker_propcross</code> returns the fraction of time series length that walker crosses time series.</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/walker_propcross.html">walker_propcross</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span>
-<span class="co">#&gt; [1] 0.2027972</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/walker_propcross.html">walker_propcross</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0.2027972</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="localsimple_taures">localsimple_taures<a class="anchor" aria-label="anchor" href="#localsimple_taures"></a>
 </h4>
 <p>Simple predictors using the past trainLength values of the time series to predict its next value. <code>localsimple_taures</code> returns the first zero crossing of the autocorrelation function of the residuals from this Simple local time-series forecasting.</p>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/localsimple_taures.html">localsimple_taures</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span>
-<span class="co">#&gt; [1] 2</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/localsimple_taures.html">localsimple_taures</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 2</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="sampen">sampen_first and sampenc<a class="anchor" aria-label="anchor" href="#sampen"></a>
 </h4>
 <p><code>sampen_first</code> returns the first Sample Entropy of a time series where the embedding dimension is set to 5 and the threshold is set to 0.3. <code>sampenc</code> is the underlying function to calculate the first sample entropy with optional dimension and threshold settings.</p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/sampen_first.html">sampen_first</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span>
-<span class="co">#&gt; [1] Inf</span>
-<span class="fu"><a href="../reference/sampenc.html">sampenc</a></span><span class="op">(</span><span class="va">AirPassengers</span>, M <span class="op">=</span> <span class="fl">5</span>, r <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span>
-<span class="co">#&gt; [1] Inf</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/sampen_first.html">sampen_first</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] Inf</span></span>
+<span><span class="fu"><a href="../reference/sampenc.html">sampenc</a></span><span class="op">(</span><span class="va">AirPassengers</span>, M <span class="op">=</span> <span class="fl">5</span>, r <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] Inf</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="std1st_der">std1st_der<a class="anchor" aria-label="anchor" href="#std1st_der"></a>
 </h4>
 <p><code>std1st_der</code> returns the standard deviation of the first derivative of the time series.</p>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/std1st_der.html">std1st_der</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span>
-<span class="co">#&gt; [1] 33.75428</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/std1st_der.html">std1st_der</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 33.75428</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="spreadrandomlocal_meantaul">spreadrandomlocal_meantaul<a class="anchor" aria-label="anchor" href="#spreadrandomlocal_meantaul"></a>
 </h4>
 <p>100 time-series segments of length l are selected at random from the time series and the mean of the first zero-crossings of the autocorrelation function in each segment is calculated using <code>spreadrandomlocal_meantaul</code>.</p>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/spreadrandomlocal_meantaul.html">spreadrandomlocal_meantaul</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span>
-<span class="co">#&gt; [1] 12.99</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/spreadrandomlocal_meantaul.html">spreadrandomlocal_meantaul</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 12.86</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="histogram_mode">histogram_mode<a class="anchor" aria-label="anchor" href="#histogram_mode"></a>
 </h4>
 <p><code>histogram_mode</code> measures the mode of the data vector using histograms with a given number of bins (default to 10) as suggestion.</p>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/histogram_mode.html">histogram_mode</a></span><span class="op">(</span><span class="va">AirPassengers</span>, numBins <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
-<span class="co">#&gt; [1] 125</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/histogram_mode.html">histogram_mode</a></span><span class="op">(</span><span class="va">AirPassengers</span>, numBins <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 125</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="outlierinclude_mdrmd">outlierinclude_mdrmd<a class="anchor" aria-label="anchor" href="#outlierinclude_mdrmd"></a>
@@ -569,16 +570,16 @@
 <p>At each threshold, proportion of time series points included and median are calculated, and outputs from the algorithm measure how these statistical quantities change as more extreme points are included in the calculation.</p>
 <p><code>outlierinclude_mdrmd</code> essentially returns the median of the median of range indices.</p>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/outlierinclude_mdrmd.html">outlierinclude_mdrmd</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span>
-<span class="co">#&gt; [1] 0.4166667</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/outlierinclude_mdrmd.html">outlierinclude_mdrmd</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0.4166667</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="fluctanal_prop_r1">fluctanal_prop_r1<a class="anchor" aria-label="anchor" href="#fluctanal_prop_r1"></a>
 </h4>
 <p><code>fluctanal_prop_r1</code> implements fluctuation analysis. It fits a polynomial of order 1 and then returns the range. The order of fluctuations is 2, corresponding to root mean square fluctuations.</p>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/fluctanal_prop_r1.html">fluctanal_prop_r1</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span>
-<span class="co">#&gt; [1] 0.7692308</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/fluctanal_prop_r1.html">fluctanal_prop_r1</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0.7692308</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level3">
@@ -589,35 +590,35 @@
 </h4>
 <p>Here we replicate the analysis in Hyndman, Wang &amp; Laptev (ICDM 2015). However, note that crossing_points, peak and trough are defined differently in the <em>tsfeatures</em> package than in the Hyndman et al (2015) paper. Other features are the same.</p>
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://pkg.robjhyndman.com/tsfeatures/" class="external-link">tsfeatures</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span>
-
-<span class="va">yahoo</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/yahoo_data.html">yahoo_data</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://pkg.robjhyndman.com/tsfeatures/" class="external-link">tsfeatures</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">yahoo</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/yahoo_data.html">yahoo_data</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">hwl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html" class="external-link">bind_cols</a></span><span class="op">(</span>
-         <span class="fu"><a href="../reference/tsfeatures.html">tsfeatures</a></span><span class="op">(</span><span class="va">yahoo</span>,
-           <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"acf_features"</span>,<span class="st">"entropy"</span>,<span class="st">"lumpiness"</span>,
-             <span class="st">"flat_spots"</span>,<span class="st">"crossing_points"</span><span class="op">)</span><span class="op">)</span>,
-         <span class="fu"><a href="../reference/tsfeatures.html">tsfeatures</a></span><span class="op">(</span><span class="va">yahoo</span>,<span class="st">"stl_features"</span>, s.window<span class="op">=</span><span class="st">'periodic'</span>, robust<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>,
-         <span class="fu"><a href="../reference/tsfeatures.html">tsfeatures</a></span><span class="op">(</span><span class="va">yahoo</span>, <span class="st">"max_kl_shift"</span>, width<span class="op">=</span><span class="fl">48</span><span class="op">)</span>,
-         <span class="fu"><a href="../reference/tsfeatures.html">tsfeatures</a></span><span class="op">(</span><span class="va">yahoo</span>,
-           <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mean"</span>,<span class="st">"var"</span><span class="op">)</span>, scale<span class="op">=</span><span class="cn">FALSE</span>, na.rm<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>,
-         <span class="fu"><a href="../reference/tsfeatures.html">tsfeatures</a></span><span class="op">(</span><span class="va">yahoo</span>,
-           <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"max_level_shift"</span>,<span class="st">"max_var_shift"</span><span class="op">)</span>, trim<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">mean</span>, <span class="va">var</span>, <span class="va">x_acf1</span>, <span class="va">trend</span>, <span class="va">linearity</span>, <span class="va">curvature</span>,
-         <span class="va">seasonal_strength</span>, <span class="va">peak</span>, <span class="va">trough</span>,
-         <span class="va">entropy</span>, <span class="va">lumpiness</span>, <span class="va">spike</span>, <span class="va">max_level_shift</span>, <span class="va">max_var_shift</span>, <span class="va">flat_spots</span>,
-         <span class="va">crossing_points</span>, <span class="va">max_kl_shift</span>, <span class="va">time_kl_shift</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">hwl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html" class="external-link">bind_cols</a></span><span class="op">(</span></span>
+<span>         <span class="fu"><a href="../reference/tsfeatures.html">tsfeatures</a></span><span class="op">(</span><span class="va">yahoo</span>,</span>
+<span>           <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"acf_features"</span>,<span class="st">"entropy"</span>,<span class="st">"lumpiness"</span>,</span>
+<span>             <span class="st">"flat_spots"</span>,<span class="st">"crossing_points"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>         <span class="fu"><a href="../reference/tsfeatures.html">tsfeatures</a></span><span class="op">(</span><span class="va">yahoo</span>,<span class="st">"stl_features"</span>, s.window<span class="op">=</span><span class="st">'periodic'</span>, robust<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>         <span class="fu"><a href="../reference/tsfeatures.html">tsfeatures</a></span><span class="op">(</span><span class="va">yahoo</span>, <span class="st">"max_kl_shift"</span>, width<span class="op">=</span><span class="fl">48</span><span class="op">)</span>,</span>
+<span>         <span class="fu"><a href="../reference/tsfeatures.html">tsfeatures</a></span><span class="op">(</span><span class="va">yahoo</span>,</span>
+<span>           <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mean"</span>,<span class="st">"var"</span><span class="op">)</span>, scale<span class="op">=</span><span class="cn">FALSE</span>, na.rm<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>         <span class="fu"><a href="../reference/tsfeatures.html">tsfeatures</a></span><span class="op">(</span><span class="va">yahoo</span>,</span>
+<span>           <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"max_level_shift"</span>,<span class="st">"max_var_shift"</span><span class="op">)</span>, trim<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">mean</span>, <span class="va">var</span>, <span class="va">x_acf1</span>, <span class="va">trend</span>, <span class="va">linearity</span>, <span class="va">curvature</span>,</span>
+<span>         <span class="va">seasonal_strength</span>, <span class="va">peak</span>, <span class="va">trough</span>,</span>
+<span>         <span class="va">entropy</span>, <span class="va">lumpiness</span>, <span class="va">spike</span>, <span class="va">max_level_shift</span>, <span class="va">max_var_shift</span>, <span class="va">flat_spots</span>,</span>
+<span>         <span class="va">crossing_points</span>, <span class="va">max_kl_shift</span>, <span class="va">time_kl_shift</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># 2-d Feature space</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span>
-<span class="va">hwl_pca</span> <span class="op">&lt;-</span> <span class="va">hwl</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html" class="external-link">na.omit</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html" class="external-link">prcomp</a></span><span class="op">(</span>scale<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
-<span class="va">hwl_pca</span><span class="op">$</span><span class="va">x</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">PC1</span>, y<span class="op">=</span><span class="va">PC2</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># 2-d Feature space</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
+<span><span class="va">hwl_pca</span> <span class="op">&lt;-</span> <span class="va">hwl</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html" class="external-link">na.omit</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html" class="external-link">prcomp</a></span><span class="op">(</span>scale<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">hwl_pca</span><span class="op">$</span><span class="va">x</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">PC1</span>, y<span class="op">=</span><span class="va">PC2</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="tsfeatures_files/figure-html/yahoographics-1.png" width="700" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level4">
@@ -625,52 +626,52 @@
 </h4>
 <p>Compute the features used in Kang, Hyndman &amp; Smith-Miles (IJF 2017). Note that the trend and ACF1 are computed differently for non-seasonal data in the <em>tsfeatures</em> package than in the Kang et al (2017). <code>tsfeatures</code> uses <code>mstl</code> which uses <code>supsmu</code> for the trend calculation with non-seasonal data, whereas Kang et al used a penalized regression spline computed using <code>mgcv</code> instead. Other features are the same.</p>
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://pkg.robjhyndman.com/tsfeatures/" class="external-link">tsfeatures</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://pkg.robjhyndman.com/forecast/" class="external-link">forecast</a></span><span class="op">)</span>
-
-<span class="va">M3data</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="fu">Mcomp</span><span class="fu">::</span><span class="va"><a href="http://pkg.robjhyndman.com/Mcomp/reference/M3.html" class="external-link">M3</a></span>,
-  <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
-      <span class="va">tspx</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/tsp.html" class="external-link">tsp</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">x</span><span class="op">)</span>
-      <span class="fu"><a href="https://rdrr.io/r/stats/ts.html" class="external-link">ts</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">x</span>,<span class="va">x</span><span class="op">$</span><span class="va">xx</span><span class="op">)</span>, start<span class="op">=</span><span class="va">tspx</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, frequency<span class="op">=</span><span class="va">tspx</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span>
-  <span class="op">}</span><span class="op">)</span>
-<span class="va">khs_stl</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>,<span class="va">...</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://pkg.robjhyndman.com/forecast/reference/BoxCox.lambda.html" class="external-link">BoxCox.lambda</a></span><span class="op">(</span><span class="va">x</span>, lower<span class="op">=</span><span class="fl">0</span>, upper<span class="op">=</span><span class="fl">1</span>, method<span class="op">=</span><span class="st">'loglik'</span><span class="op">)</span>
-  <span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://pkg.robjhyndman.com/forecast/reference/BoxCox.html" class="external-link">BoxCox</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">lambda</span><span class="op">)</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="../reference/stl_features.html">stl_features</a></span><span class="op">(</span><span class="va">y</span>, s.window<span class="op">=</span><span class="st">'periodic'</span>, robust<span class="op">=</span><span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span>, lambda<span class="op">=</span><span class="va">lambda</span><span class="op">)</span>
-<span class="op">}</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://pkg.robjhyndman.com/tsfeatures/" class="external-link">tsfeatures</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://pkg.robjhyndman.com/forecast/" class="external-link">forecast</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">M3data</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="fu">Mcomp</span><span class="fu">::</span><span class="va"><a href="http://pkg.robjhyndman.com/Mcomp/reference/M3.html" class="external-link">M3</a></span>,</span>
+<span>  <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span>      <span class="va">tspx</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/tsp.html" class="external-link">tsp</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">x</span><span class="op">)</span></span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/stats/ts.html" class="external-link">ts</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">x</span>,<span class="va">x</span><span class="op">$</span><span class="va">xx</span><span class="op">)</span>, start<span class="op">=</span><span class="va">tspx</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, frequency<span class="op">=</span><span class="va">tspx</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span></span>
+<span>  <span class="op">}</span><span class="op">)</span></span>
+<span><span class="va">khs_stl</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>,<span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://pkg.robjhyndman.com/forecast/reference/BoxCox.lambda.html" class="external-link">BoxCox.lambda</a></span><span class="op">(</span><span class="va">x</span>, lower<span class="op">=</span><span class="fl">0</span>, upper<span class="op">=</span><span class="fl">1</span>, method<span class="op">=</span><span class="st">'loglik'</span><span class="op">)</span></span>
+<span>  <span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://pkg.robjhyndman.com/forecast/reference/BoxCox.html" class="external-link">BoxCox</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">lambda</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="../reference/stl_features.html">stl_features</a></span><span class="op">(</span><span class="va">y</span>, s.window<span class="op">=</span><span class="st">'periodic'</span>, robust<span class="op">=</span><span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span>, lambda<span class="op">=</span><span class="va">lambda</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
 <div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">khs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html" class="external-link">bind_cols</a></span><span class="op">(</span>
-  <span class="fu"><a href="../reference/tsfeatures.html">tsfeatures</a></span><span class="op">(</span><span class="va">M3data</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"frequency"</span>, <span class="st">"entropy"</span><span class="op">)</span><span class="op">)</span>,
-  <span class="fu"><a href="../reference/tsfeatures.html">tsfeatures</a></span><span class="op">(</span><span class="va">M3data</span>, <span class="st">"khs_stl"</span>, scale<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">frequency</span>, <span class="va">entropy</span>, <span class="va">trend</span>, <span class="va">seasonal_strength</span>, <span class="va">e_acf1</span>, <span class="va">lambda</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/replace_na.html" class="external-link">replace_na</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>seasonal_strength<span class="op">=</span><span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span>
-    Frequency <span class="op">=</span> <span class="va">frequency</span>,
-    Entropy <span class="op">=</span> <span class="va">entropy</span>,
-    Trend <span class="op">=</span> <span class="va">trend</span>,
-    Season <span class="op">=</span> <span class="va">seasonal_strength</span>,
-    ACF1 <span class="op">=</span> <span class="va">e_acf1</span>,
-    Lambda <span class="op">=</span> <span class="va">lambda</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>Period <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">Frequency</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">khs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html" class="external-link">bind_cols</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="../reference/tsfeatures.html">tsfeatures</a></span><span class="op">(</span><span class="va">M3data</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"frequency"</span>, <span class="st">"entropy"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="../reference/tsfeatures.html">tsfeatures</a></span><span class="op">(</span><span class="va">M3data</span>, <span class="st">"khs_stl"</span>, scale<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">frequency</span>, <span class="va">entropy</span>, <span class="va">trend</span>, <span class="va">seasonal_strength</span>, <span class="va">e_acf1</span>, <span class="va">lambda</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/replace_na.html" class="external-link">replace_na</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>seasonal_strength<span class="op">=</span><span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span></span>
+<span>    Frequency <span class="op">=</span> <span class="va">frequency</span>,</span>
+<span>    Entropy <span class="op">=</span> <span class="va">entropy</span>,</span>
+<span>    Trend <span class="op">=</span> <span class="va">trend</span>,</span>
+<span>    Season <span class="op">=</span> <span class="va">seasonal_strength</span>,</span>
+<span>    ACF1 <span class="op">=</span> <span class="va">e_acf1</span>,</span>
+<span>    Lambda <span class="op">=</span> <span class="va">lambda</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>Period <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">Frequency</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Fig 1 of paper</span>
-<span class="va">khs</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">Period</span>, <span class="va">Entropy</span>, <span class="va">Trend</span>, <span class="va">Season</span>, <span class="va">ACF1</span>, <span class="va">Lambda</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu">GGally</span><span class="fu">::</span><span class="fu"><a href="https://ggobi.github.io/ggally/reference/ggpairs.html" class="external-link">ggpairs</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Fig 1 of paper</span></span>
+<span><span class="va">khs</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">Period</span>, <span class="va">Entropy</span>, <span class="va">Trend</span>, <span class="va">Season</span>, <span class="va">ACF1</span>, <span class="va">Lambda</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">GGally</span><span class="fu">::</span><span class="fu"><a href="https://ggobi.github.io/ggally/reference/ggpairs.html" class="external-link">ggpairs</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="tsfeatures_files/figure-html/ijf2017graphs-1.png" width="700" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
-<code class="sourceCode R">
-<span class="co"># 2-d Feature space (Top of Fig 2)</span>
-<span class="va">khs_pca</span> <span class="op">&lt;-</span> <span class="va">khs</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">Period</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html" class="external-link">prcomp</a></span><span class="op">(</span>scale<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
-<span class="va">khs_pca</span><span class="op">$</span><span class="va">x</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html" class="external-link">bind_cols</a></span><span class="op">(</span>Period<span class="op">=</span><span class="va">khs</span><span class="op">$</span><span class="va">Period</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">PC1</span>, y<span class="op">=</span><span class="va">PC2</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>col<span class="op">=</span><span class="va">Period</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span></span>
+<span><span class="co"># 2-d Feature space (Top of Fig 2)</span></span>
+<span><span class="va">khs_pca</span> <span class="op">&lt;-</span> <span class="va">khs</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">Period</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html" class="external-link">prcomp</a></span><span class="op">(</span>scale<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">khs_pca</span><span class="op">$</span><span class="va">x</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html" class="external-link">bind_cols</a></span><span class="op">(</span>Period<span class="op">=</span><span class="va">khs</span><span class="op">$</span><span class="va">Period</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">PC1</span>, y<span class="op">=</span><span class="va">PC2</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>col<span class="op">=</span><span class="va">Period</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="tsfeatures_files/figure-html/ijf2017graphs-2.png" width="700" style="display: block; margin: auto;"></p>
 </div>
 </div>
@@ -713,7 +714,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>

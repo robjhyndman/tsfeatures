@@ -75,38 +75,37 @@
 <div class="page-header"><h1 id="tsfeatures">tsfeatures<a class="anchor" aria-label="anchor" href="#tsfeatures"></a>
 </h1></div>
 <!-- badges: start -->
-
 <p>The R package <em>tsfeatures</em> provides methods for extracting various features from time series data.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <p>You can install the <strong>stable</strong> version on <a href="https://cran.r-project.org/package=tsfeatures" class="external-link">R CRAN</a>.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">'tsfeatures'</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">'tsfeatures'</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>You can install the <strong>development</strong> version from <a href="https://github.com/robjhyndman/tsfeatures" class="external-link">Github</a> with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"robjhyndman/tsfeatures"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"robjhyndman/tsfeatures"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
 </h2>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://pkg.robjhyndman.com/tsfeatures/" class="external-link">tsfeatures</a></span><span class="op">)</span>
-<span class="va">mylist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">sunspot.year</span>, <span class="va">WWWusage</span>, <span class="va">AirPassengers</span>, <span class="va">USAccDeaths</span><span class="op">)</span>
-<span class="va">myfeatures</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/tsfeatures.html">tsfeatures</a></span><span class="op">(</span><span class="va">mylist</span><span class="op">)</span>
-<span class="va">myfeatures</span>
-<span class="co">#&gt; # A tibble: 4 x 20</span>
-<span class="co">#&gt;   frequency nperiods seasonal_period trend   spike linearity curvature e_acf1</span>
-<span class="co">#&gt;       &lt;dbl&gt;    &lt;dbl&gt;           &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;</span>
-<span class="co">#&gt; 1         1        0               1 0.125 2.10e-5      3.58      1.11  0.793</span>
-<span class="co">#&gt; 2         1        0               1 0.985 3.01e-8      4.45      1.10  0.774</span>
-<span class="co">#&gt; 3        12        1              12 0.989 2.12e-8     11.0       1.10  0.552</span>
-<span class="co">#&gt; 4        12        1              12 0.796 9.67e-7     -2.13      2.85  0.250</span>
-<span class="co">#&gt; # … with 12 more variables: e_acf10 &lt;dbl&gt;, entropy &lt;dbl&gt;, x_acf1 &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   x_acf10 &lt;dbl&gt;, diff1_acf1 &lt;dbl&gt;, diff1_acf10 &lt;dbl&gt;, diff2_acf1 &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   diff2_acf10 &lt;dbl&gt;, seasonal_strength &lt;dbl&gt;, peak &lt;dbl&gt;, trough &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   seas_acf1 &lt;dbl&gt;</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://pkg.robjhyndman.com/tsfeatures/" class="external-link">tsfeatures</a></span><span class="op">)</span></span>
+<span><span class="va">mylist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">sunspot.year</span>, <span class="va">WWWusage</span>, <span class="va">AirPassengers</span>, <span class="va">USAccDeaths</span><span class="op">)</span></span>
+<span><span class="va">myfeatures</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/tsfeatures.html">tsfeatures</a></span><span class="op">(</span><span class="va">mylist</span><span class="op">)</span></span>
+<span><span class="va">myfeatures</span></span>
+<span><span class="co">#&gt; # A tibble: 4 x 20</span></span>
+<span><span class="co">#&gt;   frequency nperiods seasonal_period trend   spike linearity curvature e_acf1</span></span>
+<span><span class="co">#&gt;       &lt;dbl&gt;    &lt;dbl&gt;           &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1         1        0               1 0.125 2.10e-5      3.58      1.11  0.793</span></span>
+<span><span class="co">#&gt; 2         1        0               1 0.985 3.01e-8      4.45      1.10  0.774</span></span>
+<span><span class="co">#&gt; 3        12        1              12 0.989 2.12e-8     11.0       1.10  0.552</span></span>
+<span><span class="co">#&gt; 4        12        1              12 0.796 9.67e-7     -2.13      2.85  0.250</span></span>
+<span><span class="co">#&gt; # … with 12 more variables: e_acf10 &lt;dbl&gt;, entropy &lt;dbl&gt;, x_acf1 &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   x_acf10 &lt;dbl&gt;, diff1_acf1 &lt;dbl&gt;, diff1_acf10 &lt;dbl&gt;, diff2_acf1 &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   diff2_acf10 &lt;dbl&gt;, seasonal_strength &lt;dbl&gt;, peak &lt;dbl&gt;, trough &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   seas_acf1 &lt;dbl&gt;</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="license">License<a class="anchor" aria-label="anchor" href="#license"></a>
@@ -181,7 +180,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>

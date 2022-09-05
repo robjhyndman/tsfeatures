@@ -61,24 +61,31 @@ predict its next value.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">localsimple_taures</span><span class="op">(</span><span class="va">y</span>, forecastMeth <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mean"</span>, <span class="st">"lfit"</span><span class="op">)</span>, trainLength <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">localsimple_taures</span><span class="op">(</span><span class="va">y</span>, forecastMeth <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mean"</span>, <span class="st">"lfit"</span><span class="op">)</span>, trainLength <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>y</dt>
 <dd><p>the input time series</p></dd>
+
+
 <dt>forecastMeth</dt>
 <dd><p>the forecasting method, default to <code>mean</code>.
 <code>mean</code>: local mean prediction using the past trainLength time-series values.
 <code>lfit</code>: local linear prediction using the past trainLength time-series values.</p></dd>
+
+
 <dt>trainLength</dt>
 <dd><p>the number of time-series values to use to forecast the next value.
 Default to 1 when using method <code>mean</code> and 3 when using method <code>lfit</code>.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>The first zero crossing of the autocorrelation function of the residuals</p>
+    
+
+<p>The first zero crossing of the autocorrelation function of the residuals</p>
     </div>
 
   </div>
@@ -93,7 +100,7 @@ Default to 1 when using method <code>mean</code> and 3 when using method <code>l
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

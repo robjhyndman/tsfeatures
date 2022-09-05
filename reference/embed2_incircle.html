@@ -59,25 +59,32 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">embed2_incircle</span><span class="op">(</span>
-  <span class="va">y</span>,
-  boundary <span class="op">=</span> <span class="cn">NULL</span>,
-  acfv <span class="op">=</span> <span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/acf.html" class="external-link">acf</a></span><span class="op">(</span><span class="va">y</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span>, plot <span class="op">=</span> <span class="cn">FALSE</span>, na.action <span class="op">=</span> <span class="va">na.pass</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">embed2_incircle</span><span class="op">(</span></span>
+<span>  <span class="va">y</span>,</span>
+<span>  boundary <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  acfv <span class="op">=</span> <span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/acf.html" class="external-link">acf</a></span><span class="op">(</span><span class="va">y</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span>, plot <span class="op">=</span> <span class="cn">FALSE</span>, na.action <span class="op">=</span> <span class="va">na.pass</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>y</dt>
 <dd><p>the input time series</p></dd>
+
+
 <dt>boundary</dt>
 <dd><p>the given circular boundary, setting to 1 or 2 in CompEngine. Default to 1.</p></dd>
+
+
 <dt>acfv</dt>
 <dd><p>vector of autocorrelation, if exist, used to avoid repeated computation.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>the proportion of points inside a given circular boundary</p>
+    
+
+<p>the proportion of points inside a given circular boundary</p>
     </div>
     <div id="references">
     <h2>References</h2>
@@ -101,7 +108,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>
