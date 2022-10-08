@@ -36,10 +36,10 @@
 #' @export
 
 entropy <- function(x) {
-  #spec <- spectrum(x, plot = FALSE, n.freq = ceiling(length(x)/2 + 1), ...) 
-  spec <- try(stats::spec.ar(na.contiguous(x), plot=FALSE, method='burg', 
+  #spec <- spectrum(x, plot = FALSE, n.freq = ceiling(length(x)/2 + 1), ...)
+  spec <- try(stats::spec.ar(na.contiguous(x), plot=FALSE, method='burg',
                       n.freq = ceiling(length(x)/2 + 1)))
-  if (class(spec) == "try-error") {
+  if ("try-error" %in% class(spec)) {
     entropy <- NA
   } else {
     fx <- c(rev(spec$spec[-1]),spec$spec)/ length(x)

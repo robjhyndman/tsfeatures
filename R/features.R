@@ -69,7 +69,7 @@ max_level_shift <- function(x, width = ifelse(frequency(x) > 1,
                               frequency(x), 10
                             )) {
   suppressWarnings(rollmean <- try(RcppRoll::roll_mean(x, width, na.rm = TRUE), silent = TRUE))
-  if (class(rollmean) == "try-error") {
+  if ("try-error" %in% class(rollmean)) {
     maxmeans <- NA_real_
     maxidx <- NA_real_
   } else {
@@ -97,7 +97,7 @@ max_var_shift <- function(x, width = ifelse(frequency(x) > 1,
                             frequency(x), 10
                           )) {
   suppressWarnings(rollvar <- try(RcppRoll::roll_var(x, width, na.rm = TRUE), silent = TRUE))
-  if (class(rollvar) == "try-error") {
+  if ("try-error" %in% class(rollvar)) {
     maxvar <- NA_real_
     maxidx <- NA_real_
   } else {
@@ -199,7 +199,7 @@ flat_spots <- function(x) {
   cutx <- try(cut(x, breaks = 10, include.lowest = TRUE, labels = FALSE),
     silent = TRUE
   )
-  if (class(cutx) == "try-error") {
+  if ("try-error" %in% class(cutx)) {
     fspots <- NA
   } else {
     rlex <- rle(cutx)
