@@ -1,3 +1,5 @@
+# tsfeatures (development version)
+
 # tsfeatures 1.1
 
 * Added zero_proportion
