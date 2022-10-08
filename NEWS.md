@@ -1,6 +1,10 @@
-# tsfeatures (development version)
+# tsfeatures 1.1
 
-## Bug fixes
+* Added zero_proportion
+* Replaced deprecated multiprocess
+* Bug fixes and documentation improvements
+
+# tsfeatures 1.0.2
 
 * Better handling of perfect fits in `arch_stat()`
 
