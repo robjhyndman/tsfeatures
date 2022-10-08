@@ -3,7 +3,7 @@ pkgdown: 2.0.6
 pkgdown_sha: ~
 articles:
   tsfeatures: tsfeatures.html
-last_built: 2022-10-08T06:07Z
+last_built: 2022-10-08T22:52Z
 urls:
   reference: http://pkg.robjhyndman.com/tsfeatures/reference
   article: http://pkg.robjhyndman.com/tsfeatures/articles
