@@ -496,7 +496,7 @@ khs_pca$x %>%
 
 [Barbour, A. J., & Parker, R. L. (2014). psd: Adaptive, sine multitaper power spectral density estimation for R. Computers & Geosciences, 63, 1-8.](https://doi.org/10.1016/j.cageo.2013.09.015)
 
-[Cleveland, R. B., Cleveland, W. S., McRae, J. E., & Terpenning, I. (1990). STL: A Seasonal-Trend Decomposition. Journal of Official Statistics, 6(1), 3-73.](http://bit.ly/stl1990)
+[Cleveland, R. B., Cleveland, W. S., McRae, J. E., & Terpenning, I. (1990). STL: A Seasonal-Trend Decomposition. Journal of Official Statistics, 6(1), 3-73.](https://www.proquest.com/docview/1266805989)
 
 [Engle, R. F. (1982). Autoregressive conditional heteroscedasticity with estimates of the variance of United Kingdom inflation. Econometrica: Journal of the Econometric Society, 987-1007.](https://doi.org/10.2307/1912773)
 
@@ -506,7 +506,7 @@ khs_pca$x %>%
 
 [Hyndman, R. J., Wang, E., & Laptev, N. (2015, November). Large-scale unusual time series detection. In Data Mining Workshop (ICDMW), 2015 IEEE International Conference on (pp. 1616-1619). IEEE.](https://doi.org/10.1109/ICDMW.2015.104)
 
-[Kang, Y., Hyndman, R. J., & Li, F. (2018). Efficient generation of time series with diverse and controllable characteristics.](https://robjhyndman.com/publications/tsgeneration/)
+[Kang, Y., Hyndman, R. J., & Li, F. (2018). GRATIS: GeneRAting TIme Series with diverse and controllable characteristics.](https://robjhyndman.com/publications/gratis/)
 
 [Kang, Y., Hyndman, R. J., & Smith-Miles, K. (2017). Visualising forecasting algorithm performance using time series instance spaces. International Journal of Forecasting, 33(2), 345-358.](https://doi.org/10.1016/j.ijforecast.2016.09.004)
 
