@@ -80,8 +80,8 @@ spectral density, estimated using an AR model.</p>
     <h2>Details</h2>
     <p>The <em>spectral entropy</em> equals the Shannon entropy of the spectral density
 \(f_x(\lambda)\) of a stationary process \(x_t\):
-$$ 
-H_s(x_t) = - \int_{-\pi}^{\pi} f_x(\lambda) \log f_x(\lambda) d \lambda, 
+$$
+H_s(x_t) = - \int_{-\pi}^{\pi} f_x(\lambda) \log f_x(\lambda) d \lambda,
 $$
 where the density is normalized such that
 \(\int_{-\pi}^{\pi} f_x(\lambda) d \lambda = 1\).
@@ -94,8 +94,8 @@ the <code>burg</code> method.</p>
 Interpretation of Spectral Entropy Based Upon Rate Distortion Functions”.
 IEEE International Symposium on Information Theory, pp. 277-281.</p>
 <p>Goerg, G. M. (2013). “Forecastable Component Analysis”.
-Journal of Machine Learning Research (JMLR) W&amp;CP 28 (2): 64-72, 2013.
-Available at <a href="http://jmlr.org/proceedings/papers/v28/goerg13.html" class="external-link">http://jmlr.org/proceedings/papers/v28/goerg13.html</a>.</p>
+Proceedings of the 30th International Conference on Machine Learning (PMLR) 28 (2): 64-72, 2013.
+Available at <a href="https://proceedings.mlr.press/v28/goerg13.html" class="external-link">https://proceedings.mlr.press/v28/goerg13.html</a>.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -109,8 +109,8 @@ Available at <a href="http://jmlr.org/proceedings/papers/v28/goerg13.html" class
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">entropy</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  entropy </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 0.999289 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> entropy </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       1 </span>
 <span class="r-in"><span><span class="fu">entropy</span><span class="op">(</span><span class="va">lynx</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   entropy </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 0.7331515 </span>
