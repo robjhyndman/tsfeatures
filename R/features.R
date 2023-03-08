@@ -84,7 +84,7 @@ max_level_shift <- function(x, width = ifelse(frequency(x) > 1,
     }
     else {
       maxmeans <- max(means, na.rm = TRUE)
-      maxidx <- which.max(means) + 1L
+      maxidx <- which.max(means) + width - 1L
     }
   }
   return(c(max_level_shift = maxmeans, time_level_shift = maxidx))
@@ -113,7 +113,7 @@ max_var_shift <- function(x, width = ifelse(frequency(x) > 1,
     }
     else {
       maxvar <- max(vars, na.rm = TRUE)
-      maxidx <- which.max(vars) + 1L
+      maxidx <- which.max(vars) + width - 1L
     }
   }
   return(c(max_var_shift = maxvar, time_var_shift = maxidx))
@@ -165,7 +165,7 @@ max_kl_shift <- function(x, width = ifelse(frequency(x) > 1,
     maxidx <- NA_real_
   }
   else {
-    maxidx <- which.max(diffkl) + 1L
+    maxidx <- which.max(diffkl) + width - 1L
   }
   return(c(max_kl_shift = max(diffkl, na.rm = TRUE), time_kl_shift = maxidx))
 }
