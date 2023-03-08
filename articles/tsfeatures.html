@@ -75,7 +75,7 @@
       <h1 data-toc-skip>Introduction to the tsfeatures package</h1>
                         <h4 data-toc-skip class="author">Yangzhuoran Yang and Rob J Hyndman</h4>
             
-            <h4 data-toc-skip class="date">2022-10-08</h4>
+            <h4 data-toc-skip class="date">2023-03-08</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/robjhyndman/tsfeatures/blob/HEAD/vignettes/tsfeatures.Rmd" class="external-link"><code>vignettes/tsfeatures.Rmd</code></a></small>
       <div class="hidden name"><code>tsfeatures.Rmd</code></div>
@@ -236,13 +236,13 @@
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/max_level_shift.html">max_level_shift</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span></span>
 <span><span class="co">#&gt;  max_level_shift time_level_shift </span></span>
-<span><span class="co">#&gt;             54.5            117.0</span></span>
+<span><span class="co">#&gt;             54.5            127.0</span></span>
 <span><span class="fu"><a href="../reference/max_level_shift.html">max_var_shift</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span></span>
 <span><span class="co">#&gt;  max_var_shift time_var_shift </span></span>
-<span><span class="co">#&gt;       2342.152        107.000</span></span>
+<span><span class="co">#&gt;       2342.152        117.000</span></span>
 <span><span class="fu"><a href="../reference/max_level_shift.html">max_kl_shift</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span></span>
 <span><span class="co">#&gt;  max_kl_shift time_kl_shift </span></span>
-<span><span class="co">#&gt;     0.1210444   122.0000000</span></span></code></pre></div>
+<span><span class="co">#&gt;     0.1210444   132.0000000</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="crossing_points">crossing_points<a class="anchor" aria-label="anchor" href="#crossing_points"></a>
@@ -435,11 +435,11 @@
 </tr>
 <tr class="even">
 <td align="left">spreadrandomlocal_meantaul_50</td>
-<td align="right">13.3400000</td>
+<td align="right">13.2600000</td>
 </tr>
 <tr class="odd">
 <td align="left">spreadrandomlocal_meantaul_ac2</td>
-<td align="right">38.9000000</td>
+<td align="right">38.9300000</td>
 </tr>
 <tr class="even">
 <td align="left">histogram_mode_10</td>
@@ -552,7 +552,7 @@
 <p>100 time-series segments of length l are selected at random from the time series and the mean of the first zero-crossings of the autocorrelation function in each segment is calculated using <code>spreadrandomlocal_meantaul</code>.</p>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/spreadrandomlocal_meantaul.html">spreadrandomlocal_meantaul</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 13.4</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 12.71</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="histogram_mode">histogram_mode<a class="anchor" aria-label="anchor" href="#histogram_mode"></a>
@@ -595,7 +595,7 @@
 <span></span>
 <span><span class="va">yahoo</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/yahoo_data.html">yahoo_data</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">hwl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html" class="external-link">bind_cols</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">hwl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_cols.html" class="external-link">bind_cols</a></span><span class="op">(</span></span>
 <span>         <span class="fu"><a href="../reference/tsfeatures.html">tsfeatures</a></span><span class="op">(</span><span class="va">yahoo</span>,</span>
 <span>           <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"acf_features"</span>,<span class="st">"entropy"</span>,<span class="st">"lumpiness"</span>,</span>
 <span>             <span class="st">"flat_spots"</span>,<span class="st">"crossing_points"</span><span class="op">)</span><span class="op">)</span>,</span>
@@ -642,7 +642,7 @@
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="../reference/stl_features.html">stl_features</a></span><span class="op">(</span><span class="va">y</span>, s.window<span class="op">=</span><span class="st">'periodic'</span>, robust<span class="op">=</span><span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span>, lambda<span class="op">=</span><span class="va">lambda</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">khs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html" class="external-link">bind_cols</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">khs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_cols.html" class="external-link">bind_cols</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="../reference/tsfeatures.html">tsfeatures</a></span><span class="op">(</span><span class="va">M3data</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"frequency"</span>, <span class="st">"entropy"</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  <span class="fu"><a href="../reference/tsfeatures.html">tsfeatures</a></span><span class="op">(</span><span class="va">M3data</span>, <span class="st">"khs_stl"</span>, scale<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">frequency</span>, <span class="va">entropy</span>, <span class="va">trend</span>, <span class="va">seasonal_strength</span>, <span class="va">e_acf1</span>, <span class="va">lambda</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -669,7 +669,7 @@
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html" class="external-link">prcomp</a></span><span class="op">(</span>scale<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">khs_pca</span><span class="op">$</span><span class="va">x</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html" class="external-link">bind_cols</a></span><span class="op">(</span>Period<span class="op">=</span><span class="va">khs</span><span class="op">$</span><span class="va">Period</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_cols.html" class="external-link">bind_cols</a></span><span class="op">(</span>Period<span class="op">=</span><span class="va">khs</span><span class="op">$</span><span class="va">Period</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">PC1</span>, y<span class="op">=</span><span class="va">PC2</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>col<span class="op">=</span><span class="va">Period</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="tsfeatures_files/figure-html/ijf2017graphs-2.png" width="700" style="display: block; margin: auto;"></p>
@@ -714,7 +714,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>
