@@ -26,6 +26,7 @@ authors:
     href: https://yangzhuoranyang.com
 
 navbar:
+  type: light
   structure:
     left:
     - home
