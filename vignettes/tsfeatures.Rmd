@@ -65,16 +65,16 @@ tsfeatures(mylist, features = "is.monthly")
 
 |FEATURES||||
 |:-------|:-------|:-------|:-------|
-|[acf_features](#acf_features)      |[max_kl_shift](#max_shift)       |[compengine](#compengine)                |[outlierinclude_mdrmd](#outlierinclude_mdrmd)|
-|[arch_stat](#arch_stat)            |[max_level_shift](#max_shift)    |[ac_9](#ac_9)                            |[sampenc](#sampen)|
-|[crossing_points](#crossing_points)|[max_var_shift](#max_shift)      |[binarize_mean](#binarize_mean)          |[sampen_first](#sampen)|
-|[entropy](#entropy)                |[nonlinearity](#nonlinearity)    |[embed2_incircle](#embed2_incircle)      |[spreadrandomlocal_meantaul](#spreadrandomlocal_meantaul)|
-|[flat_spots](#flat_spots)          |[pacf_features](#pacf_features)  |[firstmin_ac](#firstmin_ac)              |[std1st_der](#std1st_der)|
-|[heterogeneity](#heterogeneity)    |[stability](#lumpiness_stability)|[firstzero_ac](#firstzero_ac)            |[trev_num](#trev_num)|
-|[holt_parameters](#holt_hw)        |[stl_features](#stl_features)    |[fluctanal_prop_r1](#fluctanal_prop_r1)  |[walker_propcross](#walker_propcross)|
-|[hurst](#hurst)                    |[unitroot_kpss](#unitroot)        |[histogram_mode](#histogram_mode)          | |
-|[hw_parameters](#holt_hw)          |[unitroot_pp](#unitroot)          |[localsimple_taures](#localsimple_taures)|  |
-|[lumpiness](#lumpiness_stability)  |                                  |[motiftwo_entro3](#motiftwo_entro3)      |  |
+|[acf_features](#acf_features)      |[max_kl_shift](#max_shift)       |[compengine](#compengine)                   |[sampenc](#sampen)|
+|[arch_stat](#arch_stat)            |[max_level_shift](#max_shift)    |[ac_9](#ac_9)                               |[sampen_first](#sampen)|
+|[crossing_points](#crossing_points)|[max_var_shift](#max_shift)      |[embed2_incircle](#embed2_incircle)         |[spreadrandomlocal_meantaul](#spreadrandomlocal_meantaul)|
+|[entropy](#entropy)                |[nonlinearity](#nonlinearity)    |[firstmin_ac](#firstmin_ac)                 |[std1st_der](#std1st_der) |
+|[flat_spots](#flat_spots)          |[pacf_features](#pacf_features)  |[firstzero_ac](#firstzero_ac)               |[trev_num](#trev_num)|
+|[heterogeneity](#heterogeneity)    |[stability](#lumpiness_stability)|[fluctanal_prop_r1](#fluctanal_prop_r1)     |[walker_propcross](#walker_propcross)|
+|[holt_parameters](#holt_hw)        |[stl_features](#stl_features)    |[histogram_mode](#histogram_mode)     ||
+|[hurst](#hurst)                    |[unitroot_kpss](#unitroot)       |[localsimple_taures](#localsimple_taures)           |  |
+|[hw_parameters](#holt_hw)          |[unitroot_pp](#unitroot)         |[motiftwo_entro3](#motiftwo_entro3)  |  |
+|[lumpiness](#lumpiness_stability)  |                                 |[outlierinclude_mdrmd](#outlierinclude_mdrmd)         |  |
 
 
 ### entropy {#entropy}
@@ -289,14 +289,6 @@ Local motifs in a binary symbolization of the time series. Coarse-graining is pe
 
 ```{r}
 motiftwo_entro3(AirPassengers)
-```
-
-### binarize_mean {#binarize_mean}
-
-`binarize_mean` converts an input vector into a binarized version. Time-series values above its mean are given 1, and those below the mean are 0.
-
-```{r}
-str(binarize_mean(AirPassengers))
 ```
 
 ### walker_propcross {#walker_propcross}
