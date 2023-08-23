@@ -14,4 +14,4 @@ Fixed _PACKAGE issue as requested
 
 ## revdep checks
 
-All reverse dependencies have been checked with no new errors detected.
+All 6 reverse dependencies have been checked with no new errors detected.
