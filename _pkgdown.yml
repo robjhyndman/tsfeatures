@@ -48,10 +48,10 @@ navbar:
       href: https://github.com/robjhyndman/tsfeatures/
 
 reference:
- - title: "Package"
-    desc: "tsfeatures package"
-    contents:
-      - tsfeatures-package
+- title: "Package"
+  desc: "tsfeatures package"
+  contents:
+  - tsfeatures-package
 - title: tsfeatures
   desc: The main function to extract features from a list of time series.
   contents:
