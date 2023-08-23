@@ -12,7 +12,8 @@ Methods for extracting various features from time series data. The features prov
 Useful links:
 \itemize{
   \item \url{https://pkg.robjhyndman.com/tsfeatures/}
-  \item Report bugs at \url{https://github.com/robjhyndman/tsfeatures/issues/}
+  \item \url{https://github.com/robjhyndman/tsfeatures}
+  \item Report bugs at \url{https://github.com/robjhyndman/tsfeatures/issues}
 }
 
 }
