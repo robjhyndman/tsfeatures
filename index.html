@@ -28,7 +28,7 @@
     
     <a class="navbar-brand me-2" href="index.html">tsfeatures</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,6 +48,9 @@
 </li>
 <li class="nav-item">
   <a class="nav-link" href="reference/index.html">Reference</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="news/index.html">Change log</a>
 </li>
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
@@ -94,17 +97,16 @@
 <span><span class="va">myfeatures</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/tsfeatures.html">tsfeatures</a></span><span class="op">(</span><span class="va">mylist</span><span class="op">)</span></span>
 <span><span class="va">myfeatures</span></span>
 <span><span class="co">#&gt; # A tibble: 4 × 20</span></span>
-<span><span class="co">#&gt;   frequency nperi…¹ seaso…² trend   spike linea…³ curva…⁴ e_acf1 e_acf10 entropy</span></span>
-<span><span class="co">#&gt;       &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1         1       0       1 0.125 2.10e-5    3.58    1.11  0.793   2.21    0.702</span></span>
-<span><span class="co">#&gt; 2         1       0       1 0.985 3.01e-8    4.45    1.10  0.774   0.983   0.461</span></span>
-<span><span class="co">#&gt; 3        12       1      12 0.991 1.46e-8   11.0     1.09  0.509   0.930   0.296</span></span>
-<span><span class="co">#&gt; 4        12       1      12 0.802 9.15e-7   -2.12    2.85  0.258   0.341   0.548</span></span>
-<span><span class="co">#&gt; # … with 10 more variables: x_acf1 &lt;dbl&gt;, x_acf10 &lt;dbl&gt;, diff1_acf1 &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   diff1_acf10 &lt;dbl&gt;, diff2_acf1 &lt;dbl&gt;, diff2_acf10 &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   seasonal_strength &lt;dbl&gt;, peak &lt;dbl&gt;, trough &lt;dbl&gt;, seas_acf1 &lt;dbl&gt;, and</span></span>
-<span><span class="co">#&gt; #   abbreviated variable names ¹​nperiods, ²​seasonal_period, ³​linearity,</span></span>
-<span><span class="co">#&gt; #   ⁴​curvature</span></span></code></pre></div>
+<span><span class="co">#&gt;   frequency nperiods seasonal_period trend      spike linearity curvature e_acf1</span></span>
+<span><span class="co">#&gt;       &lt;dbl&gt;    &lt;dbl&gt;           &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1         1        0               1 0.125    2.10e-5      3.58      1.11  0.793</span></span>
+<span><span class="co">#&gt; 2         1        0               1 0.985    3.01e-8      4.45      1.10  0.774</span></span>
+<span><span class="co">#&gt; 3        12        1              12 0.991    1.46e-8     11.0       1.09  0.509</span></span>
+<span><span class="co">#&gt; 4        12        1              12 0.802    9.15e-7     -2.12      2.85  0.258</span></span>
+<span><span class="co">#&gt; # ℹ 12 more variables: e_acf10 &lt;dbl&gt;, entropy &lt;dbl&gt;, x_acf1 &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   x_acf10 &lt;dbl&gt;, diff1_acf1 &lt;dbl&gt;, diff1_acf10 &lt;dbl&gt;, diff2_acf1 &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   diff2_acf10 &lt;dbl&gt;, seasonal_strength &lt;dbl&gt;, peak &lt;dbl&gt;, trough &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   seas_acf1 &lt;dbl&gt;</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="license">License<a class="anchor" aria-label="anchor" href="#license"></a>
@@ -117,7 +119,7 @@
 <ul class="list-unstyled">
 <li><a href="https://cloud.r-project.org/package=tsfeatures" class="external-link">View on CRAN</a></li>
 <li><a href="https://github.com/robjhyndman/tsfeatures/" class="external-link">Browse source code</a></li>
-<li><a href="https://github.com/robjhyndman/tsfeatures/issues/" class="external-link">Report a bug</a></li>
+<li><a href="https://github.com/robjhyndman/tsfeatures/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
 
@@ -144,13 +146,13 @@
 <li>
 <a href="https://yanfei.site/" class="external-link">Yanfei Kang</a> <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-8769-6650" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>Pablo Montero-Manso <br><small class="roles"> Author </small>  </li>
+<li>Mitchell O'Hara-Wild <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-6729-7695" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>
 <a href="https://thiyanga.netlify.com/" class="external-link">Thiyanga Talagala</a> <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-0656-9789" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>
 <a href="https://earo.me" class="external-link">Earo Wang</a> <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-6448-5260" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>
 <a href="https://yangzhuoranyang.com" class="external-link">Yangzhuoran Yang</a> <br><small class="roles"> Author </small>  </li>
-<li>Mitchell O'Hara-Wild <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-6729-7695" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
@@ -171,7 +173,7 @@
 
     <footer><div class="pkgdown-footer-left">
   <p></p>
-<p>Developed by <a href="https://robjhyndman.com" class="external-link">Rob Hyndman</a>, <a href="https://yanfei.site/" class="external-link">Yanfei Kang</a>, Pablo Montero-Manso, <a href="https://thiyanga.netlify.com/" class="external-link">Thiyanga Talagala</a>, <a href="https://earo.me" class="external-link">Earo Wang</a>, <a href="https://yangzhuoranyang.com" class="external-link">Yangzhuoran Yang</a>, Mitchell O’Hara-Wild.</p>
+<p>Developed by <a href="https://robjhyndman.com" class="external-link">Rob Hyndman</a>, <a href="https://yanfei.site/" class="external-link">Yanfei Kang</a>, Pablo Montero-Manso, Mitchell O’Hara-Wild, <a href="https://thiyanga.netlify.com/" class="external-link">Thiyanga Talagala</a>, <a href="https://earo.me" class="external-link">Earo Wang</a>, <a href="https://yangzhuoranyang.com" class="external-link">Yangzhuoran Yang</a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">
