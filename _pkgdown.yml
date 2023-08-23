@@ -28,11 +28,8 @@ authors:
 navbar:
   type: light
   structure:
-    left:
-    - home
-    - intro
-    - reference
-    right: github
+    left: [home, intro, reference, changelog]
+    right: [search, github]
   components:
     home:
       icon: fa-home fa-lg
@@ -43,11 +40,18 @@ navbar:
     intro:
       text: Get started
       href: articles/tsfeatures.html
+    changelog:
+      text: Change log
+      href: news/index.html
     github:
       icon: fa-github fa-lg
       href: https://github.com/robjhyndman/tsfeatures/
 
 reference:
+ - title: "Package"
+    desc: "tsfeatures package"
+    contents:
+      - tsfeatures-package
 - title: tsfeatures
   desc: The main function to extract features from a list of time series.
   contents:
