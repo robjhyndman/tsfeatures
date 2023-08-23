@@ -1,6 +1,6 @@
 Package: tsfeatures
 Title: Time Series Feature Extraction
-Version: 1.1.0.9000
+Version: 1.2.0
 Authors@R: c(
     person("Rob", "Hyndman", email = "Rob.Hyndman@monash.edu", role = c("aut","cre"), comment = c(ORCID = "0000-0002-2140-5352")),
     person("Yanfei", "Kang", role = "aut", comment = c(ORCID = "0000-0001-8769-6650")),
@@ -40,8 +40,8 @@ Suggests:
     GGally
 License: GPL-3
 ByteCompile: true
-URL: https://pkg.robjhyndman.com/tsfeatures/
-BugReports: https://github.com/robjhyndman/tsfeatures/issues/
+URL: https://pkg.robjhyndman.com/tsfeatures/, https://github.com/robjhyndman/tsfeatures
+BugReports: https://github.com/robjhyndman/tsfeatures/issues
 RoxygenNote: 7.2.3
 Roxygen: list(markdown = TRUE, roclets=c('rd', 'collate', 'namespace'))
 VignetteBuilder: knitr
