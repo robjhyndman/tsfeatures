@@ -1,5 +1,10 @@
 # tsfeatures (development version)
 
+# tsfeatures 1.1.1
+
+* Bug fixes
+* Improved docs
+
 # tsfeatures 1.1
 
 * Added zero_proportion
