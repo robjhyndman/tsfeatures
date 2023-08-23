@@ -4,6 +4,7 @@ doc
 .Rproj.user
 .Rhistory
 .RData
+docs/*
 
 # History files
 .Rapp.history
