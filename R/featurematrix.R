@@ -153,9 +153,13 @@ rename_duplicate_features <- function(fun_names, feat_list) {
       if (Reduce("|", names_first_fun %in% names_sec_fun)) {
         warning(paste("Conflicting feature names in functions: ", fun_names[[i]], " and ", fun_names[[j]]))
         names_first_fun <- paste(fun_names[[i]], "_", names_first_fun, sep = "")
-        names(feat_list[[i]][[1]]) <- names_first_fun
+        for (idx in seq_along(feat_list[[i]])) {
+          names(feat_list[[i]][[idx]]) <- names_first_fun
+        }
         names_sec_fun <- paste(fun_names[[j]], "_", names_sec_fun, sep = "")
-        names(feat_list[[j]][[1]]) <- names_sec_fun
+        for (idx in seq_along(feat_list[[j]])) {
+          names(feat_list[[j]][[idx]]) <- names_sec_fun
+        }
       }
     }
   }
