@@ -24,10 +24,10 @@ Authors:
 \itemize{
   \item Yanfei Kang (\href{https://orcid.org/0000-0001-8769-6650}{ORCID})
   \item Pablo Montero-Manso \email{p.montero.manso@udc.es}
+  \item Mitchell O'Hara-Wild (\href{https://orcid.org/0000-0001-6729-7695}{ORCID})
   \item Thiyanga Talagala (\href{https://orcid.org/0000-0002-0656-9789}{ORCID})
   \item Earo Wang (\href{https://orcid.org/0000-0001-6448-5260}{ORCID})
   \item Yangzhuoran Yang \email{Fin.Yang@monash.edu}
-  \item Mitchell O'Hara-Wild (\href{https://orcid.org/0000-0001-6729-7695}{ORCID})
 }
 
 Other contributors:
