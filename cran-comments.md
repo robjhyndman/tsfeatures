@@ -1,9 +1,11 @@
+Fixed _PACKAGE issue as requested
+
 ## Test environments
 
-* ubuntu 20.04 (local): R 4.2.1
-* macOS (on GitHub Actions): release
-* windows (on GitHub Actions): release
-* ubuntu 20.04.5 (on GitHub Actions): devel, release, oldrel
+* ubuntu 22.04 (local): R 4.3.1
+* macOS-latest (on GitHub Actions): release
+* windows-latest (on GitHub Actions): release
+* ubuntu-latest (on GitHub Actions): devel, release, oldrel
 * win-builder: devel, release, oldrelease
 
 ## R CMD check results
