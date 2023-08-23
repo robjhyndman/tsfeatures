@@ -4,7 +4,8 @@ doc
 .Rproj.user
 .Rhistory
 .RData
-docs/*
+docs
+revdep
 
 # History files
 .Rapp.history
