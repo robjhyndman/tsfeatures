@@ -60,22 +60,130 @@ is.monthly <- function(x){
 tsfeatures(mylist, features = "is.monthly")
 ```
 
-
 ## List of features
 
-|FEATURES||||
-|:-------|:-------|:-------|:-------|
-|[acf_features](#acf_features)      |[max_kl_shift](#max_shift)       |[compengine](#compengine)                   |[sampenc](#sampen)|
-|[arch_stat](#arch_stat)            |[max_level_shift](#max_shift)    |[ac_9](#ac_9)                               |[sampen_first](#sampen)|
-|[crossing_points](#crossing_points)|[max_var_shift](#max_shift)      |[embed2_incircle](#embed2_incircle)         |[spreadrandomlocal_meantaul](#spreadrandomlocal_meantaul)|
-|[entropy](#entropy)                |[nonlinearity](#nonlinearity)    |[firstmin_ac](#firstmin_ac)                 |[std1st_der](#std1st_der) |
-|[flat_spots](#flat_spots)          |[pacf_features](#pacf_features)  |[firstzero_ac](#firstzero_ac)               |[trev_num](#trev_num)|
-|[heterogeneity](#heterogeneity)    |[stability](#lumpiness_stability)|[fluctanal_prop_r1](#fluctanal_prop_r1)     |[walker_propcross](#walker_propcross)|
-|[holt_parameters](#holt_hw)        |[stl_features](#stl_features)    |[histogram_mode](#histogram_mode)     ||
-|[hurst](#hurst)                    |[unitroot_kpss](#unitroot)       |[localsimple_taures](#localsimple_taures)           |  |
-|[hw_parameters](#holt_hw)          |[unitroot_pp](#unitroot)         |[motiftwo_entro3](#motiftwo_entro3)  |  |
-|[lumpiness](#lumpiness_stability)  |                                 |[outlierinclude_mdrmd](#outlierinclude_mdrmd)         |  |
+### acf_features {#acf_features}
 
+We compute the autocorrelation function of the series, the differenced series, and the twice-differenced series. `acf_features` produces a vector comprising the first autocorrelation coefficient in each case, and the sum of squares of the first 10 autocorrelation coefficients in each case.
+
+```{r}
+acf_features(AirPassengers)
+```
+
+### arch_stat {#arch_stat}
+
+`arch_stat` Computes a statistic based on the Lagrange Multiplier (LM) test of Engle ([1982](#ref)) for autoregressive conditional heteroscedasticity (ARCH). The statistic returned is the $R^2$ value of an autoregressive model of order specified as lags applied to $x^2$.
+
+```{r}
+arch_stat(AirPassengers)
+```
+
+### autocorr_features
+
+The autocorrelation feature set from software package hctsa
+
+#### ac_9 {#ac_9}
+
+`ac_9` is the autocorrelation at lag 9.
+
+```{r}
+ac_9(AirPassengers)
+```
+
+#### embed2_incircle {#embed2_incircle}
+
+`embed2_incircle` gives proportion of points inside a given circular boundary in a 2-d embedding space.
+
+```{r}
+embed2_incircle(AirPassengers, boundary = 1e5)
+```
+
+firstmin_ac, trev_num, motiftwo_entro3, and walker_propcross
+
+#### firstmin_ac {#firstmin_ac}
+
+`firstmin_ac` returns the time of first minimum in the autocorrelation function.
+
+```{r}
+firstmin_ac(AirPassengers)
+```
+
+#### trev_num  {#trev_num}
+
+`trev_num` returns the numerator of the trev function of a time series, a normalized nonlinear autocorrelation. The time lag is set to 1.
+
+```{r}
+trev_num(AirPassengers)
+```
+
+#### motiftwo_entro3 {#motiftwo_entro3}
+
+Local motifs in a binary symbolization of the time series. Coarse-graining is performed. Time-series values above its mean are given 1, and those below the mean are 0. `motiftwo_entro3` returns the entropy of words in the binary alphabet of length 3.
+
+```{r}
+motiftwo_entro3(AirPassengers)
+```
+
+#### walker_propcross {#walker_propcross}
+
+Simulates a hypothetical walker moving through the time domain. The hypothetical particle (or 'walker') moves in response to values of the time series at each point. The walker narrows the gap between its value and that of the time series by 10. `walker_propcross` returns the fraction of time series length that walker crosses time series.
+
+```{r}
+walker_propcross(AirPassengers)
+```
+
+### binarize_mean {#binarize_mean}
+
+`binarize_mean` converts an input vector into a binarized version. Time-series values above its mean are given 1, and those below the mean are 0.
+
+```{r}
+str(binarize_mean(AirPassengers))
+```
+
+### compengine feature set {#compengine}
+
+`compengine` calculate the features that have been used in the [CompEngine](https://www.comp-engine.org/) database, using a method introduced in package `kctsa`.
+
+The features involved can be grouped as autocorrelation, prediction, stationarity, distribution, and scaling, which can be computed using `autocorr_features`, `pred_features`, `station_features`, `dist_features`, and `scal_features`.
+
+```{r}
+comp <- compengine(AirPassengers)
+knitr::kable(comp)
+```
+
+### crossing_points {#crossing_points}
+
+`crossing points` are defined as the number of times a time series crosses the median line.
+
+```{r}
+crossing_points(AirPassengers)
+```
+
+### dist_features
+
+The distribution feature set from the hctsa package.
+
+#### histogram_mode {#histogram_mode}
+
+`histogram_mode` measures the mode of the data vector using histograms with a given number of bins (default to 10) as suggestion.
+
+```{r}
+histogram_mode(AirPassengers, numBins = 10)
+```
+
+#### outlierinclude_mdrmd {#outlierinclude_mdrmd}
+
+`outlierinclude_mdrmd` measures the median as more and more outliers are included in the calculation according to a specified rule, of outliers being furthest from the mean.
+
+The threshold for including time-series data points in the analysis increases from zero to the maximum deviation, in increments of 0.01*sigma (by default), where sigma is the standard deviation of the time series.
+
+At each threshold, proportion of time series points included and median are calculated, and outputs from the algorithm measure how these statistical quantities change as more extreme points are included in the calculation.
+
+`outlierinclude_mdrmd` essentially returns the median of the median of range indices.
+
+```{r}
+outlierinclude_mdrmd(AirPassengers)
+```
 
 ### entropy {#entropy}
 
@@ -87,6 +195,71 @@ where $\hat{f}(\lambda)$ is an estimate of the spectral density of the data. Thi
 
 ```{r}
 entropy(AirPassengers)
+```
+
+### firstzero_ac {#firstzero_ac}
+
+`firstzero_ac` returns the first zero crossing of the autocorrelation function.
+
+```{r}
+firstzero_ac(AirPassengers)
+```
+
+### flat_spots {#flat_spots}
+
+`flat_spots` are computed by dividing the sample space of a time series into ten equal-sized intervals, and computing the maximum run length within any single interval.
+
+```{r}
+flat_spots(AirPassengers)
+```
+
+### fluctanal_prop_r1 {#fluctanal_prop_r1}
+
+`fluctanal_prop_r1` implements fluctuation analysis. It fits a polynomial of order 1 and then returns the range. The order of fluctuations is 2, corresponding to root mean square fluctuations.
+
+```{r}
+fluctanal_prop_r1(AirPassengers)
+```
+
+### heterogeneity {#heterogeneity}
+
+The `heterogeneity` features measure the heterogeneity of the time series.
+First, we pre-whiten the time series to remove the mean, trend, and autoregressive (AR) information (Barbour & Parker [2014](#ref)). Then we fit a $GARCH(1,1)$ model to the pre-whitened time series, $x_t$, to measure for autoregressive conditional heteroskedasticity (ARCH) effects. The residuals from this model, $z_t$, are also measured for ARCH effects using a second $GARCH(1,1)$ model.
+
+* `arch_acf` is the sum of squares of the first 12 autocorrelations of $\{x^2_t\}$.
+* `garch_acf` is the sum of squares of the first 12 autocorrelations of $\{z^2_t\}$.
+* `arch_r2` is the $R^2$ value of an AR model applied to $\{x^2_t\}$.
+* `garch_r2` is the $R^2$ value of an AR model applied to $\{z^2_t\}$.
+
+The statistics obtained from $\{x^2_t\}$ are the ARCH effects, while those from $\{z^2_t\}$ are the GARCH effects. Note that the two $R^2$ values are used in the Lagrange-multiplier test of Engle ([1982](#ref)), and the sum of squared autocorrelations are used in the Ljung-Box test proposed by Ljung & Box ([1978](#ref)).
+
+```{r}
+heterogeneity(AirPassengers)
+```
+
+### holt_parameters and hw_parameters {#holt_hw}
+
+`holt_parameters` Estimate the smoothing parameter for the level-alpha and the smoothing parameter for the trend-beta of Holt's linear trend method. `hw_parameters` considers additive seasonal trend: ETS(A,A,A) model, returning a vector of 3 values: alpha, beta and gamma.
+
+```{r}
+holt_parameters(AirPassengers)
+hw_parameters(AirPassengers)
+```
+
+### hurst {#hurst}
+
+We use a measure of the long-term memory of a time series (`hurst`), computed as 0.5 plus the maximum likelihood estimate of the fractional differencing order $d$ given by Haslett & Raftery ([1989](#ref)). We add 0.5 to make it consistent with the Hurst coefficient. Note that the fractal dimension can be estimated as $D = 2 - \text{hurst}$.
+
+```{r}
+hurst(AirPassengers)
+```
+
+### localsimple_taures {#localsimple_taures}
+
+Simple predictors using the past trainLength values of the time series to predict its next value. `localsimple_taures` returns the first zero crossing of the autocorrelation function of the residuals from this Simple local time-series forecasting.
+
+```{r}
+localsimple_taures(AirPassengers)
 ```
 
 ### lumpiness and stability {#lumpiness_stability}
@@ -112,37 +285,45 @@ max_var_shift(AirPassengers)
 max_kl_shift(AirPassengers)
 ```
 
-### crossing_points {#crossing_points}
+### nonlinearity {#nonlinearity}
 
-`crossing points` are defined as the number of times a time series crosses the median line.
+The `nonlinearity` coefficient is computed using a modification of the statistic used in Teräsvirta’s nonlinearity test. Teräsvirta’s test uses a statistic $X^2=T\log(\text{SSE}1/\text{SSE}0)$ where SSE1 and SSE0 are the sum of squared residuals from a nonlinear and linear autoregression respectively. This is non-ergodic, so instead, we define it as $10X^2/T$ which will converge to a value indicating the extent of nonlinearity as $T\rightarrow\infty$. This takes large values when the series is nonlinear, and values around 0 when the series is linear.
 
 ```{r}
-crossing_points(AirPassengers)
+nonlinearity(AirPassengers)
 ```
 
-### flat_spots {#flat_spots}
+### pacf_features {#pacf_features}
 
-`flat_spots` are computed by dividing the sample space of a time series into ten equal-sized intervals, and computing the maximum run length within any single interval.
+We compute the partial autocorrelation function of the series, the differenced series, and the second-order differenced series. Then `pacf_features` produces a vector comprising the sum of squares of the first 5 partial autocorrelation coefficients in each case.
 
 ```{r}
-flat_spots(AirPassengers)
+pacf_features(AirPassengers)
 ```
 
-### hurst {#hurst}
+### sampen_first and sampenc {#sampen}
 
-We use a measure of the long-term memory of a time series (`hurst`), computed as 0.5 plus the maximum likelihood estimate of the fractional differencing order $d$ given by Haslett & Raftery ([1989](#ref)). We add 0.5 to make it consistent with the Hurst coefficient. Note that the fractal dimension can be estimated as $D = 2 - \text{hurst}$.
+`sampen_first` returns the first Sample Entropy of a time series where the embedding dimension is set to 5 and the threshold is set to 0.3. `sampenc` is the underlying function to calculate the first sample entropy with optional dimension and threshold settings.
 
 ```{r}
-hurst(AirPassengers)
+sampen_first(AirPassengers)
+sampenc(AirPassengers, M = 5, r = 0.3)
 ```
 
-### unitroot_kpss and unitroot_pp {#unitroot}
+### spreadrandomlocal_meantaul {#spreadrandomlocal_meantaul}
 
-`unitroot_kpss` is a vector comprising the statistic for the KPSS unit root test with linear trend and lag one, and `unitroot_pp` is the statistic for the “Z-alpha” version of PP unit root test with constant trend and lag one.
+100 time-series segments of length l are selected at random from the time series and the mean of the first zero-crossings of the autocorrelation function in each segment is calculated using `spreadrandomlocal_meantaul`.
 
 ```{r}
-unitroot_kpss(AirPassengers)
-unitroot_pp(AirPassengers)
+spreadrandomlocal_meantaul(AirPassengers)
+```
+
+### std1st_der {#std1st_der}
+
+`std1st_der` returns the standard deviation of the first derivative of the time series.
+
+```{r}
+std1st_der(AirPassengers)
 ```
 
 ### stl_features {#stl_features}
@@ -175,191 +356,21 @@ We compute the autocorrelation function of $e_t$, and `e_acf1` and `e_acf10` con
 stl_features(AirPassengers)
 ```
 
-### acf_features {#acf_features}
+### unitroot_kpss and unitroot_pp {#unitroot}
 
-We compute the autocorrelation function of the series, the differenced series, and the twice-differenced series. `acf_features` produces a vector comprising the first autocorrelation coefficient in each case, and the sum of squares of the first 10 autocorrelation coefficients in each case.
+`unitroot_kpss` is a vector comprising the statistic for the KPSS unit root test with linear trend and lag one, and `unitroot_pp` is the statistic for the “Z-alpha” version of PP unit root test with constant trend and lag one.
 
 ```{r}
-acf_features(AirPassengers)
+unitroot_kpss(AirPassengers)
+unitroot_pp(AirPassengers)
 ```
 
-### pacf_features {#pacf_features}
+### zero_proportion
 
-We compute the partial autocorrelation function of the series, the differenced series, and the second-order differenced series. Then `pacf_features` produces a vector comprising the sum of squares of the first 5 partial autocorrelation coefficients in each case.
-
-```{r}
-pacf_features(AirPassengers)
-```
-
-### holt_parameters and hw_parameters {#holt_hw}
-
-`holt_parameters` Estimate the smoothing parameter for the level-alpha and the smoothing parameter for the trend-beta of Holt's linear trend method. `hw_parameters` considers additive seasonal trend: ETS(A,A,A) model, returning a vector of 3 values: alpha, beta and gamma.
+Computes proporton of zeros in a time series.
 
 ```{r}
-holt_parameters(AirPassengers)
-hw_parameters(AirPassengers)
-```
-
-### heterogeneity {#heterogeneity}
-
-The `heterogeneity` features measure the heterogeneity of the time series.
-First, we pre-whiten the time series to remove the mean, trend, and autoregressive (AR) information (Barbour & Parker [2014](#ref)). Then we fit a $GARCH(1,1)$ model to the pre-whitened time series, $x_t$, to measure for autoregressive conditional heteroskedasticity (ARCH) effects. The residuals from this model, $z_t$, are also measured for ARCH effects using a second $GARCH(1,1)$ model.
-
-* `arch_acf` is the sum of squares of the first 12 autocorrelations of $\{x^2_t\}$.
-* `garch_acf` is the sum of squares of the first 12 autocorrelations of $\{z^2_t\}$.
-* `arch_r2` is the $R^2$ value of an AR model applied to $\{x^2_t\}$.
-* `garch_r2` is the $R^2$ value of an AR model applied to $\{z^2_t\}$.
-
-The statistics obtained from $\{x^2_t\}$ are the ARCH effects, while those from $\{z^2_t\}$ are the GARCH effects. Note that the two $R^2$ values are used in the Lagrange-multiplier test of Engle ([1982](#ref)), and the sum of squared autocorrelations are used in the Ljung-Box test proposed by Ljung & Box ([1978](#ref)).
-
-```{r}
-heterogeneity(AirPassengers)
-```
-
-### nonlinearity {#nonlinearity}
-
-The `nonlinearity` coefficient is computed using a modification of the statistic used in Teräsvirta’s nonlinearity test. Teräsvirta’s test uses a statistic $X^2=T\log(\text{SSE}1/\text{SSE}0)$ where SSE1 and SSE0 are the sum of squared residuals from a nonlinear and linear autoregression respectively. This is non-ergodic, so instead, we define it as $10X^2/T$ which will converge to a value indicating the extent of nonlinearity as $T\rightarrow\infty$. This takes large values when the series is nonlinear, and values around 0 when the series is linear.
-
-```{r}
-nonlinearity(AirPassengers)
-```
-
-### arch_stat {#arch_stat}
-
-`arch_stat` Computes a statistic based on the Lagrange Multiplier (LM) test of Engle ([1982](#ref)) for autoregressive conditional heteroscedasticity (ARCH). The statistic returned is the $R^2$ value of an autoregressive model of order specified as lags applied to $x^2$.
-
-```{r}
-arch_stat(AirPassengers)
-```
-
-### compengine feature set {#compengine}
-
-`compengine` calculate the features that have been used in the [CompEngine](https://www.comp-engine.org/) database, using a method introduced in package `kctsa`.
-
-The features involved can be grouped as autocorrelation, prediction, stationarity, distribution, and scaling, which can be computed using `autocorr_features`, `pred_features`, `station_features`, `dist_features`, and `scal_features`.
-
-```{r}
-comp <- compengine(AirPassengers)
-knitr::kable(comp)
-```
-
-### embed2_incircle {#embed2_incircle}
-
-`embed2_incircle` gives proportion of points inside a given circular boundary in a 2-d embedding space.
-
-```{r}
-embed2_incircle(AirPassengers, boundary = 1e5)
-```
-
-### ac_9 {#ac_9}
-
-`ac_9` is just the autocorrelation at lag 9, included here for completion and consistency.
-
-```{r}
-ac_9(AirPassengers)
-```
-
-### firstmin_ac {#firstmin_ac}
-
-`firstmin_ac` returns the time of first minimum in the autocorrelation function.
-
-```{r}
-firstmin_ac(AirPassengers)
-```
-
-### firstzero_ac {#firstzero_ac}
-
-`firstzero_ac` returns the first zero crossing of the autocorrelation function.
-
-```{r}
-firstzero_ac(AirPassengers)
-```
-
-### trev_num  {#trev_num}
-
-`trev_num` returns the numerator of the trev function of a time series, a normalized nonlinear autocorrelation. The time lag is set to 1.
-
-```{r}
-trev_num(AirPassengers)
-```
-
-### motiftwo_entro3 {#motiftwo_entro3}
-
-Local motifs in a binary symbolization of the time series. Coarse-graining is performed. Time-series values above its mean are given 1, and those below the mean are 0. `motiftwo_entro3` returns the entropy of words in the binary alphabet of length 3.
-
-```{r}
-motiftwo_entro3(AirPassengers)
-```
-
-### walker_propcross {#walker_propcross}
-
-Simulates a hypothetical walker moving through the time domain. The hypothetical particle (or 'walker') moves in response to values of the time series at each point. The walker narrows the gap between its value and that of the time series by 10. `walker_propcross` returns the fraction of time series length that walker crosses time series.
-
-```{r}
-walker_propcross(AirPassengers)
-```
-
-### localsimple_taures {#localsimple_taures}
-
-Simple predictors using the past trainLength values of the time series to predict its next value. `localsimple_taures` returns the first zero crossing of the autocorrelation function of the residuals from this Simple local time-series forecasting.
-
-```{r}
-localsimple_taures(AirPassengers)
-```
-
-### sampen_first and sampenc {#sampen}
-
-`sampen_first` returns the first Sample Entropy of a time series where the embedding dimension is set to 5 and the threshold is set to 0.3. `sampenc` is the underlying function to calculate the first sample entropy with optional dimension and threshold settings.
-
-```{r}
-sampen_first(AirPassengers)
-sampenc(AirPassengers, M = 5, r = 0.3)
-```
-
-### std1st_der {#std1st_der}
-
-`std1st_der` returns the standard deviation of the first derivative of the time series.
-
-```{r}
-std1st_der(AirPassengers)
-```
-
-### spreadrandomlocal_meantaul {#spreadrandomlocal_meantaul}
-
-100 time-series segments of length l are selected at random from the time series and the mean of the first zero-crossings of the autocorrelation function in each segment is calculated using `spreadrandomlocal_meantaul`.
-
-```{r}
-spreadrandomlocal_meantaul(AirPassengers)
-```
-
-### histogram_mode {#histogram_mode}
-
-`histogram_mode` measures the mode of the data vector using histograms with a given number of bins (default to 10) as suggestion.
-
-```{r}
-histogram_mode(AirPassengers, numBins = 10)
-```
-
-### outlierinclude_mdrmd {#outlierinclude_mdrmd}
-
-`outlierinclude_mdrmd` measures the median as more and more outliers are included in the calculation according to a specified rule, of outliers being furthest from the mean.
-
-The threshold for including time-series data points in the analysis increases from zero to the maximum deviation, in increments of 0.01*sigma (by default), where sigma is the standard deviation of the time series.
-
-At each threshold, proportion of time series points included and median are calculated, and outputs from the algorithm measure how these statistical quantities change as more extreme points are included in the calculation.
-
-`outlierinclude_mdrmd` essentially returns the median of the median of range indices.
-
-```{r}
-outlierinclude_mdrmd(AirPassengers)
-```
-
-### fluctanal_prop_r1 {#fluctanal_prop_r1}
-
-`fluctanal_prop_r1` implements fluctuation analysis. It fits a polynomial of order 1 and then returns the range. The order of fluctuations is 2, corresponding to root mean square fluctuations.
-
-```{r}
-fluctanal_prop_r1(AirPassengers)
+zero_proportion(AirPassengers)
 ```
 
 ## Reproducing papers
