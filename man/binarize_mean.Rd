@@ -23,4 +23,3 @@ B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: t
 \author{
 Yangzhuoran Yang
 }
-\keyword{internal}

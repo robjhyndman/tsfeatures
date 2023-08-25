@@ -64,6 +64,7 @@ reference:
   - arch_stat
   - as.list.mts
   - autocorr_features
+  - binarize_mean
   - compengine
   - crossing_points
   - dist_features
