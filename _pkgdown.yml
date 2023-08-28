@@ -62,7 +62,6 @@ reference:
   - ac_9
   - acf_features
   - arch_stat
-  - as.list.mts
   - autocorr_features
   - binarize_mean
   - compengine
@@ -97,6 +96,10 @@ reference:
   - unitroot_kpss
   - walker_propcross
   - zero_proportion
+- title: Utility functions
+  contents:
+  - as.list.mts
+
 - title: Data
   desc: Download data providing Yahoo server metrics
   contents:
