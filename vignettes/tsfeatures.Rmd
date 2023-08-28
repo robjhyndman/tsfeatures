@@ -82,55 +82,16 @@ arch_stat(AirPassengers)
 
 The autocorrelation feature set from software package hctsa
 
-#### ac_9 {#ac_9}
-
-`ac_9` is the autocorrelation at lag 9.
-
 ```{r}
-ac_9(AirPassengers)
+autocorr_features(AirPassengers)
 ```
 
-#### embed2_incircle {#embed2_incircle}
-
-`embed2_incircle` gives proportion of points inside a given circular boundary in a 2-d embedding space.
-
-```{r}
-embed2_incircle(AirPassengers, boundary = 1e5)
-```
-
-firstmin_ac, trev_num, motiftwo_entro3, and walker_propcross
-
-#### firstmin_ac {#firstmin_ac}
-
-`firstmin_ac` returns the time of first minimum in the autocorrelation function.
-
-```{r}
-firstmin_ac(AirPassengers)
-```
-
-#### trev_num  {#trev_num}
-
-`trev_num` returns the numerator of the trev function of a time series, a normalized nonlinear autocorrelation. The time lag is set to 1.
-
-```{r}
-trev_num(AirPassengers)
-```
-
-#### motiftwo_entro3 {#motiftwo_entro3}
-
-Local motifs in a binary symbolization of the time series. Coarse-graining is performed. Time-series values above its mean are given 1, and those below the mean are 0. `motiftwo_entro3` returns the entropy of words in the binary alphabet of length 3.
-
-```{r}
-motiftwo_entro3(AirPassengers)
-```
-
-#### walker_propcross {#walker_propcross}
-
-Simulates a hypothetical walker moving through the time domain. The hypothetical particle (or 'walker') moves in response to values of the time series at each point. The walker narrows the gap between its value and that of the time series by 10. `walker_propcross` returns the fraction of time series length that walker crosses time series.
-
-```{r}
-walker_propcross(AirPassengers)
-```
+* `ac_9` is the autocorrelation at lag 9.
+* `embed2_incircle` gives proportion of points inside a given circular boundary in a 2-d embedding space.
+* `firstmin_ac` returns the time of first minimum in the autocorrelation function.
+* `trev_num` returns the numerator of the trev function of a time series, a normalized nonlinear autocorrelation. The time lag is set to 1.
+* `motiftwo_entro3` finds local motifs in a binary symbolization of the time series. Coarse-graining is performed. Time-series values above its mean are given 1, and those below the mean are 0. `motiftwo_entro3` returns the entropy of words in the binary alphabet of length 3.
+* `walker_propcross` simulates a hypothetical walker moving through the time domain. The hypothetical particle (or 'walker') moves in response to values of the time series at each point. The walker narrows the gap between its value and that of the time series by 10. `walker_propcross` returns the fraction of time series length that walker crosses time series.
 
 ### binarize_mean {#binarize_mean}
 
@@ -163,27 +124,15 @@ crossing_points(AirPassengers)
 
 The distribution feature set from the hctsa package.
 
-#### histogram_mode {#histogram_mode}
 
-`histogram_mode` measures the mode of the data vector using histograms with a given number of bins (default to 10) as suggestion.
-
-```{r}
-histogram_mode(AirPassengers, numBins = 10)
-```
-
-#### outlierinclude_mdrmd {#outlierinclude_mdrmd}
-
-`outlierinclude_mdrmd` measures the median as more and more outliers are included in the calculation according to a specified rule, of outliers being furthest from the mean.
-
-The threshold for including time-series data points in the analysis increases from zero to the maximum deviation, in increments of 0.01*sigma (by default), where sigma is the standard deviation of the time series.
-
-At each threshold, proportion of time series points included and median are calculated, and outputs from the algorithm measure how these statistical quantities change as more extreme points are included in the calculation.
-
-`outlierinclude_mdrmd` essentially returns the median of the median of range indices.
+The scaling feature set from `hctsa`.
 
 ```{r}
-outlierinclude_mdrmd(AirPassengers)
+dist_features(AirPassengers)
 ```
+
+* `histogram_mode` measures the mode of the data vector using histograms with a given number of bins (default to 10) as suggestion.
+* `outlierinclude_mdrmd` measures the median as more and more outliers are included in the calculation according to a specified rule, of outliers being furthest from the mean. The threshold for including time-series data points in the analysis increases from zero to the maximum deviation, in increments of 0.01*sigma (by default), where sigma is the standard deviation of the time series. At each threshold, proportion of time series points included and median are calculated, and outputs from the algorithm measure how these statistical quantities change as more extreme points are included in the calculation. `outlierinclude_mdrmd` essentially returns the median of the median of range indices.
 
 ### entropy {#entropy}
 
@@ -211,14 +160,6 @@ firstzero_ac(AirPassengers)
 
 ```{r}
 flat_spots(AirPassengers)
-```
-
-### fluctanal_prop_r1 {#fluctanal_prop_r1}
-
-`fluctanal_prop_r1` implements fluctuation analysis. It fits a polynomial of order 1 and then returns the range. The order of fluctuations is 2, corresponding to root mean square fluctuations.
-
-```{r}
-fluctanal_prop_r1(AirPassengers)
 ```
 
 ### heterogeneity {#heterogeneity}
@@ -252,14 +193,6 @@ We use a measure of the long-term memory of a time series (`hurst`), computed as
 
 ```{r}
 hurst(AirPassengers)
-```
-
-### localsimple_taures {#localsimple_taures}
-
-Simple predictors using the past trainLength values of the time series to predict its next value. `localsimple_taures` returns the first zero crossing of the autocorrelation function of the residuals from this Simple local time-series forecasting.
-
-```{r}
-localsimple_taures(AirPassengers)
 ```
 
 ### lumpiness and stability {#lumpiness_stability}
@@ -301,30 +234,41 @@ We compute the partial autocorrelation function of the series, the differenced s
 pacf_features(AirPassengers)
 ```
 
-### sampen_first and sampenc {#sampen}
+### pred_features
 
-`sampen_first` returns the first Sample Entropy of a time series where the embedding dimension is set to 5 and the threshold is set to 0.3. `sampenc` is the underlying function to calculate the first sample entropy with optional dimension and threshold settings.
+The prediction feature set from the `hctsa` package. The first two elements are obtained from `localsimple_taurus` with different forecast methods (the mean, and an LS fit). The third is from `sampen_first`.
 
 ```{r}
-sampen_first(AirPassengers)
+pred_features(AirPassengers)
+```
+
+* Simple predictors using the past trainLength values of the time series to predict its next value. `localsimple_taures` returns the first zero crossing of the autocorrelation function of the residuals from this Simple local time-series forecasting.
+* `sampen_first` returns the first Sample Entropy of a time series where the embedding dimension is set to 5 and the threshold is set to 0.3. `sampenc` is the underlying function to calculate the first sample entropy with optional dimension and threshold settings.
+
+```{r}
 sampenc(AirPassengers, M = 5, r = 0.3)
 ```
 
-### spreadrandomlocal_meantaul {#spreadrandomlocal_meantaul}
+### scal_features
 
-100 time-series segments of length l are selected at random from the time series and the mean of the first zero-crossings of the autocorrelation function in each segment is calculated using `spreadrandomlocal_meantaul`.
-
-```{r}
-spreadrandomlocal_meantaul(AirPassengers)
-```
-
-### std1st_der {#std1st_der}
-
-`std1st_der` returns the standard deviation of the first derivative of the time series.
+The scaling feature set from `hctsa`.
 
 ```{r}
-std1st_der(AirPassengers)
+scal_features(AirPassengers)
 ```
+
+* `fluctanal_prop_r1` implements fluctuation analysis. It fits a polynomial of order 1 and then returns the range. The order of fluctuations is 2, corresponding to root mean square fluctuations.
+
+### station_features
+
+The stationary feature set from `hctsa`.
+
+```{r}
+station_features(AirPassengers)
+```
+
+* `std1st_der` returns the standard deviation of the first derivative of the time series.
+* 100 time-series segments of length l are selected at random from the time series and the mean of the first zero-crossings of the autocorrelation function in each segment is calculated using `spreadrandomlocal_meantaul`.
 
 ### stl_features {#stl_features}
 
