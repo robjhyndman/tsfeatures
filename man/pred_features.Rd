@@ -10,7 +10,7 @@ pred_features(x)
 \item{x}{the input time series}
 }
 \value{
-a vector with autocorrelation features
+a vector with prediction features
 }
 \description{
 Calculate the features that grouped as prediction set,

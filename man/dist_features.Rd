@@ -10,7 +10,7 @@ dist_features(x)
 \item{x}{the input time series}
 }
 \value{
-a vector with autocorrelation features
+a vector with distribution features
 }
 \description{
 Calculate the features that grouped as distribution set,

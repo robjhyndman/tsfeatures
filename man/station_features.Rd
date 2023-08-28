@@ -10,7 +10,7 @@ station_features(x)
 \item{x}{the input time series}
 }
 \value{
-a vector with autocorrelation features
+a vector with stationarity features
 }
 \description{
 Calculate the features that grouped as stationarity set,

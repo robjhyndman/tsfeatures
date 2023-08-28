@@ -70,7 +70,7 @@ autocorr_features <- function(x) {
 #' and \code{sampen_first}.
 #'
 #' @param x the input time series
-#' @return a vector with autocorrelation features
+#' @return a vector with prediction features
 #' @seealso \code{\link{localsimple_taures}}
 #' @seealso \code{\link{sampen_first}}
 #' @references B.D. Fulcher and N.S. Jones. hctsa: A computational framework for automated time-series phenotyping using massive feature extraction. Cell Systems 5, 527 (2017).
@@ -96,7 +96,7 @@ pred_features <- function(x) {
 #' and \code{spreadrandomlocal_meantaul_ac2}.
 #'
 #' @param x the input time series
-#' @return a vector with autocorrelation features
+#' @return a vector with stationarity features
 #' @seealso \code{\link{std1st_der}}
 #' @seealso \code{\link{spreadrandomlocal_meantaul}}
 #' @references B.D. Fulcher and N.S. Jones. hctsa: A computational framework for automated time-series phenotyping using massive feature extraction. Cell Systems 5, 527 (2017).
@@ -121,7 +121,7 @@ station_features <- function(x) {
 #' and \code{outlierinclude_mdrmd}.
 #'
 #' @param x the input time series
-#' @return a vector with autocorrelation features
+#' @return a vector with distribution features
 #' @seealso \code{\link{histogram_mode}}
 #' @seealso \code{\link{outlierinclude_mdrmd}}
 #' @references B.D. Fulcher and N.S. Jones. hctsa: A computational framework for automated time-series phenotyping using massive feature extraction. Cell Systems 5, 527 (2017).
@@ -144,7 +144,7 @@ dist_features <- function(x) {
 #' Feature in this set is \code{fluctanal_prop_r1}.
 #'
 #' @param x the input time series
-#' @return a vector with autocorrelation features
+#' @return a vector with scaling features
 #' @seealso \code{\link{fluctanal_prop_r1}}
 #' @references B.D. Fulcher and N.S. Jones. hctsa: A computational framework for automated time-series phenotyping using massive feature extraction. Cell Systems 5, 527 (2017).
 #' @references B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series analysis: the empirical structure of time series and their methods. J. Roy. Soc. Interface 10, 83 (2013).

@@ -10,7 +10,7 @@ scal_features(x)
 \item{x}{the input time series}
 }
 \value{
-a vector with autocorrelation features
+a vector with scaling features
 }
 \description{
 Calculate the features that grouped as scaling set,
