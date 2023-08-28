@@ -1,6 +1,6 @@
 Package: tsfeatures
 Title: Time Series Feature Extraction
-Version: 1.1.1
+Version: 1.1.1.9000
 Authors@R: c(
     person("Rob", "Hyndman", email = "Rob.Hyndman@monash.edu", role = c("aut","cre"), comment = c(ORCID = "0000-0002-2140-5352")),
     person("Yanfei", "Kang", role = "aut", comment = c(ORCID = "0000-0001-8769-6650")),
