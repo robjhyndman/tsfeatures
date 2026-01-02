@@ -340,7 +340,7 @@ hwl <- bind_cols(
          tsfeatures(yahoo,
            c("mean","var"), scale=FALSE, na.rm=TRUE),
          tsfeatures(yahoo,
-           c("max_level_shift","max_var_shift"), trim=TRUE)) %>%
+           c("max_level_shift","max_var_shift"), trim=TRUE)) |>
   select(mean, var, x_acf1, trend, linearity, curvature,
          seasonal_strength, peak, trough,
          entropy, lumpiness, spike, max_level_shift, max_var_shift, flat_spots,
@@ -362,11 +362,11 @@ load(tmp)
 ```{r yahoographics}
 # 2-d Feature space
 library(ggplot2)
-hwl_pca <- hwl %>%
-  na.omit() %>%
+hwl_pca <- hwl |>
+  na.omit() |>
   prcomp(scale=TRUE)
-hwl_pca$x %>%
-  as_tibble() %>%
+hwl_pca$x |>
+  as_tibble() |>
   ggplot(aes(x=PC1, y=PC2)) +
     geom_point()
 ```
@@ -397,16 +397,16 @@ khs_stl <- function(x,...) {
 ```{r khs, eval=FALSE}
 khs <- bind_cols(
   tsfeatures(M3data, c("frequency", "entropy")),
-  tsfeatures(M3data, "khs_stl", scale=FALSE)) %>%
-  select(frequency, entropy, trend, seasonal_strength, e_acf1, lambda) %>%
-  replace_na(list(seasonal_strength=0)) %>%
+  tsfeatures(M3data, "khs_stl", scale=FALSE)) |>
+  select(frequency, entropy, trend, seasonal_strength, e_acf1, lambda) |>
+  replace_na(list(seasonal_strength=0)) |>
   rename(
     Frequency = frequency,
     Entropy = entropy,
     Trend = trend,
     Season = seasonal_strength,
     ACF1 = e_acf1,
-    Lambda = lambda) %>%
+    Lambda = lambda) |>
   mutate(Period = as.factor(Frequency))
 ```
 
@@ -424,17 +424,17 @@ load(tmp)
 
 ```{r ijf2017graphs, message=FALSE}
 # Fig 1 of paper
-khs %>%
-  select(Period, Entropy, Trend, Season, ACF1, Lambda) %>%
+khs |>
+  select(Period, Entropy, Trend, Season, ACF1, Lambda) |>
   GGally::ggpairs()
 
 # 2-d Feature space (Top of Fig 2)
-khs_pca <- khs %>%
-  select(-Period) %>%
+khs_pca <- khs |>
+  select(-Period) |>
   prcomp(scale=TRUE)
-khs_pca$x %>%
-  as_tibble() %>%
-  bind_cols(Period=khs$Period) %>%
+khs_pca$x |>
+  as_tibble() |>
+  bind_cols(Period=khs$Period) |>
   ggplot(aes(x=PC1, y=PC2)) +
     geom_point(aes(col=Period))
 ```
