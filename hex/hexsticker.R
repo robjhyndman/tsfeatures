@@ -32,11 +32,11 @@ ggplot() +
   geom_from_path(aes(0.5, 0.5, path = img_cropped)) +
   annotate(
     "text",
-    x = 0.20,
-    y = 0.23,
+    x = 0.10,
+    y = 0.32,
     label = "tsfeatures",
     family = "firasans",
-    size = 36,
+    size = 37,
     colour = "#c14b14",
     angle = 0,
     hjust = 0,
