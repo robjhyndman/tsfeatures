@@ -1,0 +1,53 @@
+# How median depend on distributional outliers from software package `hctsa`
+
+Measures median as more and more outliers are included in the
+calculation according to a specified rule, of outliers being furthest
+from the mean.
+
+## Usage
+
+``` r
+outlierinclude_mdrmd(y, zscored = TRUE)
+```
+
+## Arguments
+
+- y:
+
+  the input time series (ideally z-scored)
+
+- zscored:
+
+  Should y be z-scored before computing the statistic. Default: TRUE
+
+## Value
+
+median of the median of range indices
+
+## Details
+
+The threshold for including time-series data points in the analysis
+increases from zero to the maximum deviation, in increments of
+0.01\*sigma (by default), where sigma is the standard deviation of the
+time series.
+
+At each threshold, proportion of time series points included and median
+are calculated, and outputs from the algorithm measure how these
+statistical quantities change as more extreme points are included in the
+calculation.
+
+Outliers are defined as furthest from the mean.
+
+## References
+
+B.D. Fulcher and N.S. Jones. hctsa: A computational framework for
+automated time-series phenotyping using massive feature extraction. Cell
+Systems 5, 527 (2017).
+
+B.D. Fulcher, M.A. Little, N.S. Jones Highly comparative time-series
+analysis: the empirical structure of time series and their methods. J.
+Roy. Soc. Interface 10, 83 (2013).
+
+## Author
+
+Yangzhuoran Yang

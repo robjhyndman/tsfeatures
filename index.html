@@ -8,9 +8,9 @@
 <title>Time Series Feature Extraction • tsfeatures</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/Fira_Sans-0.4.9/font.css" rel="stylesheet">
-<link href="deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/Fira_Sans-0.4.10/font.css" rel="stylesheet">
+<link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><link href="extra.css" rel="stylesheet">
 <meta property="og:title" content="Time Series Feature Extraction">
 <meta name="description" content="Methods for extracting various features from time series data. The features provided are those from Hyndman, Wang and Laptev (2013) &lt;doi:10.1109/ICDMW.2015.104&gt;, Kang, Hyndman and Smith-Miles (2017) &lt;doi:10.1016/j.ijforecast.2016.09.004&gt; and from Fulcher, Little and Jones (2013) &lt;doi:10.1098/rsif.2013.0048&gt;. Features include spectral entropy, autocorrelations, measures of the strength of seasonality and trend, and so on. Users can also define their own feature functions.">
@@ -52,7 +52,7 @@
 </nav><div class="container template-home">
 <div class="row">
   <main id="main" class="col-md-9"><div class="section level1">
-<div class="page-header"><h1 id="tsfeatures">tsfeatures<a class="anchor" aria-label="anchor" href="#tsfeatures"></a>
+<div class="page-header"><h1 id="tsfeatures-">tsfeatures <img src="reference/figures/tsfeatures-hex.png" align="right" width="150"><a class="anchor" aria-label="anchor" href="#tsfeatures-"></a>
 </h1></div>
 <!-- badges: start -->
 
@@ -122,17 +122,17 @@
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>
-<a href="https://robjhyndman.com" class="external-link">Rob Hyndman</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-2140-5352" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<a href="https://robjhyndman.com" class="external-link">Rob Hyndman</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-2140-5352" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
 <li>
-<a href="https://yanfei.site/" class="external-link">Yanfei Kang</a> <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-8769-6650" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>Pablo Montero-Manso <br><small class="roles"> Author </small>  </li>
-<li>Mitchell O'Hara-Wild <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-6729-7695" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<a href="https://yanfei.site/" class="external-link">Yanfei Kang</a> <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-8769-6650" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
+<li>Pablo Montero-Manso <br><small class="roles"> Author </small>   </li>
+<li>Mitchell O'Hara-Wild <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-6729-7695" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
 <li>
-<a href="https://thiyanga.netlify.com/" class="external-link">Thiyanga Talagala</a> <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-0656-9789" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<a href="https://thiyanga.netlify.com/" class="external-link">Thiyanga Talagala</a> <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-0656-9789" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
 <li>
-<a href="https://earo.me" class="external-link">Earo Wang</a> <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-6448-5260" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<a href="https://earo.me" class="external-link">Earo Wang</a> <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-6448-5260" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
 <li>
-<a href="https://yangzhuoranyang.com" class="external-link">Yangzhuoran Yang</a> <br><small class="roles"> Author </small>  </li>
+<a href="https://yangzhuoranyang.com" class="external-link">Yangzhuoran Yang</a> <br><small class="roles"> Author </small>   </li>
 <li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
@@ -156,7 +156,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>

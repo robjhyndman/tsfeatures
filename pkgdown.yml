@@ -1,9 +1,9 @@
 pandoc: 3.1.11
-pkgdown: 2.1.0
+pkgdown: 2.2.0
 pkgdown_sha: ~
 articles:
   tsfeatures: tsfeatures.html
-last_built: 2024-07-23T02:40Z
+last_built: 2026-01-02T04:27Z
 urls:
   reference: http://pkg.robjhyndman.com/tsfeatures/reference
   article: http://pkg.robjhyndman.com/tsfeatures/articles
