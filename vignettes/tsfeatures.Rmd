@@ -54,7 +54,7 @@ The default functions that `tsfeatures` uses to compute features are `frequency`
 
 ```{r}
 # Function from outside of tsfeatures package being used
-is.monthly <- function(x){
+is.monthly <- function(x) {
   frequency(x) == 12
 }
 tsfeatures(mylist, features = "is.monthly")
@@ -332,24 +332,35 @@ yahoo <- yahoo_data()
 
 ```{r hwl, eval=FALSE}
 hwl <- bind_cols(
-         tsfeatures(yahoo,
-           c("acf_features","entropy","lumpiness",
-             "flat_spots","crossing_points")),
-         tsfeatures(yahoo,"stl_features", s.window='periodic', robust=TRUE),
-         tsfeatures(yahoo, "max_kl_shift", width=48),
-         tsfeatures(yahoo,
-           c("mean","var"), scale=FALSE, na.rm=TRUE),
-         tsfeatures(yahoo,
-           c("max_level_shift","max_var_shift"), trim=TRUE)) |>
-  select(mean, var, x_acf1, trend, linearity, curvature,
-         seasonal_strength, peak, trough,
-         entropy, lumpiness, spike, max_level_shift, max_var_shift, flat_spots,
-         crossing_points, max_kl_shift, time_kl_shift)
+  tsfeatures(
+    yahoo,
+    c(
+      "acf_features", "entropy", "lumpiness",
+      "flat_spots", "crossing_points"
+    )
+  ),
+  tsfeatures(yahoo, "stl_features", s.window = "periodic", robust = TRUE),
+  tsfeatures(yahoo, "max_kl_shift", width = 48),
+  tsfeatures(yahoo,
+    c("mean", "var"),
+    scale = FALSE, na.rm = TRUE
+  ),
+  tsfeatures(yahoo,
+    c("max_level_shift", "max_var_shift"),
+    trim = TRUE
+  )
+) |>
+  select(
+    mean, var, x_acf1, trend, linearity, curvature,
+    seasonal_strength, peak, trough,
+    entropy, lumpiness, spike, max_level_shift, max_var_shift, flat_spots,
+    crossing_points, max_kl_shift, time_kl_shift
+  )
 ```
 
 ```{r hwlsave, eval=FALSE, echo=FALSE}
 # Now store the computed results for later use
-save(hwl, file="../extra-data/hwl.rda")
+save(hwl, file = "../extra-data/hwl.rda")
 ```
 
 ```{r hwlquick, include=FALSE}
@@ -364,11 +375,11 @@ load(tmp)
 library(ggplot2)
 hwl_pca <- hwl |>
   na.omit() |>
-  prcomp(scale=TRUE)
+  prcomp(scale = TRUE)
 hwl_pca$x |>
   as_tibble() |>
-  ggplot(aes(x=PC1, y=PC2)) +
-    geom_point()
+  ggplot(aes(x = PC1, y = PC2)) +
+  geom_point()
 ```
 
 ### Kang, Hyndman & Smith-Miles (IJF 2017)
@@ -382,37 +393,41 @@ library(dplyr)
 library(tidyr)
 library(forecast)
 
-M3data <- purrr::map(Mcomp::M3,
+M3data <- purrr::map(
+  Mcomp::M3,
   function(x) {
-      tspx <- tsp(x$x)
-      ts(c(x$x,x$xx), start=tspx[1], frequency=tspx[3])
-  })
-khs_stl <- function(x,...) {
-  lambda <- BoxCox.lambda(x, lower=0, upper=1, method='loglik')
+    tspx <- tsp(x$x)
+    ts(c(x$x, x$xx), start = tspx[1], frequency = tspx[3])
+  }
+)
+khs_stl <- function(x, ...) {
+  lambda <- BoxCox.lambda(x, lower = 0, upper = 1, method = "loglik")
   y <- BoxCox(x, lambda)
-  c(stl_features(y, s.window='periodic', robust=TRUE, ...), lambda=lambda)
+  c(stl_features(y, s.window = "periodic", robust = TRUE, ...), lambda = lambda)
 }
 ```
 
 ```{r khs, eval=FALSE}
 khs <- bind_cols(
   tsfeatures(M3data, c("frequency", "entropy")),
-  tsfeatures(M3data, "khs_stl", scale=FALSE)) |>
+  tsfeatures(M3data, "khs_stl", scale = FALSE)
+) |>
   select(frequency, entropy, trend, seasonal_strength, e_acf1, lambda) |>
-  replace_na(list(seasonal_strength=0)) |>
+  replace_na(list(seasonal_strength = 0)) |>
   rename(
     Frequency = frequency,
     Entropy = entropy,
     Trend = trend,
     Season = seasonal_strength,
     ACF1 = e_acf1,
-    Lambda = lambda) |>
+    Lambda = lambda
+  ) |>
   mutate(Period = as.factor(Frequency))
 ```
 
 ```{r khssave, eval=FALSE, echo=FALSE}
 # Now store the computed results for later use
-save(khs, file="../extra-data/khs.rda")
+save(khs, file = "../extra-data/khs.rda")
 ```
 
 ```{r khsquick, include=FALSE}
@@ -431,12 +446,12 @@ khs |>
 # 2-d Feature space (Top of Fig 2)
 khs_pca <- khs |>
   select(-Period) |>
-  prcomp(scale=TRUE)
+  prcomp(scale = TRUE)
 khs_pca$x |>
   as_tibble() |>
-  bind_cols(Period=khs$Period) |>
-  ggplot(aes(x=PC1, y=PC2)) +
-    geom_point(aes(col=Period))
+  bind_cols(Period = khs$Period) |>
+  ggplot(aes(x = PC1, y = PC2)) +
+  geom_point(aes(col = Period))
 ```
 
 ## Resources  {#ref}

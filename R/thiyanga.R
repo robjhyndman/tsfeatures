@@ -12,18 +12,33 @@
 #' @export
 acf_features <- function(x) {
   m <- frequency(x)
-  if(length(x) > 1) {
-    acfx <- acf(x, lag.max = max(10L, m), plot = FALSE, na.action=na.pass)$acf[-1L]
+  if (length(x) > 1) {
+    acfx <- acf(
+      x,
+      lag.max = max(10L, m),
+      plot = FALSE,
+      na.action = na.pass
+    )$acf[-1L]
   } else {
     acfx <- NA
   }
-  if(length(x) > 10) {
-    acfdiff1x <- acf(diff(x, differences = 1), lag.max = 10L, plot = FALSE, na.action = na.pass)$acf[-1L]
+  if (length(x) > 10) {
+    acfdiff1x <- acf(
+      diff(x, differences = 1),
+      lag.max = 10L,
+      plot = FALSE,
+      na.action = na.pass
+    )$acf[-1L]
   } else {
     acfdiff1x <- NA
   }
-  if(length(x) > 11) {
-    acfdiff2x <- acf(diff(x, differences = 2), lag.max = 10L, plot = FALSE, na.action = na.pass)$acf[-1L]
+  if (length(x) > 11) {
+    acfdiff2x <- acf(
+      diff(x, differences = 2),
+      lag.max = 10L,
+      plot = FALSE,
+      na.action = na.pass
+    )$acf[-1L]
   } else {
     acfdiff2x <- NA
   }
@@ -76,29 +91,33 @@ acf_features <- function(x) {
 #' @export
 pacf_features <- function(x) {
   m <- frequency(x)
-  if(length(x) > 1){
+  if (length(x) > 1) {
     pacfx <- pacf(x, lag.max = max(5L, m), plot = FALSE)$acf
   } else {
     pacfx <- NA
   }
 
   # Sum of first 5 PACs squared
-  if(length(x) > 5) {
+  if (length(x) > 5) {
     pacf_5 <- sum((pacfx[seq(5L)])^2)
   } else {
     pacf_5 <- NA
   }
 
   # Sum of first 5 PACs of difference series squared
-  if(length(x) > 6) {
-    diff1_pacf_5 <- sum(pacf(diff(x, differences = 1L), lag.max = 5L, plot = FALSE)$acf^2)
+  if (length(x) > 6) {
+    diff1_pacf_5 <- sum(
+      pacf(diff(x, differences = 1L), lag.max = 5L, plot = FALSE)$acf^2
+    )
   } else {
     diff1_pacf_5 <- NA
   }
 
   # Sum of first 5 PACs of twice differenced series squared
-  if(length(x) > 7) {
-    diff2_pacf_5 <- sum(pacf(diff(x, differences = 2L), lag.max = 5L, plot = FALSE)$acf^2)
+  if (length(x) > 7) {
+    diff2_pacf_5 <- sum(
+      pacf(diff(x, differences = 2L), lag.max = 5L, plot = FALSE)$acf^2
+    )
   } else {
     diff2_pacf_5 <- NA
   }
@@ -138,8 +157,10 @@ holt_parameters <- function(x) {
 #' @export
 hw_parameters <- function(x) {
   # parameter estimates of holt winters additive trend seasonal model
-  hw_fit <- purrr::possibly(forecast::ets,
-    list(par = c(alpha = NA, beta = NA, gamma = NA)))(x, model = c("AAA"))
+  hw_fit <- purrr::possibly(
+    forecast::ets,
+    list(par = c(alpha = NA, beta = NA, gamma = NA))
+  )(x, model = c("AAA"))
   return(hw_fit$par[c("alpha", "beta", "gamma")])
 }
 # #' Autocorrelation coefficient at lag 1 of the residual
@@ -165,5 +186,5 @@ hw_parameters <- function(x) {
 #' @author Thiyanga Talagala
 #' @export
 zero_proportion <- function(x, tol = 1e-8) {
-  mean(abs(x) < tol, na.rm=TRUE)
+  mean(abs(x) < tol, na.rm = TRUE)
 }

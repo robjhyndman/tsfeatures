@@ -1,4 +1,3 @@
-
 #' Time series features based on tiled windows
 #'
 #' Computes feature of a time series based on tiled (non-overlapping) windows.
@@ -11,16 +10,15 @@
 #' @author Earo Wang and Rob J Hyndman
 #' @export
 
-lumpiness <- function(x, width = ifelse(frequency(x) > 1,
-                        frequency(x), 10
-                      )) {
+lumpiness <- function(x, width = ifelse(frequency(x) > 1, frequency(x), 10)) {
   x <- scalets(x)
   nr <- length(x)
   lo <- seq(1, nr, by = width)
   up <- seq(width, nr + width, by = width)
   nsegs <- nr / width
-  varx <- map_dbl(seq_len(nsegs), function(idx)
-    var(x[lo[idx]:up[idx]], na.rm = TRUE))
+  varx <- map_dbl(seq_len(nsegs), function(idx) {
+    var(x[lo[idx]:up[idx]], na.rm = TRUE)
+  })
   if (length(x) < 2 * width) {
     lumpiness <- 0
   } else {
@@ -32,16 +30,15 @@ lumpiness <- function(x, width = ifelse(frequency(x) > 1,
 #' @rdname lumpiness
 #' @export
 
-stability <- function(x, width = ifelse(frequency(x) > 1,
-                        frequency(x), 10
-                      )) {
+stability <- function(x, width = ifelse(frequency(x) > 1, frequency(x), 10)) {
   x <- scalets(x)
   nr <- length(x)
   lo <- seq(1, nr, by = width)
   up <- seq(width, nr + width, by = width)
   nsegs <- nr / width
-  meanx <- map_dbl(seq_len(nsegs), function(idx)
-    mean(x[lo[idx]:up[idx]], na.rm = TRUE))
+  meanx <- map_dbl(seq_len(nsegs), function(idx) {
+    mean(x[lo[idx]:up[idx]], na.rm = TRUE)
+  })
   if (length(x) < 2 * width) {
     stability <- 0
   } else {
@@ -65,10 +62,13 @@ stability <- function(x, width = ifelse(frequency(x) > 1,
 #' @author Earo Wang and Rob J Hyndman
 #' @export
 
-max_level_shift <- function(x, width = ifelse(frequency(x) > 1,
-                              frequency(x), 10
-                            )) {
-  suppressWarnings(rollmean <- try(RcppRoll::roll_mean(x, width, na.rm = TRUE), silent = TRUE))
+max_level_shift <- function(
+  x,
+  width = ifelse(frequency(x) > 1, frequency(x), 10)
+) {
+  suppressWarnings(
+    rollmean <- try(RcppRoll::roll_mean(x, width, na.rm = TRUE), silent = TRUE)
+  )
   if ("try-error" %in% class(rollmean)) {
     maxmeans <- NA_real_
     maxidx <- NA_real_
@@ -77,12 +77,10 @@ max_level_shift <- function(x, width = ifelse(frequency(x) > 1,
     if (length(means) == 0L) {
       maxmeans <- 0
       maxidx <- NA_real_
-    }
-    else if (all(is.na(means))) {
+    } else if (all(is.na(means))) {
       maxmeans <- NA_real_
       maxidx <- NA_real_
-    }
-    else {
+    } else {
       maxmeans <- max(means, na.rm = TRUE)
       maxidx <- which.max(means) + width - 1L
     }
@@ -93,10 +91,13 @@ max_level_shift <- function(x, width = ifelse(frequency(x) > 1,
 #' @rdname max_level_shift
 #' @export
 
-max_var_shift <- function(x, width = ifelse(frequency(x) > 1,
-                            frequency(x), 10
-                          )) {
-  suppressWarnings(rollvar <- try(RcppRoll::roll_var(x, width, na.rm = TRUE), silent = TRUE))
+max_var_shift <- function(
+  x,
+  width = ifelse(frequency(x) > 1, frequency(x), 10)
+) {
+  suppressWarnings(
+    rollvar <- try(RcppRoll::roll_var(x, width, na.rm = TRUE), silent = TRUE)
+  )
   if ("try-error" %in% class(rollvar)) {
     maxvar <- NA_real_
     maxidx <- NA_real_
@@ -106,12 +107,10 @@ max_var_shift <- function(x, width = ifelse(frequency(x) > 1,
     if (length(vars) == 0L) {
       maxvar <- 0
       maxidx <- NA_real_
-    }
-    else if (all(is.na(vars))) {
+    } else if (all(is.na(vars))) {
       maxvar <- NA_real_
       maxidx <- NA_real_
-    }
-    else {
+    } else {
       maxvar <- max(vars, na.rm = TRUE)
       maxidx <- which.max(vars) + width - 1L
     }
@@ -122,9 +121,10 @@ max_var_shift <- function(x, width = ifelse(frequency(x) > 1,
 #' @rdname max_level_shift
 #' @export
 
-max_kl_shift <- function(x, width = ifelse(frequency(x) > 1,
-                           frequency(x), 10
-                         )) {
+max_kl_shift <- function(
+  x,
+  width = ifelse(frequency(x) > 1, frequency(x), 10)
+) {
   gw <- 100 # grid width
   xgrid <- seq(min(x, na.rm = TRUE), max(x, na.rm = TRUE), length = gw)
   grid <- xgrid[2L] - xgrid[1L]
@@ -147,8 +147,11 @@ max_kl_shift <- function(x, width = ifelse(frequency(x) > 1,
     dens.mat[i, ] <- dnorm(xgrid, mean = x[i], sd = bw)
   }
   dens.mat <- pmax(dens.mat, dnorm(38))
-  rmean <- RcppRoll::roll_mean(dens.mat,
-    n = width, na.rm = TRUE, fill = NA,
+  rmean <- RcppRoll::roll_mean(
+    dens.mat,
+    n = width,
+    na.rm = TRUE,
+    fill = NA,
     align = "right"
   ) # by column
   # lo <- seq(1, lastrep - width + 1)
@@ -156,15 +159,19 @@ max_kl_shift <- function(x, width = ifelse(frequency(x) > 1,
   lo <- seq(1, lenx - width + 1)
   hi <- seq(width + 1, lenx)
   seqidx <- min(length(lo), length(hi))
-  kl <- sapply(1:seqidx, function(i) sum(rmean[lo[i], ] *
-      (log(rmean[lo[i], ]) - log(rmean[hi[i], ])) *
-      grid, na.rm = TRUE))
+  kl <- sapply(1:seqidx, function(i) {
+    sum(
+      rmean[lo[i], ] *
+        (log(rmean[lo[i], ]) - log(rmean[hi[i], ])) *
+        grid,
+      na.rm = TRUE
+    )
+  })
   diffkl <- diff(kl, na.rm = TRUE)
   if (length(diffkl) == 0L) {
     diffkl <- 0
     maxidx <- NA_real_
-  }
-  else {
+  } else {
     maxidx <- which.max(diffkl) + width - 1L
   }
   return(c(max_kl_shift = max(diffkl, na.rm = TRUE), time_kl_shift = maxidx))
@@ -196,7 +203,8 @@ crossing_points <- function(x) {
 #' @export
 
 flat_spots <- function(x) {
-  cutx <- try(cut(x, breaks = 10, include.lowest = TRUE, labels = FALSE),
+  cutx <- try(
+    cut(x, breaks = 10, include.lowest = TRUE, labels = FALSE),
     silent = TRUE
   )
   if ("try-error" %in% class(cutx)) {
@@ -242,7 +250,11 @@ flat_spots <- function(x) {
 
 hurst <- function(x) {
   # Hurst=d+0.5 where d is fractional difference.
-  return(c(hurst = suppressWarnings(fracdiff::fracdiff(na.contiguous(x), 0, 0)[["d"]] + 0.5)))
+  return(c(
+    hurst = suppressWarnings(
+      fracdiff::fracdiff(na.contiguous(x), 0, 0)[["d"]] + 0.5
+    )
+  ))
 }
 
 #' Unit Root Test Statistics
@@ -258,8 +270,8 @@ hurst <- function(x) {
 #' @author Pablo Montero-Manso
 #' @export
 unitroot_kpss <- function(x, ...) {
-  kpss <- try(urca::ur.kpss(x, ...)@teststat, silent=TRUE)
-  if("try-error" %in% class(kpss)) {
+  kpss <- try(urca::ur.kpss(x, ...)@teststat, silent = TRUE)
+  if ("try-error" %in% class(kpss)) {
     warning("Error in unitroot_kpss")
     kpss <- NA
   }
@@ -270,7 +282,7 @@ unitroot_kpss <- function(x, ...) {
 #' @export
 unitroot_pp <- function(x, ...) {
   pp <- try(urca::ur.pp(x, ...)@teststat, silent = TRUE)
-  if("try-error" %in% class(pp)) {
+  if ("try-error" %in% class(pp)) {
     warning("Error in unitroot_pp")
     pp <- NA
   }

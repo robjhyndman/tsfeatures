@@ -26,18 +26,26 @@
 #' tsfeatures(mylist)
 #' @author Rob J Hyndman
 #' @export
-tsfeatures <- function(tslist,
-                       features = c("frequency", "stl_features", "entropy", "acf_features"),
-                       scale = TRUE, trim = FALSE, trim_amount = 0.1,
-                       parallel = FALSE, multiprocess = future::multisession, na.action = na.pass, ...) {
+tsfeatures <- function(
+  tslist,
+  features = c("frequency", "stl_features", "entropy", "acf_features"),
+  scale = TRUE,
+  trim = FALSE,
+  trim_amount = 0.1,
+  parallel = FALSE,
+  multiprocess = future::multisession,
+  na.action = na.pass,
+  ...
+) {
   if (!is.list(tslist)) {
     tslist <- as.list(as.ts(tslist))
-  }
-  else{
+  } else {
     tslist <- map(tslist, as.ts)
   }
-  if (scale && any(map_dbl(tslist, var, na.rm=TRUE) == 0)){
-    warning("Some series are constant and cannot be scaled, so scaling has been disabled (`scale = FALSE`).")
+  if (scale && any(map_dbl(tslist, var, na.rm = TRUE) == 0)) {
+    warning(
+      "Some series are constant and cannot be scaled, so scaling has been disabled (`scale = FALSE`)."
+    )
     scale <- FALSE
   }
   if (scale) {
@@ -61,18 +69,20 @@ tsfeatures <- function(tslist,
     on.exit(future::plan(old_plan))
   }
   for (i in seq_along(features)) {
-
     if (parallel) {
       flist[[i]] <- furrr::future_map(tslist, func[[i]], ...)
-    }
-    else {
+    } else {
       flist[[i]] <- map(tslist, func[[i]], ...)
     }
 
     # Check names
     if (is.null(names(flist[[i]][[1]]))) {
-      if(length(flist[[i]][[1]]) != 1L) {
-        stop(paste("Function",features[i],"not returning named feature vector"))
+      if (length(flist[[i]][[1]]) != 1L) {
+        stop(paste(
+          "Function",
+          features[i],
+          "not returning named feature vector"
+        ))
       }
       flist[[i]] <- map(
         flist[[i]],
@@ -89,8 +99,9 @@ tsfeatures <- function(tslist,
 
   # Unpack features into a list of numeric vectors
   featurelist <- list()
-  for (i in seq_along(tslist))
+  for (i in seq_along(tslist)) {
     featurelist[[i]] <- unlist(map(flist, function(u) u[[i]]))
+  }
 
   # Find feature names
   featurenames <- map(featurelist, names)
@@ -105,8 +116,9 @@ tsfeatures <- function(tslist,
   colnames(fmat) <- fnames
   rownames(fmat) <- names(tslist)
 
-  for (i in seq_along(tslist))
+  for (i in seq_along(tslist)) {
     fmat[i, featurenames[[i]]] <- featurelist[[i]][featurenames[[i]]]
+  }
 
   return(tibble::as_tibble(fmat))
 }
@@ -121,8 +133,7 @@ scalets <- function(x) {
   if ("msts" %in% class(x)) {
     msts <- attributes(x)$msts
     y <- forecast::msts(scaledx, seasonal.periods = msts)
-  }
-  else {
+  } else {
     y <- as.ts(scaledx)
   }
   tsp(y) <- tsp(x)
@@ -151,7 +162,12 @@ rename_duplicate_features <- function(fun_names, feat_list) {
       names_sec_fun <- names(feat_list[[j]][[1]])
       # look for at least one match in the names of the features
       if (Reduce("|", names_first_fun %in% names_sec_fun)) {
-        warning(paste("Conflicting feature names in functions: ", fun_names[[i]], " and ", fun_names[[j]]))
+        warning(paste(
+          "Conflicting feature names in functions: ",
+          fun_names[[i]],
+          " and ",
+          fun_names[[j]]
+        ))
         names_first_fun <- paste(fun_names[[i]], "_", names_first_fun, sep = "")
         for (idx in seq_along(feat_list[[i]])) {
           names(feat_list[[i]][[idx]]) <- names_first_fun

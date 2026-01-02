@@ -1,4 +1,3 @@
-
 #' Strength of trend and seasonality of a time series
 #'
 #' Computes various measures of trend and seasonality of a time series based on
@@ -16,22 +15,20 @@ stl_features <- function(x, ...) {
   if ("msts" %in% class(x)) {
     msts <- attributes(x)$msts
     nperiods <- length(msts)
-  }
-  else if ("ts" %in% class(x)) {
+  } else if ("ts" %in% class(x)) {
     msts <- frequency(x)
     nperiods <- msts > 1
-    if(length(x) <= 2*msts) {
+    if (length(x) <= 2 * msts) {
       warning("Insufficient data to compute STL decomposition")
       x <- c(x)
     }
     season <- 0
-  }
-  else {
+  } else {
     msts <- 1
     nperiods <- 0L
     season <- 0
   }
-  if(NCOL(x) > 1){
+  if (NCOL(x) > 1) {
     stop("x must be a univariate time series.")
   }
   trend <- linearity <- curvature <- season <- spike <- peak <- trough <- acfremainder <- NA
@@ -59,9 +56,9 @@ stl_features <- function(x, ...) {
   nseas <- NCOL(seasonal)
 
   # Measure of trend strength
-  if(varx < .Machine$double.eps)
+  if (varx < .Machine$double.eps) {
     trend <- 0
-  else if (vardeseason / varx < 1e-10) {
+  } else if (vardeseason / varx < 1e-10) {
     trend <- 0
   } else {
     trend <- max(0, min(1, 1 - vare / vardeseason))
@@ -70,13 +67,16 @@ stl_features <- function(x, ...) {
   if (nseas > 0) {
     # Measure of seasonal strength
     season <- numeric(nseas)
-    for (i in seq(nseas))
-      season[i] <- max(0, min(1, 1 - vare / var(remainder + seasonal[, i], na.rm = TRUE)))
+    for (i in seq(nseas)) {
+      season[i] <- max(
+        0,
+        min(1, 1 - vare / var(remainder + seasonal[, i], na.rm = TRUE))
+      )
+    }
 
     # Find time of peak and trough for each component
     peak <- trough <- numeric(nseas)
-    for (i in seq(nseas))
-    {
+    for (i in seq(nseas)) {
       startx <- start(x)[2L] - 1L
       pk <- (startx + which.max(seasonal[, i])) %% msts[i]
       th <- (startx + which.min(seasonal[, i])) %% msts[i]
@@ -91,7 +91,7 @@ stl_features <- function(x, ...) {
   spike <- var(varloo, na.rm = TRUE)
 
   # Compute measures of linearity and curvature
-  tren.coef <- coef(lm(trend0 ~ poly(seq(n), degree = min(n-1, 2L))))[2L:3L]
+  tren.coef <- coef(lm(trend0 ~ poly(seq(n), degree = min(n - 1, 2L))))[2L:3L]
   linearity <- tren.coef[1L]
   curvature <- tren.coef[2L]
 
@@ -100,12 +100,22 @@ stl_features <- function(x, ...) {
 
   # Assemble results
   output <- c(
-    nperiods = nperiods, seasonal_period = msts, trend = trend,
-    spike = spike, linearity = unname(linearity), curvature = unname(curvature),
-    e_acf1 = acfremainder[1L], e_acf10 = acfremainder[2L]
+    nperiods = nperiods,
+    seasonal_period = msts,
+    trend = trend,
+    spike = spike,
+    linearity = unname(linearity),
+    curvature = unname(curvature),
+    e_acf1 = acfremainder[1L],
+    e_acf10 = acfremainder[2L]
   )
   if (nseas > 0) {
-    output <- c(output, seasonal_strength = season, peak = peak, trough = trough)
+    output <- c(
+      output,
+      seasonal_strength = season,
+      peak = peak,
+      trough = trough
+    )
   }
 
   return(output)

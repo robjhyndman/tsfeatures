@@ -38,7 +38,12 @@ heterogeneity <- function(x) {
 
   # compare Box test of squared residuals before and after fitting garch
   LBstat2 <- NA
-  try(LBstat2 <- sum(acf(na.contiguous(garch.fit.std^2), lag.max = 12L, plot = FALSE)$acf[-1L]^2),
+  try(
+    LBstat2 <- sum(
+      acf(na.contiguous(garch.fit.std^2), lag.max = 12L, plot = FALSE)$acf[
+        -1L
+      ]^2
+    ),
     silent = TRUE
   )
   output <- c(
@@ -67,8 +72,10 @@ heterogeneity <- function(x) {
 #' @export
 
 nonlinearity <- function(x) {
-  X2 <- tryCatch(tseries::terasvirta.test(as.ts(x), type = "Chisq")$stat,
-                 error = function(e) NA)
+  X2 <- tryCatch(
+    tseries::terasvirta.test(as.ts(x), type = "Chisq")$stat,
+    error = function(e) NA
+  )
   c(nonlinearity = 10 * unname(X2) / length(x))
 }
 
@@ -86,7 +93,7 @@ nonlinearity <- function(x) {
 #' @export
 
 arch_stat <- function(x, lags = 12, demean = TRUE) {
-  if (length(x) <= lags+1) {
+  if (length(x) <= lags + 1) {
     return(c(ARCH.LM = NA_real_))
   }
   if (demean) {
@@ -99,6 +106,6 @@ arch_stat <- function(x, lags = 12, demean = TRUE) {
   } else {
     arch.lm <- summary(fit)
     S <- arch.lm$r.squared #* NROW(mat)
-    return(c(ARCH.LM = if(is.nan(S)) 1 else S))
+    return(c(ARCH.LM = if (is.nan(S)) 1 else S))
   }
 }
