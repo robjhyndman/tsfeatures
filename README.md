@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# tsfeatures
+# tsfeatures <img src="man/figures/tsfeatures-hex.png" align="right" width = 150 />
 
 <!-- badges: start -->
 

@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# tsfeatures
+# tsfeatures <img src="man/figures/tsfeatures-hex.png" align="right" width = 150 />
 
 <!-- badges: start -->
   [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/tsfeatures)](https://cran.r-project.org/package=tsfeatures)
