@@ -33,6 +33,8 @@
 
 - **Bohan Zhang**. Contributor.
 
+- **Trent Henderson**. Contributor.
+
 ## Citation
 
 Source:
@@ -40,12 +42,12 @@ Source:
 
 Hyndman R, Kang Y, Montero-Manso P, O'Hara-Wild M, Talagala T, Wang E,
 Yang Y (2026). *tsfeatures: Time Series Feature Extraction*. R package
-version 1.1.1.9000, <https://pkg.robjhyndman.com/tsfeatures/>.
+version 1.2.0.0, <https://pkg.robjhyndman.com/tsfeatures/>.
 
     @Manual{,
       title = {tsfeatures: Time Series Feature Extraction},
       author = {Rob Hyndman and Yanfei Kang and Pablo Montero-Manso and Mitchell O'Hara-Wild and Thiyanga Talagala and Earo Wang and Yangzhuoran Yang},
       year = {2026},
-      note = {R package version 1.1.1.9000},
+      note = {R package version 1.2.0.0},
       url = {https://pkg.robjhyndman.com/tsfeatures/},
     }

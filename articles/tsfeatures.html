@@ -7,8 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Introduction to the tsfeatures package • tsfeatures</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Fira_Sans-0.4.10/font.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/Fira_Sans-0.4.10/font.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
@@ -23,7 +23,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">tsfeatures</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.1.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,7 +59,7 @@
                         <h4 data-toc-skip class="author">Yangzhuoran
 Yang and Rob J Hyndman</h4>
             
-            <h4 data-toc-skip class="date">2026-01-02</h4>
+            <h4 data-toc-skip class="date">2026-06-13</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/robjhyndman/tsfeatures/blob/master/vignettes/tsfeatures.Rmd" class="external-link"><code>vignettes/tsfeatures.Rmd</code></a></small>
       <div class="d-none name"><code>tsfeatures.Rmd</code></div>
@@ -333,10 +333,10 @@ median of range indices.</li>
 <h4 id="entropy">entropy<a class="anchor" aria-label="anchor" href="#entropy"></a>
 </h4>
 <p>The spectral <code>entropy</code> is the Shannon entropy
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><msubsup><mo>∫</mo><mrow><mo>−</mo><mi>π</mi></mrow><mi>π</mi></msubsup><mover><mi>f</mi><mo accent="true">̂</mo></mover><mrow><mo stretchy="true" form="prefix">(</mo><mi>λ</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>log</mo><mover><mi>f</mi><mo accent="true">̂</mo></mover><mrow><mo stretchy="true" form="prefix">(</mo><mi>λ</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>d</mi><mi>λ</mi><mo>,</mo></mrow><annotation encoding="application/x-tex">
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>−</mi><msubsup><mo>∫</mo><mrow><mi>−</mi><mi>π</mi></mrow><mi>π</mi></msubsup><mover><mi>f</mi><mo accent="true">̂</mo></mover><mo stretchy="false" form="prefix">(</mo><mi>λ</mi><mo stretchy="false" form="postfix">)</mo><mrow><mi mathvariant="normal">log</mi><mo>⁡</mo></mrow><mover><mi>f</mi><mo accent="true">̂</mo></mover><mo stretchy="false" form="prefix">(</mo><mi>λ</mi><mo stretchy="false" form="postfix">)</mo><mi>d</mi><mi>λ</mi><mo>,</mo></mrow><annotation encoding="application/x-tex">
   -\int^\pi_{-\pi}\hat{f}(\lambda)\log\hat{f}(\lambda) d\lambda,
 </annotation></semantics></math> where
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mi>f</mi><mo accent="true">̂</mo></mover><mrow><mo stretchy="true" form="prefix">(</mo><mi>λ</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\hat{f}(\lambda)</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mi>f</mi><mo accent="true">̂</mo></mover><mo stretchy="false" form="prefix">(</mo><mi>λ</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\hat{f}(\lambda)</annotation></semantics></math>
 is an estimate of the spectral density of the data. This measures the
 “forecastability” of a time series, where low values indicate a high
 signal-to-noise ratio, and large values occur when a series is difficult
@@ -373,14 +373,14 @@ run length within any single interval.</p>
 the time series. First, we pre-whiten the time series to remove the
 mean, trend, and autoregressive (AR) information (Barbour &amp; Parker
 <a href="#ref">2014</a>). Then we fit a
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><mi>A</mi><mi>R</mi><mi>C</mi><mi>H</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>,</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">GARCH(1,1)</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><mi>A</mi><mi>R</mi><mi>C</mi><mi>H</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>,</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">GARCH(1,1)</annotation></semantics></math>
 model to the pre-whitened time series,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>x</mi><mi>t</mi></msub><annotation encoding="application/x-tex">x_t</annotation></semantics></math>,
 to measure for autoregressive conditional heteroskedasticity (ARCH)
 effects. The residuals from this model,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>z</mi><mi>t</mi></msub><annotation encoding="application/x-tex">z_t</annotation></semantics></math>,
 are also measured for ARCH effects using a second
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><mi>A</mi><mi>R</mi><mi>C</mi><mi>H</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>,</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">GARCH(1,1)</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><mi>A</mi><mi>R</mi><mi>C</mi><mi>H</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>,</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">GARCH(1,1)</annotation></semantics></math>
 model.</p>
 <ul>
 <li>
@@ -412,6 +412,9 @@ values are used in the Lagrange-multiplier test of Engle (<a href="#ref">1982</a
 in the Ljung-Box test proposed by Ljung &amp; Box (<a href="#ref">1978</a>).</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/heterogeneity.html">heterogeneity</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Registered S3 method overwritten by 'quantmod':</span></span>
+<span><span class="co">#&gt;   method            from</span></span>
+<span><span class="co">#&gt;   as.zoo.data.frame zoo</span></span>
 <span><span class="co">#&gt;  arch_acf garch_acf   arch_r2  garch_r2 </span></span>
 <span><span class="co">#&gt;    0.2296    0.2277    0.2106    0.2102</span></span></code></pre></div>
 </div>
@@ -491,7 +494,7 @@ time index of the shift.</p>
 <p>The <code>nonlinearity</code> coefficient is computed using a
 modification of the statistic used in Teräsvirta’s nonlinearity test.
 Teräsvirta’s test uses a statistic
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>X</mi><mn>2</mn></msup><mo>=</mo><mi>T</mi><mo>log</mo><mrow><mo stretchy="true" form="prefix">(</mo><mtext mathvariant="normal">SSE</mtext><mn>1</mn><mi>/</mi><mtext mathvariant="normal">SSE</mtext><mn>0</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">X^2=T\log(\text{SSE}1/\text{SSE}0)</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>X</mi><mn>2</mn></msup><mo>=</mo><mi>T</mi><mrow><mi mathvariant="normal">log</mi><mo>⁡</mo></mrow><mo stretchy="false" form="prefix">(</mo><mtext mathvariant="normal">SSE</mtext><mn>1</mn><mi>/</mi><mtext mathvariant="normal">SSE</mtext><mn>0</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">X^2=T\log(\text{SSE}1/\text{SSE}0)</annotation></semantics></math>
 where SSE1 and SSE0 are the sum of squared residuals from a nonlinear
 and linear autoregression respectively. This is non-ergodic, so instead,
 we define it as
@@ -612,17 +615,17 @@ is the
 seasonal component and
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>e</mi><mi>t</mi></msub><annotation encoding="application/x-tex">e_t</annotation></semantics></math>
 is a remainder component. The components are estimated iteratively. Let
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msubsup><mi>s</mi><mrow><mi>i</mi><mo>,</mo><mi>t</mi></mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>k</mi><mo stretchy="true" form="postfix">)</mo></mrow></msubsup><annotation encoding="application/x-tex">s^{(k)}_{i,t}</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msubsup><mi>s</mi><mrow><mi>i</mi><mo>,</mo><mi>t</mi></mrow><mrow><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo stretchy="false" form="postfix">)</mo></mrow></msubsup><annotation encoding="application/x-tex">s^{(k)}_{i,t}</annotation></semantics></math>
 be the estimate of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>s</mi><mi>i</mi></msub><mo>,</mo><mi>t</mi></mrow><annotation encoding="application/x-tex">s_i,t</annotation></semantics></math>
 at the
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>th
 iteration, with initial values given as
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>s</mi><mrow><mi>i</mi><mo>,</mo><mi>t</mi></mrow><mrow><mo stretchy="true" form="prefix">(</mo><mn>0</mn><mo stretchy="true" form="postfix">)</mo></mrow></msubsup><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">s^{(0)}_{i,t}=0</annotation></semantics></math>.
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>s</mi><mrow><mi>i</mi><mo>,</mo><mi>t</mi></mrow><mrow><mo stretchy="false" form="prefix">(</mo><mn>0</mn><mo stretchy="false" form="postfix">)</mo></mrow></msubsup><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">s^{(0)}_{i,t}=0</annotation></semantics></math>.
 The we apply an STL decomposition to
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mi>t</mi></msub><mo>−</mo><msubsup><mo>∑</mo><mrow><mi>j</mi><mo>≠</mo><mn>1</mn></mrow><mrow><mi>j</mi><mo>=</mo><mn>1</mn></mrow></msubsup><msup><mrow></mrow><msup><mi></mi><mi>M</mi></msup></msup><msubsup><mi>s</mi><mrow><mi>j</mi><mo>,</mo><mi>t</mi></mrow><mrow><mi>k</mi><mo>−</mo><mn>1</mn></mrow></msubsup></mrow><annotation encoding="application/x-tex">x_t-\sum^{j=1}_{j\neq1}{}^{^{M}}s^{k-1}_{j,t}</annotation></semantics></math>
 to obtained updated estimates
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msubsup><mi>s</mi><mrow><mi>i</mi><mo>,</mo><mi>t</mi></mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>k</mi><mo stretchy="true" form="postfix">)</mo></mrow></msubsup><annotation encoding="application/x-tex">s^{(k)}_{i,t}</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msubsup><mi>s</mi><mrow><mi>i</mi><mo>,</mo><mi>t</mi></mrow><mrow><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo stretchy="false" form="postfix">)</mo></mrow></msubsup><annotation encoding="application/x-tex">s^{(k)}_{i,t}</annotation></semantics></math>
 for
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mn>1</mn><mo>,</mo><mn>2</mn><mo>,</mo><mi>…</mi></mrow><annotation encoding="application/x-tex">k=1,2,\ldots</annotation></semantics></math>.
 In practice, this converges quickly and only two iterations are
@@ -635,7 +638,7 @@ where
 is computed using Friedman’s “super smoother” (Friedman <a href="#ref">1984</a>).</p>
 <p>Strength of trend (<code>trend</code>) and strength of seasonality
 (<code>seasonal.strength</code>) are defined as
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">trend</mtext><mo>=</mo><mn>1</mn><mo>−</mo><mfrac><mrow><mtext mathvariant="normal">Var</mtext><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>e</mi><mi>t</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><mrow><mtext mathvariant="normal">Var</mtext><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>f</mi><mi>t</mi></msub><mo>+</mo><msub><mi>e</mi><mi>t</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mspace width="1.0em"></mspace><mtext mathvariant="normal">and</mtext><mspace width="1.0em"></mspace><mtext mathvariant="normal">seasonal.strength</mtext><mo>=</mo><mn>1</mn><mo>−</mo><mfrac><mrow><mtext mathvariant="normal">Var</mtext><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>e</mi><mi>t</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><mrow><mtext mathvariant="normal">Var</mtext><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>s</mi><mrow><mi>i</mi><mo>,</mo><mi>t</mi></mrow></msub><mo>+</mo><msub><mi>e</mi><mi>t</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mi>.</mi></mrow><annotation encoding="application/x-tex">
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">trend</mtext><mo>=</mo><mn>1</mn><mo>−</mo><mfrac><mrow><mtext mathvariant="normal">Var</mtext><mo stretchy="false" form="prefix">(</mo><msub><mi>e</mi><mi>t</mi></msub><mo stretchy="false" form="postfix">)</mo></mrow><mrow><mtext mathvariant="normal">Var</mtext><mo stretchy="false" form="prefix">(</mo><msub><mi>f</mi><mi>t</mi></msub><mo>+</mo><msub><mi>e</mi><mi>t</mi></msub><mo stretchy="false" form="postfix">)</mo></mrow></mfrac><mspace width="1.0em"></mspace><mtext mathvariant="normal">and</mtext><mspace width="1.0em"></mspace><mtext mathvariant="normal">seasonal.strength</mtext><mo>=</mo><mn>1</mn><mo>−</mo><mfrac><mrow><mtext mathvariant="normal">Var</mtext><mo stretchy="false" form="prefix">(</mo><msub><mi>e</mi><mi>t</mi></msub><mo stretchy="false" form="postfix">)</mo></mrow><mrow><mtext mathvariant="normal">Var</mtext><mo stretchy="false" form="prefix">(</mo><msub><mi>s</mi><mrow><mi>i</mi><mo>,</mo><mi>t</mi></mrow></msub><mo>+</mo><msub><mi>e</mi><mi>t</mi></msub><mo stretchy="false" form="postfix">)</mo></mrow></mfrac><mi>.</mi></mrow><annotation encoding="application/x-tex">
   \text{trend} = 1-\frac{\text{Var}(e_t)}{\text{Var}(f_t+e_t)}\quad \text{and}\quad \text{seasonal.strength}=1-\frac{\text{Var}(e_t)}{\text{Var}(s_{i,t}+e_t)}.
 </annotation></semantics></math> If their values are less than 0, they
 are set to 0, while values greater than 1 are set to 1. For non-seasonal

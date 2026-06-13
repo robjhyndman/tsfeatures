@@ -21,6 +21,8 @@ sampen_first(y)
 
 Embedding dimension is set to 5. The threshold is set to 0.3.
 
+Accelerated implementation: computed in C++ via `sampenc_cpp()`.
+
 ## References
 
 cf. "Physiological time-series analysis using approximate entropy and

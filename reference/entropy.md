@@ -22,8 +22,11 @@ A non-negative real value for the spectral entropy \\H_s(x_t)\\.
 ## Details
 
 The *spectral entropy* equals the Shannon entropy of the spectral
-density \\f_x(\lambda)\\ of a stationary process \\x_t\\: \$\$ H_s(x_t)
-= - \int\_{-\pi}^{\pi} f_x(\lambda) \log f_x(\lambda) d \lambda, \$\$
+density \\f_x(\lambda)\\ of a stationary process \\x_t\\:
+
+\$\$H_s(x_t) = - \int\_{-\pi}^{\pi} f_x(\lambda) \log f_x(\lambda) d
+\lambda,\$\$
+
 where the density is normalized such that \\\int\_{-\pi}^{\pi}
 f_x(\lambda) d \lambda = 1\\. An estimate of \\f(\lambda)\\ can be
 obtained using [`spec.ar`](https://rdrr.io/r/stats/spec.ar.html) with

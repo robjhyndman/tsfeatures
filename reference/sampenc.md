@@ -25,6 +25,10 @@ sampenc(y, M = 6, r = 0.3)
 
   threshold
 
+## Details
+
+Accelerated implementation: the loops are in C++ via `sampenc_cpp()`
+
 ## References
 
 cf. "Physiological time-series analysis using approximate entropy and

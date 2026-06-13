@@ -53,3 +53,5 @@ Other contributors:
 - J R Moorman \[contributor\]
 
 - Bohan Zhang \[contributor\]
+
+- Trent Henderson \[contributor\]

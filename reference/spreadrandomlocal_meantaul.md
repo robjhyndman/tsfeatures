@@ -26,6 +26,11 @@ spreadrandomlocal_meantaul(y, l = 50)
 
 mean of the first zero-crossings of the autocorrelation function
 
+## Details
+
+Accelerated implementation: for a complete (no-NA) series, dispatches to
+`spreadrandomlocal_meantaul_cpp()`
+
 ## References
 
 B.D. Fulcher and N.S. Jones. hctsa: A computational framework for

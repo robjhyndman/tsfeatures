@@ -9,6 +9,7 @@ You can install the **stable** version on [R
 CRAN](https://cran.r-project.org/package=tsfeatures).
 
 ``` r
+
 install.packages('tsfeatures', dependencies = TRUE)
 ```
 
@@ -16,6 +17,7 @@ You can install the **development** version from
 [Github](https://github.com/robjhyndman/tsfeatures) with:
 
 ``` r
+
 # install.packages("devtools")
 devtools::install_github("robjhyndman/tsfeatures")
 ```
@@ -23,6 +25,7 @@ devtools::install_github("robjhyndman/tsfeatures")
 ## Usage
 
 ``` r
+
 library(tsfeatures)
 mylist <- list(sunspot.year, WWWusage, AirPassengers, USAccDeaths)
 myfeatures <- tsfeatures(mylist)

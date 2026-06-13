@@ -5,7 +5,6 @@
 tsfeatures package
 
 - [`tsfeatures-package`](http://pkg.robjhyndman.com/tsfeatures/reference/tsfeatures-package.md)
-  [`_PACKAGE`](http://pkg.robjhyndman.com/tsfeatures/reference/tsfeatures-package.md)
   : tsfeatures: Time Series Feature Extraction
 
 ## tsfeatures

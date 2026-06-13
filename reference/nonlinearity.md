@@ -41,6 +41,9 @@ Yanfei Kang and Rob J Hyndman
 
 ``` r
 nonlinearity(lynx)
+#> Registered S3 method overwritten by 'quantmod':
+#>   method            from
+#>   as.zoo.data.frame zoo 
 #> nonlinearity 
 #>    0.8959046 
 ```

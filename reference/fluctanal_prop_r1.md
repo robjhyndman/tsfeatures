@@ -15,6 +15,11 @@ fluctanal_prop_r1(x)
 
   the input time series (or any vector)
 
+## Details
+
+Accelerated implementation: computed in C++ via
+`fluctanal_prop_r1_cpp()`
+
 ## References
 
 B.D. Fulcher and N.S. Jones. hctsa: A computational framework for
