@@ -33,4 +33,4 @@ The first zero crossing of the autocorrelation function of the residuals
 ## Details
 
 Accelerated implementation: for a complete (no-NA) series, dispatches to
-`localsimple_taures_cpp()`
+C++.

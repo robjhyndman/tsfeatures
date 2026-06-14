@@ -17,8 +17,7 @@ fluctanal_prop_r1(x)
 
 ## Details
 
-Accelerated implementation: computed in C++ via
-`fluctanal_prop_r1_cpp()`
+Accelerated implementation: computed in C++.
 
 ## References
 

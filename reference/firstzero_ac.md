@@ -26,9 +26,9 @@ The first zero crossing of the autocorrelation function
 ## Details
 
 Accelerated implementation: for a complete (no-NA) series with no
-user-supplied `acfv`, dispatches to `firstzero_ac_cpp()`, which computes
-autocorrelations lag-by-lag and stops at the first crossing. Otherwise
-the original pure-R logic is used.
+user-supplied `acfv`, dispatches to C++, which computes autocorrelations
+lag-by-lag and stops at the first crossing. Otherwise the original
+pure-R logic is used.
 
 ## References
 

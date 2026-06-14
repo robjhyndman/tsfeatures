@@ -29,7 +29,7 @@ mean of the first zero-crossings of the autocorrelation function
 ## Details
 
 Accelerated implementation: for a complete (no-NA) series, dispatches to
-`spreadrandomlocal_meantaul_cpp()`
+C++.
 
 ## References
 

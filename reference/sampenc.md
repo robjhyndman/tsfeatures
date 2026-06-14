@@ -27,7 +27,7 @@ sampenc(y, M = 6, r = 0.3)
 
 ## Details
 
-Accelerated implementation: the loops are in C++ via `sampenc_cpp()`
+Accelerated implementation: the loops are in C++.
 
 ## References
 

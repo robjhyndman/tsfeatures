@@ -1,7 +1,7 @@
 # Time of first minimum in the autocorrelation function from software package `hctsa`
 
 Accelerated implementation: for a complete (no-NA) series with no
-user-supplied `acfv`, dispatches to `firstmin_ac_cpp()`
+user-supplied `acfv`, dispatches to C++.
 
 ## Usage
 

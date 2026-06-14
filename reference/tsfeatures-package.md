@@ -28,6 +28,9 @@ Useful links:
 
 Authors:
 
+- Rob Hyndman <Rob.Hyndman@monash.edu>
+  ([ORCID](https://orcid.org/0000-0002-2140-5352))
+
 - Yanfei Kang ([ORCID](https://orcid.org/0000-0001-8769-6650))
 
 - Pablo Montero-Manso <p.montero.manso@udc.es>
@@ -46,6 +49,8 @@ Other contributors:
 
 - Cao Hanqing \[contributor\]
 
+- Trent Henderson \[contributor\]
+
 - D K Lake \[contributor\]
 
 - Nikolay Laptev \[contributor\]
@@ -53,5 +58,3 @@ Other contributors:
 - J R Moorman \[contributor\]
 
 - Bohan Zhang \[contributor\]
-
-- Trent Henderson \[contributor\]

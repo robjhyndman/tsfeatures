@@ -25,6 +25,8 @@
 
 - **Cao Hanqing**. Contributor.
 
+- **Trent Henderson**. Contributor.
+
 - **D K Lake**. Contributor.
 
 - **Nikolay Laptev**. Contributor.
@@ -32,8 +34,6 @@
 - **J R Moorman**. Contributor.
 
 - **Bohan Zhang**. Contributor.
-
-- **Trent Henderson**. Contributor.
 
 ## Citation
 

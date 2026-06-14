@@ -23,7 +23,7 @@ fraction of time series length that walker crosses time series
 ## Details
 
 Accelerated implementation: the sequential walker recurrence is computed
-in C++ via `walker_propcross_cpp()`
+in C++.
 
 ## References
 
