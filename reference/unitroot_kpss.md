@@ -25,7 +25,7 @@ unitroot_pp(x, ...)
 
   Other arguments are passed to the
   [`ur.kpss`](https://rdrr.io/pkg/urca/man/ur.kpss.html) or
-  [`ur.kpss`](https://rdrr.io/pkg/urca/man/ur.kpss.html) functions.
+  [`ur.pp`](https://rdrr.io/pkg/urca/man/ur.pp.html) functions.
 
 ## Value
 
