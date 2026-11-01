@@ -13,7 +13,7 @@ unitroot_pp(x, ...)
 \item{x}{a univariate time series.}
 
 \item{...}{Other arguments are passed to the \code{\link[urca]{ur.kpss}} or
-\code{\link[urca]{ur.kpss}} functions.}
+\code{\link[urca]{ur.pp}} functions.}
 }
 \value{
 A numeric value

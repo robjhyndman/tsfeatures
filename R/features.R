@@ -265,7 +265,7 @@ hurst <- function(x) {
 #' using the default settings for the \code{\link[urca]{ur.pp}} function.
 #' @param x a univariate time series.
 #' @param ... Other arguments are passed to the \code{\link[urca]{ur.kpss}} or
-#' \code{\link[urca]{ur.kpss}} functions.
+#' \code{\link[urca]{ur.pp}} functions.
 #' @return A numeric value
 #' @author Pablo Montero-Manso
 #' @export
