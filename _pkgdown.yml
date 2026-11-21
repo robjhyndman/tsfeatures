@@ -2,11 +2,9 @@ url: http://pkg.robjhyndman.com/tsfeatures
 
 template:
   bootstrap: 5
-  theme: tango
   bootswatch: flatly
   bslib:
     base_font: {google: "Fira Sans"}
-    heading_font: {google: "Fira Sans"}
     code_font: "Hack, mono"
     primary: "#234460"
     link-color: "#234460"
@@ -27,25 +25,6 @@ authors:
 
 navbar:
   type: light
-  structure:
-    left: [home, intro, reference, changelog]
-    right: [search, github]
-  components:
-    home:
-      icon: fa-home fa-lg
-      href: index.html
-    reference:
-      text: Reference
-      href: reference/index.html
-    intro:
-      text: Get started
-      href: articles/tsfeatures.html
-    changelog:
-      text: Change log
-      href: news/index.html
-    github:
-      icon: fa-github fa-lg
-      href: https://github.com/robjhyndman/tsfeatures/
 
 reference:
 - title: "Package"
