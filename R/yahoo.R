@@ -14,7 +14,6 @@
 #' yahoo <- yahoo_data()
 #' plot(yahoo[, 1:10])
 #' plot(yahoo[, 1:44], plot.type = "single", col = 1:44)
-#'
 #' @export
 yahoo_data <- function(...) {
   yahoo <- 1 # Just to avoid a note about undefined global variables.
