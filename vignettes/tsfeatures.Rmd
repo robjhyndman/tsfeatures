@@ -335,7 +335,9 @@ Here we replicate the analysis in Hyndman, Wang & Laptev (ICDM 2015). However, n
 ```{r yahoo, message=FALSE}
 library(tsfeatures)
 library(dplyr)
+```
 
+```{r yahoodata, eval=FALSE}
 yahoo <- yahoo_data()
 ```
 
@@ -374,12 +376,18 @@ save(hwl, file = "../extra-data/hwl.rda")
 
 ```{r hwlquick, include=FALSE}
 # This replicates the above but uses pre-stored data to speed things up
+hwl <- NULL
 tmp <- tempfile()
-utils::download.file("https://github.com/robjhyndman/tsfeatures/raw/master/extra-data/hwl.rda", tmp)
-load(tmp)
+try(
+  {
+    utils::download.file("https://github.com/robjhyndman/tsfeatures/raw/master/extra-data/hwl.rda", tmp, mode = "wb", quiet = TRUE)
+    load(tmp)
+  },
+  silent = TRUE
+)
 ```
 
-```{r yahoographics}
+```{r yahoographics, eval=!is.null(hwl)}
 # 2-d Feature space
 library(ggplot2)
 hwl_pca <- hwl |>

@@ -1,5 +1,7 @@
 # tsfeatures (development version)
 
+* `yahoo_data()` now fails gracefully (returning `NULL` with a message) if the data cannot be downloaded.
+
 # tsfeatures 1.1.1
 
 * Bug fixes

@@ -7,20 +7,23 @@
 yahoo_data(...)
 }
 \arguments{
-\item{...}{Additional arguments passed to \code{download.file}
-
-Downloads and returns aggregated and anonymized datasets from Yahoo representing server metrics of Yahoo services.}
+\item{...}{Additional arguments passed to \code{download.file}}
 }
 \value{
-A matrix of time series with 1437 rows of hourly data, and 1748 columns representing different servers.
+A matrix of time series with 1437 rows of hourly data, and 1748 columns representing different servers,
+or \code{NULL} if the data could not be downloaded.
 }
 \description{
-Yahoo server metrics
+Downloads and returns aggregated and anonymized datasets from Yahoo representing server metrics of Yahoo services.
+If the download fails (e.g., no internet connection or the server is unavailable),
+a message is shown and \code{NULL} is returned invisibly.
 }
 \examples{
 yahoo <- yahoo_data()
-plot(yahoo[, 1:10])
-plot(yahoo[, 1:44], plot.type = "single", col = 1:44)
+if (!is.null(yahoo)) {
+  plot(yahoo[, 1:10])
+  plot(yahoo[, 1:44], plot.type = "single", col = 1:44)
+}
 }
 \references{
 Hyndman, R.J., Wang, E., Laptev, N. (2015) Large-scale unusual time series detection.
