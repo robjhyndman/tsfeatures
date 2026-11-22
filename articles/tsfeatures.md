@@ -642,6 +642,7 @@ library(tsfeatures)
 library(dplyr)
 library(tidyr)
 library(forecast)
+library(ggplot2)
 
 M3data <- purrr::map(
   Mcomp::M3,
