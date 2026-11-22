@@ -1,6 +1,9 @@
 # Yahoo server metrics
 
-Yahoo server metrics
+Downloads and returns aggregated and anonymized datasets from Yahoo
+representing server metrics of Yahoo services. If the download fails
+(e.g., no internet connection or the server is unavailable), a message
+is shown and `NULL` is returned invisibly.
 
 ## Usage
 
@@ -14,13 +17,11 @@ yahoo_data(...)
 
   Additional arguments passed to `download.file`
 
-  Downloads and returns aggregated and anonymized datasets from Yahoo
-  representing server metrics of Yahoo services.
-
 ## Value
 
 A matrix of time series with 1437 rows of hourly data, and 1748 columns
-representing different servers.
+representing different servers, or `NULL` if the data could not be
+downloaded.
 
 ## References
 
@@ -37,7 +38,9 @@ Rob Hyndman, Earo Wang, Nikolay Laptev, Mitchell O'Hara-Wild
 
 ``` r
 yahoo <- yahoo_data()
-plot(yahoo[, 1:10])
+if (!is.null(yahoo)) {
+  plot(yahoo[, 1:10])
+  plot(yahoo[, 1:44], plot.type = "single", col = 1:44)
+}
 
-plot(yahoo[, 1:44], plot.type = "single", col = 1:44)
 ```

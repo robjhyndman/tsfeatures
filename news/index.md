@@ -2,6 +2,10 @@
 
 ## tsfeatures (development version)
 
+- [`yahoo_data()`](http://pkg.robjhyndman.com/tsfeatures/reference/yahoo_data.md)
+  now fails gracefully (returning `NULL` with a message) if the data
+  cannot be downloaded.
+
 ## tsfeatures 1.1.1
 
 CRAN release: 2023-08-28

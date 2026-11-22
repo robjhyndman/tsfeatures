@@ -576,6 +576,9 @@ paper. Other features are the same.
 
 library(tsfeatures)
 library(dplyr)
+```
+
+``` r
 
 yahoo <- yahoo_data()
 ```
