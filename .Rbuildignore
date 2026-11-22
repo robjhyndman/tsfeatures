@@ -16,3 +16,5 @@
 ^CRAN-RELEASE$
 ^pkgdown$
 ^CRAN-SUBMISSION$
+^hex$
+^tasks$
